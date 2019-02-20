@@ -218,7 +218,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
 
 
-        RootPrivilegedUtils.checkRootGranted();
+        //RootPrivilegedUtils.checkRootGranted();
 
         mAnimationRunnable = new Runnable() {
             @Override
