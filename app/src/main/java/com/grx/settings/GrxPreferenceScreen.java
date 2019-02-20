@@ -242,7 +242,11 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
             if(p.getDialog()!=null) p.getDialog().dismiss();
             setPreferenceScreen((PreferenceScreen)preferenceScreen);
             mGrxSettingsActivity.onBackKey(preferenceScreen.getTitle(), true);
-            setListPosition(mScreenPositions.get(getPreferenceScreen().getKey()));
+            try {
+                setListPosition(mScreenPositions.get(getPreferenceScreen().getKey()));
+            } catch (NullPointerException e) {
+                // Logggggggggggg..
+            }
             mCurrentSubScreen=getPreferenceScreen().getKey();
             mGrxSettingsActivity.onScreenChange(mCurrentSubScreen);
         }
