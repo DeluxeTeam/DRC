@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:grx="http://schemas.android.com/apk/res-auto">
+
+    <!-- Recientes -->
+    <PreferenceScreen android:title="@string/recents">
+        <GrxSingleSelection
+            android:title="@string/long_press"
+            android:key="dlx_long_recent_action"
+            android:defaultValue="0"
+            grx:broadCast1="dlx_remap"
+            grx:optionsArray="@array/agc_virtual_buttons_entries"
+            grx:systemType="system"
+            grx:valuesArray="@array/agc_virtual_buttons_values" />
+        <GrxAppSelection
+            android:title="@string/app"
+            android:key="dlx_long_recent_app"
+            grx:systemType="system"
+            grx:depRule="ENABLE#dlx_long_recent_action#STRING#1"
+            grx:broadCast1="dlx_remap"
+            grx:saveActivityname="true"
+            grx:showSystemapps="false" />
+    </PreferenceScreen>
+
+    <!-- Inicio -->
+    <PreferenceScreen android:title="@string/home">
+        <GrxSingleSelection
+            android:title="@string/long_press"
+            android:key="dlx_long_home_action"
+            android:defaultValue="0"
+            grx:broadCast1="dlx_remap"
+            grx:optionsArray="@array/agc_virtual_buttons_entries"
+            grx:systemType="system"
+            grx:valuesArray="@array/agc_virtual_buttons_values" />
+        <GrxAppSelection
+            android:title="@string/app"
+            android:key="dlx_long_home_app"
+            grx:systemType="system"
+            grx:depRule="ENABLE#dlx_long_home_action#STRING#1"
+            grx:broadCast1="dlx_remap"
+            grx:saveActivityname="true"
+            grx:showSystemapps="false" />
+        <GrxSingleSelection
+            android:title="@string/doubletap"
+            android:key="dlx_double_home_action"
+            android:defaultValue="0"
+            grx:broadCast1="dlx_remap"
+            grx:optionsArray="@array/agc_virtual_buttons_entries"
+            grx:systemType="system"
+            grx:valuesArray="@array/agc_virtual_buttons_values" />
+        <GrxAppSelection
+            android:title="@string/app"
+            android:key="dlx_double_home_app"
+            grx:systemType="system"
+            grx:depRule="ENABLE#dlx_double_home_action#STRING#1"
+            grx:broadCast1="dlx_remap"
+            grx:saveActivityname="true"
+            grx:showSystemapps="false" />
+    </PreferenceScreen>
+
+    <!-- Retroceso -->
+    <PreferenceScreen android:title="@string/back">
+        <GrxSingleSelection
+            android:title="@string/long_press"
+            android:key="dlx_long_back_action"
+            android:defaultValue="0"
+            grx:broadCast1="dlx_remap"
+            grx:optionsArray="@array/agc_virtual_buttons_entries"
+            grx:systemType="system"
+            grx:valuesArray="@array/agc_virtual_buttons_values" />
+        <GrxAppSelection
+            android:title="@string/app"
+            android:key="dlx_long_back_app"
+            grx:systemType="system"
+            grx:depRule="ENABLE#dlx_long_back_action#STRING#1"
+            grx:broadCast1="dlx_remap"
+            grx:saveActivityname="true"
+            grx:showSystemapps="false" />
+    </PreferenceScreen>
+
+    <!-- Bixby -->
+    <PreferenceScreen android:title="Bixby">
+        <GrxSingleSelection
+            android:title="@string/screenon_short"
+            android:key="dlx_bixby_short_on"
+            android:defaultValue="0"
+            grx:broadCast1="dlx_remap"
+            grx:optionsArray="@array/agc_virtual_buttons_entries"
+            grx:systemType="system"
+            grx:valuesArray="@array/agc_virtual_buttons_values" />
+        <GrxAppSelection
+            android:title="@string/screenon_app"
+            android:key="dlx_bixby_short_app_on"
+            grx:systemType="system"
+            grx:depRule="ENABLE#dlx_bixby_short_on#STRING#1"
+            grx:broadCast1="dlx_remap"
+            grx:saveActivityname="true"
+            grx:showSystemapps="false" />
+        <GrxSingleSelection
+            android:title="@string/screenoff_shortaction"
+            android:key="dlx_bixby_short_off"
+            android:defaultValue="0"
+            grx:broadCast1="dlx_remap"
+            grx:optionsArray="@array/agc_virtual_buttons_entries"
+            grx:systemType="system"
+            grx:valuesArray="@array/agc_virtual_buttons_values" />
+        <GrxAppSelection
+            android:title="@string/screenoff_app"
+            android:key="dlx_bixby_short_app_off"
+            grx:systemType="system"
+            grx:depRule="ENABLE#dlx_bixby_short_off#STRING#1"
+            grx:broadCast1="dlx_remap"
+            grx:saveActivityname="true"
+            grx:showSystemapps="false" />
+    </PreferenceScreen>
+
+</PreferenceScreen>

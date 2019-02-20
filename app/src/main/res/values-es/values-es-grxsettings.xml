@@ -214,5 +214,231 @@
         </item>
     </string-array>
 
+    <string name="sb_preferences">Preferencias de iconos, colores, tamaños…</string>
+
+    <string-array name="agc_reboot_options">
+        <item>Encendido</item>
+        <item>Reinicio</item>
+        <item>Recovery</item>
+        <item>Download</item>
+        <item>Reinicio rápido</item>
+        <item>Modo emergencia</item>
+        <item>Linterna</item>
+        <item>Asistencia</item>
+        <item>Grabar pantalla</item>
+        <item>Captura de pantalla</item>
+        <item>Ajustes</item>
+        <item>RomControl</item>
+    </string-array>
+
+    <string-array name="crop_entries">
+        <item>Centrada ajustada</item>
+        <item>Centrada</item>
+        <item>Ajustar XY</item>
+    </string-array>
+
+    <string-array name="custom_bg_type_entries">
+        <item>Imagen</item>
+        <item>Color Solido</item>
+        <item>Degradado</item>
+    </string-array>
+
+    <string-array name="clock_color_entries">
+        <item>Hora</item>
+        <item>Minutos</item>
+        <item>Segundos</item>
+        <item>Separador</item>
+        <item>Dia</item>
+        <item>Fecha</item>
+        <item>AM/PM</item>
+    </string-array>
+
+    <string-array name="agc_clock_options">
+        <item>Hora</item>
+        <item>Espacio</item>
+        <item>Dia</item>
+        <item>Espacio</item>
+        <item>Fecha</item>
+    </string-array>
+
+    <string-array name="agc_clock_date_options">
+        <item>Dia</item>
+        <item>Separador</item>
+        <item>Mes</item>
+        <item>Separador</item>
+        <item>Año</item>
+    </string-array>
+
+    <string-array name="gradient_entries">
+        <item>De arriba hacia abajo</item>
+        <item>De abajo a arriba</item>
+        <item>De izquierda a derecha</item>
+        <item>De derecha a izquierda</item>
+        <item>Diagonal inferior izquierda a superior derecha</item>
+        <item>Diagonal superior derecha a inferior izquierda</item>
+        <item>Diagonal inferior derecha a superior izquierda</item>
+        <item>Diagonal superior izquierda a inferior derecha</item>
+    </string-array>
+
+    <string-array name="agc_virtual_buttons_entries">
+        <item>Stock</item>
+        <item>Ejecutar aplicación</item>
+        <item>Pulsar retroceso</item>
+        <item>Pulsar inicio</item>
+        <item>Pulsar recientes</item>
+        <item>Pulsar menú</item>
+        <item>Linterna</item>
+        <item>Modo de sonido</item>
+        <item>Pantalla de bloqueo</item>
+        <item>Menú de reinicio</item>
+        <item>Cerrar app actual</item>
+        <item>Cerrar apps en segundo plano</item>
+        <item>Captura de pantalla</item>
+        <item>Grabar pantalla</item>
+        <item>Aumentar brillo x10</item>
+        <item>Disminuir brillo x10</item>
+        <item>WiFi</item>
+        <item>Rotación</item>
+        <item>Bluetooth</item>
+        <item>Subir volumen de sistema</item>
+        <item>Disminuir volumen de sistema</item>
+        <item>Subir volumen multimedia</item>
+        <item>Disminuir volumen multimedia</item>
+        <item>Subir volumen de notificaciones</item>
+        <item>Disminuir volumen de notificaciones</item>
+        <item>Subir volumen de llamada</item>
+        <item>Disminuir volumen de llamada</item>
+        <item>Play / Pausa</item>
+        <item>Siguiente pista</item>
+        <item>Pista anterior</item>
+    </string-array>
+
+    <string-array name="agc_position_clock_entries">
+        <item>Izquierda</item>
+        <item>Centro</item>
+        <item>Derecha</item>
+        <item>Barra de navegación</item>
+    </string-array>
+
+    <string-array name="outdoor_position_entries">
+        <item>Izquierda</item>
+        <item>Derecha</item>
+    </string-array>
+
+    <string-array name="torchlight_timeout_entries">
+        <item>15 segundos</item>
+        <item>30 segundos</item>
+        <item>1 minuto</item>
+        <item>2 minutos</item>
+        <item>5 minutos</item>
+    </string-array>
+
+    <string-array name="qstile_animation_duration_entries">
+        <item>Muy lento (3000ms)</item>
+        <item>Lento (2500ms)</item>
+        <item>Por defecto (2000ms)</item>
+        <item>Rápido (1500ms)</item>
+        <item>Muy rápido (1000ms)</item>
+        <item>Extremadamente rápido (500ms)</item>
+        <item>Imperceptible (250ms)</item>
+    </string-array>
+
+    <string-array name="qs_tile_animation_interpolator_entries">
+        <item>Linear</item>
+        <item>Acelerar</item>
+        <item>Decelerar</item>
+        <item>Acelerar y decelerar</item>
+        <item>Rebotar</item>
+        <item>Exceder</item>
+        <item>Anticipar</item>
+        <item>Anticipar y rebotar</item>
+    </string-array>
+
+    <string-array name="agc_netw_interval_entries">
+        <item>Tiempo real</item>
+        <item>3 segundos</item>
+        <item>5 segundos</item>
+        <item>7 segundos</item>
+        <item>10 segundos</item>
+    </string-array>
+
+    <string name="listview_off">Apagado</string>
+    <string name="listview_wave_left">Ola (izquierda)</string>
+    <string name="listview_wave_right">Ola (derecha)</string>
+    <string name="listview_alpha">Alpha</string>
+    <string name="listview_scale">Escala</string>
+    <string name="listview_stack_top">Pila (arriba)</string>
+    <string name="listview_stack_bottom">Pila (abajo)</string>
+    <string name="listview_unfold">Desplegar</string>
+    <string name="listview_fold">Doblez</string>
+    <string name="listview_translate_left">Translate (izquierda)</string>
+    <string name="listview_translate_right">Translate (derecha)</string>
+    <string name="listview_rotate">Girar</string>
+    <string name="listview_interpolator_title">Interpolador ListView</string>
+    <string name="listview_accelerate_interpolator">Acelerar</string>
+    <string name="listview_decelerate_interpolator">Decelerar</string>
+    <string name="listview_accelerate_decelerate_interpolator">Acelerar desacelerar</string>
+    <string name="listview_anticipate_interpolator">Anticipar</string>
+    <string name="listview_overshoot_interpolator">Excederse</string>
+    <string name="listview_anticipate_overshoot_interpolator">Anticipar excederse</string>
+    <string name="listview_bounce_interpolator">Bote</string>
+
+    <string-array name="data_usage_gravity_entries">
+        <item>Izquierda</item>
+        <item>Centro</item>
+        <item>Derecha</item>
+    </string-array>
+
+    <string-array name="agc_signal_position_entries">
+        <item>Izquierda</item>
+        <item>Centro</item>
+        <item>Derecha</item>
+    </string-array>
+
+    <string-array name="reboot_style_entries">
+        <item>Stock</item>
+        <item>Dialogo</item>
+    </string-array>
+
     <string name="grxs_draganddroptoshortout">Puedes ordenar la lista arrastrando los elementos</string>
+
+    <string name="sb_positions">Posición de vistas</string>
+    <string name="sb_positions_us">Posiciones vistas en barra de estado</string>
+    <string name="sb_positions_ls">Posicion vistas en barra de estado (LS)</string>
+    <string name="sb_positions_help">Selecciona posición por vista y ordenalas</string>
+
+    <string name="battery_and_text">Batería y porcentaje</string>
+    <string name="circularbt">Batería circular</string>
+    <string name="carrier">Texto de operadora</string>
+    <string name="mobile">Datos</string>
+    <string name="wifi">WiFi</string>
+    <string name="airplane">Modo avión</string>
+    <string name="nfc">NFC</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="alarm">Alarma</string>
+    <string name="cast">ScreenCast</string>
+    <string name="wifi_p2p">WiFi P2P</string>
+    <string name="wifi_calling">Llamadas WiFi/Volte</string>
+    <string name="location">Localización (GPS)</string>
+    <string name="volume">Modo de sonido</string>
+    <string name="power_saving">Ahorro de batería</string>
+    <string name="data_saver">Ahorro de datos</string>
+    <string name="hotspot">Conexión compartida</string>
+    <string name="zen">Modo no molestar</string>
+    <string name="rcs">RCS</string>
+    <string name="wearable_gear">Gear</string>
+    <string name="private_mode">Modo privado</string>
+    <string name="secure_mode">Modo seguro</string>
+    <string name="smart_network">Red</string>
+    <string name="headset">Auriculares</string>
+
+    <string name="netspeed">Velocímetro de red</string>
+    <string name="systemicons">Iconos de sistema</string>
+
+    <string-array name="sb_postions_options">
+        <item>Izquierda</item>
+        <item>Centro</item>
+        <item>Derecha</item>
+    </string-array>
+
 </resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:grx="http://schemas.android.com/apk/res-auto">
+
+    <!--&lt;!&ndash; Animaciones de lista &ndash;&gt;
+    <GrxSingleSelection
+        android:title="@string/listview_animations"
+        android:key="listview_animation"
+        android:defaultValue="0"
+        grx:optionsArray="@array/listview_animation_entries"
+        grx:valuesArray="@array/listview_animation_values"
+        grx:systemType="system" />
+
+    &lt;!&ndash; Animaciones de interpolador &ndash;&gt;
+    <GrxSingleSelection
+        android:title="@string/interpolator_animation"
+        android:key="listview_interpolator"
+        android:defaultValue="0"
+        grx:optionsArray="@array/listview_interpolator_entries"
+        grx:valuesArray="@array/listview_interpolator_values"
+        grx:systemType="system" />-->
+
+    <!-- Listado blanco -->
+    <GrxMultipleAppSelection
+        android:title="@string/whitelist"
+        android:summary="@string/whitelist_summary"
+        android:key="dlx_whitelist_slot_general"
+        grx:systemType="system"
+        grx:saveActivityname="false"
+        grx:separator="##"
+        grx:commonBcExtra="arg"
+        grx:commonBcExtraValue="kill_prefs" />
+
+    <!-- Mostrar toast app cerrada -->
+    <GrxCheckBoxPreference
+        android:title="@string/toast_app_closed"
+        android:key="dlx_show_closed_app"
+        android:defaultValue="false"
+        grx:commonBcExtra="arg"
+        grx:commonBcExtraValue="kill_prefs"
+        grx:systemType="system" />
+
+    <!-- Mostrar toast apps recientes cerradas -->
+    <GrxCheckBoxPreference
+        android:title="@string/toast_recents_closed"
+        android:key="dlx_show_closed_recent_apps"
+        android:defaultValue="false"
+        grx:commonBcExtra="arg"
+        grx:commonBcExtraValue="kill_prefs"
+        grx:systemType="system" />
+
+    <!-- Mostrar toast app en lista blanca -->
+    <GrxCheckBoxPreference
+        android:title="@string/toast_app_whitelisted"
+        android:key="dlx_show_cant_close_app"
+        android:defaultValue="false"
+        grx:commonBcExtra="arg"
+        grx:commonBcExtraValue="kill_prefs"
+        grx:systemType="system" />
+
+    <!-- Aviso de batería -->
+    <GrxSeekBar
+        android:title="@string/low_bt_warning"
+        android:key="dlx_low_battery"
+        android:defaultValue="15"
+        grx:maxValue="99"
+        grx:minValue="1"
+        grx:interval="1"
+        grx:systemType="system" />
+
+    <!-- Aviso de batería -->
+    <GrxSeekBar
+        android:title="@string/critical_bt_warning"
+        android:key="dlx_critical_battery"
+        android:defaultValue="5"
+        grx:maxValue="99"
+        grx:minValue="1"
+        grx:interval="1"
+        grx:systemType="system" />
+
+</PreferenceScreen>

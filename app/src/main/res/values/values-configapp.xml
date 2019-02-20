@@ -44,7 +44,7 @@
 
     <integer name="grxi_default_list_divider_height">1</integer>
 
-    <string name="grxs_default_theme">Theme.White.BlueGrey</string> <!-- DEFAULT THEME NAME - Change this according to the style name in styles.xml -->
+    <string name="grxs_default_theme">Theme.Black.Red</string> <!-- DEFAULT THEME NAME - Change this according to the style name in styles.xml -->
 
 
     <integer name="grxi_floatingrecents_max_items_seen">3</integer> <!-- recents screen floating area máx seen in the area (height of area)  -->
