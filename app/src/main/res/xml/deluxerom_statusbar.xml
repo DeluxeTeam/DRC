@@ -21,7 +21,7 @@
 		<GrxMultipleSelection
 			android:title="@string/hidden_icons"
 			android:key="icon_blacklist"
-			android:defaultValue="rotate,headset,circularbt,minit,"
+			android:defaultValue="rotate,headset,circularbt,minit,netspeed,"
 			grx:separator=","
 			grx:systemType="secure"
 			grx:optionsArray="@array/hidden_icons_options"
@@ -260,6 +260,98 @@
 					grx:commonBcExtraValue="carrier"
 					grx:maxValue="25"
 					grx:minValue="1"
+					grx:interval="1"
+					grx:systemType="system" />
+			</GrxPreferenceCategory>
+		</PreferenceScreen>
+
+		<!-- Velocímetro de red -->
+		<PreferenceScreen android:title="Velocimetro de red">
+			<GrxPreferenceCategory android:title="Preferencias de red" grx:depRule="DISABLE#icon_blacklist#STRING#(netspeed)">
+				<GrxSingleSelection
+					android:title="@string/update_every"
+					android:key="dlx_netw_intervals"
+					android:defaultValue="1000"
+					grx:optionsArray="@array/agc_netw_interval_entries"
+					grx:valuesArray="@array/agc_netw_interval_values"
+					grx:systemType="system"
+					grx:broadCast1="update_network" />
+				<GrxCheckBoxPreference
+					android:title="@string/split_up_down"
+					android:key="dlx_netw_showall"
+					android:defaultValue="0"
+					grx:systemType="system"
+					grx:broadCast1="update_network" />
+				<GrxColorPicker
+					android:title="@string/main_color"
+					android:key="dlx_netw_singlecolor"
+					android:defaultValue="-1107296257"
+					grx:colorPickerStyle="flower"
+					grx:saveValueOnFly="true"
+					grx:depRule="ENABLE#dlx_netw_showall#BOOLEAN#0"
+					grx:broadCast1="update_network"
+					grx:systemType="system" />
+				<GrxColorPicker
+					android:title="@string/up_color"
+					android:key="dlx_netw_upcolor"
+					android:defaultValue="-1107296257"
+					grx:colorPickerStyle="flower"
+					grx:saveValueOnFly="true"
+					android:dependency="dlx_netw_showall"
+					grx:broadCast1="update_network"
+					grx:systemType="system" />
+				<GrxColorPicker
+					android:title="@string/down_color"
+					android:key="dlx_netw_downcolor"
+					android:defaultValue="-1107296257"
+					grx:colorPickerStyle="flower"
+					grx:saveValueOnFly="true"
+					android:dependency="dlx_netw_showall"
+					grx:broadCast1="update_network"
+					grx:systemType="system" />
+				<GrxColorPicker
+					android:title="@string/arrows_color"
+					android:key="dlx_netw_arrowscolor"
+					android:defaultValue="-1107296257"
+					grx:colorPickerStyle="flower"
+					grx:saveValueOnFly="true"
+					android:dependency="dlx_netw_showall"
+					grx:broadCast1="update_network"
+					grx:systemType="system" />
+				<GrxSingleSelection
+					android:title="@string/font"
+					android:key="dlx_netw_font"
+					android:defaultValue="0"
+					grx:broadCast1="update_network"
+					grx:iconsArray="@array/agc_estilo_fuente_drawables"
+					grx:optionsArray="@array/agc_estilo_fuente_entries"
+					grx:valuesArray="@array/agc_estilo_fuente_values"
+					grx:systemType="system" />
+				<GrxSeekBar
+					android:title="@string/size"
+					android:key="dlx_netw_size"
+					android:defaultValue="12"
+					grx:broadCast1="update_network"
+					grx:maxValue="25"
+					grx:minValue="1"
+					grx:interval="1"
+					grx:systemType="system" />
+				<GrxSeekBar
+					android:title="@string/left_margin"
+					android:key="dlx_netw_start"
+					android:defaultValue="0"
+					grx:broadCast1="update_network"
+					grx:maxValue="70"
+					grx:minValue="0"
+					grx:interval="1"
+					grx:systemType="system" />
+				<GrxSeekBar
+					android:title="@string/right_margin"
+					android:key="dlx_netw_end"
+					android:defaultValue="0"
+					grx:broadCast1="update_network"
+					grx:maxValue="70"
+					grx:minValue="0"
 					grx:interval="1"
 					grx:systemType="system" />
 			</GrxPreferenceCategory>

@@ -1652,11 +1652,11 @@ public class GrxSettingsActivity extends AppCompatActivity implements
     }
 
     private void upadePanelHeaderBgInfo(String text){
-        String tmp = mConfigMenu.getMenuItem(R.id.grx_mid_header_svn_back).getClass().getSimpleName();
+        /*String tmp = mConfigMenu.getMenuItem(R.id.grx_mid_header_svn_back).getClass().getSimpleName();
         if(tmp.equals("SublimeTextWithBadgeMenuItem")) {
             SublimeTextWithBadgeMenuItem item = (SublimeTextWithBadgeMenuItem) mConfigMenu.getMenuItem(R.id.grx_mid_header_svn_back);
             item.setBadgeText(text);
-        }else mConfigMenu.getMenuItem(R.id.grx_mid_header_svn_back).setHint(text);
+        }else mConfigMenu.getMenuItem(R.id.grx_mid_header_svn_back).setHint(text);*/
     }
 
     private void updateThemeTextInfo(){
@@ -1909,9 +1909,9 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
 
     private void removeNonAuthorizedUserOptions(){
-        if(!getResources().getBoolean(R.bool.grxb_allow_panelheader_changes)){
+        /*if(!getResources().getBoolean(R.bool.grxb_allow_panelheader_changes)){
             mConfigMenu.removeItem(R.id.grx_mid_header_svn_back);
-        }
+        }*/
 
         if(!getResources().getBoolean(R.bool.grxb_allow_user_colorpicker_selection)){
             mConfigMenu.removeItem(R.id.grx_mid_color_picker_style);
@@ -1923,9 +1923,9 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         boolean isdemo = getResources().getBoolean(R.bool.grxb_demo_mode);
         String mTabsLayouts[]=  isdemo ? getResources().getStringArray(R.array.demo_tabs_layouts) : getResources().getStringArray(R.array.rom_tabs_layouts);
 
-        if(mTabsLayouts==null){
+        /*if(mTabsLayouts==null){
             mConfigMenu.removeItem(R.id.grx_mid_rom_info);
-        }
+        }*/
     }
 
 

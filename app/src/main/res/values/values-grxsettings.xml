@@ -868,6 +868,7 @@
         <item>@string/circularbt</item>
         <item>@string/carrier</item>
         <item>@string/clock</item>
+        <item>@string/netspeed</item>
         <item>@string/mobile</item>
         <item>@string/wifi</item>
         <item>@string/airplane</item>
@@ -897,6 +898,7 @@
         <item>circularbt</item>
         <item>carrier</item>
         <item>clock</item>
+        <item>netspeed</item>
         <item>mobile</item>
         <item>wifi</item>
         <item>airplane</item>
