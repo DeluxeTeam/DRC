@@ -182,6 +182,9 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
                     .setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            if (mSaveOnFly && mCallBack != null) {
+                                mCallBack.onGrxColorSet(mCurrentColor);
+                            }
                             dismiss();
                         }
                     })
