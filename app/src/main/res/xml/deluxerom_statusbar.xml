@@ -29,7 +29,14 @@
 
 		<!-- Baterias -->
 		<PreferenceScreen android:title="@string/batteries">
-			<GrxPreferenceCategory android:title="@string/stock_bt_options">
+			<GrxPreferenceCategory android:title="@string/stock_bt_options" grx:depRule="DISABLE#icon_blacklist#STRING#(battery)">
+				<GrxSwitchPreference
+					android:title="@string/stock_battery"
+					android:defaultValue="true"
+					grx:systemType="system"
+					android:key="dlx_show_stock_battery"
+					grx:commonBcExtra="arg"
+					grx:commonBcExtraValue="stock_battery" />
 				<GrxSwitchPreference
 					android:title="@string/battery_percentage"
 					android:defaultValue="true"
@@ -38,16 +45,14 @@
 					grx:commonBcExtra="arg"
 					grx:commonBcExtraValue="battery" />
 			</GrxPreferenceCategory>
-			<GrxPreferenceCategory android:title="@string/minit_bt_options">
+			<GrxPreferenceCategory android:title="@string/minit_bt_options" grx:depRule="DISABLE#icon_blacklist#STRING#(minit)">
 				<GrxOpenActivity
 					android:title="3MinitBattery"
-					grx:depRule="DISABLE#icon_blacklist#STRING#(minit)"
 					grx:activity="com.three.minit.minitbatterysettings/com.three.minit.minitbatterysettings.MainActivity" />
 				<GrxCheckBoxPreference
 					android:title="@string/minit_tint"
 					android:defaultValue="0"
 					android:key="dlx_allow_3minit_tint"
-					grx:depRule="DISABLE#icon_blacklist#STRING#(minit)"
 					grx:commonBcExtra="arg"
 					grx:commonBcExtraValue="minit_tint" />
 			</GrxPreferenceCategory>
@@ -266,8 +271,8 @@
 		</PreferenceScreen>
 
 		<!-- Velocímetro de red -->
-		<PreferenceScreen android:title="Velocimetro de red">
-			<GrxPreferenceCategory android:title="Preferencias de red" grx:depRule="DISABLE#icon_blacklist#STRING#(netspeed)">
+		<PreferenceScreen android:title="@string/netwspeed">
+			<GrxPreferenceCategory android:title="@string/netw_prefs" grx:depRule="DISABLE#icon_blacklist#STRING#(netspeed)">
 				<GrxSingleSelection
 					android:title="@string/update_every"
 					android:key="dlx_netw_intervals"
@@ -435,21 +440,95 @@
 		</PreferenceScreen>-->
 
 		<!-- Selección de iconos y colores -->
-		<!--<PreferenceScreen android:title="@string/icon_colors_position">
+		<PreferenceScreen android:title="@string/icon_colors_position">
 
-			&lt;!&ndash; Colores generales &ndash;&gt;
+			<GrxInfoText android:textColor="?complementary_color3" android:textSize="20sp" android:summary="@string/icons_warning" />
+
+			<!-- Icono WiFi -->
+			<GrxSingleSelection
+				android:title="@string/wifi_icon"
+				android:key="dlx_wifi_sb_style"
+				android:defaultValue="0"
+				grx:systemType="system"
+				grx:broadCast1="dlx_refresh_wifi_icons"
+				grx:optionsArray="@array/agc_wifi_entries"
+				grx:valuesArray="@array/agc_wifi_values"
+				grx:iconsArray="@array/agc_wifi_drawables" />
+
+			<!--&lt;!&ndash; Icono señal &ndash;&gt;
+			<GrxSingleSelection
+				android:title="@string/signal_icon"
+				android:key="sb_signal_icon"
+				android:defaultValue="0"
+				grx:optionsArray="@array/agc_signal_entries"
+				grx:valuesArray="@array/agc_signal_values"
+				grx:iconsArray="@array/agc_signal_drawables"
+				grx:systemType="system"
+				grx:commonBcExtra="arg"
+				grx:commonBcExtraValue="kill" />
+
+			&lt;!&ndash; Icono alarma &ndash;&gt;
+			<GrxSingleSelection
+				android:title="@string/alarm_icon"
+				android:key="sb_alarm_icon"
+				android:defaultValue="0"
+				grx:optionsArray="@array/agc_alarma_entries"
+				grx:valuesArray="@array/agc_alarma_values"
+				grx:iconsArray="@array/agc_alarma_drawables"
+				grx:systemType="system"
+				grx:commonBcExtra="arg"
+				grx:commonBcExtraValue="sb_custom_icons" />
+
+			&lt;!&ndash; Icono bluetooth &ndash;&gt;
+			<GrxSingleSelection
+				android:title="@string/bluetooth_icon"
+				android:key="dlx_bluetooth_sb_style"
+				android:defaultValue="0"
+				grx:optionsArray="@array/agc_bluetooth_entries"
+				grx:valuesArray="@array/agc_bluetooth_values"
+				grx:iconsArray="@array/agc_bluetooth_drawables"
+				grx:systemType="system"
+				grx:commonBcExtra="arg"
+				grx:commonBcExtraValue="bluetooth_icons" />
+
+			&lt;!&ndash; Icono volumen &ndash;&gt;
+			<GrxSingleSelection
+				android:title="@string/sound_icon"
+				android:key="sb_volume_icons"
+				android:defaultValue="0"
+				grx:optionsArray="@array/agc_sound_sb_entries"
+				grx:valuesArray="@array/agc_sound_sb_values"
+				grx:iconsArray="@array/agc_sound_sb_drawables"
+				grx:systemType="system"
+				grx:commonBcExtra="arg"
+				grx:commonBcExtraValue="sb_custom_icons" />
+
+			&lt;!&ndash; LTE / 4G &ndash;&gt;
+			<GrxSwitchPreference
+				android:title="@string/use_lte"
+				android:defaultValue="true"
+
+				grx:systemType="system"
+				android:key="dlx_use_lte" />-->
+
+			<GrxInfoText android:textColor="?complementary_color3" android:textSize="20sp" android:summary="@string/general_colors_info" />
+
 			<GrxPerItemColor
-				android:title="@string/general_colors"
-				android:key="agc_notifs_unic_colors"
-				grx:valuesArray="@array/notifs_color_values"
-				grx:optionsArray="@array/notifs_color_entries"
-				android:defaultValue="agc_sb_general_color/-1107296257##agc_sb_volume_color/-1107296257##agc_sb_alarm_color/-1107296257##agc_sb_bluetooth_color/-1107296257##agc_sb_location_color/-1107296257##agc_sb_privatemode_color/-1107296257##agc_sb_powersaver_color/-1107296257##agc_sb_headset_color/-1107296257##agc_sb_nfc_color/-1107296257##agc_sb_datasaver_color/-1107296257##agc_sb_telegram_color/-1107296257##agc_sb_whatsapp_color/-1107296257##agc_sb_facebook_color/-1107296257##agc_sb_nodisturb_color/-1107296257##agc_sb_gear_color/-1107296257##agc_sb_wificall_color/-1107296257##agc_sb_screenshot_color/-1107296257##agc_sb_screenrecorder_color/-1107296257##agc_sb_cast_color/-1107296257##agc_sb_contacts_color/-1107296257##agc_sb_incallui_color/-1107296257##agc_sb_downloads_color/-1107296257##agc_sb_playstore_color/-1107296257##agc_sb_youtube_color/-1107296257##agc_sb_instagram_color/-1107296257##agc_sb_twitter_color/-1107296257"
+				android:title="@string/color_per_icon"
+				android:key="dlx_system_icons_colors"
+				grx:valuesArray="@array/general_color_values"
+				grx:optionsArray="@array/general_color_entries"
+				android:defaultValue="sound/-1107296257##bluetooth/-1107296257##nfc/-1107296257##alarm/-1107296257##wificall/-1107296257##location/-1107296257##privatemode/-1107296257##gear/-1107296257##powersaver/-1107296257##datasaver/-1107296257##headset/-1107296257##tint/-1728053248##"
 				grx:separator="##"
 				grx:systemType="system"
-				grx:broadCast1="deluxerom.notif_colors" />
+				grx:colorPickerStyle="flower"
+				grx:showAlphaSlider="true"
+				grx:showAutoButton="true"
+				grx:commonBcExtra="arg"
+				grx:commonBcExtraValue="general_icons_reload" />
 
-			&lt;!&ndash; Colores de señal &ndash;&gt;
-			<GrxPerItemColor
+			<!-- Colores de señal -->
+			<!--GrxPerItemColor
 				android:title="@string/signal_colors"
 				android:key="dlx_signal_colors"
 				android:defaultValue="wifi/-1107296257##wifiarrows/-1107296257##signal/-1107296257##mobiletype/-1107296257##mobilearrows/-1107296257##roaming/-1107296257##airplane/-1107296257##vpn/-1107296257##eth/-1107296257##ethactivity/-1107296257##boosterwifi/-1107296257##boostermobile/-1107296257##boosteractivity/-1107296257"
@@ -457,97 +536,9 @@
 				grx:optionsArray="@array/signal_color_entries"
 				grx:separator="##"
 				grx:systemType="system"
-				grx:broadCast1="dlx.signal_colors" />
+				grx:broadCast1="dlx.signal_colors" /-->
 
-			&lt;!&ndash; Mantener whatsapp sin colorear &ndash;&gt;
-			<GrxSwitchPreference
-				android:title="@string/keep_whatsapp"
-				android:summary="@string/keep_whatsapp_summary"
-				android:defaultValue="true"
-				grx:broadCast1="deluxerom.notif_colors"
-				grx:systemType="system"
-				android:key="dlx_stock_whatsapp" />
-
-			&lt;!&ndash; Icono WiFi &ndash;&gt;
-			<GrxSingleSelection
-				android:title="@string/wifi_icon"
-				android:key="sb_wifi_icon"
-				android:defaultValue="0"
-				grx:optionsArray="@array/agc_wifi_entries"
-				grx:valuesArray="@array/agc_wifi_values"
-				grx:iconsArray="@array/agc_wifi_drawables"
-                grx:systemType="system"
-				grx:commonBcExtra="arg"
-				grx:commonBcExtraValue="kill" />
-
-            &lt;!&ndash; Icono señal &ndash;&gt;
-            <GrxSingleSelection
-                android:title="@string/signal_icon"
-                android:key="sb_signal_icon"
-                android:defaultValue="0"
-                grx:optionsArray="@array/agc_signal_entries"
-                grx:valuesArray="@array/agc_signal_values"
-                grx:iconsArray="@array/agc_signal_drawables"
-                grx:systemType="system"
-                grx:commonBcExtra="arg"
-                grx:commonBcExtraValue="kill" />
-
-            &lt;!&ndash; Icono alarma &ndash;&gt;
-            <GrxSingleSelection
-                android:title="@string/alarm_icon"
-                android:key="sb_alarm_icon"
-                android:defaultValue="0"
-                grx:optionsArray="@array/agc_alarma_entries"
-                grx:valuesArray="@array/agc_alarma_values"
-                grx:iconsArray="@array/agc_alarma_drawables"
-                grx:systemType="system"
-                grx:commonBcExtra="arg"
-                grx:commonBcExtraValue="sb_custom_icons" />
-
-            &lt;!&ndash; Icono bluetooth &ndash;&gt;
-            <GrxSingleSelection
-                android:title="@string/bluetooth_icon"
-                android:key="sb_bluetooth_icon"
-                android:defaultValue="0"
-                grx:optionsArray="@array/agc_bluetooth_entries"
-                grx:valuesArray="@array/agc_bluetooth_values"
-                grx:iconsArray="@array/agc_bluetooth_drawables"
-                grx:systemType="system"
-                grx:commonBcExtra="arg"
-                grx:commonBcExtraValue="sb_custom_icons" />
-
-            &lt;!&ndash; Icono volumen &ndash;&gt;
-            <GrxSingleSelection
-                android:title="@string/sound_icon"
-                android:key="sb_volume_icons"
-                android:defaultValue="0"
-                grx:optionsArray="@array/agc_sound_sb_entries"
-                grx:valuesArray="@array/agc_sound_sb_values"
-                grx:iconsArray="@array/agc_sound_sb_drawables"
-                grx:systemType="system"
-                grx:commonBcExtra="arg"
-                grx:commonBcExtraValue="sb_custom_icons" />
-
-			&lt;!&ndash; LTE / 4G &ndash;&gt;
-			<GrxSwitchPreference
-				android:title="@string/use_lte"
-				android:defaultValue="true"
-				grx:commonBcExtra="arg"
-				grx:commonBcExtraValue="kill"
-				grx:systemType="system"
-				android:key="dlx_use_lte" />
-
-            &lt;!&ndash; Posicion de señal &ndash;&gt;
-            <GrxSingleSelection
-                android:title="@string/signal_position"
-                android:key="dlx_signal_position"
-                android:defaultValue="2"
-                grx:optionsArray="@array/agc_signal_position_entries"
-                grx:valuesArray="@array/agc_signal_position_values"
-                grx:systemType="system"
-                grx:broadCast1="dlx.signal_position" />
-
-		</PreferenceScreen>-->
+		</PreferenceScreen>
 
 	</GrxPreferenceCategory>
 
@@ -688,11 +679,32 @@
 		</PreferenceScreen>-->
 
 		<!-- Heads-Up -->
-		<!--<GrxSwitchPreference
-			android:title="@string/heads_up_notif"
-			android:key="heads_up_notifications_enabled"
-			android:defaultValue="1"
-			grx:systemType="global" />-->
+		<PreferenceScreen android:title="@string/heads_up_notif">
+			<GrxSwitchPreference
+				android:title="@string/heads_up_notif"
+				android:key="heads_up_notifications_enabled"
+				android:defaultValue="1"
+				grx:systemType="global" />
+			<GrxSeekBar
+				android:title="@string/timeout"
+				android:key="dlx_headsup_timeout"
+				android:defaultValue="5000"
+				android:dependency="heads_up_notifications_enabled"
+				grx:commonBcExtra="arg"
+				grx:commonBcExtraValue="headsup_timeout"
+				grx:maxValue="10000"
+				grx:minValue="1000"
+				grx:systemType="system" />
+		</PreferenceScreen>
+
+		<!-- Usar todos los iconos de statusbar -->
+		<GrxSwitchPreference
+			android:title="@string/show_all_icons"
+			android:key="dlx_use_full_sb"
+			android:defaultValue="false"
+			grx:commonBcExtra="arg"
+			grx:commonBcExtraValue="general_icons_reload"
+			grx:systemType="system" />
 
 		<!-- Doble toque para bloquear -->
 		<GrxSwitchPreference

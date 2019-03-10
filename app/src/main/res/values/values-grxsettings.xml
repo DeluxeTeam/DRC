@@ -55,7 +55,7 @@
     <string name="grxs_nav_header_bg">Panel Header Bg</string>
     <string name="grxs_selecc_image_usando">Select Image using..</string>
     <string name="grxs_error_redondeando">Error processing image</string>
-    <string name="grxs_script_array_error">An error ocurred while running the associated script</string>
+    <string name="grxs_script_array_error">An error occurred while running the associated script</string>
     <string name="grxs_apply">Apply</string>
     <string name="grxs_backup">Backup</string>
     <string name="grxs_restore">Restore</string>
@@ -69,7 +69,7 @@
     <string name="grxs_back">Back</string>
     <string name="grxs_select_app">Select Application</string>
     <string name="grxs_building_sorting_list">Creaing and sorting list ..</string>
-    <string name="grxs_building_list">Creating applications list...</string>
+    <string name="grxs_building_list">Creating applications list…</string>
     <string name="grxs_is_not_installed">( %1$s is not installed! )</string>
     <string name="grxs_delete_values">Delete values</string>
     <string name="grxs_reset_values">Reset values</string>
@@ -89,7 +89,7 @@
     <string name="grxs_help_sort_list">List Ordering</string>
     <string name="grxs_help_sort_apps_alphabet">Sorts the list of applications alphabetically</string>
     <string name="grxs_help_app_not_installed">App not installed</string>
-    <string name="grxs_help_app_not_found">This icon indicates that the application is not installed or some kind of error happend. </string>
+    <string name="grxs_help_app_not_found">This icon indicates that the application is not installed or some kind of error happened. </string>
     <string name="grxs_copied_clipboard">Value copied to the clipboard</string>
     <string name="grxs_max_choices_warning">Max number of allowed items has been reached.</string>
     <string name="grxs_current_max_choices">  ( max = %1$d )</string>
@@ -98,7 +98,7 @@
     <string name="grxs_actions">Actions</string>
     <string name="grxs_user_apps">User Applications</string>
     <string name="grxs_shortcuts">ShortCuts</string>
-    <string name="grxs_shortcut_error">Some problem ocurred while creating the shortcut!!</string>
+    <string name="grxs_shortcut_error">Some problem occurred while creating the shortcut!!</string>
     <string name="grxs_shortcut_not_allowed">Error starting the activity. Some type of access/activities/shortcuts just can be executed from system applications. In other cases, it is not possiblie to launch them!</string>
     <string name="grxs_ok">Ok</string>
     <string name="grxs_cancel">Cancel</string>
@@ -165,7 +165,7 @@
     <string name="grxs_pulse_app_null">No App Selected</string>
     <string name="grxs_pulse_no_screenoff">It was not possible to screen off to test. Please screen off manually to check the led settings.</string>
 
-    <string name="grxs_savesettings_exception">A problem ocurred while saving the value in settings. Try installing the app in priv-app</string>
+    <string name="grxs_savesettings_exception">A problem occurred while saving the value in settings. Try installing the app in priv-app</string>
     <string name="grxs_draganddroptoshortout">Drag and drop the elements to short out the list</string>
     <string name="grxs_select_option">Select Option</string>
 	
@@ -335,7 +335,7 @@
         <item>Most of the preferences can be reset to their default values by double clicking.</item>
         <item>Please, read the help buttons which appear in some preferences. That help will tell you how to delete, sort, or whatever is enabled by the dev.</item>
         <item>You can select you default color picker style. This style is only taken if the dev has not defined an specific style for the color preferences or if you are in a preference using a specific style</item>
-        <item>In color picker preferences you can copy the hex value to the clipboard by long-clicking on the color circle. This feature can be usefull when there are many color pickers preferences</item>
+        <item>In color picker preferences you can copy the hex value to the clipboard by long-clicking on the color circle. This feature can be useful when there are many color pickers preferences</item>
         <item>Floating Recents Area\n\n
         - You can enable or disable in this menu. Floating Action Button has to be enabled. Then long-click on it to show the floating area\n
         - You can change the transparency of the area by double - clicking on the title area\n
@@ -1926,5 +1926,127 @@
         <item>0</item>
         <item>1</item>
     </string-array>
+
+    <string-array name="custombg_color_entries">
+        <item>Color 1</item>
+        <item>Color 2</item>
+        <item>Color 3</item>
+        <item>Color 4</item>
+        <item>Color 5</item>
+        <item>Color 6</item>
+    </string-array>
+
+    <string-array name="custombg_color_values">
+        <item>color1</item>
+        <item>color2</item>
+        <item>color3</item>
+        <item>color4</item>
+        <item>color5</item>
+        <item>color6</item>
+    </string-array>
+
+    <string-array name="general_color_entries">
+        <item>Sound</item>
+        <item>Bluetooth</item>
+        <item>NFC</item>
+        <item>Alarm</item>
+        <item>WifiCall</item>
+        <item>Location</item>
+        <item>Private mode</item>
+        <item>Gear</item>
+        <item>Power saver</item>
+        <item>Data saver</item>
+        <item>HeadSet</item>
+        <item>Tint on white apps</item>
+    </string-array>
+
+    <string-array name="general_color_values">
+        <item>sound</item>
+        <item>bluetooth</item>
+        <item>nfc</item>
+        <item>alarm</item>
+        <item>wificall</item>
+        <item>location</item>
+        <item>privatemode</item>
+        <item>gear</item>
+        <item>powersaver</item>
+        <item>datasaver</item>
+        <item>headset</item>
+        <item>tint</item>
+    </string-array>
+
+    <string name="general_info">General information</string>
+    <string name="features">Features</string>
+    <string name="changelog">Changelog</string>
+
+    <string-array name="changelog_114">
+        <item>Added DeluxeKernel®_v6 for all variants</item>
+        <item>Added option to show all icons on statusbar</item>
+        <item>Added color pickers for general colors on statusbar</item>
+        <item>Added custom WiFi icons</item>
+        <item>Added network speedmeter preferences</item>
+        <item>Added option to hide stock battery alone (without percentage)</item>
+        <item>Hidden percentage and network speedmeter from Settings. Both are on DRC</item>
+        <item>Added option to disable heads-up notifications and select timeout</item>
+        <item>Added custom background for navigation bar</item>
+        <item>Fixed virtual buttons size on statusbar (on landscape)</item>
+        <item>More useless files debloated</item>
+        <item>Fixed minnor bugs on DRC</item>
+        <item>Optimized some mods</item>
+    </string-array>
+
+    <string-array name="changelog_113">
+        <item>Rebased over N950FXXU5DSB2</item>
+        <item>Added extended reboot menu (stock style)</item>
+        <item>Fixed extended reboot menu (list style)</item>
+        <item>Added toggle to choose reboot menu style (stock/list)</item>
+        <item>Tint switch for 3MinitBattery</item>
+        <item>Fixed virtual navigation bar button on landscape</item>
+        <item>Added NZC CSC (New Zeland unbranded)</item>
+        <item>Added PET CSC (Peru Claro)</item>
+        <item>Various optimizations</item>
+        <item>Replaced SmartManager witch China version (more features)</item>
+        <item>Forced status official on settings</item>
+        <item>Added native blur to quickpanel</item>
+    </string-array>
+
+    <string-array name="changelog_112">
+        <item>Not released to users</item>
+    </string-array>
+
+    <string-array name="changelog_111">
+        <item>Fixed camera S8/S8+</item>
+        <item>Fixed iris unlock S8/S8+</item>
+        <item>Bootloader/modem optional on AROMA</item>
+        <item>Added Velvet (Google) as system app on AROMA</item>
+        <item>Added Samsung Notes on AROMA</item>
+        <item>Keept BixbyWakeUp for prevent Google Voice FC</item>
+        <item>Added back glance for S-Pen</item>
+        <item>Deleted OEM toggle from settings, is always enabled</item>
+        <item>Added 2Sims + SD bypass</item>
+        <item>Fixed carrier text limit size on lockscreen</item>
+        <item>Added custom color for white backgrounds on carrier text</item>
+        <item>Added data usage preferences to DRC</item>
+        <item>Fixed behavior of batteries 3Minit and circular</item>
+        <item>Added tint to 3Minit icon</item>
+        <item>Added virtual buttons with 28 actions</item>
+        <item>Deleted brightness warning</item>
+        <item>Added extended reboot menu (EXPERIMENTAL)</item>
+        <item>Added battery levels (warning and critic) pickers</item>
+    </string-array>
+
+    <string-array name="changelog_110">
+        <item>Initial release</item>
+        <item>Based on first N950F Beta</item>
+    </string-array>
+
+    <string name="changelog_114">Changelog v11.4</string>
+    <string name="changelog_113">Changelog v11.3</string>
+    <string name="changelog_112">Changelog v11.2</string>
+    <string name="changelog_111">Changelog v11.1</string>
+    <string name="changelog_110">Changelog v11</string>
+
+    <string name="custom_navbar_info">NOTE : ENABLE CUSTOM BACKGROUND WILL FORCE THE VISIBILITY. SO IF YOU SELECT AN IMAGE, IT WILL BE SHOWN ALWAYS, EVEN IN HOME.
+    ALSO MAKE SURE TO SELECT ONLY LOCAL CONTENT, NOT FROM DRIVE OR ANY OTHER CLOUD.</string>
 
 </resources>

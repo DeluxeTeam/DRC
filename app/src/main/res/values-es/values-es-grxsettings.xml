@@ -37,7 +37,7 @@
 
     <string name="grxs_nav_header_bg">Panel Header Bg</string>
 
-    <string name="grxs_selecc_image_usando">Selecciona imagen usand...</string>
+    <string name="grxs_selecc_image_usando">Selecciona imagen usando…</string>
     <string name="grxs_error_redondeando">Error redondeando imagen</string>
 
     <string name="grxs_remove">Eliminar</string>
@@ -45,7 +45,7 @@
 
     <string name="grxs_backup">Backup</string>
     <string name="grxs_restore">Restaurar</string>
-    <string name="grxs_restoring_msg">Restaurando y sincronizando las preferencias y archivos del backup %1$s  ...</string>
+    <string name="grxs_restoring_msg">Restaurando y sincronizando las preferencias y archivos del backup %1$s  …</string>
 
     <string name="grxs_recents_screens_title">Pantallas Recientes</string>
     <string name="grxs_buildprop_simulator">Simular Build Prop</string>
@@ -73,7 +73,7 @@
     <string name="grxs_select_sort_help">Puedes borrar un elemento deslizando el elemento hacia la izquierda y aparecerá la opción de borrar.\nPara posicionar un elemento pulsa largo y arrástralo hasta la posición deseada.\nPuedes siempre seleccionar y deseleccionar elementos a travs del botón +/-\nPara borrar toda la selección actual pulsa el botón X</string>
     <string name="grxs_select_app">Selecciona Aplicación</string>
     <string name="grxs_building_sorting_list">Creando y ordenando listado ..</string>
-    <string name="grxs_building_list">Creando listado aplicaciones...</string>
+    <string name="grxs_building_list">Creando listado aplicaciones…</string>
     <string name="grxs_is_not_installed">( %1$s no está instalada! )</string>
     <string name="grxs_delete_values">Borrar valores</string>
     <string name="grxs_reset_values">Reset valores</string>
@@ -202,14 +202,14 @@
         <item>Dependiendo de la configuración y preferencias usadas por el dev, en algunos tipos de preferencia aparece un botón de ayuda que muestra cómo se usan funciones como eliminar elementos, ordenarlos, etc. Por favor, leee la ayouda..</item>
         <item>Puedes seleccionar el tipo de ColorPicker por defecto. Este valor será usado siempre que el dev no haya definido en las preferencias un valor específico o que la preferencia necesite usar un tipo de selector de color específico. </item>
         <item>En las preferencias tipo ColorPicker (selector de color) podrás copiar el valor seleccionado en la preferencia al portapapeles en formato hexadecimal mediant una pulsación larga sobre la muestra de color. Te puede facilitar la labor de configurar tus colores.</item>
-        <item>Area flotante con acceso a últimas pantallas\n\n
+        <item>Área flotante con acceso a últimas pantallas\n\n
         - Puedes activarla o no en este menú. Aparecerá cuando pulsas largo en el FAB (botón flotante) si has activado esta opción.\n
         - Puedes cambiar la transparencia de este área mediante doble-clicks en la zona del título\n
         - Para mover el área, símplemente presiona largo en el título y desplázala\n
         - El área es ocultado automáticamente cuando usamos el teclado.\n
         </item>
         <item>Tu desarrollador puede activar las siguientes características:\n\n
-        - Asignar una imágen de fondo en la cabecera del panel de navegación\n
+        - Asignar una imagen de fondo en la cabecera del panel de navegación\n
         - Seleccionar temas\n
         </item>
     </string-array>
@@ -248,7 +248,7 @@
         <item>Minutos</item>
         <item>Segundos</item>
         <item>Separador</item>
-        <item>Dia</item>
+        <item>Día</item>
         <item>Fecha</item>
         <item>AM/PM</item>
     </string-array>
@@ -256,13 +256,13 @@
     <string-array name="agc_clock_options">
         <item>Hora</item>
         <item>Espacio</item>
-        <item>Dia</item>
+        <item>Día</item>
         <item>Espacio</item>
         <item>Fecha</item>
     </string-array>
 
     <string-array name="agc_clock_date_options">
-        <item>Dia</item>
+        <item>Día</item>
         <item>Separador</item>
         <item>Mes</item>
         <item>Separador</item>
@@ -439,6 +439,92 @@
         <item>Izquierda</item>
         <item>Centro</item>
         <item>Derecha</item>
+    </string-array>
+
+    <string name="general_info">General information</string>
+    <string name="features">Features</string>
+    <string name="changelog">Changelog</string>
+
+    <string-array name="changelog_114">
+        <item>Añadido DeluxeKernel®_v6 para todas las variantes</item>
+        <item>Añadida opción para mostrar todos los iconos en statusbar</item>
+        <item>Añadidos selectores de color para iconos generales</item>
+        <item>Añadidos iconos WiFi personalizados</item>
+        <item>Añadidas preferencias para velocímetro de red</item>
+        <item>Añadida opción para esconder icono de batería stock solo (sin porcentaje)</item>
+        <item>Escondido porcentaje de bateria y velocímetro de red de ajustes. Ambos están en DRC</item>
+        <item>Añadida opción para desactivar notificaciones heads-up y tiempo de espera</item>
+        <item>Añadido fondo personalizado en barra de navegación</item>
+        <item>Arreglado tamaño de botones virtuales en barra de estado</item>
+        <item>Mas archivos inutiles eliminados</item>
+        <item>Arreglados pequeños bugs en DRC</item>
+        <item>Optimizados varios mods</item>
+    </string-array>
+
+    <string-array name="changelog_113">
+        <item>Rebasado sobre N950FXXU5DSB2</item>
+        <item>Añadido menu de reinicio extendido (estilo stock)</item>
+        <item>Arreglado menu de reinicio extendido (estilo dialogo)</item>
+        <item>Añadido toggle para estilo de menu de reinicio (stock/dialogo)</item>
+        <item>Añadido switch para tinta en 3MinitBattery</item>
+        <item>Arreglado tamaño de botón virtual en barra de navegación</item>
+        <item>Añadido NZC CSC (Nueva Zelanda libre)</item>
+        <item>Añadido PET CSC (Peru Claro)</item>
+        <item>Varias optimizaciones</item>
+        <item>Reemplazado SmartManager por la versión china</item>
+        <item>Forzado estado oficial en ajustes</item>
+        <item>Añadido blur nativo al panel de notificaciones</item>
+    </string-array>
+
+    <string-array name="changelog_112">
+        <item>No publicada para usuarios</item>
+    </string-array>
+
+    <string-array name="changelog_111">
+        <item>Arreglada cámara en S8/S8+</item>
+        <item>Arreglado desbloqueo por iris en S8/S8+</item>
+        <item>Bootloader/modem opcional en AROMA</item>
+        <item>Añadido Velvet (Google) como app de sistem en AROMA</item>
+        <item>Añadido Samsung Notes en AROMA</item>
+        <item>Mantenido BixbyWakeUp para prevenir FC en Google voz</item>
+        <item>Añadido de nuevo Vista Rápida para S-Pen</item>
+        <item>Eliminado toggle OEM de settings, está activo siempre</item>
+        <item>Añadido bypass para 2Sims + SD</item>
+        <item>Arreglado limite de tamaño en texto de operadora en pantalla de bloqueo</item>
+        <item>Añadido color personalizado para texto de operadora sobre fondos blancos</item>
+        <item>Añadidas preferencias de uso de datos en cortina de notificaciones</item>
+        <item>Arreglado comportamiento de baterías circular y 3Minit</item>
+        <item>Añadido switch para usar o no tinta en 3MinitBattery</item>
+        <item>Añadidos botones virtuales con 28 acciones</item>
+        <item>Eliminado aviso de brillo alto</item>
+        <item>Añadido menú de reinicio extendido (EXPERIMENTAL)</item>
+        <item>Añadidos selectores de nivel de batería crítico y bajo</item>
+    </string-array>
+
+    <string-array name="changelog_110">
+        <item>Versión Pie inicial</item>
+        <item>Basada en primera beta para N950F</item>
+    </string-array>
+
+    <string name="changelog_114">Cambios v11.4</string>
+    <string name="changelog_113">Cambios v11.3</string>
+    <string name="changelog_112">Cambios v11.2</string>
+    <string name="changelog_111">Cambios v11.1</string>
+    <string name="changelog_110">Cambios v11</string>
+
+    <string-array name="general_color_entries">
+        <item>Modo de sonido</item>
+        <item>Bluetooth</item>
+        <item>NFC</item>
+        <item>Alarma</item>
+        <item>Llamadas WiFi</item>
+        <item>Localización</item>
+        <item>Modo privado</item>
+        <item>Gear</item>
+        <item>Ahorro de energia</item>
+        <item>Ahorro de datos</item>
+        <item>Auriculares</item>
+        <item>Tinta en fondos blancos</item>
     </string-array>
 
 </resources>

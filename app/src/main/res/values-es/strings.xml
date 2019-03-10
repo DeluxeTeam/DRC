@@ -35,7 +35,7 @@
     <string name="color">Color</string>
     <string name="weather">Clima</string>
     <string name="update_every">Actualizar cada</string>
-    <string name="icon_colors_position">Selecciona iconos, colores, posiciones...</string>
+    <string name="icon_colors_position">Selecciona iconos y colores</string>
     <string name="general_colors">Colores generales</string>
     <string name="signal_colors">Colores de señal</string>
     <string name="keep_whatsapp">Mantener WhatsApp sin colorear</string>
@@ -221,5 +221,19 @@
     <string name="extended_power_menu_desc">CARACTERÍSTICA EXPERIMENTAL, PUEDE CONTENER FALLOS.</string>
     <string name="minit_tint">Tintar icono en fondos blancos</string>
     <string name="reboot_style">Estilo de menú de reinicio</string>
+    <string name="timeout">Tiempo visible</string>
+    <string name="netw_prefs">Preferencias de red</string>
+    <string name="paypal">Donaciones en PayPal</string>
+    <string name="telegram_esp">Grupo de soporte en Telegram (ESP)</string>
+    <string name="telegram_eng">Grupo de soporte en Telegram (ENG)</string>
+    <string name="htc">Hilo en HTCMania</string>
+    <string name="xda">Hilo en XDA</string>
+    <string name="activity_not_found">No se puede abrir esta actividad</string>
+    <string name="custom_navbar_info">NOTA : HABILITAR EL FONDO PERSONALIZADO FORZARÁ SU VISIBILIDAD SIEMPRE, INCLUSO EN PANTALLA DE INICIO. ASEGURATE DE SELECCIONAR SOLO CONTENIDO LOCAL EN CASO DE USAR IMAGEN, NUNCA DE DRIVE O CUALQUIER OTRA NUBE.</string>
+    <string name="show_all_icons">Mostrar todos los iconos en barra de estado</string>
+    <string name="color_per_icon">Color por icono</string>
+    <string name="general_colors_info">NOTA : ESTOS COLORES NO AFECTAN A LA BARRA DE ESTADO DEL PANEL DE NOTIFICACIONES. RECUERDA QUE PUEDES MOSTRAR TODOS LOS ICONOS DE LA BARRA EN Barra de estado > Mostrar todos los iconos</string>
+    <string name="icons_warning">NOTA : EL CAMBIO DE ICONOS PUEDE TARDAR ENTRE 2 Y 5 SEGUNDOS PARA TENER EFECTO</string>
+    <string name="select_icons">Selecciona iconos</string>
 
 </resources>

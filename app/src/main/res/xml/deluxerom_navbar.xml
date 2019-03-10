@@ -42,7 +42,7 @@
     <GrxColorPicker
         android:title="@string/bg_color"
         android:key="navigationbar_color"
-        grx:depRule="ENABLE#dlx_nb_drw_visibility#BOOLEAN#false"
+        grx:depRule="ENABLE#dlx_navbar_bg_enabled#BOOLEAN#false"
         android:defaultValue="0xFFF0F0F0"
         grx:colorPickerStyle="flower"
         grx:iconTint="?complementary_color3"
@@ -52,137 +52,86 @@
         grx:systemType="global" />
 
     <!-- Fondo personalizado -->
-    <!--<PreferenceScreen android:title="@string/custombg" >
+    <PreferenceScreen android:title="@string/custombg" >
+
+        <GrxInfoText android:textColor="?complementary_color3" android:textSize="20sp" android:summary="@string/custom_navbar_info" />
+
         <GrxSwitchPreference
             android:title="@string/visibility"
-            android:key="dlx_nb_drw_visibility"
+            android:key="dlx_navbar_bg_enabled"
             android:defaultValue="false"
-            grx:broadCast1="deluxerom.drawable_update_dlx_nb_drw_"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="navbar_bg"
             grx:systemType="system" />
         <GrxSingleSelection
             android:title="@string/type"
-            android:key="dlx_nb_drw_type"
-            android:dependency="dlx_nb_drw_visibility"
+            android:key="dlx_navbar_bg_type"
             android:defaultValue="0"
-            grx:broadCast1="deluxerom.drawable_update_dlx_nb_drw_"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="navbar_bg"
+            android:dependency="dlx_navbar_bg_enabled"
             grx:optionsArray="@array/custom_bg_type_entries"
             grx:systemType="system"
             grx:valuesArray="@array/custom_bg_type_values" />
         <GrxPickImage
             android:title="@string/select_image"
-            android:key="dlx_nb_drw_image_uri"
-            grx:depRule="ENABLE#dlx_nb_drw_type#STRING#0"
-            android:dependency="dlx_nb_drw_visibility"
-            grx:broadCast1="deluxerom.drawable_update_dlx_nb_drw_"
+            android:key="dlx_navbar_bg_uri"
+            grx:commonBcExtra="arg"
+            android:dependency="dlx_navbar_bg_enabled"
+            grx:depRule="ENABLE#dlx_navbar_bg_type#STRING#0"
+            grx:commonBcExtraValue="navbar_bg"
             grx:systemType="system" />
-        <GrxSingleSelection
-            android:title="@string/image_scale"
-            android:key="dlx_nb_drw_scale"
-            android:dependency="dlx_nb_drw_visibility"
-            grx:depRule="ENABLE#dlx_nb_drw_type#STRING#0"
-            android:defaultValue="2"
-            grx:broadCast1="deluxerom.drawable_update_dlx_nb_drw_"
-            grx:optionsArray="@array/crop_entries"
-            grx:systemType="system"
-            grx:valuesArray="@array/crop_values" />
         <GrxSeekBar
             android:title="@string/opacity"
-            android:key="dlx_nb_drw_opacity"
-            android:dependency="dlx_nb_drw_visibility"
+            android:key="dlx_navbar_bg_alpha"
             android:defaultValue="255"
-            grx:broadCast1="deluxerom.drawable_update_dlx_nb_drw_"
+            android:dependency="dlx_navbar_bg_enabled"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="navbar_bg"
             grx:maxValue="255"
             grx:minValue="0"
             grx:systemType="system" />
         <GrxColorPicker
             android:title="@string/color"
-            android:key="dlx_nb_drw_primary"
-            android:dependency="dlx_nb_drw_visibility"
-            grx:depRule="DISABLE#dlx_nb_drw_type#STRING#0"
-            android:defaultValue="16777215"
+            android:key="dlx_navbar_bg_indv_color"
+            android:defaultValue="-1"
+            android:dependency="dlx_navbar_bg_enabled"
+            grx:depRule="ENABLE#dlx_navbar_bg_type#STRING#1"
             grx:colorPickerStyle="flower"
             grx:iconTint="?complementary_color3"
-            grx:broadCast1="deluxerom.drawable_update_dlx_nb_drw_"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="navbar_bg"
             grx:showAlphaSlider="true"
             grx:showAutoButton="true"
             grx:saveValueOnFly="true"
             grx:systemType="system" />
-        <GrxColorPicker
-            android:title="Color 2"
-            android:key="dlx_nb_drw_secondary"
-            android:dependency="dlx_nb_drw_visibility"
-            grx:depRule="ENABLE#dlx_nb_drw_type#STRING#2"
-            android:defaultValue="16777215"
+        <GrxPerItemColor
+            android:title="Gradient colors (6)"
+            android:key="dlx_navbar_bg_color_array"
+            grx:valuesArray="@array/custombg_color_values"
+            grx:optionsArray="@array/custombg_color_entries"
+            android:defaultValue="color1/-1##color2/-1##color3/-1##color4/-1##color5/-1##color6/-1##"
+            grx:separator="##"
+            grx:systemType="system"
             grx:colorPickerStyle="flower"
-            grx:iconTint="?complementary_color3"
-            grx:broadCast1="deluxerom.drawable_update_dlx_nb_drw_"
+            android:dependency="dlx_navbar_bg_enabled"
+            grx:depRule="ENABLE#dlx_navbar_bg_type#STRING#2"
             grx:showAlphaSlider="true"
             grx:showAutoButton="true"
-            grx:saveValueOnFly="true"
-            grx:systemType="system" />
-        <GrxColorPicker
-            android:title="Color 3"
-            android:key="dlx_nb_drw_tertiary"
-            android:dependency="dlx_nb_drw_visibility"
-            grx:depRule="ENABLE#dlx_nb_drw_type#STRING#2"
-            android:defaultValue="16777215"
-            grx:colorPickerStyle="flower"
-            grx:iconTint="?complementary_color3"
-            grx:broadCast1="deluxerom.drawable_update_dlx_nb_drw_"
-            grx:showAlphaSlider="true"
-            grx:showAutoButton="true"
-            grx:saveValueOnFly="true"
-            grx:systemType="system" />
-        <GrxColorPicker
-            android:title="Color 4"
-            android:key="dlx_nb_drw_quaternary"
-            android:dependency="dlx_nb_drw_visibility"
-            grx:depRule="ENABLE#dlx_nb_drw_type#STRING#2"
-            android:defaultValue="16777215"
-            grx:colorPickerStyle="flower"
-            grx:iconTint="?complementary_color3"
-            grx:broadCast1="deluxerom.drawable_update_dlx_nb_drw_"
-            grx:showAlphaSlider="true"
-            grx:showAutoButton="true"
-            grx:saveValueOnFly="true"
-            grx:systemType="system" />
-        <GrxColorPicker
-            android:title="Color 5"
-            android:key="dlx_nb_drw_quinary"
-            android:dependency="dlx_nb_drw_visibility"
-            grx:depRule="ENABLE#dlx_nb_drw_type#STRING#2"
-            android:defaultValue="16777215"
-            grx:colorPickerStyle="flower"
-            grx:iconTint="?complementary_color3"
-            grx:broadCast1="deluxerom.drawable_update_dlx_nb_drw_"
-            grx:showAlphaSlider="true"
-            grx:showAutoButton="true"
-            grx:saveValueOnFly="true"
-            grx:systemType="system" />
-        <GrxColorPicker
-            android:title="Color 6"
-            android:key="dlx_nb_drw_sextary"
-            android:dependency="dlx_nb_drw_visibility"
-            grx:depRule="ENABLE#dlx_nb_drw_type#STRING#2"
-            android:defaultValue="16777215"
-            grx:colorPickerStyle="flower"
-            grx:iconTint="?complementary_color3"
-            grx:broadCast1="deluxerom.drawable_update_dlx_nb_drw_"
-            grx:showAlphaSlider="true"
-            grx:showAutoButton="true"
-            grx:saveValueOnFly="true"
-            grx:systemType="system" />
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="navbar_bg" />
         <GrxSingleSelection
             android:title="@string/custombg_orientation"
-            android:key="dlx_nb_drw_gradient_orientation"
-            grx:depRule="ENABLE#dlx_nb_drw_type#STRING#2"
-            android:dependency="dlx_nb_drw_visibility"
+            android:key="dlx_navbar_bg_orientation"
             android:defaultValue="0"
-            grx:broadCast1="deluxerom.drawable_update_dlx_nb_drw_"
+            android:dependency="dlx_navbar_bg_enabled"
+            grx:depRule="ENABLE#dlx_navbar_bg_type#STRING#2"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="navbar_bg"
             grx:optionsArray="@array/gradient_entries"
             grx:systemType="system"
             grx:valuesArray="@array/gradient_values" />
-    </PreferenceScreen>-->
+    </PreferenceScreen>
 
     <!-- Tamaño personalizado -->
     <GrxSwitchPreference

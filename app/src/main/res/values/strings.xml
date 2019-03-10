@@ -38,7 +38,7 @@
     <string name="color">Color</string>
     <string name="weather">Weather</string>
     <string name="update_every">Update every</string>
-    <string name="icon_colors_position">Select icons, colors, positions...</string>
+    <string name="icon_colors_position">Select general icons and colors</string>
     <string name="general_colors">General colors</string>
     <string name="signal_colors">Signal colors</string>
     <string name="keep_whatsapp">Keep WhatsApp without color</string>
@@ -224,5 +224,19 @@
     <string name="extended_power_menu_desc">THIS IS AN EXPERIMENTAL FEATURE AND MAY NOT WORK.</string>
     <string name="minit_tint">Use tint on white backgrounds</string>
     <string name="reboot_style">Reboot menu style</string>
+    <string name="timeout">Timeout</string>
+    <string name="netw_prefs">Network preferences</string>
+    <string name="activity_not_found">Can\'t open this activity</string>
+    <string name="xda">XDA thread</string>
+    <string name="htc">HTCMania thread</string>
+    <string name="telegram_eng">Telegram group support (English)</string>
+    <string name="telegram_esp">Telegram group support (Spanish)</string>
+    <string name="paypal">PayPal donations</string>
+    <string name="show_all_icons">Show all icons on statusbar</string>
+    <string name="color_per_icon">Color per icon</string>
+    <string name="general_colors_info"><![CDATA[NOTE : THIS COLORS DOESN\'T AFFECT TO QUICKPANEL STATUSBAR. REMEMBER YOU CAN SHOW ALL STATUSBAR ICONS ON Statusbar > Show all icons]]></string>
+    <string name="icons_warning">NOTE : ICON CHANGE CAN TAKE 2–5 SECONDS TO BE RELOADED</string>
+    <string name="select_icons">Select icons</string>
+
 
 </resources>
