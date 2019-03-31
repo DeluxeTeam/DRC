@@ -21,15 +21,14 @@
         android:defaultValue="false"
         grx:systemType="system" />
 
-<!--    &lt;!&ndash; Rotación &ndash;&gt;
+    <!-- Rotación -->
     <GrxSwitchPreference
         android:title="@string/ls_rotation"
-        android:key="dlx_kg_rotation"
-        android:defaultValue="false"
-        grx:commonBcExtra="arg"
-        grx:commonBcExtraValue="kill"
+        android:key="lock_screen_allow_rotation"
+        android:defaultValue="true"
         grx:systemType="system" />
 
+    <!--
     &lt;!&ndash; Ocultar barra de estado &ndash;&gt;
     <GrxSwitchPreference
         android:title="@string/hide_sb"

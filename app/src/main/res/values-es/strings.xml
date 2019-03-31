@@ -235,5 +235,8 @@
     <string name="general_colors_info">NOTA : ESTOS COLORES NO AFECTAN A LA BARRA DE ESTADO DEL PANEL DE NOTIFICACIONES. RECUERDA QUE PUEDES MOSTRAR TODOS LOS ICONOS DE LA BARRA EN Barra de estado > Mostrar todos los iconos</string>
     <string name="icons_warning">NOTA : EL CAMBIO DE ICONOS PUEDE TARDAR ENTRE 2 Y 5 SEGUNDOS PARA TENER EFECTO</string>
     <string name="select_icons">Selecciona iconos</string>
+    <string name="use_random_reboot">Usar orden aleatorio</string>
+    <string name="grxs_rom_info">Información de la ROM</string>
+    <string name="changelog_120">Cambios v12</string>
 
 </resources>

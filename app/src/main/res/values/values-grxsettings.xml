@@ -159,7 +159,7 @@
     <string name="grxs_script_dialog_msg">Are you sure you want to run this action?</string>
     <string name="grxs_script_file_dialog_msg">Are you sure you want to run this scrip: %1$s ?</string>
     <string name="grxs_update_item">Update Item</string>
-    <string name="grxs_rom_info">Rom Info</string>
+    <string name="grxs_rom_info">ROM info</string>
     <string name="grxs_app">App.</string>
     <string name="grxs_pulse_speed_title">Pulse Speed (Time On - Time Off)</string>
     <string name="grxs_pulse_app_null">No App Selected</string>
@@ -964,6 +964,7 @@
         <item>@drawable/wifi_modern</item>
         <item>@drawable/wifi_atomo</item>
         <item>@drawable/wifi_metallica</item>
+        <item>@drawable/wifi_agua</item>
     </string-array>
     <string-array name="agc_wifi_entries">
         <item>Stock</item>
@@ -981,6 +982,7 @@
         <item>MODERN</item>
         <item>ATOMO</item>
         <item>METALLICA</item>
+        <item>AGUA</item>
     </string-array>
     <string-array name="agc_wifi_values">
         <item>0</item>
@@ -998,6 +1000,7 @@
         <item>12</item>
         <item>13</item>
         <item>14</item>
+        <item>15</item>
     </string-array>
 	<string-array name="agc_signal_drawables">
         <item>@drawable/signal_stock</item>
@@ -1014,6 +1017,7 @@
         <item>@drawable/signal_modern</item>
         <item>@drawable/signal_atomo</item>
         <item>@drawable/signal_metallica</item>
+        <item>@drawable/signal_ios</item>
     </string-array>
     <string-array name="agc_signal_entries">
         <item>Stock</item>
@@ -1030,6 +1034,7 @@
         <item>MODERN</item>
         <item>ATOMO</item>
         <item>METALLICA</item>
+        <item>iOS</item>
     </string-array>
     <string-array name="agc_signal_values">
         <item>0</item>
@@ -1046,6 +1051,7 @@
         <item>11</item>
         <item>12</item>
         <item>13</item>
+        <item>14</item>
     </string-array>
 	<array name="agc_alarma_drawables">
         <item>@drawable/alarma_stock</item>
@@ -1979,6 +1985,22 @@
     <string name="features">Features</string>
     <string name="changelog">Changelog</string>
 
+    <string-array name="changelog_120">
+        <item>Rebased over N950FXXS5DSC2</item>
+        <item>Updated ramdisk N950F</item>
+        <item>Fixed /system size problem</item>
+        <item>Added custom signal icons</item>
+        <item>Added custom bluetooth icons</item>
+        <item>Added custom alarm icons</item>
+        <item>Added custom sound mode icons</item>
+        <item>Added selection 4G/LTE icon</item>
+        <item>Added power menu item/order selection</item>
+        <item>Added power menu random order selection</item>
+        <item>Added 14 styles to power menu</item>
+        <item>Panel blur disabled if GoodLock is running</item>
+        <item>SmartManager stock/chinese version selectable on AROMA</item>
+    </string-array>
+
     <string-array name="changelog_114">
         <item>Added DeluxeKernel®_v6 for all variants</item>
         <item>Added option to show all icons on statusbar</item>
@@ -2048,5 +2070,19 @@
 
     <string name="custom_navbar_info">NOTE : ENABLE CUSTOM BACKGROUND WILL FORCE THE VISIBILITY. SO IF YOU SELECT AN IMAGE, IT WILL BE SHOWN ALWAYS, EVEN IN HOME.
     ALSO MAKE SURE TO SELECT ONLY LOCAL CONTENT, NOT FROM DRIVE OR ANY OTHER CLOUD.</string>
+
+    <string-array name="brightness_color_values">
+        <item>color_025</item>
+        <item>color_2550</item>
+        <item>color_5075</item>
+        <item>color_75100</item>
+    </string-array>
+
+    <string-array name="brightness_color_entries">
+        <item>From  0% to 25%</item>
+        <item>From 25% to 50%</item>
+        <item>From 50% to 75%</item>
+        <item>From 75% to 100%</item>
+    </string-array>
 
 </resources>

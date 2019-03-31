@@ -217,18 +217,18 @@
     <string name="sb_preferences">Preferencias de iconos, colores, tamaños…</string>
 
     <string-array name="agc_reboot_options">
-        <item>Encendido</item>
-        <item>Reinicio</item>
+        <item>Power off</item>
+        <item>Reboot</item>
         <item>Recovery</item>
         <item>Download</item>
-        <item>Reinicio rápido</item>
-        <item>Modo emergencia</item>
-        <item>Linterna</item>
-        <item>Asistencia</item>
-        <item>Grabar pantalla</item>
-        <item>Captura de pantalla</item>
-        <item>Ajustes</item>
-        <item>RomControl</item>
+        <item>Data mode</item>
+        <item>Quick reboot</item>
+        <item>Reboot UI</item>
+        <item>Emergency mode</item>
+        <item>Flashlight</item>
+        <item>Record screen</item>
+        <item>Screenshot</item>
+        <item>Settings</item>
     </string-array>
 
     <string-array name="crop_entries">
@@ -444,6 +444,22 @@
     <string name="general_info">General information</string>
     <string name="features">Features</string>
     <string name="changelog">Changelog</string>
+
+    <string-array name="changelog_120">
+        <item>Rebasado sobre N950FXXS5DSC2</item>
+        <item>Actualizado ramdisk N950F</item>
+        <item>Arreglado problema de tamaño en /system</item>
+        <item>Añadidos iconos de señal personalizados</item>
+        <item>Añadidos iconos de bluetooth personalizados</item>
+        <item>Añadidos iconos de alarma personalizados</item>
+        <item>Añadidos iconos de modo de sonido personalizados</item>
+        <item>Añadido selector 4G/LTE</item>
+        <item>Añadida selección de elementos/orden de menú de apagado</item>
+        <item>Añadida opción para usar ordern aleatorio en menú de apagado</item>
+        <item>Añadidos 14 estilos para menú de apagado</item>
+        <item>Blur en panel desactivado si GoodLock está funcionando</item>
+        <item>SmartManager stock/chino seleccionable en AROMA</item>
+    </string-array>
 
     <string-array name="changelog_114">
         <item>Añadido DeluxeKernel®_v6 para todas las variantes</item>

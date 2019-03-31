@@ -17,6 +17,7 @@
 			grx:spinnerOptionsArray="@array/sb_postions_options"
 			grx:spinnerValuesArray="@array/sb_positions_values"/>
 
+
 		<!-- Iconos ocultos -->
 		<GrxMultipleSelection
 			android:title="@string/hidden_icons"
@@ -455,31 +456,30 @@
 				grx:valuesArray="@array/agc_wifi_values"
 				grx:iconsArray="@array/agc_wifi_drawables" />
 
-			<!--&lt;!&ndash; Icono señal &ndash;&gt;
+			<!-- Icono señal -->
 			<GrxSingleSelection
 				android:title="@string/signal_icon"
-				android:key="sb_signal_icon"
+				android:key="dlx_signal_sb_style"
 				android:defaultValue="0"
 				grx:optionsArray="@array/agc_signal_entries"
 				grx:valuesArray="@array/agc_signal_values"
 				grx:iconsArray="@array/agc_signal_drawables"
 				grx:systemType="system"
-				grx:commonBcExtra="arg"
-				grx:commonBcExtraValue="kill" />
+				grx:broadCast1="dlx_refresh_signal_icons" />
 
-			&lt;!&ndash; Icono alarma &ndash;&gt;
+			<!-- Icono alarma -->
 			<GrxSingleSelection
 				android:title="@string/alarm_icon"
-				android:key="sb_alarm_icon"
+				android:key="dlx_alarm_sb_style"
 				android:defaultValue="0"
 				grx:optionsArray="@array/agc_alarma_entries"
 				grx:valuesArray="@array/agc_alarma_values"
 				grx:iconsArray="@array/agc_alarma_drawables"
 				grx:systemType="system"
 				grx:commonBcExtra="arg"
-				grx:commonBcExtraValue="sb_custom_icons" />
+				grx:commonBcExtraValue="bluetooth_icons" />
 
-			&lt;!&ndash; Icono bluetooth &ndash;&gt;
+			<!-- Icono bluetooth -->
 			<GrxSingleSelection
 				android:title="@string/bluetooth_icon"
 				android:key="dlx_bluetooth_sb_style"
@@ -491,25 +491,25 @@
 				grx:commonBcExtra="arg"
 				grx:commonBcExtraValue="bluetooth_icons" />
 
-			&lt;!&ndash; Icono volumen &ndash;&gt;
+			<!-- Icono volumen -->
 			<GrxSingleSelection
 				android:title="@string/sound_icon"
-				android:key="sb_volume_icons"
+				android:key="dlx_sound_sb_style"
 				android:defaultValue="0"
 				grx:optionsArray="@array/agc_sound_sb_entries"
 				grx:valuesArray="@array/agc_sound_sb_values"
 				grx:iconsArray="@array/agc_sound_sb_drawables"
 				grx:systemType="system"
 				grx:commonBcExtra="arg"
-				grx:commonBcExtraValue="sb_custom_icons" />
+				grx:commonBcExtraValue="bluetooth_icons" />
 
-			&lt;!&ndash; LTE / 4G &ndash;&gt;
+			<!-- LTE / 4G -->
 			<GrxSwitchPreference
 				android:title="@string/use_lte"
 				android:defaultValue="true"
-
+				grx:broadCast1="dlx_refresh_signal_icons"
 				grx:systemType="system"
-				android:key="dlx_use_lte" />-->
+				android:key="dlx_use_lte" />
 
 			<GrxInfoText android:textColor="?complementary_color3" android:textSize="20sp" android:summary="@string/general_colors_info" />
 
