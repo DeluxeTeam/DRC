@@ -22,7 +22,7 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/_imagen04" />
 
-                <com.grx.settings.views.LinearLayoutWithLink
+                <!--com.grx.settings.views.LinearLayoutWithLink
                     grxURL="https://forum.xda-developers.com/galaxy-note-8/development/n950f-g955f-g950f-deluxerom-v6-0-t3784712"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
@@ -67,7 +67,7 @@
                         android:gravity="center_vertical"
                         android:layout_marginStart="15dp"
                         android:text="@string/htc" />
-                </com.grx.settings.views.LinearLayoutWithLink>
+                </com.grx.settings.views.LinearLayoutWithLink-->
 
                 <com.grx.settings.views.LinearLayoutWithLink
                     grxURL="https://t.me/joinchat/CogTU0GwjRFRR1zTf9MuEg"

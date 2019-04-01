@@ -445,6 +445,14 @@
     <string name="features">Features</string>
     <string name="changelog">Changelog</string>
 
+    <!-- Changelogs N950F/G95xF -->
+    <string name="changelog_120">Cambios v12</string>
+    <string name="changelog_114">Cambios v11.4</string>
+    <string name="changelog_113">Cambios v11.3</string>
+    <string name="changelog_112">Cambios v11.2</string>
+    <string name="changelog_111">Cambios v11.1</string>
+    <string name="changelog_110">Cambios v11</string>
+
     <string-array name="changelog_120">
         <item>Rebasado sobre N950FXXS5DSC2</item>
         <item>Actualizado ramdisk N950F</item>
@@ -522,11 +530,19 @@
         <item>Basada en primera beta para N950F</item>
     </string-array>
 
-    <string name="changelog_114">Cambios v11.4</string>
-    <string name="changelog_113">Cambios v11.3</string>
-    <string name="changelog_112">Cambios v11.2</string>
-    <string name="changelog_111">Cambios v11.1</string>
-    <string name="changelog_110">Cambios v11</string>
+    <!-- G93xF changelogs -->
+    <string name="changelog_013">Cambios v1.3</string>
+    <string name="changelog_012">Cambios v1.2</string>
+    <string name="changelog_011">Cambios v1.1</string>
+    <string name="changelog_010">Cambios v1</string>
+
+    <string-array name="changelog_013"></string-array>
+    <string-array name="changelog_012"></string-array>
+    <string-array name="changelog_011"></string-array>
+    <string-array name="changelog_010">
+        <item>Versión inicial</item>
+        <item>Basada en N935FXXU4CSC4</item>
+    </string-array>
 
     <string-array name="general_color_entries">
         <item>Modo de sonido</item>

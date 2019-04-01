@@ -1985,6 +1985,14 @@
     <string name="features">Features</string>
     <string name="changelog">Changelog</string>
 
+    <!-- N950F/G95xF changelogs -->
+    <string name="changelog_120">Changelog v12</string>
+    <string name="changelog_114">Changelog v11.4</string>
+    <string name="changelog_113">Changelog v11.3</string>
+    <string name="changelog_112">Changelog v11.2</string>
+    <string name="changelog_111">Changelog v11.1</string>
+    <string name="changelog_110">Changelog v11</string>
+
     <string-array name="changelog_120">
         <item>Rebased over N950FXXS5DSC2</item>
         <item>Updated ramdisk N950F</item>
@@ -2062,11 +2070,19 @@
         <item>Based on first N950F Beta</item>
     </string-array>
 
-    <string name="changelog_114">Changelog v11.4</string>
-    <string name="changelog_113">Changelog v11.3</string>
-    <string name="changelog_112">Changelog v11.2</string>
-    <string name="changelog_111">Changelog v11.1</string>
-    <string name="changelog_110">Changelog v11</string>
+    <!-- G93xF changelogs -->
+    <string name="changelog_013">Changelog v1.3</string>
+    <string name="changelog_012">Changelog v1.2</string>
+    <string name="changelog_011">Changelog v1.1</string>
+    <string name="changelog_010">Changelog v1</string>
+
+    <string-array name="changelog_013"></string-array>
+    <string-array name="changelog_012"></string-array>
+    <string-array name="changelog_011"></string-array>
+    <string-array name="changelog_010">
+        <item>Initial release</item>
+        <item>Based on N935FXXU4CSC4</item>
+    </string-array>
 
     <string name="custom_navbar_info">NOTE : ENABLE CUSTOM BACKGROUND WILL FORCE THE VISIBILITY. SO IF YOU SELECT AN IMAGE, IT WILL BE SHOWN ALWAYS, EVEN IN HOME.
     ALSO MAKE SURE TO SELECT ONLY LOCAL CONTENT, NOT FROM DRIVE OR ANY OTHER CLOUD.</string>

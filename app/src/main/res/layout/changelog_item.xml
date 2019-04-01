@@ -16,53 +16,13 @@
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"  android:orientation="vertical"
                 android:weightSum="1">
 
-                <!-- Changelog 12 -->
+                <!-- Changelog 1 -->
                 <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
                     android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
-                    android:text="@string/changelog_120" android:textColor="?complemnt_accent_color"/>
+                    android:text="@string/changelog_010" android:textColor="?complemnt_accent_color"/>
                 <com.grx.settings.views.ArrayTextList
                     android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
-                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_120"/>
-
-                <!-- Changelog 11.4 -->
-                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
-                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
-                    android:text="@string/changelog_114" android:textColor="?complemnt_accent_color"/>
-                <com.grx.settings.views.ArrayTextList
-                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
-                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_114"/>
-
-                <!-- Changelog 11.3 -->
-                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
-                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
-                    android:text="@string/changelog_113" android:textColor="?complemnt_accent_color"/>
-                <com.grx.settings.views.ArrayTextList
-                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
-                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_113"/>
-
-                <!-- Changelog 11.2 -->
-                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
-                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
-                    android:text="@string/changelog_112" android:textColor="?complemnt_accent_color"/>
-                <com.grx.settings.views.ArrayTextList
-                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
-                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_112"/>
-
-                <!-- Changelog 11.1 -->
-                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
-                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
-                    android:text="@string/changelog_111" android:textColor="?complemnt_accent_color"/>
-                <com.grx.settings.views.ArrayTextList
-                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
-                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_111"/>
-
-                <!-- Changelog 11 -->
-                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
-                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
-                    android:text="@string/changelog_110" android:textColor="?complemnt_accent_color"/>
-                <com.grx.settings.views.ArrayTextList
-                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
-                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_110"/>
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_010"/>
 
                 <!--some space for fab button if you want to-->
                 <View android:layout_width="match_parent" android:layout_height="30dp"/>
