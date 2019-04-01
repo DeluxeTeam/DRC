@@ -384,6 +384,6 @@
     </style>
 
 
-
+    <string name="activity_not_found">Can\'t open this activity</string>
 
 </resources>
