@@ -2071,14 +2071,15 @@
     </string-array>
 
     <!-- G93xF changelogs -->
-    <string name="changelog_013">Changelog v1.3</string>
-    <string name="changelog_012">Changelog v1.2</string>
-    <string name="changelog_011">Changelog v1.1</string>
+    <string name="changelog_020">Changelog v2</string>
     <string name="changelog_010">Changelog v1</string>
 
-    <string-array name="changelog_013"></string-array>
-    <string-array name="changelog_012"></string-array>
-    <string-array name="changelog_011"></string-array>
+    <string-array name="changelog_020">
+        <item>Rebased over N935FXXU4CSC4</item>
+        <item>Fixed audio problems</item>
+        <item>Added Gear apps to AROMA</item>
+        <item>Added TouchWiz with 6x6, 7x7 and 8x8</item>
+    </string-array>
     <string-array name="changelog_010">
         <item>Initial release</item>
         <item>Based on N935FXXU4CSC4</item>

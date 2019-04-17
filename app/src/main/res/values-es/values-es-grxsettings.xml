@@ -441,9 +441,9 @@
         <item>Derecha</item>
     </string-array>
 
-    <string name="general_info">General information</string>
-    <string name="features">Features</string>
-    <string name="changelog">Changelog</string>
+    <string name="general_info">Información general</string>
+    <string name="features">Características</string>
+    <string name="changelog">Cambios</string>
 
     <!-- Changelogs N950F/G95xF -->
     <string name="changelog_120">Cambios v12</string>
@@ -531,14 +531,15 @@
     </string-array>
 
     <!-- G93xF changelogs -->
-    <string name="changelog_013">Cambios v1.3</string>
-    <string name="changelog_012">Cambios v1.2</string>
-    <string name="changelog_011">Cambios v1.1</string>
+    <string name="changelog_020">Cambios v2</string>
     <string name="changelog_010">Cambios v1</string>
 
-    <string-array name="changelog_013"></string-array>
-    <string-array name="changelog_012"></string-array>
-    <string-array name="changelog_011"></string-array>
+    <string-array name="changelog_020">
+        <item>Rebasada sobre N935FXXU4CSC4</item>
+        <item>Arreglados problemas de audio</item>
+        <item>Añadidas apps Gear en AROMA</item>
+        <item>Añadido TouchWiz con opción 6x6, 7x7 y 8x8</item>
+    </string-array>
     <string-array name="changelog_010">
         <item>Versión inicial</item>
         <item>Basada en N935FXXU4CSC4</item>
