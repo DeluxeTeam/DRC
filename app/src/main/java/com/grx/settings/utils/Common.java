@@ -54,6 +54,9 @@ public class Common {
     public static final int INT_ID_APPDLG_RESET_ALL_PREFERENCES = 6;
     public static final String S_APPDLG_RESET_ALL_PREFERENCES = "dlg_reset_allprefs";
 
+    public static final int INT_ID_APPDLG_TOOLS = 7;
+    public static final String S_APPDLG_TOOLS = "dlg_tools";
+
     public static final String S_APPOPT_FW_ENABLE = "grx_enable_fw";
     public static final String S_APPOPT_RFW_EXIT_WITH_BACK = "grx_fw_exit_back";
     public static final String S_APPOPT_RFW_EXIT_OUTSIDE = "grx_fw_exit_outside";

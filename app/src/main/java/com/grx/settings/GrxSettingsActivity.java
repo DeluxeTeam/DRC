@@ -199,6 +199,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
     public getSuBgTask mGetSuBgTask;
 
+    public int mSelectedTool = -1;
 
     /*************************************************************************************************/
     /********************* ROOT AND SCRIPT OPERATIONS ************************************************/
@@ -1050,6 +1051,13 @@ public class GrxSettingsActivity extends AppCompatActivity implements
             showResetAllPreferencesDialog();
             return true;
         }
+
+        if( id == R.id.tools) {
+            mSelectedTool = -1;
+            DlgFrGrxNavigationUserOptions dlg = DlgFrGrxNavigationUserOptions.newInstance(Common.INT_ID_APPDLG_TOOLS);
+            getFragmentManager().beginTransaction().add(dlg, Common.S_APPDLG_TOOLS).commit();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -1638,6 +1646,26 @@ public class GrxSettingsActivity extends AppCompatActivity implements
             case Common.INT_ID_APPDLG_RESET_ALL_PREFERENCES:
                 Common.sp.edit().clear().commit();
                 restartApp();
+                break;
+
+            case Common.INT_ID_APPDLG_TOOLS:
+                mSelectedTool = opt;
+                if(!Common.IsRooted){
+                    showToast(getResources().getString(R.string.grxs_noroot_action_possible));
+                    return;
+                }
+                switch (mSelectedTool) {
+                    case 0: // recovery
+                        RootPrivilegedUtils.runRebootInRecoveryMode();
+                        break;
+                    case 1: //restart ui
+                        doKillPackage("com.android.systemui");
+                        break;
+                    case 2: // reboot phone
+                        RootPrivilegedUtils.runRebootDeviceCommands();
+                        break;
+                }
+
                 break;
 
         }
