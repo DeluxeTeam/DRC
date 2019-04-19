@@ -51,6 +51,8 @@ public class Common {
     public static final String S_APPOPT_USER_SELECTED_THEME = "grx_user_selected_theme";
     public static final String S_APPOPT_USER_SELECTED_THEME_NAME = "grx_user_selected_theme_name";
     public static final String S_APPOPT_COLORPICKERSTYLE = "grx_colorpickerstyle";
+    public static final int INT_ID_APPDLG_RESET_ALL_PREFERENCES = 6;
+    public static final String S_APPDLG_RESET_ALL_PREFERENCES = "dlg_reset_allprefs";
 
     public static final String S_APPOPT_FW_ENABLE = "grx_enable_fw";
     public static final String S_APPOPT_RFW_EXIT_WITH_BACK = "grx_fw_exit_back";

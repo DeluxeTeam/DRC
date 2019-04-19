@@ -1045,6 +1045,10 @@ public class GrxSettingsActivity extends AppCompatActivity implements
             showBuildPropDemoDialog();
             return true;
         }
+        if (id == R.id.reset_all){
+            showResetAllPreferencesDialog();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -1394,6 +1398,15 @@ public class GrxSettingsActivity extends AppCompatActivity implements
     }
 
     /********************************************************************************/
+    /**************************** RESET ALL PREFERENCES DIALG ***********************/
+    /********************************************************************************/
+
+    public void showResetAllPreferencesDialog(){
+        DlgFrGrxNavigationUserOptions dlg = DlgFrGrxNavigationUserOptions.newInstance(Common.INT_ID_APPDLG_RESET_ALL_PREFERENCES);
+        getFragmentManager().beginTransaction().add(dlg, Common.S_APPDLG_RESET_ALL_PREFERENCES).commit();
+    }
+
+    /********************************************************************************/
     /**************************** RESTORE PREFERENCES   ****************************/
     /********************************************************************************/
 
@@ -1619,6 +1632,11 @@ public class GrxSettingsActivity extends AppCompatActivity implements
                     case 1:  startImagePicker();
                         break;
                 }
+                break;
+
+            case Common.INT_ID_APPDLG_RESET_ALL_PREFERENCES:
+                Common.sp.edit().clear().commit();
+                restartApp();
                 break;
 
         }

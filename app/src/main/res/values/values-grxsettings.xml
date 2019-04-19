@@ -2087,4 +2087,8 @@
 
     <string name="grxs_app_not_rooted">Sin permiso root!</string>
 
+    <string name="grxs_reset_all_prefs">Reset app values</string>
+    <string name="grxs_tit_reset_all_prefs">Reset ALL values!</string>
+    <string name="grxs_msg_reset_all_prefs">Are you sure you want to reset ALL preferences and options to the default values?</string>
+
 </resources>
