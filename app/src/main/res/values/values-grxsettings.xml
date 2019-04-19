@@ -2108,4 +2108,16 @@
     <string name="grxs_tit_reset_all_prefs">Reset ALL values!</string>
     <string name="grxs_msg_reset_all_prefs">Are you sure you want to reset ALL preferences and options to the default values?</string>
 
+    <string name="grxs_recovery">Restart in recovery mode</string>
+    <string name="grxs_restartui">Restart UI</string>
+    <string name="grxs_restartphone">Restart device</string>
+    <string name="grxs_download_mode">Restar in download mode</string>
+    <string name="grxs_tools">Tools</string>
+
+    <string-array name="grxa_threedots_tools">
+        <item>@string/grxs_recovery</item>
+        <item>@string/grxs_restartui</item>
+        <item>@string/grxs_restartphone</item>
+    </string-array>
+
 </resources>
