@@ -386,4 +386,6 @@
 
     <string name="activity_not_found">Can\'t open this activity</string>
 
+    <string name="grxs_app_not_rooted">Sin permiso root!</string>
+
 </resources>
