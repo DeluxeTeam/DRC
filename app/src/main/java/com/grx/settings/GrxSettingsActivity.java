@@ -197,6 +197,8 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
     public  static GrxSettingsActivity GrxSettingsActivityInstance = null;
 
+    public getSuBgTask mGetSuBgTask;
+
 
     /*************************************************************************************************/
     /********************* ROOT AND SCRIPT OPERATIONS ************************************************/
@@ -218,7 +220,9 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
 
 
-        //RootPrivilegedUtils.checkRootGranted();
+        mGetSuBgTask  = new getSuBgTask();
+        mGetSuBgTask.setActivity(this);
+        mGetSuBgTask.execute();
 
         mAnimationRunnable = new Runnable() {
             @Override
@@ -2172,6 +2176,39 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         RootPrivilegedUtils.runShellCmd(true,Command);
 
     }
+
+    /*** get root bg task, to avoid the app to crash if phone not rooted */
+
+
+    public void showRootState(){
+        if(!Common.IsRooted) showToast(getString(R.string.grxs_app_not_rooted));
+    }
+
+    public class getSuBgTask extends  AsyncTask<Void, Void, Boolean> {
+        GrxSettingsActivity mActivity;
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            RootPrivilegedUtils.checkRootGranted();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean isGranted) {
+            if(mActivity!=null) {
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showRootState();
+                    }
+                });
+            }
+        }
+
+        public void setActivity(GrxSettingsActivity activity){
+            mActivity = activity;
+        }
+    };
 
 
 }

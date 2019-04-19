@@ -436,6 +436,10 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
                     break;
 
                 case "scripts":
+                    if(!Common.IsRooted) {
+                        if(mGrxSettingsActivity!=null) mGrxSettingsActivity.showRootState();
+                        break;
+                    }
                     switch (prefAttrsInfo.getMyScriptType()){
                         case NO_SCRIPT:
                             break;
