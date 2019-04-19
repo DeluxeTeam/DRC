@@ -69,6 +69,11 @@ public abstract class SublimeBaseMenuItem implements Parcelable {
     private static final int HIDDEN = 0x00000004;
     static final int ENABLED = 0x00000008;
 
+    /* grx - custom title and hint colors */
+
+    private int mCustomTitleColor=0;
+    private int mCustomHintColor=0;
+
     /**
      * Used for the icon resource ID if this item does not have an icon
      */
@@ -575,4 +580,29 @@ public abstract class SublimeBaseMenuItem implements Parcelable {
 
         }
     }
+
+
+
+    //grx - custom title and hint color support
+
+    public SublimeBaseMenuItem setCustomTitleColor(int color){
+
+        mCustomTitleColor=color;
+        return this;
+    }
+
+    public int getCustomHintColor(){
+        return mCustomHintColor;
+    }
+
+    public SublimeBaseMenuItem setCustomHintColor(int color){
+
+        mCustomHintColor=color;
+        return this;
+    }
+
+    public int getCustomTitleColor(){
+        return mCustomTitleColor;
+    }
+
 }
