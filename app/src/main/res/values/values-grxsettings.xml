@@ -2085,4 +2085,6 @@
         <item>From 75% to 100%</item>
     </string-array>
 
+    <string name="grxs_app_not_rooted">Sin permiso root!</string>
+
 </resources>

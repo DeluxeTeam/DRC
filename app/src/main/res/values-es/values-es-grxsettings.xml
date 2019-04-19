@@ -543,4 +543,6 @@
         <item>Tinta en fondos blancos</item>
     </string-array>
 
+    <string name="grxs_app_not_rooted">No root permission!</string>
+
 </resources>
