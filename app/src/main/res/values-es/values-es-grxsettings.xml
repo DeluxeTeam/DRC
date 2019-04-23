@@ -445,6 +445,21 @@
     <string name="features">Features</string>
     <string name="changelog">Changelog</string>
 
+    <string-array name="changelog_130">
+        <item>Rebasado sobre N950FXXS5DSC5</item>
+        <item>Actualizado DeluxeKernel®_v7 N8/S8+/S8</item>
+        <item>Añadido remapeo de inicio/recientes/retroceso</item>
+        <item>Añadido mod pasar canciones con teclas de volumen</item>
+        <item>TouchWiz con 6x6, 7x7, 8x8 y doble toque</item>
+        <item>Opción para máximo de toggles en panel</item>
+        <item>16 escalas de animación en ajustes</item>
+        <item>Actualizados recoverys</item>
+        <item>Reemplazados algunos iconos</item>
+        <item>Arregladas características CSC</item>
+        <item>Añadido bootanimation Deluxe®</item>
+        <item>Mejoras en DRC</item>
+    </string-array>
+
     <string-array name="changelog_120">
         <item>Rebasado sobre N950FXXS5DSC2</item>
         <item>Actualizado ramdisk N950F</item>
@@ -522,6 +537,8 @@
         <item>Basada en primera beta para N950F</item>
     </string-array>
 
+    <string name="changelog_130">Cambios v13</string>
+    <string name="changelog_120">Cambios v12</string>
     <string name="changelog_114">Cambios v11.4</string>
     <string name="changelog_113">Cambios v11.3</string>
     <string name="changelog_112">Cambios v11.2</string>
@@ -543,7 +560,7 @@
         <item>Tinta en fondos blancos</item>
     </string-array>
 
-    <string name="grxs_app_not_rooted">No root permission!</string>
+    <string name="grxs_app_not_rooted">Sin permiso root!</string>
 
     <string name="grxs_reset_all_prefs">Resetear valores</string>
     <string name="grxs_tit_reset_all_prefs">Resetear TODAS las opciones</string>
@@ -554,5 +571,15 @@
     <string name="grxs_restartphone">Reiniciar dispositivo</string>
     <string name="grxs_download_mode">Reiniciar en modo download</string>
     <string name="grxs_tools">Herramientas</string>
+
+    <string name="skip_tracks_category">Cambiar Pista Música en Pantalla Apagada</string>
+    <string name="info_skip_tracks">Play/Stop funciona si el teléfono no se encuentra en deep sleep y existe alguna aplicación que ha requerido el foco de audio al sistema (normalmente al arracar una app de música..). El sistema desactiva las teclas de volumen en deep sleep.</string>
+    <string name="enable_skip_tracks">Activar Cambio de Pistas</string>
+    <string name="double_tap_skip_tracks">Activa Doble click (Play/Stop)</string>
+    <string name="time_skip_tracks">Min. tiempo para long press</string>
+    <string name="time_dc_skip_tracks">Max. tiempo para doble click</string>
+    <string name="vibrate_skip_tracks">Vibrar con doble click/long press</string>
+    <string name="vibrate_skip_tracks_summary">El mod usa la intensidad definida en Respuesta de Vibración en settings. Sin embargo no necesitas tener activado el switch general Respuesta de vibración</string>
+    <string name="vibrate_skip_intensity">Intensidad Respuesta Vibración</string>
 
 </resources>

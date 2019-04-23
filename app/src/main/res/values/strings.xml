@@ -237,8 +237,13 @@
     <string name="general_colors_info"><![CDATA[NOTE : THIS COLORS DOESN\'T AFFECT TO QUICKPANEL STATUSBAR. REMEMBER YOU CAN SHOW ALL STATUSBAR ICONS ON Statusbar > Show all icons]]></string>
     <string name="icons_warning">NOTE : ICON CHANGE CAN TAKE 2–5 SECONDS TO BE RELOADED</string>
     <string name="select_icons">Select icons</string>
-    <string name="changelog_120">Changelog v12</string>
     <string name="use_random_reboot">Use random order</string>
+    <string name="screen_on">Screen on</string>
+    <string name="screen_off">Screen off</string>
+    <string name="volume_keys">Volume keys</string>
+    <string name="max_rows" >Max. rows visibles</string>
+    <string name="rows_portrait">On portrait mode</string>
+    <string name="rows_landscape">On landscape mode</string>
 
 
 </resources>

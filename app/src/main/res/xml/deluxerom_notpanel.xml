@@ -940,6 +940,29 @@
             grx:systemType="system" />
     </PreferenceScreen>
 
+    <PreferenceScreen android:title="@string/max_rows">
+        <GrxSeekBar
+            android:title="@string/rows_portrait"
+            android:key="dlx_rows_portrait"
+            android:defaultValue="6"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="max_qs_rows"
+            grx:maxValue="10"
+            grx:minValue="3"
+            grx:interval="1"
+            grx:systemType="system" />
+        <GrxSeekBar
+            android:title="@string/rows_landscape"
+            android:key="dlx_rows_landscape"
+            android:defaultValue="10"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="max_qs_rows"
+            grx:maxValue="16"
+            grx:minValue="3"
+            grx:interval="1"
+            grx:systemType="system" />
+    </PreferenceScreen>
+
    <!-- &lt;!&ndash; Información de dispositivo (id CarrierLabel) &ndash;&gt;
     <PreferenceScreen android:title="@string/device_info">
         <GrxSwitchPreference

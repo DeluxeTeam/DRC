@@ -1985,6 +1985,21 @@
     <string name="features">Features</string>
     <string name="changelog">Changelog</string>
 
+    <string-array name="changelog_130">
+        <item>Rebased over N950FXXS5DSC5</item>
+        <item>Updated DeluxeKernel®_v7 N8/S8+/S8</item>
+        <item>Added remap for home/back/recents</item>
+        <item>Added skip tracks mods</item>
+        <item>TouchWiz with 6x6, 7x7, 8x8 and double tap</item>
+        <item>Option for max. rows on quickpanel</item>
+        <item>16 animation scales on settings</item>
+        <item>Updated recoverys</item>
+        <item>Replaced some icons</item>
+        <item>Fixed CSC features</item>
+        <item>Added Deluxe® bootanimation</item>
+        <item>DRC improvements</item>
+    </string-array>
+
     <string-array name="changelog_120">
         <item>Rebased over N950FXXS5DSC2</item>
         <item>Updated ramdisk N950F</item>
@@ -2062,6 +2077,8 @@
         <item>Based on first N950F Beta</item>
     </string-array>
 
+    <string name="changelog_130">Changelog v13</string>
+    <string name="changelog_120">Changelog v12</string>
     <string name="changelog_114">Changelog v11.4</string>
     <string name="changelog_113">Changelog v11.3</string>
     <string name="changelog_112">Changelog v11.2</string>
@@ -2085,7 +2102,7 @@
         <item>From 75% to 100%</item>
     </string-array>
 
-    <string name="grxs_app_not_rooted">Sin permiso root!</string>
+    <string name="grxs_app_not_rooted">No root permission!</string>
 
     <string name="grxs_reset_all_prefs">Reset app values</string>
     <string name="grxs_tit_reset_all_prefs">Reset ALL values!</string>
@@ -2094,7 +2111,7 @@
     <string name="grxs_recovery">Restart in recovery mode</string>
     <string name="grxs_restartui">Restart UI</string>
     <string name="grxs_restartphone">Restart device</string>
-    <string name="grxs_download_mode">Restar in download mode</string>
+    <string name="grxs_download_mode">Restart in download mode</string>
     <string name="grxs_tools">Tools</string>
 
     <string-array name="grxa_threedots_tools">
@@ -2102,5 +2119,15 @@
         <item>@string/grxs_restartui</item>
         <item>@string/grxs_restartphone</item>
     </string-array>
+
+    <string name="skip_tracks_category">Skip tracks when screen is off</string>
+    <string name="info_skip_tracks">Play/Stop works when the phone is not in deep sleep and a music app has got the audio focus (is playing o was playing not too long ago. When in deep sleep volume keys are not enabled by the system</string>
+    <string name="enable_skip_tracks">Enable Skip Tracks</string>
+    <string name="double_tap_skip_tracks">Double click play/stop music</string>
+    <string name="time_skip_tracks">Long press min Time</string>
+    <string name="time_dc_skip_tracks">Double Click max Time</string>
+    <string name="vibrate_skip_tracks">Vibrate on long and double click</string>
+    <string name="vibrate_skip_tracks_summary">The mod uses system feedback vibration intensity, however it is not needed to enable main system switch for vibration feedback</string>
+    <string name="vibrate_skip_intensity">Vibration Feedback Intensity</string>
 
 </resources>
