@@ -2071,9 +2071,21 @@
     </string-array>
 
     <!-- G93xF changelogs -->
+    <string name="changelog_021">Changelog v2.1</string>
     <string name="changelog_020">Changelog v2</string>
     <string name="changelog_010">Changelog v1</string>
 
+    <string-array name="changelog_021">
+        <item>Updated Gear apps</item>
+        <item>Added home/recents/back remap</item>
+        <item>Added skip tracks with volume keys</item>
+        <item>Added double tap on TouchWiz</item>
+        <item>Added max. visible toggles on quickpanel</item>
+        <item>Fixed CSC tweaks</item>
+        <item>Added Deluxe® bootanimation</item>
+        <item>16 scale animations</item>
+        <item>DRC improvements</item>
+    </string-array>
     <string-array name="changelog_020">
         <item>Rebased over N935FXXU4CSC4</item>
         <item>Fixed audio problems</item>
@@ -2102,7 +2114,7 @@
         <item>From 75% to 100%</item>
     </string-array>
 
-    <string name="grxs_app_not_rooted">Sin permiso root!</string>
+    <string name="grxs_app_not_rooted">No root permission!</string>
 
     <string name="grxs_reset_all_prefs">Reset app values</string>
     <string name="grxs_tit_reset_all_prefs">Reset ALL values!</string>
@@ -2111,7 +2123,7 @@
     <string name="grxs_recovery">Restart in recovery mode</string>
     <string name="grxs_restartui">Restart UI</string>
     <string name="grxs_restartphone">Restart device</string>
-    <string name="grxs_download_mode">Restar in download mode</string>
+    <string name="grxs_download_mode">Restart in download mode</string>
     <string name="grxs_tools">Tools</string>
 
     <string-array name="grxa_threedots_tools">
@@ -2119,5 +2131,15 @@
         <item>@string/grxs_restartui</item>
         <item>@string/grxs_restartphone</item>
     </string-array>
+
+    <string name="skip_tracks_category">Skip tracks when screen is off</string>
+    <string name="info_skip_tracks">Play/Stop works when the phone is not in deep sleep and a music app has got the audio focus (is playing o was playing not too long ago. When in deep sleep volume keys are not enabled by the system</string>
+    <string name="enable_skip_tracks">Enable Skip Tracks</string>
+    <string name="double_tap_skip_tracks">Double click play/stop music</string>
+    <string name="time_skip_tracks">Long press min Time</string>
+    <string name="time_dc_skip_tracks">Double Click max Time</string>
+    <string name="vibrate_skip_tracks">Vibrate on long and double click</string>
+    <string name="vibrate_skip_tracks_summary">The mod uses system feedback vibration intensity, however it is not needed to enable main system switch for vibration feedback</string>
+    <string name="vibrate_skip_intensity">Vibration Feedback Intensity</string>
 
 </resources>

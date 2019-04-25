@@ -237,5 +237,11 @@
     <string name="select_icons">Selecciona iconos</string>
     <string name="use_random_reboot">Usar orden aleatorio</string>
     <string name="grxs_rom_info">Información de la ROM</string>
+    <string name="rows_portrait">En modo vertical</string>
+    <string name="rows_landscape">En modo horizontal</string>
+    <string name="max_rows">Máx. de toggles visibles</string>
+    <string name="volume_keys">Teclas de volumen</string>
+    <string name="screen_off">Pantalla apagada</string>
+    <string name="screen_on">Pantalla encendida</string>
 
 </resources>
