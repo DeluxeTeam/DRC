@@ -3,143 +3,428 @@
 
 
     <!-- Colores panel -->
-    <!--<PreferenceScreen android:title="Panel colors">
-        <PreferenceScreen android:title="Background and toggles">
-            <GrxColorPicker
-                android:title="Background color"
-                android:key="dlx_qp_white_color"
-                android:defaultValue="-855310"
-                grx:colorPickerStyle="flower"
-                grx:saveValueOnFly="false"
-                grx:commonBcExtra="arg"
-                grx:commonBcExtraValue="panel_reload"
-                grx:systemType="system" />
-            <GrxColorPicker
-                android:title="Background color on night mode"
-                android:key="dlx_qp_black_color"
+    <PreferenceScreen android:title="@string/panel_mods">
+        <GrxPreferenceCategory android:title="@string/toggles">
+            <GrxSingleSelection
+                android:title="@string/toggle_style"
                 android:defaultValue="0"
-                grx:colorPickerStyle="flower"
-                grx:saveValueOnFly="false"
+                android:key="dlx_toggle_style"
+                grx:commonBcExtra="arg"
+                grx:commonBcExtraValue="panel_reload"
+                grx:optionsArray="@array/notpanel_styles_entries"
+                grx:valuesArray="@array/notpanel_styles_values"
+                grx:iconsArray="@array/notpanel_styles_drawables"
+                grx:systemType="system" />
+            <GrxSeekBar
+                android:title="@string/rows_portrait"
+                android:key="dlx_rows_portrait"
+                android:defaultValue="6"
+                grx:commonBcExtra="arg"
+                grx:commonBcExtraValue="max_qs_rows"
+                grx:maxValue="10"
+                grx:minValue="3"
+                grx:interval="1"
+                grx:systemType="system" />
+            <GrxSeekBar
+                android:title="@string/rows_landscape"
+                android:key="dlx_rows_landscape"
+                android:defaultValue="10"
+                grx:commonBcExtra="arg"
+                grx:commonBcExtraValue="max_qs_rows"
+                grx:maxValue="16"
+                grx:minValue="3"
+                grx:interval="1"
+                grx:systemType="system" />
+        </GrxPreferenceCategory>
+        <GrxPreferenceCategory android:title="@string/buttons">
+            <GrxSwitchPreference
+                android:title="Power menu"
+                android:key="dlx_qp_power_button"
+                android:defaultValue="false"
+                grx:systemType="system"
+                grx:commonBcExtra="arg"
+                grx:commonBcExtraValue="panel_pw_button" />
+            <GrxSwitchPreference
+                android:title="User"
+                android:key="dlx_qp_user_icon"
+                android:defaultValue="true"
+                grx:systemType="system"
+                grx:commonBcExtra="arg"
+                grx:commonBcExtraValue="panel_pw_button" />
+        </GrxPreferenceCategory>
+        <GrxPreferenceCategory android:title="@string/Colors"/>
+            <GrxSwitchPreference
+                android:title="@string/use_custom_colors"
+                android:key="dlx_use_panel_colors"
+                android:defaultValue="false"
                 grx:commonBcExtra="arg"
                 grx:commonBcExtraValue="panel_reload"
                 grx:systemType="system" />
-        </PreferenceScreen>
-        <PreferenceScreen android:title="Clock/Date/Settings"></PreferenceScreen>
-        <PreferenceScreen android:title="Brightness icons/slider">
-            <GrxPreferenceCategory android:title="Day mode">
-                <GrxPerItemColor android:title="Brightness icon"
-                    android:key="dlx_brightness_black_colors"
-                    grx:valuesArray="@array/brightness_color_values"
-                    grx:optionsArray="@array/brightness_color_entries"
-                    android:defaultValue="color_025/-5785922##color_2550/-5785922##color_5075/-5785922##color_75100/-965073##"
-                    grx:separator="##"
-                    grx:systemType="system"
-                    grx:colorPickerStyle="flower"
-                    grx:showAlphaSlider="true"
-                    grx:showAutoButton="true"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items" />
-                <GrxColorPicker android:title="Brightness slider background"
-                    android:key="dlx_brightness_slider_bg_dark"
-                    android:defaultValue="1291875540"
-                    grx:colorPickerStyle="flower"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items"
-                    grx:systemType="system" />
-                <GrxColorPicker android:title="Brightness slider foreground"
-                    android:key="dlx_brightness_slider_foreground_dark"
-                    android:defaultValue="-16747308"
-                    grx:colorPickerStyle="flower"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items"
-                    grx:systemType="system" />
-                <GrxColorPicker android:title="Brightness controller"
-                    android:key="dlx_brightness_slider_controller_dark"
-                    android:defaultValue="-16747308"
-                    grx:colorPickerStyle="flower"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items"
-                    grx:systemType="system" />
-                <GrxColorPicker android:title="Brightness max. disabled"
-                    android:key="dlx_brightness_slider_max_bg_dark"
-                    android:defaultValue="-540483"
-                    grx:colorPickerStyle="flower"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items"
-                    grx:systemType="system" />
-                <GrxColorPicker android:title="Brightness max. enabled"
-                    android:key="dlx_brightness_slider_max_fg_dark"
-                    android:defaultValue="-965073"
-                    grx:colorPickerStyle="flower"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items"
-                    grx:systemType="system" />
-                <GrxColorPicker android:title="Brightness detail"
-                    android:key="dlx_brightness_detail_black_color"
-                    android:defaultValue="0x99000000"
-                    grx:colorPickerStyle="flower"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items"
-                    grx:systemType="system" />
+            <GrxPreferenceCategory grx:hiddenCategory="true" grx:depRule="ENABLE#dlx_use_panel_colors#BOOLEAN#true">
+                <PreferenceScreen android:title="@string/bg_tgs">
+                    <GrxPreferenceCategory android:title="@string/day_mode">
+                        <GrxColorPicker
+                            android:title="@string/bg_color"
+                            android:key="dlx_qp_white_color"
+                            android:defaultValue="-855310"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/tile_bg_on"
+                            android:key="dlx_tile_bg_on"
+                            android:defaultValue="-12412929"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/tile_bg_off"
+                            android:key="dlx_tile_bg_off"
+                            android:defaultValue="-1710619"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/tile_bg_dim"
+                            android:key="dlx_tile_bg_dim"
+                            android:defaultValue="-2143119361"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/tile_icon_bg_on"
+                            android:key="dlx_tile_icon_on"
+                            android:defaultValue="-1"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/tile_icon_bg_off"
+                            android:key="dlx_tile_icon_off"
+                            android:defaultValue="-174746224"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/tile_icon_bg_dim"
+                            android:key="dlx_tile_icon_dim"
+                            android:defaultValue="-6381922"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                    </GrxPreferenceCategory>
+                    <GrxPreferenceCategory android:title="@string/night_mode">
+                        <GrxColorPicker
+                            android:title="@string/bg_color"
+                            android:key="dlx_qp_black_color"
+                            android:defaultValue="0xFF000000"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/tile_bg_on"
+                            android:key="dlx_tile_bg_on_dark"
+                            android:defaultValue="-12412929"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/tile_bg_off"
+                            android:key="dlx_tile_bg_off_dark"
+                            android:defaultValue="-10921639"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/tile_bg_dim"
+                            android:key="dlx_tile_bg_dim_dark"
+                            android:defaultValue="-2143119361"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/tile_icon_bg_on"
+                            android:key="dlx_tile_icon_on_dark"
+                            android:defaultValue="-1"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/tile_icon_bg_off"
+                            android:key="dlx_tile_icon_off_dark"
+                            android:defaultValue="-6381922"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/tile_icon_bg_dim"
+                            android:key="dlx_tile_icon_dim_dark"
+                            android:defaultValue="-6381922"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                    </GrxPreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="@string/clock_date_settings_buttons">
+                    <GrxPreferenceCategory android:title="@string/day_mode">
+                        <GrxColorPicker
+                            android:title="@string/clock"
+                            android:key="dlx_qp_clock"
+                            android:defaultValue="-16777216"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/date"
+                            android:key="dlx_qp_date"
+                            android:defaultValue="-16777216"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/settings"
+                            android:key="dlx_qp_settings"
+                            android:defaultValue="-16777216"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/more_settings"
+                            android:key="dlx_qp_more"
+                            android:defaultValue="-16777216"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/power_menu"
+                            android:key="dlx_qp_power"
+                            android:defaultValue="-16777216"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:depRule="ENABLE#dlx_qp_power_button#BOOLEAN#true"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/search"
+                            android:key="dlx_qp_search"
+                            android:defaultValue="-16777216"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                    </GrxPreferenceCategory>
+                    <GrxPreferenceCategory android:title="@string/night_mode">
+                        <GrxColorPicker
+                            android:title="@string/clock"
+                            android:key="dlx_qp_clock_dark"
+                            android:defaultValue="-1"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/date"
+                            android:key="dlx_qp_date_dark"
+                            android:defaultValue="-1"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/settings"
+                            android:key="dlx_qp_settings_dark"
+                            android:defaultValue="-1"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/more_settings"
+                            android:key="dlx_qp_more_dark"
+                            android:defaultValue="-1"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/power_menu"
+                            android:key="dlx_qp_power_dark"
+                            android:defaultValue="-1"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:depRule="ENABLE#dlx_qp_power_button#BOOLEAN#true"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                        <GrxColorPicker
+                            android:title="@string/search"
+                            android:key="dlx_qp_search_dark"
+                            android:defaultValue="-1"
+                            grx:colorPickerStyle="flower"
+                            grx:saveValueOnFly="false"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="panel_reload"
+                            grx:systemType="system" />
+                    </GrxPreferenceCategory>
+                </PreferenceScreen>
+                <PreferenceScreen android:title="Brightness icons/slider">
+                    <GrxPreferenceCategory android:title="Day mode">
+                        <GrxPerItemColor android:title="Brightness icon"
+                            android:key="dlx_brightness_black_colors"
+                            grx:valuesArray="@array/brightness_color_values"
+                            grx:optionsArray="@array/brightness_color_entries"
+                            android:defaultValue="color_025/-5785922##color_2550/-5785922##color_5075/-5785922##color_75100/-965073##"
+                            grx:separator="##"
+                            grx:systemType="system"
+                            grx:colorPickerStyle="flower"
+                            grx:showAlphaSlider="true"
+                            grx:showAutoButton="true"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items" />
+                        <GrxColorPicker android:title="Brightness slider background"
+                            android:key="dlx_brightness_slider_bg_dark"
+                            android:defaultValue="1291875540"
+                            grx:colorPickerStyle="flower"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items"
+                            grx:systemType="system" />
+                        <GrxColorPicker android:title="Brightness slider foreground"
+                            android:key="dlx_brightness_slider_foreground_dark"
+                            android:defaultValue="-16747308"
+                            grx:colorPickerStyle="flower"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items"
+                            grx:systemType="system" />
+                        <GrxColorPicker android:title="Brightness controller"
+                            android:key="dlx_brightness_slider_controller_dark"
+                            android:defaultValue="-16747308"
+                            grx:colorPickerStyle="flower"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items"
+                            grx:systemType="system" />
+                        <GrxColorPicker android:title="Brightness max. disabled"
+                            android:key="dlx_brightness_slider_max_bg_dark"
+                            android:defaultValue="-540483"
+                            grx:colorPickerStyle="flower"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items"
+                            grx:systemType="system" />
+                        <GrxColorPicker android:title="Brightness max. enabled"
+                            android:key="dlx_brightness_slider_max_fg_dark"
+                            android:defaultValue="-965073"
+                            grx:colorPickerStyle="flower"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items"
+                            grx:systemType="system" />
+                        <GrxColorPicker android:title="Brightness detail"
+                            android:key="dlx_brightness_detail_black_color"
+                            android:defaultValue="0x99000000"
+                            grx:colorPickerStyle="flower"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items"
+                            grx:systemType="system" />
+                    </GrxPreferenceCategory>
+                    <GrxPreferenceCategory android:title="Night mode">
+                        <GrxPerItemColor android:title="Brightness icon on night mode"
+                            android:key="dlx_brightness_white_colors"
+                            grx:valuesArray="@array/brightness_color_values"
+                            grx:optionsArray="@array/brightness_color_entries"
+                            android:defaultValue="color_025/-5785922##color_2550/-5785922##color_5075/-5785922##color_75100/-965073##"
+                            grx:separator="##"
+                            grx:systemType="system"
+                            grx:colorPickerStyle="flower"
+                            grx:showAlphaSlider="true"
+                            grx:showAutoButton="true"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items" />
+                        <GrxColorPicker android:title="Brightness slider background on night mode"
+                            android:key="dlx_brightness_slider_bg"
+                            android:defaultValue="1291875540"
+                            grx:colorPickerStyle="flower"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items"
+                            grx:systemType="system" />
+                        <GrxColorPicker android:title="Brightness slider foreground on night mode"
+                            android:key="dlx_brightness_slider_fg"
+                            android:defaultValue="-16747308"
+                            grx:colorPickerStyle="flower"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items"
+                            grx:systemType="system" />
+                        <GrxColorPicker android:title="Brightness controller on night mode"
+                            android:key="dlx_brightness_slider_controller"
+                            android:defaultValue="-16747308"
+                            grx:colorPickerStyle="flower"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items"
+                            grx:systemType="system" />
+                        <GrxColorPicker android:title="Brightness max. disabled on night mode"
+                            android:key="dlx_brightness_slider_max_bg"
+                            android:defaultValue="-540483"
+                            grx:colorPickerStyle="flower"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items"
+                            grx:systemType="system" />
+                        <GrxColorPicker android:title="Brightness max. enabled on night mode"
+                            android:key="dlx_brightness_slider_max_fg"
+                            android:defaultValue="-965073"
+                            grx:colorPickerStyle="flower"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items"
+                            grx:systemType="system" />
+                        <GrxColorPicker android:title="Brightness detail on night mode"
+                            android:key="dlx_brightness_detail_white_color"
+                            android:defaultValue="-1107296257"
+                            grx:colorPickerStyle="flower"
+                            grx:commonBcExtra="arg"
+                            grx:commonBcExtraValue="refresh_bar_items"
+                            grx:systemType="system" />
+                    </GrxPreferenceCategory>
+                </PreferenceScreen>
             </GrxPreferenceCategory>
-            <GrxPreferenceCategory android:title="Night mode">
-                <GrxPerItemColor android:title="Brightness icon on night mode"
-                    android:key="dlx_brightness_white_colors"
-                    grx:valuesArray="@array/brightness_color_values"
-                    grx:optionsArray="@array/brightness_color_entries"
-                    android:defaultValue="color_025/-5785922##color_2550/-5785922##color_5075/-5785922##color_75100/-965073##"
-                    grx:separator="##"
-                    grx:systemType="system"
-                    grx:colorPickerStyle="flower"
-                    grx:showAlphaSlider="true"
-                    grx:showAutoButton="true"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items" />
-                <GrxColorPicker android:title="Brightness slider background on night mode"
-                    android:key="dlx_brightness_slider_bg"
-                    android:defaultValue="1291875540"
-                    grx:colorPickerStyle="flower"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items"
-                    grx:systemType="system" />
-                <GrxColorPicker android:title="Brightness slider foreground on night mode"
-                    android:key="dlx_brightness_slider_fg"
-                    android:defaultValue="-16747308"
-                    grx:colorPickerStyle="flower"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items"
-                    grx:systemType="system" />
-                <GrxColorPicker android:title="Brightness controller on night mode"
-                    android:key="dlx_brightness_slider_controller"
-                    android:defaultValue="-16747308"
-                    grx:colorPickerStyle="flower"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items"
-                    grx:systemType="system" />
-                <GrxColorPicker android:title="Brightness max. disabled on night mode"
-                    android:key="dlx_brightness_slider_max_bg"
-                    android:defaultValue="-540483"
-                    grx:colorPickerStyle="flower"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items"
-                    grx:systemType="system" />
-                <GrxColorPicker android:title="Brightness max. enabled on night mode"
-                    android:key="dlx_brightness_slider_max_fg"
-                    android:defaultValue="-965073"
-                    grx:colorPickerStyle="flower"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items"
-                    grx:systemType="system" />
-                <GrxColorPicker android:title="Brightness detail on night mode"
-                    android:key="dlx_brightness_detail_white_color"
-                    android:defaultValue="-1107296257"
-                    grx:colorPickerStyle="flower"
-                    grx:commonBcExtra="arg"
-                    grx:commonBcExtraValue="refresh_bar_items"
-                    grx:systemType="system" />
-            </GrxPreferenceCategory>
-        </PreferenceScreen>
-    </PreferenceScreen>-->
+    </PreferenceScreen>
     <!--    &lt;!&ndash; Colores &ndash;&gt;
         <PreferenceScreen android:title="@string/Colors">
             <GrxSwitchPreference
@@ -940,28 +1225,6 @@
             grx:systemType="system" />
     </PreferenceScreen>
 
-    <PreferenceScreen android:title="@string/max_rows">
-        <GrxSeekBar
-            android:title="@string/rows_portrait"
-            android:key="dlx_rows_portrait"
-            android:defaultValue="6"
-            grx:commonBcExtra="arg"
-            grx:commonBcExtraValue="max_qs_rows"
-            grx:maxValue="10"
-            grx:minValue="3"
-            grx:interval="1"
-            grx:systemType="system" />
-        <GrxSeekBar
-            android:title="@string/rows_landscape"
-            android:key="dlx_rows_landscape"
-            android:defaultValue="10"
-            grx:commonBcExtra="arg"
-            grx:commonBcExtraValue="max_qs_rows"
-            grx:maxValue="16"
-            grx:minValue="3"
-            grx:interval="1"
-            grx:systemType="system" />
-    </PreferenceScreen>
 
     <!-- &lt;!&ndash; InformaciÃ³n de dispositivo (id CarrierLabel) &ndash;&gt;
      <PreferenceScreen android:title="@string/device_info">

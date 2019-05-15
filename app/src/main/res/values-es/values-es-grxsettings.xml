@@ -229,6 +229,7 @@
         <item>Record screen</item>
         <item>Screenshot</item>
         <item>Settings</item>
+        <item>DRC</item>
     </string-array>
 
     <string-array name="crop_entries">
@@ -435,7 +436,17 @@
     <string name="netspeed">Velocímetro de red</string>
     <string name="systemicons">Iconos de sistema</string>
 
-    <string-array name="sb_postions_options">
+    <string-array name="sb_positions_options_dual">
+        <item>Izquierda</item>
+        <item>Centro</item>
+        <item>Derecha</item>
+        <item>Arriba - izquierda (DUAL)</item>
+        <item>Arriba - centro (DUAL)</item>
+        <item>Arriba - derecha (DUAL)</item>
+        <item>Centro absoluto (DUAL)</item>
+    </string-array>
+
+    <string-array name="sb_positions_options">
         <item>Izquierda</item>
         <item>Centro</item>
         <item>Derecha</item>

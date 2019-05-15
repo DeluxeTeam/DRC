@@ -242,8 +242,41 @@
     <string name="screen_off">Screen off</string>
     <string name="volume_keys">Volume keys</string>
     <string name="max_rows" >Max. rows visibles</string>
-    <string name="rows_portrait">On portrait mode</string>
-    <string name="rows_landscape">On landscape mode</string>
+    <string name="rows_portrait">Toggles on portrait mode</string>
+    <string name="rows_landscape">Toggles on landscape mode</string>
+    <string name="pm_split">Use 2 columns</string>
+    <string name="date_preferences">Date preferences</string>
+    <string name="search">Search</string>
+    <string name="power_menu">Power menu</string>
+    <string name="more_settings">More settings</string>
+    <string name="settings">Settings</string>
+    <string name="night_mode">Night mode</string>
+    <string name="day_mode">Day mode</string>
+    <string name="toggle_style">Toggles style</string>
+    <string name="panel_mods">Panel colors / toggles / buttons</string>
+    <string name="use_custom_colors">Use custom colors</string>
+    <string name="bg_tgs">Background and toggles</string>
+    <string name="buttons">Buttons</string>
+    <string name="tile_bg_on">Tile background on</string>
+    <string name="tile_bg_off">Tile background off</string>
+    <string name="tile_bg_dim">Tile background dim</string>
+    <string name="tile_icon_bg_on">Tile icon background on</string>
+    <string name="tile_icon_bg_off">Tile icon background off</string>
+    <string name="tile_icon_bg_dim">Tile icon background dim</string>
+    <string name="clock_date_settings_buttons">Clock/Date/Settings</string>
+    <string name="notifs_on_dual">Show notifs on dual bar</string>
+    <string name="empty_level">Empty level</string>
+    <string name="empty_level_on_white_bgs">Empty level on white bgs</string>
+    <string name="loaded_level">Loaded level</string>
+    <string name="loaded_level_on_white_bgs">Loaded level on white bgs</string>
+    <string name="bolt">Bolt</string>
+    <string name="bolt_on_white_bgs">Bolt on white bgs</string>
+    <string name="percentage">Percentage</string>
+    <string name="percentage_on_white_bgs">Percentage on white bgs</string>
+    <string name="first_value">First value</string>
+    <string name="second_value">Second value</string>
+    <string name="third_value">Third value</string>
+    <string name="separator">Separator</string>
 
 
 </resources>

@@ -401,6 +401,7 @@
         <item>Record screen</item>
         <item>Screenshot</item>
         <item>Settings</item>
+        <item>DRC</item>
     </string-array>
     <string-array name="agc_reboot_values">
         <item>power</item>
@@ -415,6 +416,7 @@
         <item>screencapture</item>
         <item>screenshot</item>
         <item>settings</item>
+        <item>grxsettings</item>
     </string-array>
     <array name="drawables_icono_reinicio">
         <item>@drawable/stock</item>
@@ -868,12 +870,14 @@
         <item>@string/circularbt</item>
         <item>@string/carrier</item>
         <item>@string/clock</item>
+        <item>@string/date</item>
         <item>@string/netspeed</item>
         <item>@string/mobile</item>
         <item>@string/wifi</item>
         <item>@string/airplane</item>
         <item>@string/nfc</item>
         <item>@string/bluetooth</item>
+        <item>@string/bluetooth_connected</item>
         <item>@string/alarm</item>
         <item>@string/cast</item>
         <item>@string/wifi_p2p</item>
@@ -898,12 +902,14 @@
         <item>circularbt</item>
         <item>carrier</item>
         <item>clock</item>
+        <item>sb_date</item>
         <item>netspeed</item>
         <item>mobile</item>
         <item>wifi</item>
         <item>airplane</item>
         <item>nfc_on</item>
         <item>bluetooth</item>
+        <item>bluetooth_connected</item>
         <item>alarm_clock</item>
         <item>cast</item>
         <item>wifi_p2p</item>
@@ -1620,6 +1626,7 @@
         <item>boosterwifi</item>
         <item>boostermobile</item>
         <item>boosteractivity</item>
+        <item>tint</item>
     </string-array>
 
     <string-array name="signal_color_entries">
@@ -1636,6 +1643,7 @@
         <item>boosterwifi</item>
         <item>boostermobile</item>
         <item>boosteractivity</item>
+        <item>tint</item>
     </string-array>
 
     <string-array name="agc_signal_position_entries">
@@ -1875,6 +1883,7 @@
     <string-array name="sb_views_positions_options">
         <item>@string/carrier</item>
         <item>@string/clock</item>
+        <item>@string/sb_date</item>
         <item>@string/netspeed</item>
         <item>@string/systemicons</item>
         <item>@string/minitbattery</item>
@@ -1885,13 +1894,13 @@
     <string-array name="sb_views_positions_values">
         <item>simple_indicator_tag_lock_carrier_text_label</item>
         <item>status_bar_clock</item>
+        <item>sb_date</item>
         <item>netspeed</item>
         <item>statusicons</item>
         <item>minitbt</item>
         <item>circularbt</item>
         <item>batterycontainer</item>
     </string-array>
-
 
     <string-array name="kgsb_views_positions_options">
         <item>@string/carrier</item>
@@ -1912,7 +1921,26 @@
     </string-array>
 
 
-    <string-array name="sb_postions_options">
+    <string-array name="sb_positions_options_dual">
+        <item>Left</item>
+        <item>Center</item>
+        <item>Right</item>
+        <item>Up - left (DUAL)</item>
+        <item>Up - center (DUAL)</item>
+        <item>Up - right (DUAL)</item>
+        <item>Absolute center (DUAL)</item>
+    </string-array>
+    <string-array name="sb_positions_values_dual">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="sb_positions_options">
         <item>Left</item>
         <item>Center</item>
         <item>Right</item>
@@ -2141,5 +2169,20 @@
     <string name="vibrate_skip_tracks">Vibrate on long and double click</string>
     <string name="vibrate_skip_tracks_summary">The mod uses system feedback vibration intensity, however it is not needed to enable main system switch for vibration feedback</string>
     <string name="vibrate_skip_intensity">Vibration Feedback Intensity</string>
+    <string name="notifications">Notifications</string>
+    <string name="bluetooth_connected">Bluetooth connected</string>
+    <string name="sb_date">Date</string>
+
+    <string-array name="sb_date_entries">
+        <item>Day</item>
+        <item>Month</item>
+        <item>Year</item>
+    </string-array>
+
+    <string-array name="sb_date_values">
+        <item>dd</item>
+        <item>MM</item>
+        <item>yy</item>
+    </string-array>
 
 </resources>

@@ -18,7 +18,7 @@
         android:title="@string/elements_show"
         grx:depRule="ENABLE#dlx_power_menu_style#STRING#0"
         android:key="dlx_power_menu_container"
-        android:defaultValue="power,restart,emergency,"
+        android:defaultValue="power,restart,emergency,grxsettings,"
         grx:systemType="system"
         grx:separator=","
         grx:commonBcExtra="arg"
@@ -30,6 +30,15 @@
         android:title="@string/use_random_reboot"
         grx:depRule="ENABLE#dlx_power_menu_style#STRING#0"
         android:key="dlx_power_menu_random"
+        grx:systemType="system"
+        grx:commonBcExtra="arg"
+        grx:commonBcExtraValue="power_menu"
+        android:defaultValue="0" />
+
+    <GrxCheckBoxPreference
+        android:title="@string/pm_split"
+        grx:depRule="ENABLE#dlx_power_menu_style#STRING#0"
+        android:key="dlx_power_menu_2columns"
         grx:systemType="system"
         grx:commonBcExtra="arg"
         grx:commonBcExtraValue="power_menu"
