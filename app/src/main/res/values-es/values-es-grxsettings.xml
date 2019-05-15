@@ -216,6 +216,23 @@
 
     <string name="sb_preferences">Preferencias de iconos, colores, tamaños…</string>
 
+    <string-array name="signal_color_entries">
+        <item>WiFi</item>
+        <item>Flechas WiFi</item>
+        <item>Señal</item>
+        <item>Tipo de datos</item>
+        <item>Flechas de datos</item>
+        <item>Roaming</item>
+        <item>̶M̶o̶d̶o̶ ̶ ̶A̶v̶i̶ó̶n</item>
+        <item>̶V̶p̶n̶</item>
+        <item>̶E̶t̶h̶</item>
+        <item>̶A̶c̶t̶i̶v̶i̶d̶a̶d̶ ̶ ̶e̶t̶h̶</item>
+        <item>̶B̶o̶o̶s̶t̶e̶r̶ ̶ ̶w̶i̶f̶i</item>
+        <item>̶B̶o̶o̶s̶t̶e̶r̶ ̶ ̶m̶o̶b̶i̶l̶e̶</item>
+        <item>̶B̶o̶o̶s̶t̶e̶r̶ ̶ ̶a̶c̶t̶i̶v̶i̶t̶y̶</item>
+        <item>Tinta en fondos blancos</item>
+    </string-array>
+
     <string-array name="agc_reboot_options">
         <item>Power off</item>
         <item>Reboot</item>
@@ -229,6 +246,7 @@
         <item>Record screen</item>
         <item>Screenshot</item>
         <item>Settings</item>
+        <item>DRC</item>
     </string-array>
 
     <string-array name="crop_entries">
@@ -435,15 +453,46 @@
     <string name="netspeed">Velocímetro de red</string>
     <string name="systemicons">Iconos de sistema</string>
 
-    <string-array name="sb_postions_options">
+    <string-array name="sb_positions_options_dual">
+        <item>Izquierda</item>
+        <item>Centro</item>
+        <item>Derecha</item>
+        <item>Arriba - izquierda (DUAL)</item>
+        <item>Arriba - centro (DUAL)</item>
+        <item>Arriba - derecha (DUAL)</item>
+        <item>Centro absoluto (DUAL)</item>
+    </string-array>
+
+
+    <string-array name="sb_positions_options">
         <item>Izquierda</item>
         <item>Centro</item>
         <item>Derecha</item>
     </string-array>
 
-    <string name="general_info">General information</string>
+    <string name="general_info">Información general</string>
     <string name="features">Features</string>
-    <string name="changelog">Changelog</string>
+    <string name="changelog">Cambios</string>
+
+    <string-array name="changelog_140">
+        <item>Rebasado sobre N950FXXS5DSD5</item>
+        <item>Actualizado ramdisk N950F</item>
+        <item>Actualizado TW con los mods previos</item>
+        <item>Arreglada app en doble toque en TW</item>
+        <item>Añadidos colores de iconos de señal</item>
+        <item>Añadidos colores de batería y porcentaje</item>
+        <item>Añadida fecha personalizada</item>
+        <item>Añadido fondo personalizado en barra de estado</item>
+        <item>Added barra de estado dual</item>
+        <item>Añadido bluetooth_conectado a la lista de iconos escondidos</item>
+        <item>Añadidos toggles personalizados</item>
+        <item>Añadidos colores de panel (Toggles, iconos, brillo…)</item>
+        <item>Añadido menu de apagado e icono de usuario al panel</item>
+        <item>Añadido DRC al menú de reinicio</item>
+        <item>Añadida opción para usar 1 columna o 2 en menú de reinicio</item>
+        <item>Añadidos toggles DRC/AppLock y VoLTE</item>
+        <item>Reescrito código de menú de reinicio para arreglar pequeños bugs</item>
+    </string-array>
 
     <string-array name="changelog_130">
         <item>Rebasado sobre N950FXXS5DSC5</item>
@@ -537,6 +586,7 @@
         <item>Basada en primera beta para N950F</item>
     </string-array>
 
+    <string name="changelog_140">Cambios v14</string>
     <string name="changelog_130">Cambios v13</string>
     <string name="changelog_120">Cambios v12</string>
     <string name="changelog_114">Cambios v11.4</string>

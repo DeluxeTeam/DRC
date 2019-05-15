@@ -13,7 +13,7 @@
         grx:valuesArray="@array/agc_virtual_buttons_values" />
     <GrxAppSelection
         android:title="@string/app"
-        android:key="dlx_tw_double_tap"
+        android:key="dlx_tw_double_tap_app"
         grx:systemType="system"
         grx:depRule="ENABLE#dlx_tw_double_tap#STRING#1"
         grx:broadCast1="dlx_tw_master"
