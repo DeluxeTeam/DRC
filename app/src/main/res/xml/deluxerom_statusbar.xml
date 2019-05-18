@@ -52,6 +52,7 @@
 					android:title="@string/empty_level"
 					android:key="dlx_bt_empty_on_dark"
 					android:defaultValue="1728053247"
+					android:dependency="dlx_show_stock_battery"
 					grx:colorPickerStyle="flower"
 					grx:saveValueOnFly="true"
 					grx:commonBcExtra="arg"
@@ -60,6 +61,7 @@
 				<GrxColorPicker
 					android:title="@string/empty_level_on_white_bgs"
 					android:key="dlx_bt_empty_on_light"
+					android:dependency="dlx_show_stock_battery"
 					android:defaultValue="1713710373"
 					grx:colorPickerStyle="flower"
 					grx:saveValueOnFly="true"
@@ -70,6 +72,7 @@
 					android:title="@string/loaded_level"
 					android:key="dlx_bt_loaded_on_dark"
 					android:defaultValue="-1"
+					android:dependency="dlx_show_stock_battery"
 					grx:colorPickerStyle="flower"
 					grx:saveValueOnFly="true"
 					grx:commonBcExtra="arg"
@@ -79,6 +82,7 @@
 					android:title="@string/loaded_level_on_white_bgs"
 					android:key="dlx_bt_loaded_on_light"
 					android:defaultValue="-14342875"
+					android:dependency="dlx_show_stock_battery"
 					grx:colorPickerStyle="flower"
 					grx:saveValueOnFly="true"
 					grx:commonBcExtra="arg"
@@ -88,6 +92,7 @@
 					android:title="@string/bolt"
 					android:key="dlx_bt_bolt_on_dark"
 					android:defaultValue="-1"
+					android:dependency="dlx_show_stock_battery"
 					grx:colorPickerStyle="flower"
 					grx:saveValueOnFly="true"
 					grx:commonBcExtra="arg"
@@ -97,6 +102,7 @@
 					android:title="@string/bolt_on_white_bgs"
 					android:key="dlx_bt_bolt_on_light"
 					android:defaultValue="-15461356"
+					android:dependency="dlx_show_stock_battery"
 					grx:colorPickerStyle="flower"
 					grx:saveValueOnFly="true"
 					grx:commonBcExtra="arg"
@@ -115,6 +121,7 @@
 					android:defaultValue="-1"
 					grx:colorPickerStyle="flower"
 					grx:saveValueOnFly="true"
+					grx:depRule="ENABLE#display_battery_percentage#BOOLEAN#true"
 					grx:commonBcExtra="arg"
 					grx:commonBcExtraValue="battery_colors"
 					grx:systemType="system" />
@@ -123,6 +130,7 @@
 					android:key="dlx_bt_percentage_tint"
 					android:defaultValue="-16777216"
 					grx:colorPickerStyle="flower"
+					grx:depRule="ENABLE#display_battery_percentage#BOOLEAN#true"
 					grx:saveValueOnFly="true"
 					grx:commonBcExtra="arg"
 					grx:commonBcExtraValue="battery_colors"
@@ -176,19 +184,19 @@
 					grx:showPopup="true"
 					grx:interval="2"/>
 				<GrxSeekBar grx:broadCast1="dlx_circular_battery" android:title="@string/batt_alpha_animation" android:key="grxbat_alphatime"
-						android:defaultValue="2" grx:minValue="1" grx:maxValue="10" grx:units=" sec" grx:showPopup="true" grx:interval="1"/>
+					android:defaultValue="2" grx:minValue="1" grx:maxValue="10" grx:units=" sec" grx:showPopup="true" grx:interval="1"/>
 				<GrxColorPicker grx:broadCast1="dlx_circular_battery" android:title="@string/batt_dark_bgs" android:key="grxbat_darkbg_bat"
-								android:defaultValue="0xfffafafa" grx:showAlphaSlider="true" grx:showAutoButton="true"  />
+					android:defaultValue="0xfffafafa" grx:showAlphaSlider="true" grx:showAutoButton="true"  />
 				<GrxColorPicker grx:broadCast1="dlx_circular_battery" android:title="@string/batt_framecolor_dark_bgs" android:key="grxbat_darkbg_frame"
-								android:defaultValue="0x20fafafa" grx:showAlphaSlider="true" grx:showAutoButton="true"  />
+					android:defaultValue="0x20fafafa" grx:showAlphaSlider="true" grx:showAutoButton="true"  />
 				<GrxColorPicker grx:broadCast1="dlx_circular_battery" android:title="@string/batt_text_dark_bgs" android:key="grxbat_darkbg_text"
-								android:defaultValue="0xfffafafa" grx:showAlphaSlider="true" grx:showAutoButton="true"  />
+					android:defaultValue="0xfffafafa" grx:showAlphaSlider="true" grx:showAutoButton="true"  />
 				<GrxColorPicker grx:broadCast1="dlx_circular_battery" android:title="@string/batt_light_bgs" android:key="grxbat_lightbg_bat"
-								android:defaultValue="0xff343434" grx:showAlphaSlider="true" grx:showAutoButton="true"  />
+					android:defaultValue="0xff343434" grx:showAlphaSlider="true" grx:showAutoButton="true"  />
 				<GrxColorPicker grx:broadCast1="dlx_circular_battery" android:title="@string/batt_framecolor_light_bgs" android:key="grxbat_lightbg_frame"
-								android:defaultValue="0x20343434" grx:showAlphaSlider="true" grx:showAutoButton="true"  />
+					android:defaultValue="0x20343434" grx:showAlphaSlider="true" grx:showAutoButton="true"  />
 				<GrxColorPicker grx:broadCast1="dlx_circular_battery" android:title="@string/batt_text_light_bgs" android:key="grxbat_lightbg_text"
-								android:defaultValue="0xff343434" grx:showAlphaSlider="true" grx:showAutoButton="true"  />
+					android:defaultValue="0xff343434" grx:showAlphaSlider="true" grx:showAutoButton="true"  />
 			</GrxPreferenceCategory>
 			<!--GrxSingleSelection
 				android:title="@string/font"
@@ -376,7 +384,7 @@
 				<GrxEditText
 					android:title="@string/custom_text"
 					android:key="dlx_carrier_text"
-					android:defaultValue="DeluxeROM®"
+					android:defaultValue="DeluxeROMÂ®"
 					grx:commonBcExtra="arg"
 					grx:commonBcExtraValue="carrier"
 					grx:systemType="system" />
@@ -421,7 +429,7 @@
 			</GrxPreferenceCategory>
 		</PreferenceScreen>
 
-		<!-- Velocímetro de red -->
+		<!-- Velocí­metro de red -->
 		<PreferenceScreen android:title="@string/netwspeed">
 			<GrxPreferenceCategory android:title="@string/netw_prefs" grx:depRule="DISABLE#icon_blacklist#STRING#(netspeed)">
 				<GrxSingleSelection
@@ -664,7 +672,7 @@
 			<GrxInfoText android:textColor="?complementary_color3" android:textSize="20sp" android:summary="@string/general_colors_info" />
 
 			<GrxPerItemColor
-				android:title="Colores de señal"
+				android:title="@string/signal_colors"
 				android:key="dlx_signal_colors"
 				grx:valuesArray="@array/signal_color_values"
 				grx:optionsArray="@array/signal_color_entries"
@@ -691,7 +699,7 @@
 				grx:commonBcExtra="arg"
 				grx:commonBcExtraValue="general_icons_reload" />
 
-			<!-- Colores de señal -->
+			<!-- Colores de seÃ±al -->
 			<!--GrxPerItemColor
 				android:title="@string/signal_colors"
 				android:key="dlx_signal_colors"

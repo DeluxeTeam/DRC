@@ -168,8 +168,8 @@
     <string name="grxs_savesettings_exception">A problem occurred while saving the value in settings. Try installing the app in priv-app</string>
     <string name="grxs_draganddroptoshortout">Drag and drop the elements to short out the list</string>
     <string name="grxs_select_option">Select Option</string>
-	
-	<string name="toast_FastFade_animation">Fundido rapido Animacion</string>
+
+    <string name="toast_FastFade_animation">Fundido rapido Animacion</string>
     <string name="toast_GrowFadeBottom_animation">Crece Inferior Fundido Animacion</string>
     <string name="toast_GrowFadeCenter_animation">Crece Centro Fundido Animacion</string>
     <string name="toast_GrowFade_animation">Crece Fundido Animacion</string>
@@ -185,8 +185,8 @@
     <string name="toast_default_animation">Defecto</string>
     <string name="toast_fade_animation">Fundido Animacion</string>
     <string name="toast_none_animation">Ninguna</string>
-	
-	<string name="listview_off">Off</string>
+
+    <string name="listview_off">Off</string>
     <string name="listview_wave_left">Wave left</string>
     <string name="listview_wave_right">Wave right</string>
     <string name="listview_alpha">Alpha</string>
@@ -469,8 +469,8 @@
         <item>13</item>
         <item>14</item>
     </string-array>
-	
-	<string-array name="toast_animation_entries">
+
+    <string-array name="toast_animation_entries">
         <item>@string/toast_none_animation</item>
         <item>@string/toast_default_animation</item>
         <item>@string/toast_fade_animation</item>
@@ -506,7 +506,7 @@
         <item>14</item>
         <item>15</item>
     </string-array>
-	<string-array name="listview_animation_entries">
+    <string-array name="listview_animation_entries">
         <item>@string/listview_off</item>
         <item>@string/listview_wave_left</item>
         <item>@string/listview_wave_right</item>
@@ -534,7 +534,7 @@
         <item>10</item>
         <item>11</item>
     </string-array>
-	<string-array name="listview_interpolator_entries">
+    <string-array name="listview_interpolator_entries">
         <item>@string/listview_off</item>
         <item>@string/listview_accelerate_interpolator</item>
         <item>@string/listview_decelerate_interpolator</item>
@@ -554,8 +554,8 @@
         <item>6</item>
         <item>7</item>
     </string-array>
-	
-	<string-array name="qs_tile_animation_style_entries">
+
+    <string-array name="qs_tile_animation_style_entries">
         <item>Defecto</item>
         <item>Girar</item>
         <item>Vuelta</item>
@@ -597,7 +597,7 @@
         <item>6</item>
         <item>7</item>
     </string-array>
-	<string-array name="qstile_animation_style_entries">
+    <string-array name="qstile_animation_style_entries">
         <item>Ninguna</item>
         <item>Flip vertical</item>
         <item>Flip horizontal</item>
@@ -653,7 +653,7 @@
         <item>10</item>
         <item>11</item>
     </string-array>
-	<string-array name="torchlight_timeout_entries">
+    <string-array name="torchlight_timeout_entries">
         <item>15 seconds</item>
         <item>30 seconds</item>
         <item>1 minute</item>
@@ -667,7 +667,7 @@
         <item>120000</item>
         <item>300000</item>
     </string-array>
-	<array name="agc_estilo_fuente_drawables">
+    <array name="agc_estilo_fuente_drawables">
         <item>@drawable/defaultt</item>
         <item>@drawable/abductionsmall</item>
         <item>@drawable/abeakrg</item>
@@ -832,8 +832,8 @@
         <item>51</item>
         <item>52</item>
     </string-array>
-	
-	<array name="notpanel_styles_drawables">
+
+    <array name="notpanel_styles_drawables">
         <item>@drawable/notpanel_style_stock</item>
         <item>@drawable/notpanel_style_1</item>
         <item>@drawable/notpanel_style_2</item>
@@ -870,7 +870,7 @@
         <item>@string/circularbt</item>
         <item>@string/carrier</item>
         <item>@string/clock</item>
-        <item>@string/date</item>
+        <item>@string/sb_date</item>
         <item>@string/netspeed</item>
         <item>@string/mobile</item>
         <item>@string/wifi</item>
@@ -954,7 +954,7 @@
     <string name="smart_network">Smart Network</string>
     <string name="headset">Head Set</string>
 
-	<string-array name="agc_wifi_drawables">
+    <string-array name="agc_wifi_drawables">
         <item>@drawable/wifi_stock_4</item>
         <item>@drawable/wifi_aosp_4</item>
         <item>@drawable/wifi_calatrava_4</item>
@@ -1008,7 +1008,7 @@
         <item>14</item>
         <item>15</item>
     </string-array>
-	<string-array name="agc_signal_drawables">
+    <string-array name="agc_signal_drawables">
         <item>@drawable/signal_stock</item>
         <item>@drawable/signal_agua</item>
         <item>@drawable/signal_aosp</item>
@@ -1059,7 +1059,7 @@
         <item>13</item>
         <item>14</item>
     </string-array>
-	<array name="agc_alarma_drawables">
+    <array name="agc_alarma_drawables">
         <item>@drawable/alarma_stock</item>
         <item>@drawable/alarma_arena</item>
         <item>@drawable/alarma_campana</item>
@@ -1095,7 +1095,7 @@
         <item>8</item>
         <item>9</item>
     </string-array>
-	<array name="agc_bluetooth_drawables">
+    <array name="agc_bluetooth_drawables">
         <item>@drawable/bluetooth_1</item>
         <item>@drawable/bluetooth_2</item>
         <item>@drawable/bluetooth_3</item>
@@ -1119,7 +1119,7 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-	<array name="agc_sound_sb_drawables">
+    <array name="agc_sound_sb_drawables">
         <item>@drawable/sound_sb_stock</item>
         <item>@drawable/sound_sb_dos</item>
         <item>@drawable/sound_sb_tres</item>
@@ -1146,8 +1146,8 @@
         <item>5</item>
         <item>6</item>
     </string-array>
-	
-	<string-array name="sb_margins">
+
+    <string-array name="sb_margins">
         <item>4.0</item>
         <item>5.0</item>
         <item>6.0</item>
@@ -1155,8 +1155,8 @@
         <item>8.0</item>
         <item>9.0</item>
     </string-array>
-	
-	<string-array name="data_usage_gravity_entries">
+
+    <string-array name="data_usage_gravity_entries">
         <item>Left</item>
         <item>Center</item>
         <item>Right</item>
@@ -1199,7 +1199,7 @@
         <item>10000</item>
     </string-array>
 
-	<string-array name="tw_effect_entries">
+    <string-array name="tw_effect_entries">
         <item>Acordeon</item>
         <item>Carta</item>
         <item>Tarjeta plegable</item>
@@ -1222,7 +1222,7 @@
         <item>Diagonal</item>
         <item>Desvanecer</item>
     </string-array>
-	<string-array name="tw_effect_values">
+    <string-array name="tw_effect_values">
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -1245,8 +1245,8 @@
         <item>20</item>
         <item>21</item>
     </string-array>
-	
-	<string-array name="immersive_entries">
+
+    <string-array name="immersive_entries">
         <item>Immersive Off (Defecto)</item>
         <item>Immersive On (Pantalla completa)</item>
         <item>Esconde StatusBar</item>
@@ -1258,8 +1258,8 @@
         <item>immersive.status=*</item>
         <item>immersive.navigation=*</item>
     </string-array>
-	
-	<string-array name="quick_tg_entries">
+
+    <string-array name="quick_tg_entries">
         <item>3</item>
         <item>4</item>
         <item>5</item>
@@ -1279,11 +1279,11 @@
         <item>9</item>
         <item>10</item>
     </string-array>
-	
 
 
-	
-	<array name="agc_outdoor_check_off_drawables">
+
+
+    <array name="agc_outdoor_check_off_drawables">
         <item>@drawable/check_off_1</item>
         <item>@drawable/check_off_2</item>
         <item>@drawable/check_off_3</item>
@@ -1630,20 +1630,20 @@
     </string-array>
 
     <string-array name="signal_color_entries">
-        <item>wifi</item>
-        <item>wifiarrows</item>
-        <item>signal</item>
-        <item>mobiletype</item>
-        <item>mobilearrows</item>
-        <item>roaming</item>
-        <item>airplane</item>
-        <item>vpn</item>
-        <item>eth</item>
-        <item>ethactivity</item>
-        <item>boosterwifi</item>
-        <item>boostermobile</item>
-        <item>boosteractivity</item>
-        <item>tint</item>
+        <item>WiFi</item>
+        <item>WiFi arrows</item>
+        <item>Signal</item>
+        <item>Mobile type</item>
+        <item>Mobile arrows</item>
+        <item>Roaming</item>
+        <item>̶A̶i̶r̶p̶l̶a̶n̶e̶</item>
+        <item>̶V̶p̶n̶</item>
+        <item>̶E̶t̶h̶</item>
+        <item>̶E̶t̶h̶ ̶ ̶a̶c̶t̶i̶v̶i̶t̶y̶</item>
+        <item>̶B̶o̶o̶s̶t̶e̶r̶ ̶ ̶w̶i̶f̶i</item>
+        <item>̶B̶o̶o̶s̶t̶e̶r̶ ̶ ̶m̶o̶b̶i̶l̶e̶</item>
+        <item>̶B̶o̶o̶s̶t̶e̶r̶ ̶ ̶a̶c̶t̶i̶v̶i̶t̶y̶</item>
+        <item>Tint</item>
     </string-array>
 
     <string-array name="agc_signal_position_entries">
@@ -1902,6 +1902,7 @@
         <item>batterycontainer</item>
     </string-array>
 
+
     <string-array name="kgsb_views_positions_options">
         <item>@string/carrier</item>
         <item>@string/netspeed</item>
@@ -1930,6 +1931,7 @@
         <item>Up - right (DUAL)</item>
         <item>Absolute center (DUAL)</item>
     </string-array>
+
     <string-array name="sb_positions_values_dual">
         <item>0</item>
         <item>1</item>
@@ -1940,7 +1942,9 @@
         <item>6</item>
     </string-array>
 
+
     <string-array name="sb_positions_options">
+
         <item>Left</item>
         <item>Center</item>
         <item>Right</item>
@@ -2013,13 +2017,40 @@
     <string name="features">Features</string>
     <string name="changelog">Changelog</string>
 
-    <!-- N950F/G95xF changelogs -->
-    <string name="changelog_120">Changelog v12</string>
-    <string name="changelog_114">Changelog v11.4</string>
-    <string name="changelog_113">Changelog v11.3</string>
-    <string name="changelog_112">Changelog v11.2</string>
-    <string name="changelog_111">Changelog v11.1</string>
-    <string name="changelog_110">Changelog v11</string>
+    <string-array name="changelog_140">
+        <item>Rebased over N950FXXS5DSD5</item>
+        <item>Updated N950F ramdisk</item>
+        <item>Updated TW with previous mods</item>
+        <item>Fixed launch app on TW double tap</item>
+        <item>Added signal colors</item>
+        <item>Added battery and percentage colors</item>
+        <item>Added custom date to statusbar</item>
+        <item>Added custom background to statusbar</item>
+        <item>Added dual statusbar</item>
+        <item>Added bluetooth_connected to hidden icons</item>
+        <item>Added custom toggles</item>
+        <item>Added panel colors (Tiles, background, buttons, brightness…)</item>
+        <item>Added power menu and user icon switchs (on panel)</item>
+        <item>Added DRC to power menu</item>
+        <item>Added option to split power menu items or not</item>
+        <item>Added DRC,AppLock and VoLTE tiles</item>
+        <item>Rewritten power menu code to fix some minnor bugs</item>
+    </string-array>
+
+    <string-array name="changelog_130">
+        <item>Rebased over N950FXXS5DSC5</item>
+        <item>Updated DeluxeKernel®_v7 N8/S8+/S8</item>
+        <item>Added remap for home/back/recents</item>
+        <item>Added skip tracks mods</item>
+        <item>TouchWiz with 6x6, 7x7, 8x8 and double tap</item>
+        <item>Option for max. rows on quickpanel</item>
+        <item>16 animation scales on settings</item>
+        <item>Updated recoverys</item>
+        <item>Replaced some icons</item>
+        <item>Fixed CSC features</item>
+        <item>Added Deluxe® bootanimation</item>
+        <item>DRC improvements</item>
+    </string-array>
 
     <string-array name="changelog_120">
         <item>Rebased over N950FXXS5DSC2</item>
@@ -2098,12 +2129,40 @@
         <item>Based on first N950F Beta</item>
     </string-array>
 
+    <string name="changelog_140">Changelog v14</string>
+    <string name="changelog_130">Changelog v13</string>
+    <string name="changelog_120">Changelog v12</string>
+    <string name="changelog_114">Changelog v11.4</string>
+    <string name="changelog_113">Changelog v11.3</string>
+    <string name="changelog_112">Changelog v11.2</string>
+    <string name="changelog_111">Changelog v11.1</string>
+    <string name="changelog_110">Changelog v11</string>
+
     <!-- G93xF changelogs -->
+    <string name="changelog_030">Changelog v3</string>
     <string name="changelog_021">Changelog v2.1</string>
     <string name="changelog_020">Changelog v2</string>
     <string name="changelog_010">Changelog v1</string>
 
+    <string-array name="changelog_030">
+        <item>Updated TW with previous mods</item>
+        <item>Fixed launch app on TW double tap</item>
+        <item>Added signal colors</item>
+        <item>Added battery and percentage colors</item>
+        <item>Added custom date to statusbar</item>
+        <item>Added custom background to statusbar</item>
+        <item>Added dual statusbar</item>
+        <item>Added bluetooth_connected to hidden icons</item>
+        <item>Added custom toggles</item>
+        <item>Added panel colors (Tiles, background, buttons, brightness…)</item>
+        <item>Added power menu and user icon switchs (on panel)</item>
+        <item>Added DRC to power menu</item>
+        <item>Added option to split power menu items or not</item>
+        <item>Added DRC,AppLock and VoLTE tiles</item>
+        <item>Rewritten power menu code to fix some minnor bugs</item>
+    </string-array>
     <string-array name="changelog_021">
+        <item>NOT RELEASE TO USERS</item>
         <item>Updated Gear apps</item>
         <item>Added home/recents/back remap</item>
         <item>Added skip tracks with volume keys</item>
@@ -2169,20 +2228,26 @@
     <string name="vibrate_skip_tracks">Vibrate on long and double click</string>
     <string name="vibrate_skip_tracks_summary">The mod uses system feedback vibration intensity, however it is not needed to enable main system switch for vibration feedback</string>
     <string name="vibrate_skip_intensity">Vibration Feedback Intensity</string>
+
     <string name="notifications">Notifications</string>
+
     <string name="bluetooth_connected">Bluetooth connected</string>
+
     <string name="sb_date">Date</string>
 
+
     <string-array name="sb_date_entries">
-        <item>Day</item>
-        <item>Month</item>
-        <item>Year</item>
+        <item>@string/day</item>
+        <item>@string/month</item>
+        <item>@string/year</item>
     </string-array>
+
 
     <string-array name="sb_date_values">
         <item>dd</item>
         <item>MM</item>
         <item>yy</item>
     </string-array>
+
 
 </resources>
