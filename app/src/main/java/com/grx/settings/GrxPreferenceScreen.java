@@ -11,6 +11,7 @@ import android.preference.GrxBasePreference;
 import android.preference.GrxPickImage;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
@@ -802,10 +803,33 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
 
 
     private void removePreferences(){
-        if(mPrefsToRemove.size()>0) for( Preference preference : mPrefsToRemove) {
-            getPreferenceScreen().removePreference(preference);
+        if ( mPrefsToRemove.size() > 0 ) {
+            for( Preference preference : mPrefsToRemove) {
+                PreferenceGroup parent = getParent(getPreferenceScreen(), preference);
+                assert parent != null;
+                parent.removePreference(preference);
+            }
         }
         mPrefsToRemove.clear();
+    }
+
+    // Not needed if API is >=26
+    private PreferenceGroup getParent(PreferenceGroup groupToSearchIn, Preference preference) {
+        for (int i = 0; i < groupToSearchIn.getPreferenceCount(); ++i) {
+            Preference child = groupToSearchIn.getPreference(i);
+
+            if (child == preference)
+                return groupToSearchIn;
+
+            if (child instanceof PreferenceGroup) {
+                PreferenceGroup childGroup = (PreferenceGroup)child;
+                PreferenceGroup result = getParent(childGroup, preference);
+                if (result != null)
+                    return result;
+            }
+        }
+
+        return null;
     }
 
     /*************************** Settings System, Secure and Global Support ****************/
