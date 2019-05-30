@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="opacity">Opacidad</string>
+    <string name="custombg_orientation">Orientación</string>
+    <string name="battery">Batería</string>
+    <string name="stock_battery">Mostrar batería stock</string>
+    <string name="battery_percentage">Mostrar porcentaje</string>
+    <string name="battery_color_percentage">Color de porcentaje</string>
+    <string name="font">Fuente</string>
+    <string name="size">Tamaño</string>
+    <string name="clock">Reloj</string>
+    <string name="visibility">Visibilidad</string>
+    <string name="position">Posición</string>
+    <string name="Colors">Colores</string>
+    <string name="elements_order">Elementos a mostrar / orden</string>
+    <string name="elements_order_date">Elementos a mostrar y orden (fecha)</string>
+    <string name="date_separator">Separador de fecha</string>
+    <string name="seconds">Segundos</string>
+    <string name="wholeday">Mostrar dia completo</string>
+    <string name="wholeyear">Mostrar año completo</string>
+    <string name="ampm_uppercase">Usar mayusculas en AM/PM</string>
+    <string name="fonts">Fuentes</string>
+    <string name="day">Dia</string>
+    <string name="hour_min_sec">Horas/Minutos/Segundos</string>
+    <string name="date">Fecha</string>
+    <string name="ampm">AM/PM</string>
+    <string name="sizes">Tamaños</string>
+    <string name="hour_separator">Separador de hora</string>
+    <string name="left_margin">Margen izquierdo</string>
+    <string name="right_margin">Margen derecho</string>
+    <string name="carrier_text">Texto de operadora</string>
+    <string name="use_custom_text">Usar texto personalizado</string>
+    <string name="all_uppercase">Usar mayusculas</string>
+    <string name="custom_text">Texto personalizado</string>
+    <string name="color">Color</string>
+    <string name="weather">Clima</string>
+    <string name="update_every">Actualizar cada</string>
+    <string name="icon_colors_position">Selecciona iconos y colores</string>
+    <string name="general_colors">Colores generales</string>
+    <string name="signal_colors">Colores de señal</string>
+    <string name="keep_whatsapp">Mantener WhatsApp sin colorear</string>
+    <string name="keep_whatsapp_summary">Algunos clientes de WhatsApp permiten usar iconos multi-color, mantén esta
+        opción para no sobreescribirlo.
+    </string>
+    <string name="wifi_icon">Icono WiFi</string>
+    <string name="signal_icon">Icono de señal</string>
+    <string name="alarm_icon">Icono de alarma</string>
+    <string name="bluetooth_icon">Icono bluetooth</string>
+    <string name="sound_icon">Icono de sonido</string>
+    <string name="use_lte">Usar icono LTE</string>
+    <string name="hidden_icons">Iconos escondidos</string>
+    <string name="signal_position">Posición iconos de señal</string>
+    <string name="other_mods">Otros mods</string>
+    <string name="custombg">Fondo personalizado</string>
+    <string name="type">Tipo</string>
+    <string name="select_image">Seleccionar imagen</string>
+    <string name="image_scale">Escalado de imagen</string>
+    <string name="heads_up_notif">Notificaciones Heads-Up</string>
+    <string name="dt2s">Doble toque para bloquear</string>
+    <string name="expand_panel">Expandir panel desde el lado derecho</string>
+    <string name="margins_sb">Margenes</string>
+    <string name="use_custom_color">Usar color personalizado</string>
+    <string name="panel_bg">Fondo del panel</string>
+    <string name="settings_button">Botón de ajustes</string>
+    <string name="more_settings_button">Botón de mas ajustes</string>
+    <string name="handler_button">Icono de arrastrar</string>
+    <string name="hour">Hora</string>
+    <string name="toggles_on">Toggles encendidos</string>
+    <string name="toggles_dim">Toggles encendiendo</string>
+    <string name="toggles_off">Toggles apagados</string>
+    <string name="toggles_text">Texto de toggles</string>
+    <string name="toggles_divisor">Divisor de toggles</string>
+    <string name="brightness_icon">Icono de brillo</string>
+    <string name="brightness_settings_icon">Icono de ajustes de brillo</string>
+    <string name="br_bar">Barra de brillo</string>
+    <string name="br_bar_bg">Fondo de barra de brillo</string>
+    <string name="brightness_max">Brillo máximos</string>
+    <string name="brightness_controller">Controlador de brillo</string>
+    <string name="toggle_styles">Estilo de toggles</string>
+    <string name="toggles">Toggles</string>
+    <string name="blur">Blur</string>
+    <string name="intensity">Intensidad</string>
+    <string name="custom_notifs">Personalizar notificaciones</string>
+    <string name="icon">Icono</string>
+    <string name="prim_text">Texto primario</string>
+    <string name="sec_text">Texto secundario</string>
+    <string name="name_app">Nombre de app</string>
+    <string name="hour_div">Divisor de hora</string>
+    <string name="summary">Sumario</string>
+    <string name="expand">Botón de expandir</string>
+    <string name="notif_settings">Texto ajustes de notificaciones</string>
+    <string name="clear_all">Texto limpiar todo</string>
+    <string name="matrix">Matrix</string>
+    <string name="random_color">Usar colores aleatorios</string>
+    <string name="use_gradient">Usar degradado</string>
+    <string name="invert_direction">Invertir dirección</string>
+    <string name="bg_color">Color de fondo</string>
+    <string name="txt_color">Color de texto</string>
+    <string name="second_txt_color">Color de texto secundario</string>
+    <string name="frequency">Frecuencia</string>
+    <string name="outdoor_mode">Modo exterior</string>
+    <string name="icon_on">Icono encendido</string>
+    <string name="icon_off">Icono apagado</string>
+    <string name="color_on">Color encendido</string>
+    <string name="color_off">Color apagado</string>
+    <string name="rotation">Rotación</string>
+    <string name="datausage">Uso de datos</string>
+    <string name="device_info">Información de dispositivo</string>
+    <string name="titles_color">Color de titulos</string>
+    <string name="values_color">Color de valores</string>
+    <string name="titles_size">Tamaño de titulos</string>
+    <string name="values_size">Tamaño de valores</string>
+    <string name="titles_font">Fuente para titulos</string>
+    <string name="values_font">fuente para valores</string>
+    <string name="multiuser_icon">Icono multi-usuario</string>
+    <string name="maxtoggles">Max. toggles visibles</string>
+    <string name="doubletap">Doble toque</string>
+    <string name="app">App</string>
+    <string name="app_txt_color">Color texto de apps</string>
+    <string name="app_txt_size">Tamaño texto de apps</string>
+    <string name="ls_rotation">Rotación</string>
+    <string name="hide_sb">Esconder barra de estado</string>
+    <string name="wake_usb">Encender al conectar USB</string>
+    <string name="biometrics_reboot">Biometricos al reiniciar</string>
+    <string name="fp_touch">Despertar al tocar huella</string>
+    <string name="quick_reply">Respuesta rápida siempre</string>
+    <string name="recents_icon">Icono de recientes</string>
+    <string name="home_icon">Icono de inicio</string>
+    <string name="back_icon">Icono de retroceso</string>
+    <string name="use_custom_size">Usar tamaño personalizado</string>
+    <string name="landscape_size">Tamaño (cuando está rotado)</string>
+    <string name="show_on_ls">Mostrar en pantalla de bloqueo</string>
+    <string name="split_up_down">Separar subida/bajada</string>
+    <string name="main_color">Color principal</string>
+    <string name="up_color">Color de subida</string>
+    <string name="down_color">Color de descarga</string>
+    <string name="arrows_color">Color de flechas</string>
+    <string name="listview_animations">Animación de listado</string>
+    <string name="interpolator_animation">Animación de interpolador</string>
+    <string name="whitelist">Lista blanca</string>
+    <string name="low_bt_warning">Aviso de batería baja</string>
+    <string name="elements_show">Elementos a mostrar</string>
+    <string name="confirm_actions">Confirmar acciones</string>
+    <string name="icons_style">Estilo de iconos</string>
+    <string name="subtxt_color">Color de subtexto</string>
+    <string name="recents_blur_color">Color de blur</string>
+    <string name="rambar">Barra de RAM</string>
+    <string name="ram_bg_used">Fondo usado</string>
+    <string name="ram_bg_free">Fondo libre</string>
+    <string name="txt_used">Texto usado</string>
+    <string name="txt_free">Texto libre</string>
+    <string name="used_ram_size">Tamaño de RAM usada</string>
+    <string name="free_ram_size">Tamaño de RAM libre</string>
+    <string name="used_ram_font">Fuente de RAM usada</string>
+    <string name="free_ram_font">fuente de RAM libre</string>
+    <string name="no_recents_apps">Texto -No hay apps recientes-</string>
+    <string name="up_margin">Margen superior</string>
+    <string name="down_margin">MArgen inferior</string>
+    <string name="closeall_text">Texto -Cerrar todo-</string>
+    <string name="more_settings_icon">Icono de mas ajustes</string>
+    <string name="recents">Recientes</string>
+    <string name="long_press">Pulsación larga</string>
+    <string name="home">Inicio</string>
+    <string name="back">Retroceso</string>
+    <string name="vbuttons_on_sb">Botones virtuales en barra de estado</string>
+    <string name="left">Izquierda</string>
+    <string name="short_press">Pulsación corta</string>
+    <string name="short_press_app">App en pulsación corta</string>
+    <string name="long_press_app">App en pulsación larga</string>
+    <string name="center">Centro</string>
+    <string name="right">Derecha</string>
+    <string name="gs_rom_name">DeluxeROM</string>
+    <string name="grxs_app_name">DRC</string>
+    <string name="statusbar">Barra de estado</string>
+    <string name="notifpanel">Panel de notificaciones</string>
+    <string name="netwspeed">Velocímetro de red</string>
+    <string name="virtual_buttons">Botones virtuales</string>
+    <string name="remap_buttons">Remapear botones</string>
+    <string name="rebootmenu">Menu de reinicio</string>
+    <string name="lockscreen">Pantalla de bloqueo</string>
+    <string name="navbar">Barra de navegación</string>
+    <string name="twlauncher">Inicio TW</string>
+    <string name="others">Otros mods</string>
+    <string name="minitbattery">3MinitBattery</string>
+    <string name="irispreview">Vista previa de iris</string>
+    <string name="vbuttons_on_nb">Botón virtual en barra de navegación</string>
+    <string name="screenoff_app">Pantalla apagada - App</string>
+    <string name="screenoff_shortaction">Pantalla apagada - Pulsación corta</string>
+    <string name="screenon_app">Pantalla encendida - App</string>
+    <string name="screenon_short">Pantalla encendida - Pulsación corta</string>
+    <string name="whitelist_summary">Las apps seleccionadas aquí quedarán extentas de la acción -Cerrar aplicación-.</string>
+
+    <string name="grx_circular_battery">Opciones de batería circular</string>
+    <string name="bold_text">Texto en negrita</string>
+    <string name="battery_size">Tamaño de batería</string>
+    <string name="batt_stroke">Grosor de batería</string>
+    <string name="batt_alpha_animation">Duración animación transparencia en carga</string>
+    <string name="batt_animation_time">Duración cambio en animación carga</string>
+    <string name="batt_colors">Colores del icono</string>
+    <string name="batt_framecolor_dark_bgs">Color fondo en backgrounds oscuros</string>
+    <string name="batt_dark_bgs">Color nivel en backgrounds oscuros</string>
+    <string name="batt_text_dark_bgs">Color texto en backgrounds oscuros</string>
+    <string name="batt_framecolor_light_bgs">Color fondo en backgrounds claros</string>
+    <string name="batt_light_bgs">Color nivel en backgrounds claros</string>
+    <string name="batt_text_light_bgs">Color texto en backgrounds oscuros</string>
+    <string name="enable_grxbat">Habilitar batería circular</string>
+
+    <string name="batteries">Baterías</string>
+    <string name="stock_bt_options">Opciones de batería stock</string>
+    <string name="minit_bt_options">Opciones de 3MinitBattery</string>
+    <string name="color_on_white_bg">Color en fondos blancos</string>
+    <string name="clock_preferences">Preferencias de reloj</string>
+    <string name="carrier_preferences">Preferencias texto de operadora</string>
+    <string name="datausage_on_expanded">Mostrar también en panel expandido</string>
+    <string name="color_on_dark_bg">Color en modo noche</string>
+    <string name="critical_bt_warning">Aviso nivel de batería crítico</string>
+    <string name="toast_app_closed">Mostrar aviso de app cerrada</string>
+    <string name="toast_recents_closed">Mostrar aviso de apps recientes cerradas</string>
+    <string name="toast_app_whitelisted">Mostrar aviso de app en lista blanca</string>
+    <string name="extended_power_menu">Menu de reinicio stock / extendido</string>
+    <string name="extended_power_menu_desc">CARACTERÍSTICA EXPERIMENTAL, PUEDE CONTENER FALLOS.</string>
+    <string name="minit_tint">Tintar icono en fondos blancos</string>
+    <string name="reboot_style">Estilo de menú de reinicio</string>
+    <string name="timeout">Tiempo visible</string>
+    <string name="netw_prefs">Preferencias de red</string>
+    <string name="paypal">Donaciones en PayPal</string>
+    <string name="telegram_esp">Grupo de soporte en Telegram (ESP)</string>
+    <string name="telegram_eng">Grupo de soporte en Telegram (ENG)</string>
+    <string name="htc">Hilo en HTCMania</string>
+    <string name="xda">Hilo en XDA</string>
+    <string name="activity_not_found">No se puede abrir esta actividad</string>
+    <string name="custom_navbar_info">NOTA : HABILITAR EL FONDO PERSONALIZADO FORZARÁ SU VISIBILIDAD SIEMPRE, INCLUSO EN PANTALLA DE INICIO. ASEGURATE DE SELECCIONAR SOLO CONTENIDO LOCAL EN CASO DE USAR IMAGEN, NUNCA DE DRIVE O CUALQUIER OTRA NUBE.</string>
+    <string name="show_all_icons">Mostrar todos los iconos en barra de estado</string>
+    <string name="color_per_icon">Color por icono</string>
+    <string name="general_colors_info">NOTA : ESTOS COLORES NO AFECTAN A LA BARRA DE ESTADO DEL PANEL DE NOTIFICACIONES. RECUERDA QUE PUEDES MOSTRAR TODOS LOS ICONOS DE LA BARRA EN Barra de estado > Mostrar todos los iconos</string>
+    <string name="icons_warning">NOTA : EL CAMBIO DE ICONOS PUEDE TARDAR ENTRE 2 Y 5 SEGUNDOS PARA TENER EFECTO</string>
+    <string name="select_icons">Selecciona iconos</string>
+    <string name="use_random_reboot">Usar orden aleatorio</string>
+    <string name="grxs_rom_info">Información de la ROM</string>
+    <string name="rows_portrait">Toggles en modo vertical</string>
+
+    <string name="rows_landscape">Toggles en modo horizontal</string>
+
+    <string name="max_rows">Máx. de toggles visibles</string>
+
+    <string name="volume_keys">Teclas de volumen</string>
+
+    <string name="screen_off">Pantalla apagada</string>
+
+    <string name="screen_on">Pantalla encendida</string>
+
+    <string name="bg_tgs">Fondo y toggles</string>
+
+    <string name="bluetooth_connected">Bluetooth conectado</string>
+
+    <string name="bolt">Rayo</string>
+
+    <string name="bolt_on_white_bgs">Rayo en fondos blancos</string>
+
+    <string name="buttons">Botones</string>
+
+    <string name="clock_date_settings_buttons">Reloj/Fecha/Ajustes</string>
+
+    <string name="date_preferences">Preferencias de fecha</string>
+
+    <string name="day_mode">Modo día</string>
+
+    <string name="empty_level">Nivel vacio</string>
+
+    <string name="empty_level_on_white_bgs">Nivel vacio en fondos blancos</string>
+
+    <string name="more_settings">Mas ajustes</string>
+
+    <string name="night_mode">Modo noche</string>
+
+    <string name="notifications">Notificaciones</string>
+
+    <string name="notifs_on_dual">Mostrar notifs. en barra dual</string>
+
+    <string name="panel_mods">Panel (Colores/Toggles/Botones)</string>
+
+    <string name="percentage">Porcentaje</string>
+
+    <string name="percentage_on_white_bgs">Porcentaje en fondos blancos</string>
+
+    <string name="pm_split">Usar 2 columnas</string>
+
+    <string name="power_menu">Menú de apagado</string>
+
+    <string name="sb_date">Fecha</string>
+
+    <string name="search">Buscar</string>
+
+    <string name="settings">Ajustes</string>
+
+    <string name="tile_bg_dim">Fondo de toggle dim</string>
+
+    <string name="tile_bg_off">Fondo de toggle apagado</string>
+
+    <string name="tile_bg_on">Fondo de toggle encendido</string>
+
+    <string name="tile_icon_bg_dim">Icono de toggle dim</string>
+
+    <string name="tile_icon_bg_off">Icono de toggle apagado</string>
+
+    <string name="tile_icon_bg_on">Icono de toggle encendido</string>
+
+    <string name="first_value">Primer valor</string>
+
+    <string name="second_value">Segundo valor</string>
+
+    <string name="third_value">Tercer valor</string>
+
+    <string name="separator">Separador</string>
+    <string name="loaded_level">Nivel cargado</string>
+    <string name="loaded_level_on_white_bgs">Nivel cargado en fondos blancos</string>
+    <string name="month">Mes</string>
+    <string name="year">Año</string>
+
+
+</resources>

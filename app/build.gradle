@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-	//buildToolsVersion "22.0.1"
+    //buildToolsVersion "22.0.1"
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId 'com.grx.settings'
@@ -51,11 +51,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
 
-    implementation 'com.android.support:recyclerview-v7:22+'
-    implementation 'com.android.support:support-annotations:22+'
+    implementation 'com.android.support:recyclerview-v7:22.2.1'
+    implementation 'com.android.support:support-annotations:28.0.0'
     implementation 'com.nineoldandroids:library:2.4.0'
-    implementation 'com.android.support:appcompat-v7:22+'
-    implementation 'com.android.support:cardview-v7:22+'
-    implementation 'com.android.support:design:22+'
-    implementation 'com.android.support:palette-v7:22+'
+    implementation 'com.android.support:appcompat-v7:22.2.1'
+    implementation 'com.android.support:cardview-v7:22.2.1'
+    implementation 'com.android.support:design:22.2.1'
+    implementation 'com.android.support:palette-v7:22.2.1'
 }

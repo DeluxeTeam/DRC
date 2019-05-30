@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:grx="http://schemas.android.com/apk/res-auto">
+
+    <!-- Icono de recientes -->
+    <!-- grx:iconsArray="@array/agc_recents_drawables" -->
+    <!--<GrxSingleSelection
+        android:title="@string/recents_icon"
+        android:key="dlx_navbar_recents"
+        android:defaultValue="0"
+        grx:optionsArray="@array/agc_navbar_entries"
+        grx:iconsArray="@array/drawables_agc_navbar_recent"
+        grx:valuesArray="@array/agc_navbar_values"
+        grx:systemType="system"
+        grx:broadCast1="dlx_navbar" />
+
+    &lt;!&ndash; Icono de inicio &ndash;&gt;
+    &lt;!&ndash; grx:iconsArray="@array/agc_home_drawables" &ndash;&gt;
+    <GrxSingleSelection
+        android:title="@string/home_icon"
+        android:key="dlx_navbar_home"
+        android:defaultValue="0"
+        grx:iconsArray="@array/drawables_agc_navbar_home"
+        grx:optionsArray="@array/agc_navbar_entries"
+        grx:valuesArray="@array/agc_navbar_values"
+        grx:depRule="DISABLE#clock_position#STRING#3"
+        grx:systemType="system"
+        grx:broadCast1="dlx_navbar" />
+
+    &lt;!&ndash; Icono de retroceso &ndash;&gt;
+    &lt;!&ndash; grx:iconsArray="@array/agc_back_drawables" &ndash;&gt;
+    <GrxSingleSelection
+        android:title="@string/back_icon"
+        android:key="dlx_navbar_back"
+        android:defaultValue="0"
+        grx:iconsArray="@array/drawables_agc_navbar_back"
+        grx:optionsArray="@array/agc_navbar_entries"
+        grx:valuesArray="@array/agc_navbar_values"
+        grx:systemType="system"
+        grx:broadCast1="dlx_navbar" />-->
+
+    <!-- Color de fondo -->
+    <GrxColorPicker
+        android:title="@string/bg_color"
+        android:key="navigationbar_color"
+        grx:depRule="ENABLE#dlx_navbar_bg_enabled#BOOLEAN#false"
+        android:defaultValue="0xFFF0F0F0"
+        grx:colorPickerStyle="flower"
+        grx:iconTint="?complementary_color3"
+        grx:showAlphaSlider="true"
+        grx:showAutoButton="true"
+        grx:saveValueOnFly="true"
+        grx:systemType="global" />
+
+    <!-- Fondo personalizado -->
+    <PreferenceScreen android:title="@string/custombg" >
+
+        <GrxInfoText android:textColor="?complementary_color3" android:textSize="20sp" android:summary="@string/custom_navbar_info" />
+
+        <GrxSwitchPreference
+            android:title="@string/visibility"
+            android:key="dlx_navbar_bg_enabled"
+            android:defaultValue="false"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="navbar_bg"
+            grx:systemType="system" />
+        <GrxSingleSelection
+            android:title="@string/type"
+            android:key="dlx_navbar_bg_type"
+            android:defaultValue="0"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="navbar_bg"
+            android:dependency="dlx_navbar_bg_enabled"
+            grx:optionsArray="@array/custom_bg_type_entries"
+            grx:systemType="system"
+            grx:valuesArray="@array/custom_bg_type_values" />
+        <GrxPickImage
+            android:title="@string/select_image"
+            android:key="dlx_navbar_bg_uri"
+            grx:commonBcExtra="arg"
+            android:dependency="dlx_navbar_bg_enabled"
+            grx:depRule="ENABLE#dlx_navbar_bg_type#STRING#0"
+            grx:commonBcExtraValue="navbar_bg"
+            grx:systemType="system" />
+        <GrxSeekBar
+            android:title="@string/opacity"
+            android:key="dlx_navbar_bg_alpha"
+            android:defaultValue="255"
+            android:dependency="dlx_navbar_bg_enabled"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="navbar_bg"
+            grx:maxValue="255"
+            grx:minValue="0"
+            grx:systemType="system" />
+        <GrxColorPicker
+            android:title="@string/color"
+            android:key="dlx_navbar_bg_indv_color"
+            android:defaultValue="-1"
+            android:dependency="dlx_navbar_bg_enabled"
+            grx:depRule="ENABLE#dlx_navbar_bg_type#STRING#1"
+            grx:colorPickerStyle="flower"
+            grx:iconTint="?complementary_color3"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="navbar_bg"
+            grx:showAlphaSlider="true"
+            grx:showAutoButton="true"
+            grx:saveValueOnFly="true"
+            grx:systemType="system" />
+        <GrxPerItemColor
+            android:title="Gradient colors (6)"
+            android:key="dlx_navbar_bg_color_array"
+            grx:valuesArray="@array/custombg_color_values"
+            grx:optionsArray="@array/custombg_color_entries"
+            android:defaultValue="color1/-1##color2/-1##color3/-1##color4/-1##color5/-1##color6/-1##"
+            grx:separator="##"
+            grx:systemType="system"
+            grx:colorPickerStyle="flower"
+            android:dependency="dlx_navbar_bg_enabled"
+            grx:depRule="ENABLE#dlx_navbar_bg_type#STRING#2"
+            grx:showAlphaSlider="true"
+            grx:showAutoButton="true"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="navbar_bg" />
+        <GrxSingleSelection
+            android:title="@string/custombg_orientation"
+            android:key="dlx_navbar_bg_orientation"
+            android:defaultValue="0"
+            android:dependency="dlx_navbar_bg_enabled"
+            grx:depRule="ENABLE#dlx_navbar_bg_type#STRING#2"
+            grx:commonBcExtra="arg"
+            grx:commonBcExtraValue="navbar_bg"
+            grx:optionsArray="@array/gradient_entries"
+            grx:systemType="system"
+            grx:valuesArray="@array/gradient_values" />
+    </PreferenceScreen>
+
+    <!-- Tamaño personalizado -->
+    <GrxSwitchPreference
+        android:title="@string/use_custom_size"
+        android:key="is_navbar_height_switch"
+        android:defaultValue="false"
+        grx:systemType="system" />
+    <GrxSeekBar
+        android:title="@string/size"
+        android:key="is_navigation_bar_height"
+        grx:systemType="system"
+        android:dependency="is_navbar_height_switch"
+        android:defaultValue="130"
+        grx:interval="1"
+        grx:maxValue="200"
+        grx:minValue="0"
+        grx:showPopup="true"
+        grx:units=" px" />
+    <GrxSeekBar
+        android:title="@string/landscape_size"
+        android:key="is_navigation_bar_width"
+        grx:systemType="system"
+        android:dependency="is_navbar_height_switch"
+        android:defaultValue="130"
+        grx:interval="1"
+        grx:maxValue="200"
+        grx:minValue="0"
+        grx:showPopup="true"
+        grx:units=" px" />
+
+</PreferenceScreen>

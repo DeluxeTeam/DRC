@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:grx="http://schemas.android.com/apk/res-auto">
+
+    <!-- Doble toque -->
+    <GrxSingleSelection
+        android:title="@string/doubletap"
+        android:key="dlx_tw_double_tap"
+        android:defaultValue="0"
+        grx:broadCast1="dlx_tw_master"
+        grx:broadCast1Extra="dlx_tw_double_tap"
+        grx:optionsArray="@array/agc_virtual_buttons_entries"
+        grx:systemType="system"
+        grx:valuesArray="@array/agc_virtual_buttons_values" />
+    <GrxAppSelection
+        android:title="@string/app"
+        android:key="dlx_tw_double_tap_app"
+        grx:systemType="system"
+        grx:depRule="ENABLE#dlx_tw_double_tap#STRING#1"
+        grx:broadCast1="dlx_tw_master"
+        grx:broadCast1Extra="dlx_tw_double_tap"
+        grx:saveActivityname="true"
+        grx:showSystemapps="false" />
+
+<!--    &lt;!&ndash; Blur &ndash;&gt;
+    <GrxSwitchPreference
+        android:title="@string/blur"
+        android:key="dlx_tw_blur"
+        android:defaultValue="1"
+        grx:systemType="system"
+        grx:broadCast1="dlx_tw_kill" />
+
+    &lt;!&ndash; Color de texto &ndash;&gt;
+    <GrxColorPicker
+        android:title="@string/app_txt_color"
+        android:key="dlx_tw_appname_color"
+        android:defaultValue="0xFFFFFFFF"
+        grx:colorPickerStyle="flower"
+        grx:broadCast1="dlx_tw_kill"
+        grx:systemType="system" />
+
+    &lt;!&ndash; Tamaño de texto &ndash;&gt;
+    <GrxSeekBar
+        android:title="@string/app_txt_size"
+        android:key="dlx_tw_appname_size"
+        android:defaultValue="25"
+        grx:broadCast1="dlx_tw_kill"
+        grx:maxValue="50"
+        grx:minValue="1"
+        grx:interval="1"
+        grx:systemType="system" />-->
+
+</PreferenceScreen>

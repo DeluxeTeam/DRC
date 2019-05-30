@@ -1,42 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--/*      Created by Roberto Mariani and Anna Berkovitch, 2015-2016
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
+<com.fab.ObservableScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/observableview">
 
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with this program.  If not, see <http://www.gnu.org/licenses/>.*/-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center"
-              android:layout_marginBottom="5dp"
-              android:layout_marginEnd="16dp"
-              android:layout_marginStart="16dp"
-              android:layout_marginTop="5dp"
-              android:orientation="horizontal"
-              tools:ignore="UseCompoundDrawables">
-
-    <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/access_arrow"
-        android:tint="?colorAccent"
-        tools:ignore="ContentDescription"/>
-
-    <TextView
-        android:id="@+id/changelogText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-</LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"  android:orientation="vertical"
+                android:weightSum="1">
+
+                <!-- Changelog 14 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_140" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_140"/>
+
+                <!-- Changelog 13 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_130" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_130"/>
+
+                <!-- Changelog 12 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_120" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_120"/>
+
+                <!-- Changelog 11.4 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_114" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_114"/>
+
+                <!-- Changelog 11.3 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_113" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_113"/>
+
+                <!-- Changelog 11.2 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_112" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_112"/>
+
+                <!-- Changelog 11.1 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_111" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_111"/>
+
+                <!-- Changelog 11 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_110" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_110"/>
+
+                <!--some space for fab button if you want to-->
+                <View android:layout_width="match_parent" android:layout_height="30dp"/>
+
+                <!--scrool views (observablescrollview) just can have one main container. So We will use a linear layout since is the easiest way.. -->
+
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+</com.fab.ObservableScrollView>

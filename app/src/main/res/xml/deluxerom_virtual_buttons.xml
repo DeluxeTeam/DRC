@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:grx="http://schemas.android.com/apk/res-auto">
+
+    <!-- Botones virtuales (Barra de estado) -->
+    <GrxPreferenceCategory android:title="@string/vbuttons_on_sb">
+
+        <!-- Izquierda -->
+        <PreferenceScreen android:title="@string/left">
+            <GrxSwitchPreference
+                android:title="@string/visibility"
+                android:key="dvb_sb_left_visibility"
+                android:defaultValue="0"
+                grx:broadCast1="dvb_sb_left_receiver"
+                grx:systemType="system" />
+            <GrxSingleSelection
+                android:title="@string/short_press"
+                android:key="dvb_sb_left_short_press"
+                android:defaultValue="0"
+                android:dependency="dvb_sb_left_visibility"
+                grx:broadCast1="dvb_sb_left_receiver"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:systemType="system"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                android:key="dvb_sb_left_long_press"
+                android:defaultValue="0"
+                android:dependency="dvb_sb_left_visibility"
+                grx:broadCast1="dvb_sb_left_receiver"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:systemType="system"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/short_press_app"
+                android:key="dvb_sb_left_short_app"
+                grx:systemType="system"
+                grx:depRule="ENABLE#dvb_sb_left_short_press#STRING#1"
+                android:dependency="dvb_sb_left_visibility"
+                grx:broadCast1="dvb_sb_left_receiver"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxAppSelection
+                android:title="@string/long_press_app"
+                android:key="dvb_sb_left_long_app"
+                grx:systemType="system"
+                grx:depRule="ENABLE#dvb_sb_left_long_press#STRING#1"
+                android:dependency="dvb_sb_left_visibility"
+                grx:broadCast1="dvb_sb_left_receiver"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxColorPicker
+                android:title="@string/color"
+                android:key="dvb_sb_left_bgcolor"
+                android:defaultValue="0xFF0000FF"
+                grx:colorPickerStyle="flower"
+                grx:saveValueOnFly="false"
+                android:dependency="dvb_sb_left_visibility"
+                grx:broadCast1="dvb_sb_left_receiver"
+                grx:systemType="system" />
+        </PreferenceScreen>
+
+        <!-- Centro -->
+        <PreferenceScreen android:title="@string/center">
+            <GrxSwitchPreference
+                android:title="@string/visibility"
+                android:key="dvb_sb_center_visibility"
+                android:defaultValue="0"
+                grx:broadCast1="dvb_sb_center_receiver"
+                grx:systemType="system" />
+            <GrxSingleSelection
+                android:title="@string/short_press"
+                android:key="dvb_sb_center_short_press"
+                android:defaultValue="0"
+                android:dependency="dvb_sb_center_visibility"
+                grx:broadCast1="dvb_sb_center_receiver"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:systemType="system"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                android:key="dvb_sb_center_long_press"
+                android:defaultValue="0"
+                android:dependency="dvb_sb_center_visibility"
+                grx:broadCast1="dvb_sb_center_receiver"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:systemType="system"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/short_press_app"
+                android:key="dvb_sb_center_short_app"
+                grx:systemType="system"
+                grx:depRule="ENABLE#dvb_sb_center_short_press#STRING#1"
+                android:dependency="dvb_sb_center_visibility"
+                grx:broadCast1="dvb_sb_center_receiver"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxAppSelection
+                android:title="@string/long_press_app"
+                android:key="dvb_sb_center_long_app"
+                grx:systemType="system"
+                grx:depRule="ENABLE#dvb_sb_center_long_press#STRING#1"
+                android:dependency="dvb_sb_center_visibility"
+                grx:broadCast1="dvb_sb_center_receiver"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxColorPicker
+                android:title="@string/color"
+                android:key="dvb_sb_center_bgcolor"
+                android:defaultValue="0xFF0000FF"
+                grx:colorPickerStyle="flower"
+                grx:saveValueOnFly="false"
+                android:dependency="dvb_sb_center_visibility"
+                grx:broadCast1="dvb_sb_center_receiver"
+                grx:systemType="system" />
+        </PreferenceScreen>
+
+        <!-- Derecha -->
+        <PreferenceScreen android:title="@string/right">
+            <GrxSwitchPreference
+                android:title="@string/visibility"
+                android:key="dvb_sb_right_visibility"
+                android:defaultValue="0"
+                grx:broadCast1="dvb_sb_right_receiver"
+                grx:systemType="system" />
+            <GrxSingleSelection
+                android:title="@string/short_press"
+                android:key="dvb_sb_right_short_press"
+                android:defaultValue="0"
+                android:dependency="dvb_sb_right_visibility"
+                grx:broadCast1="dvb_sb_right_receiver"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:systemType="system"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                android:key="dvb_sb_right_long_press"
+                android:defaultValue="0"
+                android:dependency="dvb_sb_right_visibility"
+                grx:broadCast1="dvb_sb_right_receiver"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:systemType="system"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/short_press_app"
+                android:key="dvb_sb_right_short_app"
+                grx:systemType="system"
+                grx:depRule="ENABLE#dvb_sb_right_short_press#STRING#1"
+                android:dependency="dvb_sb_right_visibility"
+                grx:broadCast1="dvb_sb_right_receiver"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxAppSelection
+                android:title="@string/long_press_app"
+                android:key="dvb_sb_right_long_app"
+                grx:systemType="system"
+                grx:depRule="ENABLE#dvb_sb_right_long_press#STRING#1"
+                android:dependency="dvb_sb_right_visibility"
+                grx:broadCast1="dvb_sb_right_receiver"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxColorPicker
+                android:title="@string/color"
+                android:key="dvb_sb_right_bgcolor"
+                android:defaultValue="0xFF0000FF"
+                grx:colorPickerStyle="flower"
+                grx:saveValueOnFly="false"
+                android:dependency="dvb_sb_right_visibility"
+                grx:broadCast1="dvb_sb_right_receiver"
+                grx:systemType="system" />
+        </PreferenceScreen>
+
+    </GrxPreferenceCategory>
+
+    <!-- Botón virtual en barra de navegación -->
+    <GrxPreferenceCategory android:title="@string/vbuttons_on_nb">
+
+        <!-- Derecha -->
+        <PreferenceScreen android:title="@string/right">
+            <GrxSwitchPreference
+                android:title="@string/visibility"
+                android:key="dvb_nb_right_visibility"
+                android:defaultValue="0"
+                grx:broadCast1="dvb_nb_right_receiver"
+                grx:systemType="system" />
+            <GrxSingleSelection
+                android:title="@string/short_press"
+                android:key="dvb_nb_right_short_press"
+                android:defaultValue="0"
+                android:dependency="dvb_nb_right_visibility"
+                grx:broadCast1="dvb_nb_right_receiver"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:systemType="system"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                android:key="dvb_nb_right_long_press"
+                android:defaultValue="0"
+                android:dependency="dvb_nb_right_visibility"
+                grx:broadCast1="dvb_nb_right_receiver"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:systemType="system"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/short_press_app"
+                android:key="dvb_nb_right_short_app"
+                grx:systemType="system"
+                grx:depRule="ENABLE#dvb_nb_right_short_press#STRING#1"
+                android:dependency="dvb_nb_right_visibility"
+                grx:broadCast1="dvb_sb_right_receiver"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxAppSelection
+                android:title="@string/long_press_app"
+                android:key="dvb_nb_right_long_app"
+                grx:systemType="system"
+                grx:depRule="ENABLE#dvb_nb_right_long_press#STRING#1"
+                android:dependency="dvb_nb_right_visibility"
+                grx:broadCast1="dvb_nb_right_receiver"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxColorPicker
+                android:title="@string/color"
+                android:key="dvb_nb_right_bgcolor"
+                android:defaultValue="0xFF0000FF"
+                grx:colorPickerStyle="flower"
+                grx:saveValueOnFly="false"
+                android:dependency="dvb_nb_right_visibility"
+                grx:broadCast1="dvb_nb_right_receiver"
+                grx:systemType="system" />
+        </PreferenceScreen>
+
+    </GrxPreferenceCategory>
+
+</PreferenceScreen>

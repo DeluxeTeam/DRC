@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:grx="http://schemas.android.com/apk/res-auto">
+
+    <!-- Posiciones de vistas en pantalla de bloqueo -->
+    <GrxPerItemSingleSelection
+        android:title="@string/sb_positions_ls"
+        android:key="dlx_kg_container"
+        android:summary="@string/sb_positions_help"
+        grx:allowSortOut="true"
+        grx:commonBcExtra="arg"
+        grx:commonBcExtraValue="sb_views"
+        android:defaultValue="simple_indicator_tag_lock_carrier_text_label;0|netspeed;2|statusicons;2|minitbt;2|circularbt;2|batterycontainer;2|"
+        grx:optionsArray="@array/kgsb_views_positions_options"
+        grx:valuesArray="@array/kgsb_views_positions_values"
+        grx:spinnerOptionsArray="@array/sb_positions_options"
+        grx:spinnerValuesArray="@array/sb_positions_values" />
+
+    <GrxSwitchPreference
+        android:title="@string/biometrics_reboot"
+        android:key="dlx_biometric_always"
+        android:defaultValue="false"
+        grx:systemType="system" />
+
+    <!--
+    &lt;!&ndash; Ocultar barra de estado &ndash;&gt;
+    <GrxSwitchPreference
+        android:title="@string/hide_sb"
+        android:key="hide_lockscreen_sb"
+        android:defaultValue="false"
+        grx:commonBcExtra="arg"
+        grx:commonBcExtraValue="ls_sb"
+        grx:systemType="system" />
+
+    &lt;!&ndash; Encender pantalla al conectar USB &ndash;&gt;
+    <GrxSwitchPreference
+        android:title="@string/wake_usb"
+        android:key="dlx_usb_wakeup"
+        android:defaultValue="true"
+        grx:systemType="system" />
+
+    &lt;!&ndash; Biométricos al reiniciar &ndash;&gt;
+    <GrxSwitchPreference
+        android:title="@string/biometrics_reboot"
+        android:key="dlx_biometric"
+        android:defaultValue="false"
+        grx:systemType="system" />
+
+    &lt;!&ndash; Vista previa de iris &ndash;&gt;
+    <GrxSwitchPreference
+        android:title="@string/irispreview"
+        android:key="dlx_show_iris_preview"
+        android:defaultValue="true"
+        grx:systemType="system" />
+
+    &lt;!&ndash; Encender al tocar el sensor de huella &ndash;&gt;
+    <GrxSwitchPreference
+        android:title="@string/fp_touch"
+        android:key="dlx_fp_wake"
+        android:defaultValue="false"
+        grx:commonBcExtra="arg"
+        grx:commonBcExtraValue="kill"
+        grx:systemType="system" />
+
+    &lt;!&ndash; Respuesta rápida &ndash;&gt;
+    <GrxSwitchPreference
+        android:title="@string/quick_reply"
+        android:key="dlx_notifs_on_ls"
+        android:defaultValue="false"
+        grx:commonBcExtra="arg"
+        grx:commonBcExtraValue="kill"
+        grx:systemType="system" />-->
+
+</PreferenceScreen>

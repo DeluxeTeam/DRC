@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import com.grx.settings.R;
 import com.grx.settings.utils.Common;
 

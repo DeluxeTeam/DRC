@@ -37,7 +37,7 @@
 
     <string name="grxs_nav_header_bg">Panel Header Bg</string>
 
-    <string name="grxs_selecc_image_usando">Selecciona imagen usand...</string>
+    <string name="grxs_selecc_image_usando">Selecciona imagen usando…</string>
     <string name="grxs_error_redondeando">Error redondeando imagen</string>
 
     <string name="grxs_remove">Eliminar</string>
@@ -45,7 +45,7 @@
 
     <string name="grxs_backup">Backup</string>
     <string name="grxs_restore">Restaurar</string>
-    <string name="grxs_restoring_msg">Restaurando y sincronizando las preferencias y archivos del backup %1$s  ...</string>
+    <string name="grxs_restoring_msg">Restaurando y sincronizando las preferencias y archivos del backup %1$s  …</string>
 
     <string name="grxs_recents_screens_title">Pantallas Recientes</string>
     <string name="grxs_buildprop_simulator">Simular Build Prop</string>
@@ -73,7 +73,7 @@
     <string name="grxs_select_sort_help">Puedes borrar un elemento deslizando el elemento hacia la izquierda y aparecerá la opción de borrar.\nPara posicionar un elemento pulsa largo y arrástralo hasta la posición deseada.\nPuedes siempre seleccionar y deseleccionar elementos a travs del botón +/-\nPara borrar toda la selección actual pulsa el botón X</string>
     <string name="grxs_select_app">Selecciona Aplicación</string>
     <string name="grxs_building_sorting_list">Creando y ordenando listado ..</string>
-    <string name="grxs_building_list">Creando listado aplicaciones...</string>
+    <string name="grxs_building_list">Creando listado aplicaciones…</string>
     <string name="grxs_is_not_installed">( %1$s no está instalada! )</string>
     <string name="grxs_delete_values">Borrar valores</string>
     <string name="grxs_reset_values">Reset valores</string>
@@ -202,23 +202,415 @@
         <item>Dependiendo de la configuración y preferencias usadas por el dev, en algunos tipos de preferencia aparece un botón de ayuda que muestra cómo se usan funciones como eliminar elementos, ordenarlos, etc. Por favor, leee la ayouda..</item>
         <item>Puedes seleccionar el tipo de ColorPicker por defecto. Este valor será usado siempre que el dev no haya definido en las preferencias un valor específico o que la preferencia necesite usar un tipo de selector de color específico. </item>
         <item>En las preferencias tipo ColorPicker (selector de color) podrás copiar el valor seleccionado en la preferencia al portapapeles en formato hexadecimal mediant una pulsación larga sobre la muestra de color. Te puede facilitar la labor de configurar tus colores.</item>
-        <item>Area flotante con acceso a últimas pantallas\n\n
+        <item>Área flotante con acceso a últimas pantallas\n\n
         - Puedes activarla o no en este menú. Aparecerá cuando pulsas largo en el FAB (botón flotante) si has activado esta opción.\n
         - Puedes cambiar la transparencia de este área mediante doble-clicks en la zona del título\n
         - Para mover el área, símplemente presiona largo en el título y desplázala\n
         - El área es ocultado automáticamente cuando usamos el teclado.\n
         </item>
         <item>Tu desarrollador puede activar las siguientes características:\n\n
-        - Asignar una imágen de fondo en la cabecera del panel de navegación\n
+        - Asignar una imagen de fondo en la cabecera del panel de navegación\n
         - Seleccionar temas\n
         </item>
     </string-array>
 
+    <string name="sb_preferences">Preferencias de iconos, colores, tamaños…</string>
+
+    <string-array name="signal_color_entries">
+        <item>WiFi</item>
+        <item>Flechas WiFi</item>
+        <item>Señal</item>
+        <item>Tipo de datos</item>
+        <item>Flechas de datos</item>
+        <item>Roaming</item>
+        <item>̶M̶o̶d̶o̶ ̶ ̶A̶v̶i̶ó̶n</item>
+        <item>̶V̶p̶n̶</item>
+        <item>̶E̶t̶h̶</item>
+        <item>̶A̶c̶t̶i̶v̶i̶d̶a̶d̶ ̶ ̶e̶t̶h̶</item>
+        <item>̶B̶o̶o̶s̶t̶e̶r̶ ̶ ̶w̶i̶f̶i</item>
+        <item>̶B̶o̶o̶s̶t̶e̶r̶ ̶ ̶m̶o̶b̶i̶l̶e̶</item>
+        <item>̶B̶o̶o̶s̶t̶e̶r̶ ̶ ̶a̶c̶t̶i̶v̶i̶t̶y̶</item>
+        <item>Tinta en fondos blancos</item>
+    </string-array>
+
+    <string-array name="agc_reboot_options">
+        <item>Power off</item>
+        <item>Reboot</item>
+        <item>Recovery</item>
+        <item>Download</item>
+        <item>Data mode</item>
+        <item>Quick reboot</item>
+        <item>Reboot UI</item>
+        <item>Emergency mode</item>
+        <item>Flashlight</item>
+        <item>Record screen</item>
+        <item>Screenshot</item>
+        <item>Settings</item>
+        <item>DRC</item>
+    </string-array>
+
+    <string-array name="crop_entries">
+        <item>Centrada ajustada</item>
+        <item>Centrada</item>
+        <item>Ajustar XY</item>
+    </string-array>
+
+    <string-array name="custom_bg_type_entries">
+        <item>Imagen</item>
+        <item>Color Solido</item>
+        <item>Degradado</item>
+    </string-array>
+
+    <string-array name="clock_color_entries">
+        <item>Hora</item>
+        <item>Minutos</item>
+        <item>Segundos</item>
+        <item>Separador</item>
+        <item>Día</item>
+        <item>Fecha</item>
+        <item>AM/PM</item>
+    </string-array>
+
+    <string-array name="agc_clock_options">
+        <item>Hora</item>
+        <item>Espacio</item>
+        <item>Día</item>
+        <item>Espacio</item>
+        <item>Fecha</item>
+    </string-array>
+
+    <string-array name="agc_clock_date_options">
+        <item>Día</item>
+        <item>Separador</item>
+        <item>Mes</item>
+        <item>Separador</item>
+        <item>Año</item>
+    </string-array>
+
+    <string-array name="gradient_entries">
+        <item>De arriba hacia abajo</item>
+        <item>De abajo a arriba</item>
+        <item>De izquierda a derecha</item>
+        <item>De derecha a izquierda</item>
+        <item>Diagonal inferior izquierda a superior derecha</item>
+        <item>Diagonal superior derecha a inferior izquierda</item>
+        <item>Diagonal inferior derecha a superior izquierda</item>
+        <item>Diagonal superior izquierda a inferior derecha</item>
+    </string-array>
+
+    <string-array name="agc_virtual_buttons_entries">
+        <item>Stock</item>
+        <item>Ejecutar aplicación</item>
+        <item>Pulsar retroceso</item>
+        <item>Pulsar inicio</item>
+        <item>Pulsar recientes</item>
+        <item>Pulsar menú</item>
+        <item>Linterna</item>
+        <item>Modo de sonido</item>
+        <item>Pantalla de bloqueo</item>
+        <item>Menú de reinicio</item>
+        <item>Cerrar app actual</item>
+        <item>Cerrar apps en segundo plano</item>
+        <item>Captura de pantalla</item>
+        <item>Grabar pantalla</item>
+        <item>Aumentar brillo x10</item>
+        <item>Disminuir brillo x10</item>
+        <item>WiFi</item>
+        <item>Rotación</item>
+        <item>Bluetooth</item>
+        <item>Subir volumen de sistema</item>
+        <item>Disminuir volumen de sistema</item>
+        <item>Subir volumen multimedia</item>
+        <item>Disminuir volumen multimedia</item>
+        <item>Subir volumen de notificaciones</item>
+        <item>Disminuir volumen de notificaciones</item>
+        <item>Subir volumen de llamada</item>
+        <item>Disminuir volumen de llamada</item>
+        <item>Play / Pausa</item>
+        <item>Siguiente pista</item>
+        <item>Pista anterior</item>
+    </string-array>
+
+    <string-array name="agc_position_clock_entries">
+        <item>Izquierda</item>
+        <item>Centro</item>
+        <item>Derecha</item>
+        <item>Barra de navegación</item>
+    </string-array>
+
+    <string-array name="outdoor_position_entries">
+        <item>Izquierda</item>
+        <item>Derecha</item>
+    </string-array>
+
+    <string-array name="torchlight_timeout_entries">
+        <item>15 segundos</item>
+        <item>30 segundos</item>
+        <item>1 minuto</item>
+        <item>2 minutos</item>
+        <item>5 minutos</item>
+    </string-array>
+
+    <string-array name="qstile_animation_duration_entries">
+        <item>Muy lento (3000ms)</item>
+        <item>Lento (2500ms)</item>
+        <item>Por defecto (2000ms)</item>
+        <item>Rápido (1500ms)</item>
+        <item>Muy rápido (1000ms)</item>
+        <item>Extremadamente rápido (500ms)</item>
+        <item>Imperceptible (250ms)</item>
+    </string-array>
+
+    <string-array name="qs_tile_animation_interpolator_entries">
+        <item>Linear</item>
+        <item>Acelerar</item>
+        <item>Decelerar</item>
+        <item>Acelerar y decelerar</item>
+        <item>Rebotar</item>
+        <item>Exceder</item>
+        <item>Anticipar</item>
+        <item>Anticipar y rebotar</item>
+    </string-array>
+
+    <string-array name="agc_netw_interval_entries">
+        <item>Tiempo real</item>
+        <item>3 segundos</item>
+        <item>5 segundos</item>
+        <item>7 segundos</item>
+        <item>10 segundos</item>
+    </string-array>
+
+    <string name="listview_off">Apagado</string>
+    <string name="listview_wave_left">Ola (izquierda)</string>
+    <string name="listview_wave_right">Ola (derecha)</string>
+    <string name="listview_alpha">Alpha</string>
+    <string name="listview_scale">Escala</string>
+    <string name="listview_stack_top">Pila (arriba)</string>
+    <string name="listview_stack_bottom">Pila (abajo)</string>
+    <string name="listview_unfold">Desplegar</string>
+    <string name="listview_fold">Doblez</string>
+    <string name="listview_translate_left">Translate (izquierda)</string>
+    <string name="listview_translate_right">Translate (derecha)</string>
+    <string name="listview_rotate">Girar</string>
+    <string name="listview_interpolator_title">Interpolador ListView</string>
+    <string name="listview_accelerate_interpolator">Acelerar</string>
+    <string name="listview_decelerate_interpolator">Decelerar</string>
+    <string name="listview_accelerate_decelerate_interpolator">Acelerar desacelerar</string>
+    <string name="listview_anticipate_interpolator">Anticipar</string>
+    <string name="listview_overshoot_interpolator">Excederse</string>
+    <string name="listview_anticipate_overshoot_interpolator">Anticipar excederse</string>
+    <string name="listview_bounce_interpolator">Bote</string>
+
+    <string-array name="data_usage_gravity_entries">
+        <item>Izquierda</item>
+        <item>Centro</item>
+        <item>Derecha</item>
+    </string-array>
+
+    <string-array name="agc_signal_position_entries">
+        <item>Izquierda</item>
+        <item>Centro</item>
+        <item>Derecha</item>
+    </string-array>
+
+    <string-array name="reboot_style_entries">
+        <item>Stock</item>
+        <item>Dialogo</item>
+    </string-array>
+
     <string name="grxs_draganddroptoshortout">Puedes ordenar la lista arrastrando los elementos</string>
 
-    <string name="activity_not_found">No se puede abrir esta actividad</string>
+    <string name="sb_positions">Posición de vistas</string>
+    <string name="sb_positions_us">Posiciones vistas en barra de estado</string>
+    <string name="sb_positions_ls">Posicion vistas en barra de estado (LS)</string>
+    <string name="sb_positions_help">Selecciona posición por vista y ordenalas</string>
 
-    <string name="grxs_app_not_rooted">No root permission!</string>
+    <string name="battery_and_text">Batería y porcentaje</string>
+    <string name="circularbt">Batería circular</string>
+    <string name="carrier">Texto de operadora</string>
+    <string name="mobile">Datos</string>
+    <string name="wifi">WiFi</string>
+    <string name="airplane">Modo avión</string>
+    <string name="nfc">NFC</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="alarm">Alarma</string>
+    <string name="cast">ScreenCast</string>
+    <string name="wifi_p2p">WiFi P2P</string>
+    <string name="wifi_calling">Llamadas WiFi/Volte</string>
+    <string name="location">Localización (GPS)</string>
+    <string name="volume">Modo de sonido</string>
+    <string name="power_saving">Ahorro de batería</string>
+    <string name="data_saver">Ahorro de datos</string>
+    <string name="hotspot">Conexión compartida</string>
+    <string name="zen">Modo no molestar</string>
+    <string name="rcs">RCS</string>
+    <string name="wearable_gear">Gear</string>
+    <string name="private_mode">Modo privado</string>
+    <string name="secure_mode">Modo seguro</string>
+    <string name="smart_network">Red</string>
+    <string name="headset">Auriculares</string>
+
+    <string name="netspeed">Velocímetro de red</string>
+    <string name="systemicons">Iconos de sistema</string>
+
+    <string-array name="sb_positions_options_dual">
+        <item>Izquierda</item>
+        <item>Centro</item>
+        <item>Derecha</item>
+        <item>Arriba - izquierda (DUAL)</item>
+        <item>Arriba - centro (DUAL)</item>
+        <item>Arriba - derecha (DUAL)</item>
+        <item>Centro absoluto (DUAL)</item>
+    </string-array>
+
+
+    <string-array name="sb_positions_options">
+        <item>Izquierda</item>
+        <item>Centro</item>
+        <item>Derecha</item>
+    </string-array>
+
+    <string name="general_info">Información general</string>
+    <string name="features">Features</string>
+    <string name="changelog">Cambios</string>
+
+    <string-array name="changelog_140">
+        <item>Rebasado sobre N950FXXS5DSD5</item>
+        <item>Actualizado ramdisk N950F</item>
+        <item>Actualizado TW con los mods previos</item>
+        <item>Arreglada app en doble toque en TW</item>
+        <item>Añadidos colores de iconos de señal</item>
+        <item>Añadidos colores de batería y porcentaje</item>
+        <item>Añadida fecha personalizada</item>
+        <item>Añadido fondo personalizado en barra de estado</item>
+        <item>Added barra de estado dual</item>
+        <item>Añadido bluetooth_conectado a la lista de iconos escondidos</item>
+        <item>Añadidos toggles personalizados</item>
+        <item>Añadidos colores de panel (Toggles, iconos, brillo…)</item>
+        <item>Añadido menu de apagado e icono de usuario al panel</item>
+        <item>Añadido DRC al menú de reinicio</item>
+        <item>Añadida opción para usar 1 columna o 2 en menú de reinicio</item>
+        <item>Añadidos toggles DRC/AppLock y VoLTE</item>
+        <item>Reescrito código de menú de reinicio para arreglar pequeños bugs</item>
+    </string-array>
+
+    <string-array name="changelog_130">
+        <item>Rebasado sobre N950FXXS5DSC5</item>
+        <item>Actualizado DeluxeKernel®_v7 N8/S8+/S8</item>
+        <item>Añadido remapeo de inicio/recientes/retroceso</item>
+        <item>Añadido mod pasar canciones con teclas de volumen</item>
+        <item>TouchWiz con 6x6, 7x7, 8x8 y doble toque</item>
+        <item>Opción para máximo de toggles en panel</item>
+        <item>16 escalas de animación en ajustes</item>
+        <item>Actualizados recoverys</item>
+        <item>Reemplazados algunos iconos</item>
+        <item>Arregladas características CSC</item>
+        <item>Añadido bootanimation Deluxe®</item>
+        <item>Mejoras en DRC</item>
+    </string-array>
+
+    <string-array name="changelog_120">
+        <item>Rebasado sobre N950FXXS5DSC2</item>
+        <item>Actualizado ramdisk N950F</item>
+        <item>Arreglado problema de tamaño en /system</item>
+        <item>Añadidos iconos de señal personalizados</item>
+        <item>Añadidos iconos de bluetooth personalizados</item>
+        <item>Añadidos iconos de alarma personalizados</item>
+        <item>Añadidos iconos de modo de sonido personalizados</item>
+        <item>Añadido selector 4G/LTE</item>
+        <item>Añadida selección de elementos/orden de menú de apagado</item>
+        <item>Añadida opción para usar ordern aleatorio en menú de apagado</item>
+        <item>Añadidos 14 estilos para menú de apagado</item>
+        <item>Blur en panel desactivado si GoodLock está funcionando</item>
+        <item>SmartManager stock/chino seleccionable en AROMA</item>
+    </string-array>
+
+    <string-array name="changelog_114">
+        <item>Añadido DeluxeKernel®_v6 para todas las variantes</item>
+        <item>Añadida opción para mostrar todos los iconos en statusbar</item>
+        <item>Añadidos selectores de color para iconos generales</item>
+        <item>Añadidos iconos WiFi personalizados</item>
+        <item>Añadidas preferencias para velocímetro de red</item>
+        <item>Añadida opción para esconder icono de batería stock solo (sin porcentaje)</item>
+        <item>Escondido porcentaje de bateria y velocímetro de red de ajustes. Ambos están en DRC</item>
+        <item>Añadida opción para desactivar notificaciones heads-up y tiempo de espera</item>
+        <item>Añadido fondo personalizado en barra de navegación</item>
+        <item>Arreglado tamaño de botones virtuales en barra de estado</item>
+        <item>Mas archivos inutiles eliminados</item>
+        <item>Arreglados pequeños bugs en DRC</item>
+        <item>Optimizados varios mods</item>
+    </string-array>
+
+    <string-array name="changelog_113">
+        <item>Rebasado sobre N950FXXU5DSB2</item>
+        <item>Añadido menu de reinicio extendido (estilo stock)</item>
+        <item>Arreglado menu de reinicio extendido (estilo dialogo)</item>
+        <item>Añadido toggle para estilo de menu de reinicio (stock/dialogo)</item>
+        <item>Añadido switch para tinta en 3MinitBattery</item>
+        <item>Arreglado tamaño de botón virtual en barra de navegación</item>
+        <item>Añadido NZC CSC (Nueva Zelanda libre)</item>
+        <item>Añadido PET CSC (Peru Claro)</item>
+        <item>Varias optimizaciones</item>
+        <item>Reemplazado SmartManager por la versión china</item>
+        <item>Forzado estado oficial en ajustes</item>
+        <item>Añadido blur nativo al panel de notificaciones</item>
+    </string-array>
+
+    <string-array name="changelog_112">
+        <item>No publicada para usuarios</item>
+    </string-array>
+
+    <string-array name="changelog_111">
+        <item>Arreglada cámara en S8/S8+</item>
+        <item>Arreglado desbloqueo por iris en S8/S8+</item>
+        <item>Bootloader/modem opcional en AROMA</item>
+        <item>Añadido Velvet (Google) como app de sistem en AROMA</item>
+        <item>Añadido Samsung Notes en AROMA</item>
+        <item>Mantenido BixbyWakeUp para prevenir FC en Google voz</item>
+        <item>Añadido de nuevo Vista Rápida para S-Pen</item>
+        <item>Eliminado toggle OEM de settings, está activo siempre</item>
+        <item>Añadido bypass para 2Sims + SD</item>
+        <item>Arreglado limite de tamaño en texto de operadora en pantalla de bloqueo</item>
+        <item>Añadido color personalizado para texto de operadora sobre fondos blancos</item>
+        <item>Añadidas preferencias de uso de datos en cortina de notificaciones</item>
+        <item>Arreglado comportamiento de baterías circular y 3Minit</item>
+        <item>Añadido switch para usar o no tinta en 3MinitBattery</item>
+        <item>Añadidos botones virtuales con 28 acciones</item>
+        <item>Eliminado aviso de brillo alto</item>
+        <item>Añadido menú de reinicio extendido (EXPERIMENTAL)</item>
+        <item>Añadidos selectores de nivel de batería crítico y bajo</item>
+    </string-array>
+
+    <string-array name="changelog_110">
+        <item>Versión Pie inicial</item>
+        <item>Basada en primera beta para N950F</item>
+    </string-array>
+
+    <string name="changelog_140">Cambios v14</string>
+    <string name="changelog_130">Cambios v13</string>
+    <string name="changelog_120">Cambios v12</string>
+    <string name="changelog_114">Cambios v11.4</string>
+    <string name="changelog_113">Cambios v11.3</string>
+    <string name="changelog_112">Cambios v11.2</string>
+    <string name="changelog_111">Cambios v11.1</string>
+    <string name="changelog_110">Cambios v11</string>
+
+    <string-array name="general_color_entries">
+        <item>Modo de sonido</item>
+        <item>Bluetooth</item>
+        <item>NFC</item>
+        <item>Alarma</item>
+        <item>Llamadas WiFi</item>
+        <item>Localización</item>
+        <item>Modo privado</item>
+        <item>Gear</item>
+        <item>Ahorro de energia</item>
+        <item>Ahorro de datos</item>
+        <item>Auriculares</item>
+        <item>Tinta en fondos blancos</item>
+    </string-array>
+
+    <string name="grxs_app_not_rooted">Sin permiso root!</string>
 
     <string name="grxs_reset_all_prefs">Resetear valores</string>
     <string name="grxs_tit_reset_all_prefs">Resetear TODAS las opciones</string>
@@ -229,5 +621,15 @@
     <string name="grxs_restartphone">Reiniciar dispositivo</string>
     <string name="grxs_download_mode">Reiniciar en modo download</string>
     <string name="grxs_tools">Herramientas</string>
+
+    <string name="skip_tracks_category">Cambiar Pista Música en Pantalla Apagada</string>
+    <string name="info_skip_tracks">Play/Stop funciona si el teléfono no se encuentra en deep sleep y existe alguna aplicación que ha requerido el foco de audio al sistema (normalmente al arracar una app de música..). El sistema desactiva las teclas de volumen en deep sleep.</string>
+    <string name="enable_skip_tracks">Activar Cambio de Pistas</string>
+    <string name="double_tap_skip_tracks">Activa Doble click (Play/Stop)</string>
+    <string name="time_skip_tracks">Min. tiempo para long press</string>
+    <string name="time_dc_skip_tracks">Max. tiempo para doble click</string>
+    <string name="vibrate_skip_tracks">Vibrar con doble click/long press</string>
+    <string name="vibrate_skip_tracks_summary">El mod usa la intensidad definida en Respuesta de Vibración en settings. Sin embargo no necesitas tener activado el switch general Respuesta de vibración</string>
+    <string name="vibrate_skip_intensity">Intensidad Respuesta Vibración</string>
 
 </resources>
