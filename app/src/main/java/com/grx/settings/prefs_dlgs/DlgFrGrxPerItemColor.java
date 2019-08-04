@@ -231,6 +231,10 @@ public class DlgFrGrxPerItemColor extends DialogFragment
         builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mValue=mOriValue;
+                checkCallback();
+                if (mCallBack == null) dismiss();
+                mCallBack.onItemsColorsSelected(mValue);
                 dismiss();
             }
         });
