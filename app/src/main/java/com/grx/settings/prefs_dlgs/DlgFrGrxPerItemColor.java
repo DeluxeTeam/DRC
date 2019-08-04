@@ -62,6 +62,7 @@ public class DlgFrGrxPerItemColor extends DialogFragment
     private String mValue;
     private String mOriValue;
     private String mSeparator;
+    private boolean mOnTheFly;
     private int mIconsTintColor;
     private Qadapter mAdapter;
 
@@ -125,7 +126,7 @@ public class DlgFrGrxPerItemColor extends DialogFragment
             DlgFrGrxPerItemColor.GrxItemsColorsListener callback, String HelperFragment,
             String key, String title, String value,
             int id_array_options, int id_array_values, int id_array_icons, int iconstintcolor, int id_array_colors,
-            int defcolor, String separtor
+            int defcolor, String separtor, boolean onTheFly
     ){
 
 
@@ -142,6 +143,7 @@ public class DlgFrGrxPerItemColor extends DialogFragment
         bundle.putInt("colors_array_id", id_array_colors);
         bundle.putInt("def_color", defcolor);
         bundle.putString("separator", separtor);
+        bundle.putBoolean("onthefly", onTheFly);
         ret.setArguments(bundle);
         ret.saveCallback(callback);
         return ret;
@@ -188,6 +190,7 @@ public class DlgFrGrxPerItemColor extends DialogFragment
         mIdColorsArray = getArguments().getInt("colors_array_id");
         mDefColor = getArguments().getInt("def_color",0xffffffff);
         mSeparator=getArguments().getString("separator");
+        mOnTheFly=getArguments().getBoolean("onthefly");
 
         mItemsInfo = new ArrayList<GrxItemInfo>();
 
@@ -289,7 +292,7 @@ public class DlgFrGrxPerItemColor extends DialogFragment
                 color = mItemsInfo.get(mIdItemClicked).getColor();
             }
             dlgFrGrxColorPicker= DlgFrGrxColorPicker.newInstance(this, Common.TAG_DLGFRGRITEMSCOLORS, mTitle,mKey,color,Common.getColorPickerStyleIndex(Common.userColorPickerStyle)/*false*/,
-                    true,true, false); //
+                    true,true, mOnTheFly); //
             dlgFrGrxColorPicker.show(getFragmentManager(),Common.TAG_DLGFRGRXCOLORPICKER);
         }
     }
@@ -333,6 +336,12 @@ public class DlgFrGrxPerItemColor extends DialogFragment
         if(mIdItemClicked==-1) return;
         mItemsInfo.get(mIdItemClicked).setColor(color);
         mAdapter.notifyDataSetChanged();
+        if (mOnTheFly) {
+            mValue = getResultFromItemList();
+            checkCallback();
+            if (mCallBack == null) dismiss();
+            mCallBack.onItemsColorsSelected(mValue);
+        }
     }
 
 
@@ -441,7 +450,7 @@ public class DlgFrGrxPerItemColor extends DialogFragment
         }
 
         private void compose_value(){
-            mValue = mOptionValue + "/" + String.valueOf(mColor);
+            mValue = mOptionValue + "/" + mColor;
         }
 
         public String getLabel(){
