@@ -15,8 +15,6 @@ package android.preference;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.Html;
 import android.util.AttributeSet;
 import android.view.View;
@@ -55,7 +53,7 @@ public class GrxInfoText extends GrxBasePreference{
         if(ta.hasValue(R.styleable.grxInfotext_rightIconTint)) {
             try {
                 mRightIconTint = ta.getInt(R.styleable.grxInfotext_rightIconTint, 0);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         ta.recycle();

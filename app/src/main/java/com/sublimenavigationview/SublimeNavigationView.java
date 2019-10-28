@@ -16,6 +16,7 @@
 
 package com.sublimenavigationview;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -375,14 +376,9 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
                 inflateMenu(menuResId);
             }
 
-            mMenu.setCallback(new SublimeMenu.Callback() {
-                public boolean onMenuItemSelected(SublimeMenu menu, SublimeBaseMenuItem item,
-                                                  OnNavigationMenuEventListener.Event event) {
-                    return SublimeNavigationView.this.mEventListener != null
-                            && SublimeNavigationView.this
-                            .mEventListener.onNavigationMenuEvent(event, item);
-                }
-            });
+            mMenu.setCallback((menu, item, event) -> SublimeNavigationView.this.mEventListener != null
+                    && SublimeNavigationView.this
+                    .mEventListener.onNavigationMenuEvent(event, item));
 
             mPresenter = new SublimeMenuPresenter();
             applyThemer();
@@ -411,6 +407,7 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
      * @param newMenuResId id of the menu that you wish
      *                     to switch to. Eg: R.menu.new_menu_id
      */
+    @SuppressLint("ResourceType")
     public void switchMenuTo(@MenuRes int newMenuResId) {
         if (newMenuResId < 1) {
             Log.e(TAG, "Could not switch to new menu: passed menuResourceId was invalid.");
@@ -420,14 +417,9 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
         mMenu = new SublimeMenu(newMenuResId);
         inflateMenu(newMenuResId);
 
-        mMenu.setCallback(new SublimeMenu.Callback() {
-            public boolean onMenuItemSelected(SublimeMenu menu, SublimeBaseMenuItem item,
-                                              OnNavigationMenuEventListener.Event event) {
-                return SublimeNavigationView.this.mEventListener != null
-                        && SublimeNavigationView.this
-                        .mEventListener.onNavigationMenuEvent(event, item);
-            }
-        });
+        mMenu.setCallback((menu, item, event) -> SublimeNavigationView.this.mEventListener != null
+                && SublimeNavigationView.this
+                .mEventListener.onNavigationMenuEvent(event, item));
 
         mMenu.setMenuPresenter(getContext(), mPresenter);
     }
@@ -448,14 +440,9 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
 
         mMenu = newMenu;
 
-        mMenu.setCallback(new SublimeMenu.Callback() {
-            public boolean onMenuItemSelected(SublimeMenu menu, SublimeBaseMenuItem item,
-                                              OnNavigationMenuEventListener.Event event) {
-                return SublimeNavigationView.this.mEventListener != null
-                        && SublimeNavigationView.this
-                        .mEventListener.onNavigationMenuEvent(event, item);
-            }
-        });
+        mMenu.setCallback((menu, item, event) -> SublimeNavigationView.this.mEventListener != null
+                && SublimeNavigationView.this
+                .mEventListener.onNavigationMenuEvent(event, item));
 
         mMenu.setMenuPresenter(getContext(), mPresenter);
     }
@@ -501,14 +488,9 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
                 }
 
                 if (mMenu != null) {
-                    mMenu.setCallback(new SublimeMenu.Callback() {
-                        public boolean onMenuItemSelected(SublimeMenu menu, SublimeBaseMenuItem item,
-                                                          OnNavigationMenuEventListener.Event event) {
-                            return SublimeNavigationView.this.mEventListener != null
-                                    && SublimeNavigationView.this
-                                    .mEventListener.onNavigationMenuEvent(event, item);
-                        }
-                    });
+                    mMenu.setCallback((menu, item, event) -> SublimeNavigationView.this.mEventListener != null
+                            && SublimeNavigationView.this
+                            .mEventListener.onNavigationMenuEvent(event, item));
                     mMenu.setMenuPresenter(getContext(), mPresenter);
                 }
     }catch (BadParcelableException e){
@@ -567,8 +549,7 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
 
     //added by Grx to have access to MenuView
     public SublimeNavMenuView getMenuView(){
-        SublimeNavMenuView vMenu = (SublimeNavMenuView) findViewById(R.id.grx_sublime_menu);
-        return vMenu;
+        return (SublimeNavMenuView) findViewById(R.id.grx_sublime_menu);
     }
 
     /**

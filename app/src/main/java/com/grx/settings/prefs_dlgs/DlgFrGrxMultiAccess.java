@@ -192,19 +192,13 @@ public class DlgFrGrxMultiAccess extends DialogFragment implements SlideAndDragL
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle);
         builder.setView(getDialogView());
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mDeleteTmpFileOnDismiss=true;
-                dismiss();
-            }
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> {
+            mDeleteTmpFileOnDismiss=true;
+            dismiss();
         });
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                setResultAndDoCallback();
-                mDeleteTmpFileOnDismiss=true;
-            }
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+            setResultAndDoCallback();
+            mDeleteTmpFileOnDismiss=true;
         });
 
         mItemsList = new ArrayList<>();
@@ -212,9 +206,8 @@ public class DlgFrGrxMultiAccess extends DialogFragment implements SlideAndDragL
         showSummary();
         iniDragAndDropList();
         checkAddItemsButtonState();
-        AlertDialog ad = builder.create();
 
-        return ad;
+        return builder.create();
 
     }
 
@@ -248,31 +241,16 @@ public class DlgFrGrxMultiAccess extends DialogFragment implements SlideAndDragL
     private  View getDialogView(){
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_grxmultiaccess, null);
         vHelpButton = (LinearLayout) view.findViewById(R.id.gid_help_button);
-        vHelpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showHelp();
-            }
-        });
+        vHelpButton.setOnClickListener(v -> showHelp());
         ListDragView = (SlideAndDragListView) view.findViewById(R.id.gid_slv_listview);
 
         vTxtSelectedItems = (TextView) view.findViewById(R.id.gid_items_selected);
         vOpenAccessDialogButton = (LinearLayout) view.findViewById(R.id.gid_item);
 
-        vOpenAccessDialogButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openSelectAccessDialog();
-            }
-        });
+        vOpenAccessDialogButton.setOnClickListener(v -> openSelectAccessDialog());
 
         vDeleteButton = (LinearLayout) view.findViewById(R.id.gid_delete_button);
-        vDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteAllItems();
-            }
-        });
+        vDeleteButton.setOnClickListener(v -> deleteAllItems());
 
         ListDragView.setDividerHeight(Common.cDividerHeight);
 
@@ -300,13 +278,13 @@ public class DlgFrGrxMultiAccess extends DialogFragment implements SlideAndDragL
 
 
     private String getResultFromItemList(){
-        String result ="";
+        StringBuilder result = new StringBuilder();
         for(int ind = 0; ind< mItemsList.size();ind ++){
-            result+=mItemsList.get(ind).get_uri();
-            result+=mSeparator;
+            result.append(mItemsList.get(ind).get_uri());
+            result.append(mSeparator);
         }
 
-        return result;
+        return result.toString();
     }
 
 
@@ -317,8 +295,8 @@ public class DlgFrGrxMultiAccess extends DialogFragment implements SlideAndDragL
         }
         String[] array = mValue.split(Pattern.quote(mSeparator));
         if(array!=null) {
-            for (int i= 0; i<array.length; i++){
-                mItemsList.add(new GrxAccessInfo(array[i],this.getActivity()));
+            for (String s : array) {
+                mItemsList.add(new GrxAccessInfo(s, this.getActivity()));
             }
         }
     }
@@ -478,18 +456,12 @@ public class DlgFrGrxMultiAccess extends DialogFragment implements SlideAndDragL
             AlertDialog ad = new AlertDialog.Builder(getActivity()).create();
             ad.setTitle(getString(R.string.grxs_delete_list));
             ad.setMessage(getString(R.string.grxs_help_delete_all_values));
-            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mItemsList.clear();
-                    updateChanges();
-                }
+            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), (dialog, which) -> {
+                mItemsList.clear();
+                updateChanges();
             });
-            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), (dialog, which) -> {
 
-                }
             });
             ad.show();
         }
@@ -505,7 +477,7 @@ public class DlgFrGrxMultiAccess extends DialogFragment implements SlideAndDragL
         if(mValue.equals(mOriValue)) return;
 
 
-        List<String> ori_icon_files_to_delete = new ArrayList<String>();
+        List<String> ori_icon_files_to_delete = new ArrayList<>();
 
 
         String[] arr_ori_uris = mOriValue.split(Pattern.quote(mSeparator));
@@ -513,9 +485,9 @@ public class DlgFrGrxMultiAccess extends DialogFragment implements SlideAndDragL
         /* list of original icons file names ***/
 
         if(arr_ori_uris!=null) {
-            for(int i=0; i<arr_ori_uris.length;i++) {
-                String tmp = GrxPrefsUtils.getFilenameFromGrxUriString(arr_ori_uris[i]);
-                if(tmp!=null) ori_icon_files_to_delete.add(tmp);
+            for (String arrOriUris : arr_ori_uris) {
+                String tmp = GrxPrefsUtils.getFilenameFromGrxUriString(arrOriUris);
+                if (tmp != null) ori_icon_files_to_delete.add(tmp);
             }
         }
 
@@ -566,11 +538,11 @@ public class DlgFrGrxMultiAccess extends DialogFragment implements SlideAndDragL
     private void deleteTmpFiles(){
         File dir = new File(Common.CacheDir);
         if(dir.exists()&&dir.isDirectory()){
-            File ficheros[]=dir.listFiles();
+            File[] ficheros = dir.listFiles();
             if(ficheros.length!=0){
-                for(int ind=0;ind<ficheros.length;ind++){
-                    if(ficheros[ind].getName().contains(Common.TMP_PREFIX)) ficheros[ind].delete();
-                    }
+                for (File fichero : ficheros) {
+                    if (fichero.getName().contains(Common.TMP_PREFIX)) fichero.delete();
+                }
 
             }
         }

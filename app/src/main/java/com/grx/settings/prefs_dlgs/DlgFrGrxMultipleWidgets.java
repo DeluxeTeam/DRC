@@ -32,7 +32,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -53,7 +52,6 @@ import com.grx.settings.utils.GrxPrefsUtils;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -170,15 +168,15 @@ public class DlgFrGrxMultipleWidgets extends DialogFragment implements SlideAndD
 
     private void setInitialSelectedWidgets(String value){
         if(mSelectedWidgets!=null) mSelectedWidgets.clear();
-        else mSelectedWidgets = new ArrayList<WidgetInfo>();
+        else mSelectedWidgets = new ArrayList<>();
         if(value==null || value.isEmpty()) return;
 
         if(mMultimode){
             String[] wv = value.split(Pattern.quote(mSeparator));
             if(wv==null || wv.length==0) return;
 
-            for(int i=0; i<wv.length;i++){
-                int index = existWdiget(wv[i]);
+            for (String s : wv) {
+                int index = existWdiget(s);
                 if (index != -1) {
                     mInstalledWidgets.get(index).setSelected(true);
                     mSelectedWidgets.add(mInstalledWidgets.get(index));
@@ -198,12 +196,12 @@ public class DlgFrGrxMultipleWidgets extends DialogFragment implements SlideAndD
     }
 
     private String getReturnValue(){
-        String returnvalue = "";
+        StringBuilder returnvalue = new StringBuilder();
         for(int i=0; i<mSelectedWidgets.size();i++) {
-            returnvalue+=mSelectedWidgets.get(i).getValue();
-            if(mMultimode) returnvalue+=mSeparator;
+            returnvalue.append(mSelectedWidgets.get(i).getValue());
+            if(mMultimode) returnvalue.append(mSeparator);
         }
-        return returnvalue;
+        return returnvalue.toString();
     }
 
     private WidgetInfo getSpecialWidgetInfo(String value){
@@ -213,12 +211,12 @@ public class DlgFrGrxMultipleWidgets extends DialogFragment implements SlideAndD
 
         if(value==null || value.isEmpty()) return null;
 
-        String w[] = value.split(Pattern.quote("/"));
+        String[] w = value.split(Pattern.quote("/"));
         if(w==null || w.length!=2) return null;
 
         ComponentName componentName = new ComponentName(w[0],w[1]);
         AppWidgetManager manager = AppWidgetManager.getInstance(getActivity());
-        AppWidgetHost appWidgetHost = new AppWidgetHost(getActivity(),Integer.valueOf(0x4b455889));
+        AppWidgetHost appWidgetHost = new AppWidgetHost(getActivity(), 0x4b455889);
         int widgetid = appWidgetHost.allocateAppWidgetId();
 
         Bundle bundle = new Bundle();
@@ -235,7 +233,7 @@ public class DlgFrGrxMultipleWidgets extends DialogFragment implements SlideAndD
 
             Object[] objects = new Object[3];
 
-            objects[0]= Integer.valueOf(widgetid);
+            objects[0]= widgetid;
             objects[1] = componentName;
             objects[2] = bundle;
 
@@ -276,7 +274,7 @@ public class DlgFrGrxMultipleWidgets extends DialogFragment implements SlideAndD
         AppsTmp = getActivity().getPackageManager().getInstalledApplications(0);
         AppWidgetManager manager = AppWidgetManager.getInstance(getActivity());
         List<AppWidgetProviderInfo> infoList = manager.getInstalledProviders();
-        ArrayList<WidgetInfo> widgetlist = new ArrayList<WidgetInfo>();
+        ArrayList<WidgetInfo> widgetlist = new ArrayList<>();
 
         for(AppWidgetProviderInfo info : infoList){
             widgetlist.add(new WidgetInfo(info));
@@ -285,26 +283,23 @@ public class DlgFrGrxMultipleWidgets extends DialogFragment implements SlideAndD
         /* process widgets array explicit values */
 
         if(mIdArrayWidgets!=0){
-            String widgets[] = getResources().getStringArray(mIdArrayWidgets);
+            String[] widgets = getResources().getStringArray(mIdArrayWidgets);
             if (!(widgets==null || widgets.length==0)){
-                for(int i=0;i<widgets.length;i++) {
-                    WidgetInfo widgetInfo = getSpecialWidgetInfo(widgets[i]);
-                    if(widgetInfo!=null) widgetlist.add(widgetInfo);
+                for (String widget : widgets) {
+                    WidgetInfo widgetInfo = getSpecialWidgetInfo(widget);
+                    if (widgetInfo != null) widgetlist.add(widgetInfo);
                 }
             }
         }
 
         try{
-            Collections.sort(widgetlist, new Comparator<WidgetInfo>() {
-                @Override
-                public int compare(WidgetInfo A_widgetinfo, WidgetInfo widgetInfo) {
-                    try{
-                        return String.CASE_INSENSITIVE_ORDER.compare(A_widgetinfo.getLabel(), widgetInfo.getLabel());
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    return 0;
+            Collections.sort(widgetlist, (A_widgetinfo, widgetInfo) -> {
+                try{
+                    return String.CASE_INSENSITIVE_ORDER.compare(A_widgetinfo.getLabel(), widgetInfo.getLabel());
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
+                return 0;
             });
 
         }catch (Exception e){
@@ -349,26 +344,18 @@ public class DlgFrGrxMultipleWidgets extends DialogFragment implements SlideAndD
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle);
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dismiss();
-            }
-        });
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> dismiss());
 
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mValue = getReturnValue();
-                if(!mValue.equals(mOriValue)) {
-                    checkCallback();
-                    if (mCallBack != null) mCallBack.OnWidgetsSelected(mValue);
-                }
-                mSelectedWidgets.clear();
-                mInstalledWidgets.clear();
-                dismiss();
-
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+            mValue = getReturnValue();
+            if(!mValue.equals(mOriValue)) {
+                checkCallback();
+                if (mCallBack != null) mCallBack.OnWidgetsSelected(mValue);
             }
+            mSelectedWidgets.clear();
+            mInstalledWidgets.clear();
+            dismiss();
+
         });
         builder.setView(getDialogView());
         return builder.create();
@@ -391,38 +378,18 @@ public class DlgFrGrxMultipleWidgets extends DialogFragment implements SlideAndD
 
 
         vHelpButton = (LinearLayout) view.findViewById(R.id.gid_help_button);
-        vHelpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              showHelp();
-            }
-        });
+        vHelpButton.setOnClickListener(v -> showHelp());
         if(!mMultimode) vHelpButton.setVisibility(View.GONE);
         vTxtSelectedInfo = (TextView) view.findViewById(R.id.gid_items_selected);
         if(!mMultimode) vTxtSelectedInfo.setVisibility(View.GONE);
         vAddButton = (LinearLayout) view.findViewById(R.id.gid_item);
-        vAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showSelectableItems();
-            }
-        });
+        vAddButton.setOnClickListener(v -> showSelectableItems());
 
         vDeleteButton = (LinearLayout) view.findViewById(R.id.gid_delete_button);
-        vDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clearAllSelectedItems();
-            }
-        });
+        vDeleteButton.setOnClickListener(v -> clearAllSelectedItems());
 
         vBackButton = (LinearLayout) view.findViewById(R.id.gid_button_back);
-        vBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showSelectedItems();
-            }
-        });
+        vBackButton.setOnClickListener(v -> showSelectedItems());
 
 
         DragListView.setDividerHeight(Common.cDividerHeight);
@@ -449,28 +416,25 @@ public class DlgFrGrxMultipleWidgets extends DialogFragment implements SlideAndD
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 SelectItemsList.setAdapter(mAdapter2);
-                SelectItemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        //ggggg
+                SelectItemsList.setOnItemClickListener((parent, view1, position, id) -> {
+                    //ggggg
 
-                        if(mInstalledWidgets.get(position).isSelected()) {
-                            mInstalledWidgets.get(position).setSelected(false);
-                            removeWidgetFromSelected(mInstalledWidgets.get(position).getIndex());
-                            mAdapter.notifyDataSetChanged();
-                            mAdapter2.notifyDataSetChanged();
-                            setSummary();
+                    if(mInstalledWidgets.get(position).isSelected()) {
+                        mInstalledWidgets.get(position).setSelected(false);
+                        removeWidgetFromSelected(mInstalledWidgets.get(position).getIndex());
+                        mAdapter.notifyDataSetChanged();
+                        mAdapter2.notifyDataSetChanged();
+                        setSummary();
 
-                        }else{
-                            if(mMax!=0){
-                                if(mSelectedWidgets.size()>=mMax) {
-                                    if(mMultimode)
-                                        Toast.makeText(getActivity(),getString(R.string.grxs_max_choices_warning),Toast.LENGTH_SHORT).show();
+                    }else{
+                        if(mMax!=0){
+                            if(mSelectedWidgets.size()>=mMax) {
+                                if(mMultimode)
+                                    Toast.makeText(getActivity(),getString(R.string.grxs_max_choices_warning),Toast.LENGTH_SHORT).show();
 
 
-                                }else addSelectedItem(position);
                             }else addSelectedItem(position);
-                        }
+                        }else addSelectedItem(position);
                     }
                 });
                 iniDragAndDropListview();
@@ -511,23 +475,17 @@ public class DlgFrGrxMultipleWidgets extends DialogFragment implements SlideAndD
             AlertDialog ad = new AlertDialog.Builder(getActivity()).create();
             ad.setTitle(getString(R.string.grxs_delete_list));
             ad.setMessage(getString(R.string.grxs_help_delete_all_values));
-            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    for(WidgetInfo info : mSelectedWidgets){
-                        mInstalledWidgets.get(info.getIndex()).setSelected(false);
-                    }
-                    mSelectedWidgets.clear();
-                    mAdapter.notifyDataSetChanged();
-                    mAdapter2.notifyDataSetChanged();
-                    setSummary();
+            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), (dialog, which) -> {
+                for(WidgetInfo info : mSelectedWidgets){
+                    mInstalledWidgets.get(info.getIndex()).setSelected(false);
                 }
+                mSelectedWidgets.clear();
+                mAdapter.notifyDataSetChanged();
+                mAdapter2.notifyDataSetChanged();
+                setSummary();
             });
-            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), (dialog, which) -> {
 
-                }
             });
             ad.show();
         }
@@ -581,7 +539,7 @@ public class DlgFrGrxMultipleWidgets extends DialogFragment implements SlideAndD
     private void setSummary(){
          if(!mMultimode) return;
         if(mMax!=0) SelectedItemsInfo = getString(R.string.grxs_num_items_selected,mSelectedWidgets.size())+ "  "+ getString(R.string.grxs_current_max_choices, mMax);
-        else SelectedItemsInfo= String.valueOf(mSelectedWidgets.size() )+"/"+String.valueOf(mInstalledWidgets.size())+" "+getString(R.string.grxs_items_selected);
+        else SelectedItemsInfo= mSelectedWidgets.size() +"/"+ mInstalledWidgets.size() +" "+getString(R.string.grxs_items_selected);
         vTxtSelectedInfo.setText(SelectedItemsInfo);
     }
 
@@ -729,7 +687,7 @@ public class DlgFrGrxMultipleWidgets extends DialogFragment implements SlideAndD
 
 
     private void updateAddbutton(){
-        if(true) return;; // for now list selection edit is allowed
+        if(true) return;// for now list selection edit is allowed
         int max;
         if(mMax==0) max=mInstalledWidgets.size();
         else max = mMax;

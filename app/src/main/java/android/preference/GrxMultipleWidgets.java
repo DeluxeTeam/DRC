@@ -55,7 +55,7 @@ public class GrxMultipleWidgets extends GrxBasePreference  implements DlgFrGrxMu
     @Override
     public void resetPreference(){
         String[] uris = mStringValue.split(Pattern.quote(myPrefAttrsInfo.getMySeparator()));
-        for(int i=0;i<uris.length;i++) GrxPrefsUtils.deleteGrxIconFileFromUriString(uris[i]);
+        for (String s : uris) GrxPrefsUtils.deleteGrxIconFileFromUriString(s);
         mStringValue= myPrefAttrsInfo.getMyStringDefValue();
         configStringPreference(mStringValue);
         saveNewStringValue(mStringValue);

@@ -15,9 +15,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
@@ -153,8 +151,8 @@ public class GrxBasePreference extends Preference implements
                 mArrowColor = myPrefAttrsInfo.getMyArrowTint();
             }
             if(mArrowColor !=0){
-                int states[][] = {{android.R.attr.state_checked}, {}};
-                int colors[] = {mArrowColor, mArrowColor};
+                int[][] states = {{android.R.attr.state_checked}, {}};
+                int[] colors = {mArrowColor, mArrowColor};
                 vWidgetArrow.setBackgroundTintList(new ColorStateList(states, colors));
             }else {
                 vWidgetArrow.setVisibility(View.GONE);
@@ -172,8 +170,8 @@ public class GrxBasePreference extends Preference implements
         if(vWidgetArrow!=null) {
             if(mArrowColor==0) mArrowColor = myPrefAttrsInfo.getMyArrowTint();
             if(mArrowColor!=0) {
-                int states[][] = {{android.R.attr.state_checked}, {}};
-                int colors[] = {mArrowColor, mArrowColor};
+                int[][] states = {{android.R.attr.state_checked}, {}};
+                int[] colors = {mArrowColor, mArrowColor};
                 vWidgetArrow.setBackgroundTintList(new ColorStateList(states, colors));
             }
             vWidgetArrow.setAlpha(alpha);
@@ -336,23 +334,20 @@ public class GrxBasePreference extends Preference implements
 
     private void setUpDoubleClick(){
         mHandler = new Handler();
-        mLongClickTimeOut = Long.valueOf(ViewConfiguration.getDoubleTapTimeout());
+        mLongClickTimeOut = (long) ViewConfiguration.getDoubleTapTimeout();
         mDoubleClickPending =false;
 
-        DoubleClickRunnable = new Runnable() {
-            @Override
-            public void run() {
-                if(!mDoubleClickPending){
+        DoubleClickRunnable = () -> {
+            if(!mDoubleClickPending){
+                actionClick();
+            }else {
+                if(mNumClicks ==0) actionClick();
+                else if(mNumClicks !=2) {
                     actionClick();
                 }else {
-                    if(mNumClicks ==0) actionClick();
-                    else if(mNumClicks !=2) {
-                        actionClick();
-                    }else {
-                        if(!mDisableDoubleClick) actionDoubleClick();
-                    }
-
+                    if(!mDisableDoubleClick) actionDoubleClick();
                 }
+
             }
         };
     }
@@ -399,12 +394,7 @@ public class GrxBasePreference extends Preference implements
         AlertDialog dlg = new AlertDialog.Builder(getContext()).create();
         dlg.setTitle(getContext().getResources().getString(R.string.grxs_reset_values));
         dlg.setMessage(getContext().getResources().getString(R.string.grxs_reset_message));
-        dlg.setButton(DialogInterface.BUTTON_POSITIVE, getContext().getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                resetPreference();
-            }
-        });
+        dlg.setButton(DialogInterface.BUTTON_POSITIVE, getContext().getString(R.string.grxs_ok), (dialog, which) -> resetPreference());
         dlg.show();
     }
 

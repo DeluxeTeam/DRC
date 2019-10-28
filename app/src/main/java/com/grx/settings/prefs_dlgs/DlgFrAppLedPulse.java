@@ -31,7 +31,6 @@ import android.os.SystemClock;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -210,44 +209,32 @@ public class DlgFrAppLedPulse extends DialogFragment implements  DlgGrxAppSelect
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle)
                 .setView(getDialogView())
-                .setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        mCurrentValue=getReturnValue();
-                        check_callback();
-                        if(mCallBack!=null) {
-                            mCallBack.onAppLedPulseSet(mCurrentValue);
-                        }
-                        mNotificationManager.cancel(1);
-                        dismiss();
-
+                .setPositiveButton(R.string.grxs_ok, (dialogInterface, i) -> {
+                    mCurrentValue=getReturnValue();
+                    check_callback();
+                    if(mCallBack!=null) {
+                        mCallBack.onAppLedPulseSet(mCurrentValue);
                     }
-                });
-        builder.setNegativeButton(getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mNotificationManager.cancel(1);
-                dismiss();
+                    mNotificationManager.cancel(1);
+                    dismiss();
 
-            }
+                });
+        builder.setNegativeButton(getString(R.string.grxs_cancel), (dialog, which) -> {
+            mNotificationManager.cancel(1);
+            dismiss();
+
         });
         if(mShowTest) builder.setNeutralButton("Test",null);
         final AlertDialog ad = builder.create();
         if(mShowTest){
-            ad.setOnShowListener(new DialogInterface.OnShowListener() {
-                @Override
-                public void onShow(DialogInterface dialogInterface) {
-                    Button button = ad.getButton(DialogInterface.BUTTON_NEUTRAL);
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
+            ad.setOnShowListener(dialogInterface -> {
+                Button button = ad.getButton(DialogInterface.BUTTON_NEUTRAL);
+                button.setOnClickListener(view -> {
 
-                            turnScreenOff();
-                            updateLedNotification();
-                            mNotificationManager.notify(1,mNotification);
-                        }
-                    });
-                }
+                    turnScreenOff();
+                    updateLedNotification();
+                    mNotificationManager.notify(1, mNotification);
+                });
             });
 
 
@@ -283,29 +270,25 @@ public class DlgFrAppLedPulse extends DialogFragment implements  DlgGrxAppSelect
         mSMHexValView.setFilters(new InputFilter[]{new InputFilter.LengthFilter(7)});
 
         mSMHexDefaultTextColor = mSMHexValView.getTextColors();
-        mSMHexValView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    String s = mSMHexValView.getText().toString();
-                    if (s.length() > 5 || s.length() < 10) {
-                        try {
-                            int c = ColorPickerPreference.convertToColorInt(s.toString());
-                            mSMColorPicker.setColor(c, true);
-                            mSMHexValView.setTextColor(mSMHexDefaultTextColor);
-                        } catch (IllegalArgumentException e) {
-                            mSMHexValView.setTextColor(Color.RED);
-                        }
-                    } else {
+        mSMHexValView.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                String s = mSMHexValView.getText().toString();
+                if (s.length() > 5 || s.length() < 10) {
+                    try {
+                        int c = ColorPickerPreference.convertToColorInt(s.toString());
+                        mSMColorPicker.setColor(c, true);
+                        mSMHexValView.setTextColor(mSMHexDefaultTextColor);
+                    } catch (IllegalArgumentException e) {
                         mSMHexValView.setTextColor(Color.RED);
                     }
-                    return true;
+                } else {
+                    mSMHexValView.setTextColor(Color.RED);
                 }
-                return false;
+                return true;
             }
+            return false;
         });
 
         ((LinearLayout) mSMOldColorView.getParent()).setPadding(
@@ -315,30 +298,19 @@ public class DlgFrAppLedPulse extends DialogFragment implements  DlgGrxAppSelect
                 0
         );
 
-        mSMColorPicker.setOnColorChangedListener(new com.smcolorpicker.ColorPickerView.OnColorChangedListener() {
-            @Override
-            public void onColorChanged(int color) {
-                setSMColor(color,true, false);
-            }
-        });
+        mSMColorPicker.setOnColorChangedListener(color -> setSMColor(color,true, false));
 
         mOriginalColor=getIntColorFromValue(mOriValue);
         mCurrentColor=getIntColorFromValue(mCurrentValue);
         mSMOldColorView.setColor(mOriginalColor);
-        mSMOldColorView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCurrentColor=mOriginalColor;
-                mSMNewColorView.setColor(mOriginalColor);
-                updateSMHexValue(mOriginalColor);
-                mSMColorPicker.setColor(mOriginalColor,false);
-            }
+        mSMOldColorView.setOnClickListener(view -> {
+            mCurrentColor=mOriginalColor;
+            mSMNewColorView.setColor(mOriginalColor);
+            updateSMHexValue(mOriginalColor);
+            mSMColorPicker.setColor(mOriginalColor,false);
         });
-        mSMNewColorView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mSMNewColorView.setOnClickListener(view -> {
 
-            }
         });
 
         mSMColorPicker.setColor(mCurrentColor, true);
@@ -352,7 +324,7 @@ public class DlgFrAppLedPulse extends DialogFragment implements  DlgGrxAppSelect
             mSpinnerOn=(Spinner) mLayout.findViewById(R.id.gid_on_spinner);
             mSpinnerOff=(Spinner) mLayout.findViewById(R.id.gid_off_spinner);
 
-            mSpinnerOnAdapter = new ArrayAdapter<String>(getActivity(),R.layout.dlg_grxapppledpulse_spinner,getActivity().getResources().getStringArray(R.array.grxa_ledpulse_ton_options));
+            mSpinnerOnAdapter = new ArrayAdapter<>(getActivity(), R.layout.dlg_grxapppledpulse_spinner, getActivity().getResources().getStringArray(R.array.grxa_ledpulse_ton_options));
             mSpinnerOn.setAdapter(mSpinnerOnAdapter);
             mSpinnerOn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -369,7 +341,7 @@ public class DlgFrAppLedPulse extends DialogFragment implements  DlgGrxAppSelect
 
                 }
             });
-            mSpinnerOffAdapter = new ArrayAdapter<String>(getActivity(),R.layout.dlg_grxapppledpulse_spinner,getActivity().getResources().getStringArray(R.array.grxa_ledpulse_toff_options));
+            mSpinnerOffAdapter = new ArrayAdapter<>(getActivity(), R.layout.dlg_grxapppledpulse_spinner, getActivity().getResources().getStringArray(R.array.grxa_ledpulse_toff_options));
             mSpinnerOff.setAdapter(mSpinnerOffAdapter);
             mSpinnerOff.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -398,12 +370,7 @@ public class DlgFrAppLedPulse extends DialogFragment implements  DlgGrxAppSelect
             mAppIconView = (ImageView) mLayout.findViewById(R.id.gid_app_icon);
             mAppLabelView = (TextView) mLayout.findViewById(R.id.gid_app_label);
             mAppPackageNameView = (TextView) mLayout.findViewById(R.id.gid_package_name);
-            appcontainer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showAppSelectionDialog();
-                }
-            });
+            appcontainer.setOnClickListener(view -> showAppSelectionDialog());
 
         }else {
             appcontainer.setVisibility(View.GONE);

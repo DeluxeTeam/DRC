@@ -52,7 +52,7 @@ public class GrxFilePreference extends GrxSwitchPreference {
                 setChecked(getPersistedBoolean(myPrefAttrsInfo.getMyBooleanDefValue()));
             } else {
                 setChecked(myPrefAttrsInfo.getMyBooleanDefValue());
-                if(!myPrefAttrsInfo.isValidKey()) return;;
+                if(!myPrefAttrsInfo.isValidKey()) return;
                 persistBoolean(isChecked());
             }
             saveValueInSettings(isChecked());

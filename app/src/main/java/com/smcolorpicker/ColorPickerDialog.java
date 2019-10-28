@@ -24,7 +24,6 @@ import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -32,7 +31,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.grx.settings.R;
 
@@ -71,7 +69,7 @@ public class ColorPickerDialog
     }
 
     public interface OnColorChangedListener {
-        public void onColorChanged(int color);
+        void onColorChanged(int color);
     }
 
     public ColorPickerDialog(Context context, int initialColor) {
@@ -108,29 +106,25 @@ public class ColorPickerDialog
         mHexVal.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         mHexDefaultTextColor = mHexVal.getTextColors();
 
-        mHexVal.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    String s = mHexVal.getText().toString();
-                    if (s.length() > 5 || s.length() < 10) {
-                        try {
-                            int c = ColorPickerPreference.convertToColorInt(s.toString());
-                            mColorPicker.setColor(c, true);
-                            mHexVal.setTextColor(mHexDefaultTextColor);
-                        } catch (IllegalArgumentException e) {
-                            mHexVal.setTextColor(Color.RED);
-                        }
-                    } else {
+        mHexVal.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                String s = mHexVal.getText().toString();
+                if (s.length() > 5 || s.length() < 10) {
+                    try {
+                        int c = ColorPickerPreference.convertToColorInt(s.toString());
+                        mColorPicker.setColor(c, true);
+                        mHexVal.setTextColor(mHexDefaultTextColor);
+                    } catch (IllegalArgumentException e) {
                         mHexVal.setTextColor(Color.RED);
                     }
-                    return true;
+                } else {
+                    mHexVal.setTextColor(Color.RED);
                 }
-                return false;
+                return true;
             }
+            return false;
         });
 
         ((LinearLayout) mOldColor.getParent()).setPadding(

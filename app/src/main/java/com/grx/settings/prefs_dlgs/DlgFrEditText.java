@@ -16,7 +16,6 @@ package com.grx.settings.prefs_dlgs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -94,33 +93,20 @@ public class DlgFrEditText extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle)
                 .setView(getDialogView())
-                .setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(mCallBack==null) {
-                            if(mHelperFragmentName.equals(Common.TAG_PREFSSCREEN_FRAGMENT)){
-                                GrxPreferenceScreen prefsScreen =(GrxPreferenceScreen) getFragmentManager().findFragmentByTag(Common.TAG_PREFSSCREEN_FRAGMENT);
-                                mCallBack=(DlgFrEditText.OnGrxEditTextListener) prefsScreen.findAndGetCallBack(mkey);
-                            }else mCallBack=(DlgFrEditText.OnGrxEditTextListener) getFragmentManager().findFragmentByTag(mHelperFragmentName);
-                        }
-                        if(mCallBack!=null) mCallBack.onEditTextDone(mEditText.getText().toString());
-                        dismiss();
+                .setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+                    if(mCallBack==null) {
+                        if(mHelperFragmentName.equals(Common.TAG_PREFSSCREEN_FRAGMENT)){
+                            GrxPreferenceScreen prefsScreen =(GrxPreferenceScreen) getFragmentManager().findFragmentByTag(Common.TAG_PREFSSCREEN_FRAGMENT);
+                            mCallBack=(OnGrxEditTextListener) prefsScreen.findAndGetCallBack(mkey);
+                        }else mCallBack=(OnGrxEditTextListener) getFragmentManager().findFragmentByTag(mHelperFragmentName);
                     }
+                    if(mCallBack!=null) mCallBack.onEditTextDone(mEditText.getText().toString());
+                    dismiss();
                 })
-                .setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dismiss();
-                    }
-                });
+                .setNegativeButton(R.string.grxs_cancel, (dialog, which) -> dismiss());
         mEditText.append(mValue);
         AlertDialog ad = builder.create();
-        ad.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                mEditText.setSelection(mEditText.getText().length());
-            }
-        });
+        ad.setOnShowListener(dialog -> mEditText.setSelection(mEditText.getText().length()));
         return ad;
     }
 

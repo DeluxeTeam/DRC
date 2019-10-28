@@ -149,7 +149,7 @@ public class GrxImageHelper {
             File f = new File(fichero);
             bmp=BitmapFactory.decodeStream(new FileInputStream(f));
 
-        }catch (Exception e){
+        }catch (Exception ignored){
 
         }
         return bmp;

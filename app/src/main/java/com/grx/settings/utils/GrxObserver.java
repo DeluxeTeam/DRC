@@ -31,7 +31,7 @@ public class GrxObserver extends ContentObserver {
         GrxObserver.OnObservedSettingsKeyChange mCallBack=null;
 
         public interface OnObservedSettingsKeyChange{
-            public void observedSettingsKeyChanged(String key);
+            void observedSettingsKeyChanged(String key);
         }
 
         public GrxObserver(android.os.Handler handler, Context context, GrxObserver.OnObservedSettingsKeyChange callback) {

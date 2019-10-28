@@ -20,10 +20,7 @@ import android.widget.LinearLayout;
 
 import com.grx.settings.R;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 
 public class Common {

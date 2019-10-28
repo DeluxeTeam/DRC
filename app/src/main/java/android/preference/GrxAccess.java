@@ -77,7 +77,7 @@ public class GrxAccess extends GrxBasePreference implements
             try {
                 iconsValueTint = ta.getInt(R.styleable.grxPreferences_iconsValueTint, 0);
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         ta.recycle();
@@ -89,8 +89,7 @@ public class GrxAccess extends GrxBasePreference implements
 
      @Override
      protected View onCreateView(ViewGroup parent) {
-         View view = super.onCreateView(parent);
-         return view;
+         return super.onCreateView(parent);
 
      }
 

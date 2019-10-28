@@ -85,7 +85,7 @@ public class GrxPickImage extends GrxBasePreference{
                 Intent intent = new Intent(chl.getActivity(), GrxImagePicker.class);
                 intent.putExtra(Common.TAG_DEST_FRAGMENT_NAME_EXTRA_KEY,myPrefAttrsInfo.getMyKey());
                 intent = GrxImageHelper.intent_avatar_img(intent, mSizeX, mSizeY,mCircular);
-                String output_file_name = Common.IconsDir + File.separator + String.valueOf(System.currentTimeMillis()+".jpg");
+                String output_file_name = Common.IconsDir + File.separator + System.currentTimeMillis() + ".jpg";
                 intent.putExtra(GrxImagePicker.S_OUTPUT_FILE_NAME,output_file_name);
                 chl.startImagePicker(intent, Common.REQ_CODE_GALLERY_IMAGE_PICKER_CROP_CIRCULAR);
             }

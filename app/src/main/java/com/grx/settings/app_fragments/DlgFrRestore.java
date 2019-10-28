@@ -18,7 +18,6 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -109,7 +108,7 @@ public class DlgFrRestore extends DialogFragment {
     public void onDismiss(DialogInterface dialog){
         super.onDismiss(dialog);
         if(isError) report_error(errorString);
-        if(!isUserdismissed) return;;
+        if(!isUserdismissed) return;
         if(mCallBack!=null)
              mCallBack.processDlgFrRestoreAction(true,mRestoreState,mReturnedString);
 
@@ -137,15 +136,12 @@ public class DlgFrRestore extends DialogFragment {
             case CONFIRM_BACKUP_FILE:
                 builder.setCancelable(true);
                 builder.setMessage(getString(R.string.grxs_restore_confirm_message, mText+"."+getString(R.string.grxs_backups_files_extension)));
-                builder.setPositiveButton(getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        isUserdismissed=true;
-                        isError=false;
-                        mRestoreState=RESTORE_STATE.RESTORING_BACKUP;
-                        mReturnedString = mText;
-                        dismiss();
-                    }
+                builder.setPositiveButton(getString(R.string.grxs_ok), (dialogInterface, i) -> {
+                    isUserdismissed=true;
+                    isError=false;
+                    mRestoreState=RESTORE_STATE.RESTORING_BACKUP;
+                    mReturnedString = mText;
+                    dismiss();
                 });
                 break;
            case RESTORING_BACKUP:
@@ -177,20 +173,17 @@ public class DlgFrRestore extends DialogFragment {
 
         ListView lv = new ListView(getActivity());
         File ficheros = new File(Common.BackupsDir+File.separator);
-        FileFilter ff = new FileFilter() {
-            @Override
-            public boolean accept(File pathname) {
-                String ruta;
-                if(pathname.isFile()){
-                    ruta = pathname.getAbsolutePath().toLowerCase();
-                    if(ruta.contains("."+getString(R.string.grxs_backups_files_extension) )){
-                        return true;
-                    }
+        FileFilter ff = pathname -> {
+            String ruta;
+            if(pathname.isFile()){
+                ruta = pathname.getAbsolutePath().toLowerCase();
+                if(ruta.contains("."+getString(R.string.grxs_backups_files_extension) )){
+                    return true;
                 }
-                return false;
             }
+            return false;
         };
-        File fa[]=ficheros.listFiles(ff);
+        File[] fa = ficheros.listFiles(ff);
         if(fa==null || fa.length==0) {
             isError=true;
             errorString = getString(R.string.grxs_no_backups);
@@ -202,22 +195,19 @@ public class DlgFrRestore extends DialogFragment {
             ab.AdapterBackups(getActivity(), fa);
             ListView lista = new ListView(getActivity());
             lista.setAdapter(ab);
-            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    isUserdismissed=true;
-                    TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                    String file_name = tv.getText().toString();
-                    File f = new File(Common.BackupsDir + File.separator + file_name + "." + getString(R.string.grxs_backups_files_extension));
-                    if (f.exists()) {
-                        mRestoreState = CONFIRM_BACKUP_FILE;
-                        mReturnedString=file_name;
-                    } else {
-                        isError = true;
-                        errorString = getString(R.string.grxs_restore_unknown_error);
-                    }
-                    dismiss();
+            lista.setOnItemClickListener((parent, view, position, id) -> {
+                isUserdismissed=true;
+                TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                String file_name = tv.getText().toString();
+                File f = new File(Common.BackupsDir + File.separator + file_name + "." + getString(R.string.grxs_backups_files_extension));
+                if (f.exists()) {
+                    mRestoreState = CONFIRM_BACKUP_FILE;
+                    mReturnedString=file_name;
+                } else {
+                    isError = true;
+                    errorString = getString(R.string.grxs_restore_unknown_error);
                 }
+                dismiss();
             });
 
             return lista;

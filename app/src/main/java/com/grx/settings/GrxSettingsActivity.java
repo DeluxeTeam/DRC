@@ -21,7 +21,6 @@ import android.app.DialogFragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -55,7 +54,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -74,7 +72,6 @@ import com.grx.settings.utils.Common;
 import com.grx.settings.utils.GrxPrefsUtils;
 import com.grx.settings.utils.RootPrivilegedUtils;
 import com.grx.settings.views.GrxFloatingRecents;
-import com.sublimenavigationview.OnNavigationMenuEventListener;
 import com.sublimenavigationview.SublimeBaseMenuItem;
 import com.sublimenavigationview.SublimeGroup;
 import com.sublimenavigationview.SublimeGroupHeaderMenuItem;
@@ -90,8 +87,6 @@ import com.grx.settings.utils.GrxImageHelper;
 import com.grx.settings.app_fragments.DlgFrGrxNavigationUserOptions;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -226,12 +221,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         mGetSuBgTask.setActivity(this);
         mGetSuBgTask.execute();
 
-        mAnimationRunnable = new Runnable() {
-            @Override
-            public void run() {
-                doChangeOfScreenOnDrawerClosed();
-            }
-        };
+        mAnimationRunnable = this::doChangeOfScreenOnDrawerClosed;
 
         initSharedPreferencesAndValues();
         setUserTheme();
@@ -1083,14 +1073,11 @@ public class GrxSettingsActivity extends AppCompatActivity implements
             }
 
         }
-        adb.setSingleChoiceItems(options, selected, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                RootUtils.runCommand("setprop "+options[i]);
-                String curr_property_val = RootUtils.getProp(getResources().getString(R.string.gs_bp_property));
-                showToast(getResources().getString(R.string.grxs_bp_restart));
-                restartApp();
-            }
+        adb.setSingleChoiceItems(options, selected, (dialogInterface, i) -> {
+            RootUtils.runCommand("setprop "+options[i]);
+            String curr_property_val1 = RootUtils.getProp(getResources().getString(R.string.gs_bp_property));
+            showToast(getResources().getString(R.string.grxs_bp_restart));
+            restartApp();
         });
         adb.setTitle(getResources().getString(R.string.grxs_bp_title,curr_property_val));
         adb.create().show();
@@ -1111,12 +1098,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
         ab.setTitle(title);
         ab.setMessage(message);
-        ab.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        ab.setPositiveButton(R.string.grxs_ok, (dialogInterface, i) -> dialogInterface.dismiss());
         ab.create().show();
     }
 
@@ -1185,13 +1167,11 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
         Common.GroupKeysList.clear();
         Common.BroadCastsList.clear();
-        Common.CommonBroadCastList.clear();;
+        Common.CommonBroadCastList.clear();
 
-        runOnUiThread(new Runnable() {
-            public void run() {
-                showToast(getString(R.string.grxs_sync_end));
-                progressBar.setVisibility(View.GONE);
-            }
+        runOnUiThread(() -> {
+            showToast(getString(R.string.grxs_sync_end));
+            progressBar.setVisibility(View.GONE);
         });
 
         setCurrentMenuAndScreen(Common.INI_MODE_FORCED);
@@ -1230,11 +1210,9 @@ public class GrxSettingsActivity extends AppCompatActivity implements
                 mNumSyncScreens=0;
                 Common.SyncUpMode = true;
                 Common.sp.edit().putBoolean(Common.S_CTRL_SYNC_NEEDED,false).commit();
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        progressBar.setVisibility(View.VISIBLE);
-                        synchronizeNextScreen();
-                    }
+                runOnUiThread(() -> {
+                    progressBar.setVisibility(View.VISIBLE);
+                    synchronizeNextScreen();
                 });
             }
         }
@@ -1265,7 +1243,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
                         ResXML.put(num_screens,getResources().getResourceEntryName(id_xml));
                         num_screens++;
                     }
-                }catch (Exception e){}
+                }catch (Exception ignored){}
             }
         }
         return ResXML.size();
@@ -1285,20 +1263,12 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         TextView info= (TextView) view.findViewById(R.id.gid_backup_info);
         info.setText(getString(R.string.grxs_info_backup));
         mEditText.append("backup_");
-        adb.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        adb.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String backup_name="";
-                if(mEditText!=null) backup_name= mEditText.getText().toString();
-                dialog.dismiss();
-                showBackupConfirmationDialog(backup_name);
-            }
+        adb.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> dialog.dismiss());
+        adb.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+            String backup_name="";
+            if(mEditText!=null) backup_name= mEditText.getText().toString();
+            dialog.dismiss();
+            showBackupConfirmationDialog(backup_name);
         });
         adb.setView(view);
         adb.create().show();
@@ -1317,12 +1287,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
         ab.setTitle(R.string.grxs_tit_backup);
         ab.setMessage(result);
-        ab.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        ab.setPositiveButton(R.string.grxs_ok, (dialog, which) -> dialog.dismiss());
         ab.create().show();
     }
 
@@ -1389,19 +1354,11 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         AlertDialog.Builder ab = new AlertDialog.Builder(this);
         ab.setTitle(R.string.grxs_tit_sobreescribir_backup);
         ab.setMessage(getString(R.string.grxs_mens_sobreescribir_backup, backup_name+"."+getString(R.string.grxs_backups_files_extension)));
-        ab.setPositiveButton(getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                showBackupResult(doPreferencesBackUp(backup_name));
-            }
+        ab.setPositiveButton(getString(R.string.grxs_ok), (dialog, which) -> {
+            dialog.dismiss();
+            showBackupResult(doPreferencesBackUp(backup_name));
         });
-        ab.setNegativeButton(getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        ab.setNegativeButton(getString(R.string.grxs_cancel), (dialog, which) -> dialog.dismiss());
         ab.create().show();
 
     }
@@ -1482,30 +1439,29 @@ public class GrxSettingsActivity extends AppCompatActivity implements
                 try{
                     Map map= (Map) ois.readObject();
                     Set set = map.entrySet();
-                    Iterator iterator = set.iterator();
-                    while(iterator.hasNext()){
+                    for (Object o : set) {
                         contador++;
-                        Map.Entry entrada = (Map.Entry) iterator.next();
+                        Map.Entry entrada = (Map.Entry) o;
                         String clave = (String) entrada.getKey();
-                        if( entrada.getValue() instanceof Boolean ){
+                        if (entrada.getValue() instanceof Boolean) {
                             Boolean b = (Boolean) entrada.getValue();
-                            sp.edit().putBoolean(clave,b.booleanValue()).commit();
-                        }else if(entrada.getValue() instanceof Float){
+                            sp.edit().putBoolean(clave, b).commit();
+                        } else if (entrada.getValue() instanceof Float) {
                             Float flo = (Float) entrada.getValue();
-                            sp.edit().putFloat(clave,flo.floatValue()).commit();
+                            sp.edit().putFloat(clave, flo).commit();
 
-                        }else if (entrada.getValue() instanceof Integer){
+                        } else if (entrada.getValue() instanceof Integer) {
                             Integer ent = (Integer) entrada.getValue();
-                            sp.edit().putInt(clave,ent.intValue()).commit();
-                        }else if (entrada.getValue() instanceof Long){
+                            sp.edit().putInt(clave, ent).commit();
+                        } else if (entrada.getValue() instanceof Long) {
                             Long lo = (Long) entrada.getValue();
-                            sp.edit().putLong(clave,lo.longValue()).commit();
-                        }else if (entrada.getValue() instanceof String){
+                            sp.edit().putLong(clave, lo).commit();
+                        } else if (entrada.getValue() instanceof String) {
                             String str = (String) entrada.getValue();
-                            sp.edit().putString(clave,str).commit();
-                        }else if (entrada.getValue() instanceof Set){
+                            sp.edit().putString(clave, str).commit();
+                        } else if (entrada.getValue() instanceof Set) {
                             Set s = (Set) entrada.getValue();
-                            sp.edit().putStringSet(clave,s).commit();
+                            sp.edit().putStringSet(clave, s).commit();
                         }
                     }
                 }catch (Exception e){
@@ -1561,11 +1517,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
         private void showToast(String msg){
             final String txt = msg;
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    Toast.makeText(context,txt, Toast.LENGTH_SHORT).show();
-                }
-            });
+            runOnUiThread(() -> Toast.makeText(context,txt, Toast.LENGTH_SHORT).show());
         }
 
         @Override
@@ -1780,18 +1732,8 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         vExpandCollapseButtons.setPadding(0,0,0,0);
         vExpandButton = (LinearLayout) vExpandCollapseButtons.findViewById(R.id.gid_button_expand);
         vCollapseButton = (LinearLayout) vExpandCollapseButtons.findViewById(R.id.gid_button_close);
-        vCollapseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                collapseSNVMenuGropus();
-            }
-        });
-        vExpandButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                expandSNVMenuGropus();
-            }
-        });
+        vCollapseButton.setOnClickListener(v -> collapseSNVMenuGropus());
+        vExpandButton.setOnClickListener(v -> expandSNVMenuGropus());
 
 
 
@@ -1829,114 +1771,106 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
     private void initMenuNavigation(){
 
-        mSVN.setNavigationMenuEventListener(new OnNavigationMenuEventListener() {
-
-            @Override
-            public boolean onNavigationMenuEvent(Event event, SublimeBaseMenuItem menuItem) {
-                String userOption;
-                boolean state;
-                if (mCurrentMenu==0){
-                    switch (event) {
-                        case GROUP_EXPANDED:
-                            break;
-                        case GROUP_COLLAPSED:
-                            break;
-                        default:
-                            changeOfScreen(menuItem);
-                            break;
-                    }
-                }
-                else {
-
-                    switch (event){
-
-                        case CHECKED:
-                            userOption = getResources().getResourceEntryName(menuItem.getItemId());
-                            state = true;
-                            updateUserConfigCheckBox(userOption, state);
-                            break;
-                        case UNCHECKED:
-                            userOption = getResources().getResourceEntryName(menuItem.getItemId());
-                            state = false;
-                            updateUserConfigCheckBox(userOption, state);
-                            break;
-                        default:
-                            try{
-                                userOption = getResources().getResourceEntryName(menuItem.getItemId());
-                            }catch (Resources.NotFoundException e){
-                                return true;
-                            }
-
-                            switch (userOption){
-                                case "grx_mid_theme":
-                                    showThemeSelectionDialog();;
-                                    break;
-
-                                case "grx_mid_header_svn_back":
-                                    showSNVHeaderBgSelection();
-                                    break;
-                                case "grx_mid_rom_info":
-                                    showInfoFragment();
-                                    if(mDrawer.isDrawerVisible(mSVN)) mDrawer.closeDrawer(mSVN);
-                                    saveLastScreenValueToSHP();
-                                    break;
-                                case "grx_mid_app_help":
-                                    showHelpFragment();
-                                    if(mDrawer.isDrawerVisible(mSVN)) mDrawer.closeDrawer(mSVN);
-                                    saveLastScreenValueToSHP();
-                                    break;
-
-                                case "grx_mid_color_picker_style":
-                                    showColorPickerStyleDialog();
-                                    break;
-                                //grxgrx
-
-                                default:break;
-                            }
-
-
-                            if (userOption.equals("grx_mid_fab_position")) {
-
-                                showFABPostionDialog();
-                            }
-                            else {
-                                if (userOption.equals("grx_mid_divider_height")) {
-                                    showDividerHeightDialog();
-                                }
-                            }
-                            break;
-                    }
-                }
-
-                return true;
-            }
-        });
-    }
-
-    private void initUserConfigFAB(){
-        mFabSvn = (FloatingActionButton) mSVN.getHeaderView().findViewById(R.id.gid_user_options_fab);
-        mFabSvn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (mCurrentMenu) {
-                    case 0:
-                        if(mExpandCollapseVisible) hideExpandCollapseNavigationButtons();
-                        mSVN.switchMenuTo(mConfigMenu);
-                        mCurrentMenu=1;
-
+        mSVN.setNavigationMenuEventListener((event, menuItem) -> {
+            String userOption;
+            boolean state;
+            if (mCurrentMenu==0){
+                switch (event) {
+                    case GROUP_EXPANDED:
                         break;
-                    case 1:
-                        if(mExpandCollapseVisible) showExpandColapseNavigationButtons();
-                        mSVN.switchMenuTo(mOptionsMenu);
-                        mCurrentMenu=0;
-                        updateSVNGroups();
-                        if (mCurrentMenuItem!=null){
-                            if(mOptionsMenu.getGroup(mCurrentMenuItem.getGroupId())!=null) mOptionsMenu.getGroup(mCurrentMenuItem.getGroupId()).setStateCollapsed(false);
+                    case GROUP_COLLAPSED:
+                        break;
+                    default:
+                        changeOfScreen(menuItem);
+                        break;
+                }
+            }
+            else {
+
+                switch (event){
+
+                    case CHECKED:
+                        userOption = getResources().getResourceEntryName(menuItem.getItemId());
+                        state = true;
+                        updateUserConfigCheckBox(userOption, state);
+                        break;
+                    case UNCHECKED:
+                        userOption = getResources().getResourceEntryName(menuItem.getItemId());
+                        state = false;
+                        updateUserConfigCheckBox(userOption, state);
+                        break;
+                    default:
+                        try{
+                            userOption = getResources().getResourceEntryName(menuItem.getItemId());
+                        }catch (Resources.NotFoundException e){
+                            return true;
+                        }
+
+                        switch (userOption){
+                            case "grx_mid_theme":
+                                showThemeSelectionDialog();
+                                break;
+
+                            case "grx_mid_header_svn_back":
+                                showSNVHeaderBgSelection();
+                                break;
+                            case "grx_mid_rom_info":
+                                showInfoFragment();
+                                if(mDrawer.isDrawerVisible(mSVN)) mDrawer.closeDrawer(mSVN);
+                                saveLastScreenValueToSHP();
+                                break;
+                            case "grx_mid_app_help":
+                                showHelpFragment();
+                                if(mDrawer.isDrawerVisible(mSVN)) mDrawer.closeDrawer(mSVN);
+                                saveLastScreenValueToSHP();
+                                break;
+
+                            case "grx_mid_color_picker_style":
+                                showColorPickerStyleDialog();
+                                break;
+                            //grxgrx
+
+                            default:break;
+                        }
+
+
+                        if (userOption.equals("grx_mid_fab_position")) {
+
+                            showFABPostionDialog();
+                        }
+                        else {
+                            if (userOption.equals("grx_mid_divider_height")) {
+                                showDividerHeightDialog();
+                            }
                         }
                         break;
                 }
             }
 
+            return true;
+        });
+    }
+
+    private void initUserConfigFAB(){
+        mFabSvn = (FloatingActionButton) mSVN.getHeaderView().findViewById(R.id.gid_user_options_fab);
+        mFabSvn.setOnClickListener(view -> {
+            switch (mCurrentMenu) {
+                case 0:
+                    if(mExpandCollapseVisible) hideExpandCollapseNavigationButtons();
+                    mSVN.switchMenuTo(mConfigMenu);
+                    mCurrentMenu=1;
+
+                    break;
+                case 1:
+                    if(mExpandCollapseVisible) showExpandColapseNavigationButtons();
+                    mSVN.switchMenuTo(mOptionsMenu);
+                    mCurrentMenu=0;
+                    updateSVNGroups();
+                    if (mCurrentMenuItem!=null){
+                        if(mOptionsMenu.getGroup(mCurrentMenuItem.getGroupId())!=null) mOptionsMenu.getGroup(mCurrentMenuItem.getGroupId()).setStateCollapsed(false);
+                    }
+                    break;
+            }
         });
     }
 
@@ -1978,7 +1912,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
             mConfigMenu.removeItem(R.id.grx_mid_theme);
         }
         boolean isdemo = getResources().getBoolean(R.bool.grxb_demo_mode);
-        String mTabsLayouts[]=  isdemo ? getResources().getStringArray(R.array.demo_tabs_layouts) : getResources().getStringArray(R.array.rom_tabs_layouts);
+        String[] mTabsLayouts = isdemo ? getResources().getStringArray(R.array.demo_tabs_layouts) : getResources().getStringArray(R.array.rom_tabs_layouts);
 
         if(mTabsLayouts==null){
             mConfigMenu.removeItem(R.id.grx_mid_rom_info);
@@ -2044,18 +1978,14 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         };
         mDrawer.setDrawerListener(toggle);
         toggle.syncState();
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( mDrawer.isDrawerVisible(mSVN) ) {
-                    if(!mDrawerInLeftPosition) mDrawer.closeDrawer(Gravity.RIGHT);
-                    else mDrawer.closeDrawer(Gravity.LEFT);
-                }else {
-                    if(!mDrawerInLeftPosition) mDrawer.openDrawer(Gravity.RIGHT);
-                    else mDrawer.openDrawer(Gravity.LEFT);
-                }
+        mToolbar.setNavigationOnClickListener(v -> {
+            if( mDrawer.isDrawerVisible(mSVN) ) {
+                if(!mDrawerInLeftPosition) mDrawer.closeDrawer(Gravity.RIGHT);
+                else mDrawer.closeDrawer(Gravity.LEFT);
+            }else {
+                if(!mDrawerInLeftPosition) mDrawer.openDrawer(Gravity.RIGHT);
+                else mDrawer.openDrawer(Gravity.LEFT);
             }
-
         });
 
 
@@ -2078,23 +2008,15 @@ public class GrxSettingsActivity extends AppCompatActivity implements
     private void setMainFABListeners(){
 
         fab = (com.fab.FloatingActionButton) findViewById(R.id.gid_main_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDrawer.openDrawer(mSVN);
-            }
-        });
-        fab.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if(mShowFloatingRecentsWindow) {
-                    if(mFloatingRecentsWindow.getVisibility()==View.VISIBLE) mFloatingRecentsWindow.setVisibility(View.GONE);
-                    else {
-                        mFloatingRecentsWindow.setVisibility(View.VISIBLE);
-                    }
+        fab.setOnClickListener(view -> mDrawer.openDrawer(mSVN));
+        fab.setOnLongClickListener(view -> {
+            if(mShowFloatingRecentsWindow) {
+                if(mFloatingRecentsWindow.getVisibility()==View.VISIBLE) mFloatingRecentsWindow.setVisibility(View.GONE);
+                else {
+                    mFloatingRecentsWindow.setVisibility(View.VISIBLE);
                 }
-                return true;
             }
+            return true;
         });
 
     }
@@ -2164,18 +2086,8 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         if(showdialog){
             AlertDialog.Builder ab = new AlertDialog.Builder(this);
             ab.setCancelable(true);
-            ab.setNegativeButton(getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-            ab.setPositiveButton(getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    doReboot();
-                }
-            }) ;
+            ab.setNegativeButton(getString(R.string.grxs_cancel), (dialogInterface, i) -> dialogInterface.dismiss());
+            ab.setPositiveButton(getString(R.string.grxs_ok), (dialogInterface, i) -> doReboot()) ;
             ab.setTitle(getString(R.string.grxs_reboot_dialog_title));
             ab.setMessage(getString(R.string.grxs_reboot_dialog_message));
             ab.create().show();
@@ -2205,18 +2117,8 @@ public class GrxSettingsActivity extends AppCompatActivity implements
             final String packagetokill = packagename;
             AlertDialog.Builder ab = new AlertDialog.Builder(this);
             ab.setCancelable(true);
-            ab.setNegativeButton(getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-            ab.setPositiveButton(getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    doKillPackage(packagetokill);
-                }
-            }) ;
+            ab.setNegativeButton(getString(R.string.grxs_cancel), (dialogInterface, i) -> dialogInterface.dismiss());
+            ab.setPositiveButton(getString(R.string.grxs_ok), (dialogInterface, i) -> doKillPackage(packagetokill)) ;
             ab.setTitle(getString(R.string.grxs_killpackage_dialog_title,label));
             ab.setMessage(getString(R.string.grxs_killpackage_dialog_message,label));
             ab.create().show();
@@ -2255,19 +2157,14 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         @Override
         protected void onPostExecute(Boolean isGranted) {
             if(mActivity!=null) {
-                mActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showRootState();
-                    }
-                });
+                mActivity.runOnUiThread(GrxSettingsActivity.this::showRootState);
             }
         }
 
         public void setActivity(GrxSettingsActivity activity){
             mActivity = activity;
         }
-    };
+    }
 
 
 }

@@ -15,7 +15,6 @@ package com.grx.settings.prefs_dlgs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -162,20 +161,16 @@ public class DlgFrGrxNumberPicker extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle state) {
-        AlertDialog dlg = new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(mTitle)
                 .setView(number_picker_view())
-                .setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(mCallback!=null) {
-                            mValue = numberPicker.getValue();
-                            mCallback.onGrxNumberPickerSet(mValue,mkey);
-                        }
+                .setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+                    if(mCallback!=null) {
+                        mValue = numberPicker.getValue();
+                        mCallback.onGrxNumberPickerSet(mValue,mkey);
                     }
                 })
                 .create();
-        return dlg;
     }
 
 }

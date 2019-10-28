@@ -20,8 +20,6 @@ import com.grx.settings.R;
 import com.grx.settings.utils.BPRulesUtils;
 import com.grx.settings.utils.Common;
 
-import java.util.regex.Pattern;
-
 
 public class PrefAttrsInfo {
 
@@ -269,14 +267,14 @@ public class PrefAttrsInfo {
         if(ta.hasValue(R.styleable.grxPreferences_iconTint)) {
             try {
                 mIconTint = ta.getInt(R.styleable.grxPreferences_iconTint, 0);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
 
         if(ta.hasValue(R.styleable.grxPreferences_arrowColor)) {
             try {
                 mArrowTint = ta.getColor(R.styleable.grxPreferences_arrowColor, 0);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
 

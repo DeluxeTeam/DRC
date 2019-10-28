@@ -32,7 +32,7 @@ public class CustomDependencyHelper {
     private int mDependencyType;
     private boolean mEnableDependent = false;
     private String mValuesToCheck;
-    private List<String> mValuesToContain = new ArrayList<String>();
+    private List<String> mValuesToContain = new ArrayList<>();
 
     public CustomDependencyHelper(GrxPreferenceScreen.CustomDependencyListener listener, String rule, String separator){
 
@@ -41,7 +41,7 @@ public class CustomDependencyHelper {
         mSeparator=separator;
 
 
-        String arr[] = rule.split(Pattern.quote("#"));
+        String[] arr = rule.split(Pattern.quote("#"));
 
         if(arr[0].toUpperCase().equals("ENABLE")) mEnableDependent = true;
 
@@ -71,14 +71,13 @@ public class CustomDependencyHelper {
             //String[] values = arr[3].split(Pattern.quote(","));
             String[] values = arr[3].split(Pattern.quote(","));
         mValuesToCheck=",";
-        for(int i = 0; i<values.length; i++){
-            String value = values[i];
-            if(value.startsWith("(") && value.endsWith(")")) {
-                String substring = value.substring(1,value.length()-1);
-                if(substring.contains("NULL"))substring=substring.replace("NULL","");
-                mValuesToContain.add(substring);
-            }else mValuesToCheck+=value+",";
-        }
+            for (String value : values) {
+                if (value.startsWith("(") && value.endsWith(")")) {
+                    String substring = value.substring(1, value.length() - 1);
+                    if (substring.contains("NULL")) substring = substring.replace("NULL", "");
+                    mValuesToContain.add(substring);
+                } else mValuesToCheck += value + ",";
+            }
         if(!mValuesToCheck.endsWith(",")) mValuesToCheck += ",";
         if(mValuesToCheck.contains("NULL")) {
             mValuesToCheck=mValuesToCheck.replace("NULL","");

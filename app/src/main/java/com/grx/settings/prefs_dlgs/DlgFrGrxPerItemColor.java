@@ -166,13 +166,13 @@ public class DlgFrGrxPerItemColor extends DialogFragment
     }
 
     private String getResultFromItemList(){
-        String resultado ="";
+        StringBuilder resultado = new StringBuilder();
         for(int ind=0;ind<mItemsInfo.size();ind++) {
             GrxItemInfo item = (GrxItemInfo) mItemsInfo.get(ind);
-            resultado += item.get_value();
-            resultado += mSeparator;
+            resultado.append(item.get_value());
+            resultado.append(mSeparator);
         }
-        return resultado;
+        return resultado.toString();
     }
 
     @Override
@@ -192,7 +192,7 @@ public class DlgFrGrxPerItemColor extends DialogFragment
         mSeparator=getArguments().getString("separator");
         mOnTheFly=getArguments().getBoolean("onthefly");
 
-        mItemsInfo = new ArrayList<GrxItemInfo>();
+        mItemsInfo = new ArrayList<>();
 
         mIdItemClicked=-1;
 
@@ -217,69 +217,51 @@ public class DlgFrGrxPerItemColor extends DialogFragment
         mAdapter = new Qadapter(mItemsInfo);
         vList.setAdapter(mAdapter);
         builder.setView(vList);
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mValue= getResultFromItemList();
-                checkCallback();
-                if (mCallBack == null) dismiss();
-                mCallBack.onItemsColorsSelected(mValue);
-                dismiss();
-            }
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+            mValue= getResultFromItemList();
+            checkCallback();
+            if (mCallBack == null) dismiss();
+            mCallBack.onItemsColorsSelected(mValue);
+            dismiss();
         });
 
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mValue=mOriValue;
-                checkCallback();
-                if (mCallBack == null) dismiss();
-                mCallBack.onItemsColorsSelected(mValue);
-                dismiss();
-            }
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> {
+            mValue=mOriValue;
+            checkCallback();
+            if (mCallBack == null) dismiss();
+            mCallBack.onItemsColorsSelected(mValue);
+            dismiss();
         });
 
-        builder.setNeutralButton("?", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                AlertDialog dlg = new AlertDialog.Builder(getActivity()).create();
-                dlg.setTitle(getActivity().getResources().getString(R.string.grxs_help));
-                dlg.setMessage(getActivity().getResources().getString(R.string.grxs_help_items_colors));
-                dlg.setButton(DialogInterface.BUTTON_POSITIVE, getActivity().getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                dlg.show();
-            }
+        builder.setNeutralButton("?", (dialog, which) -> {
+            AlertDialog dlg = new AlertDialog.Builder(getActivity()).create();
+            dlg.setTitle(getActivity().getResources().getString(R.string.grxs_help));
+            dlg.setMessage(getActivity().getResources().getString(R.string.grxs_help_items_colors));
+            dlg.setButton(DialogInterface.BUTTON_POSITIVE, getActivity().getString(R.string.grxs_ok), (dialog1, which1) -> dialog1.dismiss());
+            dlg.show();
         });
 
-         AlertDialog ad = builder.create();
-        return ad;
+        return builder.create();
 
     }
 
 
     private void setUpDoubleClick(){
         handler = new Handler();
-        timeout = Long.valueOf(ViewConfiguration.getDoubleTapTimeout());
+        timeout = (long) ViewConfiguration.getDoubleTapTimeout();
         doble_clic_pendiente=false;
 
-        RDobleClick = new Runnable() {
-            @Override
-            public void run() {
-                if(!doble_clic_pendiente){
+        RDobleClick = () -> {
+            if(!doble_clic_pendiente){
+                clickAction();
+            }else {
+                if(clicks==0) clickAction();
+                else if(clicks!=2) {
                     clickAction();
                 }else {
-                    if(clicks==0) clickAction();
-                    else if(clicks!=2) {
-                        clickAction();
-                    }else {
-                        doubleClickAction();
-                    }
-
+                    doubleClickAction();
                 }
+
             }
         };
     }
@@ -317,20 +299,12 @@ public class DlgFrGrxPerItemColor extends DialogFragment
         AlertDialog dlg = new AlertDialog.Builder(getActivity()).create();
         dlg.setTitle(getActivity().getResources().getString(R.string.grxs_reset_values));
         dlg.setMessage(getActivity().getResources().getString(R.string.grxs_reset_message));
-        dlg.setButton(DialogInterface.BUTTON_POSITIVE, getActivity().getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mItemsInfo.get(mIdItemClicked).setColor(mItemsInfo.get(mIdItemClicked).getDefColor());
-                mAdapter.notifyDataSetChanged();
-                mIdItemClicked=-1;
-            }
+        dlg.setButton(DialogInterface.BUTTON_POSITIVE, getActivity().getString(R.string.grxs_ok), (dialog, which) -> {
+            mItemsInfo.get(mIdItemClicked).setColor(mItemsInfo.get(mIdItemClicked).getDefColor());
+            mAdapter.notifyDataSetChanged();
+            mIdItemClicked=-1;
         });
-        dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                mIdItemClicked=-1;
-            }
-        });
+        dlg.setOnDismissListener(dialog -> mIdItemClicked=-1);
         dlg.show();
     }
 
@@ -392,12 +366,12 @@ public class DlgFrGrxPerItemColor extends DialogFragment
     private void initItemsList(){
 
         TypedArray icons_array=null;
-        int colors_array[]=null;
+        int[] colors_array = null;
 
-        String item[] = new String[2];
+        String[] item = new String[2];
 
-        String vals_array[] = getResources().getStringArray(mIdValuesArr);
-        String opt_array[] = getResources().getStringArray(mIdOptionsArr);
+        String[] vals_array = getResources().getStringArray(mIdValuesArr);
+        String[] opt_array = getResources().getStringArray(mIdOptionsArr);
 
         if(mIdIconsArray!=0){
             icons_array = getResources().obtainTypedArray(mIdIconsArray);
@@ -421,10 +395,10 @@ public class DlgFrGrxPerItemColor extends DialogFragment
         }
 
         if(selected!=null){
-            for(int ii=0; ii<selected.length;ii++){
-                item = selected[ii].split(Pattern.quote("/"));
-                for(int iii=0;iii<mItemsInfo.size();iii++){
-                    if(mItemsInfo.get(iii).get_option_value().equals(item[0])){
+            for (String s : selected) {
+                item = s.split(Pattern.quote("/"));
+                for (int iii = 0; iii < mItemsInfo.size(); iii++) {
+                    if (mItemsInfo.get(iii).get_option_value().equals(item[0])) {
                         mItemsInfo.get(iii).setColor(Integer.valueOf(item[1]));
                     }
                 }

@@ -56,7 +56,6 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -187,7 +186,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         mAuxShortCutActivityLabel=null;
         try {
             mAuxShortCutActivityLabel = ri.loadLabel(getActivity().getPackageManager()).toString();
-        }catch (Exception e){
+        }catch (Exception ignored){
 
         }  //save app label name to a temp var, now lets try to get shortcut  now. This is f.e. Whatsapp chat:  - let´s try to get the contact - group - ... intent now
 
@@ -367,7 +366,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
 
 
     private String getCurrenttimemillisFileIconName(){
-        return Common.CacheDir + File.separator + Common.TMP_PREFIX+String.valueOf(System.currentTimeMillis()) + ".png";
+        return Common.CacheDir + File.separator + Common.TMP_PREFIX+ System.currentTimeMillis() + ".png";
     }
 
 
@@ -390,29 +389,16 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         vExpandButton = (LinearLayout) vButtonsContainer.findViewById(R.id.gid_button_expand);
         vCollapseButton = (LinearLayout) vButtonsContainer.findViewById(R.id.gid_button_close);
         vButtonsContainer.setVisibility(View.GONE);
-        vExpandButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                expandActivitiesGroups();
-            }
-        });
+        vExpandButton.setOnClickListener(v -> expandActivitiesGroups());
 
-        vCollapseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                collapseActivitiesGroups();
-            }
-        });
+        vCollapseButton.setOnClickListener(v -> collapseActivitiesGroups());
         vSelectionContainer = (LinearLayout) view.findViewById(R.id.gid_aux_info_container);
-        vSelectionContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if(mCurrentSelectedIntent!=null) startActivity(mCurrentSelectedIntent);
-                }catch ( Exception e){
-                    e.printStackTrace();
-                    Toast.makeText(getActivity(),getString(R.string.grxs_shortcut_not_allowed),Toast.LENGTH_LONG).show();
-                }
+        vSelectionContainer.setOnClickListener(v -> {
+            try {
+                if(mCurrentSelectedIntent!=null) startActivity(mCurrentSelectedIntent);
+            }catch ( Exception e){
+                e.printStackTrace();
+                Toast.makeText(getActivity(),getString(R.string.grxs_shortcut_not_allowed),Toast.LENGTH_LONG).show();
             }
         });
 
@@ -505,31 +491,25 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         if(mValue!=null && !mValue.isEmpty()){
             try{
                 mCurrentSelectedIntent=Intent.parseUri(mValue,0);
-            }catch (URISyntaxException e){}
+            }catch (URISyntaxException ignored){}
 
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle);
         builder.setView(getDialogView());
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mDeleteTmpFileOnDismiss=true;
-                dismiss();
-            }
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> {
+            mDeleteTmpFileOnDismiss=true;
+            dismiss();
         });
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                checkCallback();
-                mDeleteTmpFileOnDismiss=false;
-                if(mCallBack!=null && mCurrentSelectedIntent!=null) {
-                    String curr_uri = mCurrentSelectedIntent.toUri(0);
-                    if(mOriValue.equals(curr_uri)) mDeleteTmpFileOnDismiss = true;
-                    else mCallBack.GrxSetAccess(curr_uri);
-                } else mDeleteTmpFileOnDismiss = true;
-            }
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+            checkCallback();
+            mDeleteTmpFileOnDismiss=false;
+            if(mCallBack!=null && mCurrentSelectedIntent!=null) {
+                String curr_uri = mCurrentSelectedIntent.toUri(0);
+                if(mOriValue.equals(curr_uri)) mDeleteTmpFileOnDismiss = true;
+                else mCallBack.GrxSetAccess(curr_uri);
+            } else mDeleteTmpFileOnDismiss = true;
         });
 
         iniSpinner();
@@ -656,9 +636,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         for (PackageInfo packinfo : ListaPaquetes){
             intent.setPackage(packinfo.packageName);
             List<ResolveInfo> mActivitiesList = getActivity().getPackageManager().queryIntentActivities(intent, 0);
-            for(ResolveInfo resolveInfo : mActivitiesList) {
-                mShortCutsList.add(resolveInfo);
-            }
+            mShortCutsList.addAll(mActivitiesList);
         }
         Collections.sort(mShortCutsList, new ResolveInfo.DisplayNameComparator(getActivity().getPackageManager()));
     }
@@ -681,7 +659,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
             @Override
             protected Void doInBackground(Void... params) {
                 if(mShortCutsList==null){
-                    mShortCutsList = new ArrayList<ResolveInfo>();
+                    mShortCutsList = new ArrayList<>();
                     buildShortcutsList();
                 }
 
@@ -696,7 +674,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
                 vListView.setAdapter(null);
                 vListView.setAdapter(mShortCutsAdapter);
                 vListView.setVisibility(View.VISIBLE);
-                if(mSpinnerList.size()>1) mSpinner.setEnabled(true);;
+                if(mSpinnerList.size()>1) mSpinner.setEnabled(true);
             }
         }.execute();
     }
@@ -754,12 +732,12 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
 
     private void buildCustomActionsList(){
         TypedArray icons_array=null;
-        String vals_array[] = getResources().getStringArray(mIdValuesArr);
-        String opt_array[] = getResources().getStringArray(mIdOptionsArr);
+        String[] vals_array = getResources().getStringArray(mIdValuesArr);
+        String[] opt_array = getResources().getStringArray(mIdOptionsArr);
         if(mIdIconsArray!=0){
             icons_array = getResources().obtainTypedArray(mIdIconsArray);
         }
-        mCustomActionsList = new ArrayList<GrxCustomActionInfo>();
+        mCustomActionsList = new ArrayList<>();
         for(int i=0;i<vals_array.length;i++){
             Drawable drwtmp = null;
             String drawable_name = null;
@@ -906,7 +884,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         boolean error=false;
         Intent intent;
 
-        ActivityInfo ai[]=mActivitiesList.get(groupPosition).getPackageInfo().activities;
+        ActivityInfo[] ai = mActivitiesList.get(groupPosition).getPackageInfo().activities;
         if(ai!=null) {
             intent = new Intent();
             intent.setComponent(new ComponentName(ai[childPosition].packageName,ai[childPosition].name ));
@@ -939,10 +917,10 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         List<PackageInfo> ListaPaquetes = getActivity().getPackageManager().getInstalledPackages(PackageManager.GET_ACTIVITIES);
         PackageManager pm = getActivity().getPackageManager();
         int i=0;
-        mActivitiesList = new ArrayList<GrxActivityInfo>();
+        mActivitiesList = new ArrayList<>();
         for(i=0;i<ListaPaquetes.size();i++){
             PackageInfo pi = ListaPaquetes.get(i);
-            ActivityInfo ai[] = pi.activities;
+            ActivityInfo[] ai = pi.activities;
 
             if (ai!=null && ai.length!=0){
                 mActivitiesList.add(new GrxActivityInfo(pi, pi.applicationInfo.loadLabel(pm).toString()));
@@ -951,16 +929,13 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         }
 
         try {
-            Collections.sort(mActivitiesList, new Comparator<GrxActivityInfo>() {
-                @Override
-                public int compare(GrxActivityInfo A_actinfo, GrxActivityInfo actinfo) {
-                    try {
-                        return String.CASE_INSENSITIVE_ORDER.compare(A_actinfo.getLabel(), actinfo.getLabel());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    return 0;
+            Collections.sort(mActivitiesList, (A_actinfo, actinfo) -> {
+                try {
+                    return String.CASE_INSENSITIVE_ORDER.compare(A_actinfo.getLabel(), actinfo.getLabel());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+                return 0;
             });
         }catch (Exception e){
             e.printStackTrace();
@@ -1159,9 +1134,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         for (PackageInfo packinfo : ListaPaquetes){
             intent.setPackage(packinfo.packageName);
             List<ResolveInfo> mActivitiesList = getActivity().getPackageManager().queryIntentActivities(intent, 0);
-            for(ResolveInfo resolveInfo : mActivitiesList) {
-                mUsuAppsList.add(resolveInfo);
-            }
+            mUsuAppsList.addAll(mActivitiesList);
         }
 
         Collections.sort(mUsuAppsList, new ResolveInfo.DisplayNameComparator(getActivity().getPackageManager()));
@@ -1185,7 +1158,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
             @Override
             protected Void doInBackground(Void... params) {
                 if(mUsuAppsList==null) {
-                    mUsuAppsList = new ArrayList<ResolveInfo>();
+                    mUsuAppsList = new ArrayList<>();
                     buildAppsList();
                 }
                 return null;
@@ -1199,7 +1172,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
                 vListView.setAdapter(mUserAppAdapter);
                 mProgressBar.setVisibility(View.GONE);
                 vListView.setVisibility(View.VISIBLE);
-                if(mSpinnerList.size()>1) mSpinner.setEnabled(true);;
+                if(mSpinnerList.size()>1) mSpinner.setEnabled(true);
             }
         }.execute();
     }

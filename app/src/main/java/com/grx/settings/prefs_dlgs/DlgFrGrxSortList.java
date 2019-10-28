@@ -15,7 +15,6 @@ package com.grx.settings.prefs_dlgs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -158,13 +157,10 @@ public class DlgFrGrxSortList extends DialogFragment implements SlideAndDragList
         builder.setTitle(mTitle);
         builder.setView(getSortListView());
         builder.setNegativeButton(R.string.grxs_cancel,null);
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (mCallback != null) mCallback.saveSortedList(getReturnValue());
-                mItemList.clear();
-                dismiss();
-            }
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+            if (mCallback != null) mCallback.saveSortedList(getReturnValue());
+            mItemList.clear();
+            dismiss();
         });
 
         initItemsList();
@@ -175,26 +171,26 @@ public class DlgFrGrxSortList extends DialogFragment implements SlideAndDragList
 
     private void initItemsList(){
         TypedArray icons_array=null;
-        String vals_array[] = getResources().getStringArray(mIdValuesArr);
-        String opt_array[] = getResources().getStringArray(mIdOptionsArr);
+        String[] vals_array = getResources().getStringArray(mIdValuesArr);
+        String[] opt_array = getResources().getStringArray(mIdOptionsArr);
         if(mIdIconsArray!=0){
             icons_array = getResources().obtainTypedArray(mIdIconsArray);
         }
 
-        String values[];
+        String[] values;
         if(mValue==null || mValue.isEmpty()) {
             values=vals_array;
             //bbbb
         }
-        else values=mValue.split(Pattern.quote(mSeparator));;
+        else values=mValue.split(Pattern.quote(mSeparator));
 
         mItemList.clear();
-        for(int i=0;i<values.length;i++){
-            int pos = GrxPrefsUtils.getPositionInStringArray(vals_array,values[i]);
-            Drawable drawable=null;
-            if(icons_array!=null) drawable = icons_array.getDrawable(pos);
+        for (String value : values) {
+            int pos = GrxPrefsUtils.getPositionInStringArray(vals_array, value);
+            Drawable drawable = null;
+            if (icons_array != null) drawable = icons_array.getDrawable(pos);
             mItemList.add(
-                    new GrxInfoItem(opt_array[pos], vals_array[pos],drawable)
+                    new GrxInfoItem(opt_array[pos], vals_array[pos], drawable)
             );
         }
         if(icons_array!=null) icons_array.recycle();
@@ -239,12 +235,12 @@ public class DlgFrGrxSortList extends DialogFragment implements SlideAndDragList
 
 
     private String getReturnValue(){
-        String tmp="";
+        StringBuilder tmp= new StringBuilder();
         for(int i=0;i<mItemList.size();i++){
-            tmp+=mItemList.get(i).getValue();
-            tmp+=mSeparator;
+            tmp.append(mItemList.get(i).getValue());
+            tmp.append(mSeparator);
         }
-        return tmp;
+        return tmp.toString();
     }
 
 

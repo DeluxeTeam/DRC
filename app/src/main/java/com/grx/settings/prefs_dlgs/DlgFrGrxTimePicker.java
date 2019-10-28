@@ -19,7 +19,6 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import android.util.Log;
-import android.widget.TimePicker;
 
 import com.grx.settings.R;
 import com.grx.settings.utils.Common;
@@ -81,15 +80,6 @@ public class DlgFrGrxTimePicker extends DialogFragment {
         int hours = (mValue/60);
         int minutes = mValue - (hours*60);
 
-        TimePickerDialog tpd = new TimePickerDialog(getActivity(),R.style.GrxDialogStyle, new TimePickerDialog.OnTimeSetListener() {
-
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                if(mCallback!=null) mCallback.onGrxTimeSet((hourOfDay*60)+minute,mkey);
-                else   Log.d("grxsettings", "null callback in timepicker");
-            }
-        },hours,minutes,true);
-
         /*if(getActivity().getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE){
             tpd.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
             View view = getActivity().getLayoutInflater().inflate(R.layout.lay_view_titulo, null);
@@ -98,7 +88,10 @@ public class DlgFrGrxTimePicker extends DialogFragment {
             tpd.setCustomTitle(view);
         }*/
 
-        return tpd;
+        return new TimePickerDialog(getActivity(),R.style.GrxDialogStyle, (view, hourOfDay, minute) -> {
+            if(mCallback!=null) mCallback.onGrxTimeSet((hourOfDay*60)+minute,mkey);
+            else   Log.d("grxsettings", "null callback in timepicker");
+        },hours,minutes,true);
     }
 
 

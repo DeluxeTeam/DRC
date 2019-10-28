@@ -9,9 +9,6 @@ import com.grx.settings.GrxPreferenceScreen;
 import com.grx.settings.R;
 import com.grx.settings.prefs_dlgs.DlgFrGrxPerItemSingleSelection;
 import com.grx.settings.utils.Common;
-import com.grx.settings.utils.GrxPrefsUtils;
-
-import java.util.regex.Pattern;
 
 
 /*
@@ -50,7 +47,7 @@ public class GrxPerItemSingleSelection extends GrxBasePreference implements DlgF
             try {
                 iconsValueTint = ta.getInt(R.styleable.grxperitemsingleselection_iconsValueTint, 0);
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
 

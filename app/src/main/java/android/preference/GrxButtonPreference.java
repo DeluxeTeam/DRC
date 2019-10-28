@@ -15,8 +15,6 @@ package android.preference;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -133,12 +131,7 @@ public class GrxButtonPreference extends GrxBasePreference {
 
         if(vButton!=null){
             setSelectable(false);
-            vButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    execButtonAction();
-                }
-            });
+            vButton.setOnClickListener(view1 -> execButtonAction());
         }
 
         return view;

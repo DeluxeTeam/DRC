@@ -38,7 +38,7 @@ public class ColorPickerView extends View {
 	private float alpha = 1;
 	private int backgroundColor = 0x00000000;
 
-	private Integer initialColors[] = new Integer[]{null, null, null, null, null};
+	private Integer[] initialColors = new Integer[]{null, null, null, null, null};
 	private int colorSelection = 0;
 	private Integer initialColor;
 	private Integer pickerTextColor;
@@ -49,7 +49,7 @@ public class ColorPickerView extends View {
 	private ColorCircle currentColorCircle;
 
 	private ArrayList<OnColorChangedListener> colorChangedListeners = new ArrayList<>();
-	private ArrayList<OnColorSelectedListener> listeners = new ArrayList<OnColorSelectedListener>();
+	private ArrayList<OnColorSelectedListener> listeners = new ArrayList<>();
 	private LightnessSlider lightnessSlider;
 	private AlphaSlider alphaSlider;
 	private EditText colorEdit;
@@ -67,7 +67,7 @@ public class ColorPickerView extends View {
                 setColor(color, false);
 				//grxgrx need fix
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
 		}
 
@@ -463,16 +463,13 @@ public class ColorPickerView extends View {
 			ImageView childImage = (ImageView) childLayout.findViewById(R.id.image_preview);
 			childImage.setClickable(true);
 			childImage.setTag(i);
-			childImage.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (v == null)
-						return;
-					Object tag = v.getTag();
-					if (tag == null || !(tag instanceof Integer))
-						return;
-					setSelectedColor((int) tag);
-				}
+			childImage.setOnClickListener(v -> {
+				if (v == null)
+					return;
+				Object tag = v.getTag();
+				if (tag == null || !(tag instanceof Integer))
+					return;
+				setSelectedColor((int) tag);
 			});
 		}
 	}

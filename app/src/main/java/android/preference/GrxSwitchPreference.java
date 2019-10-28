@@ -14,8 +14,6 @@ package android.preference;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.Settings;
 import android.support.v7.widget.SwitchCompat;
 import android.util.AttributeSet;
@@ -69,7 +67,7 @@ public class GrxSwitchPreference extends SwitchPreference implements GrxPreferen
         if(ta.hasValue(R.styleable.grxSwitchPreference_switchColor)) {
             try {
                 mColor = ta.getColor(R.styleable.grxSwitchPreference_switchColor, 0);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         ta.recycle();
@@ -121,8 +119,7 @@ public class GrxSwitchPreference extends SwitchPreference implements GrxPreferen
 
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index) {
-        boolean defvalue= a.getBoolean(index,false);
-        return defvalue;
+        return a.getBoolean(index,false);
     }
 
 
@@ -136,7 +133,7 @@ public class GrxSwitchPreference extends SwitchPreference implements GrxPreferen
                 setChecked(getPersistedBoolean(myPrefAttrsInfo.getMyBooleanDefValue()));
             } else {
                 setChecked(myPrefAttrsInfo.getMyBooleanDefValue());
-                if(!myPrefAttrsInfo.isValidKey()) return;;
+                if(!myPrefAttrsInfo.isValidKey()) return;
                 persistBoolean(isChecked());
             }
             saveValueInSettings(isChecked());

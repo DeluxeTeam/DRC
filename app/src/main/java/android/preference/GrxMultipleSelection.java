@@ -51,7 +51,7 @@ public class GrxMultipleSelection extends GrxBasePreference implements DlgFrMult
             try {
                 iconsValueTint = ta.getInt(R.styleable.grxsiconsarray_iconsValueTint, 0);
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
 
@@ -84,7 +84,7 @@ public class GrxMultipleSelection extends GrxBasePreference implements DlgFrMult
     public void resetPreference(){
         if(mStringValue!=null && !mStringValue.isEmpty()){
             String[] uris = mStringValue.split(Pattern.quote(myPrefAttrsInfo.getMySeparator()));
-            for(int i=0;i<uris.length;i++) GrxPrefsUtils.deleteGrxIconFileFromUriString(uris[i]);
+            for (String s : uris) GrxPrefsUtils.deleteGrxIconFileFromUriString(s);
         }
         mStringValue = myPrefAttrsInfo.getMyStringDefValue();
         saveNewStringValue(mStringValue);

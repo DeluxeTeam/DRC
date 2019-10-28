@@ -57,7 +57,7 @@ public class GrxOpenActivity extends GrxBasePreference{
         checkDepRuleAndAssignKeyIfNeeded();
         if(mStringValue.contains("/")){
             mIntent = new Intent();
-            String aux[]=mStringValue.split(Pattern.quote("/"));
+            String[] aux = mStringValue.split(Pattern.quote("/"));
             ComponentName componentName = new ComponentName(aux[0], aux[1] );
             mIntent.setComponent(componentName);
             mLabel = GrxPrefsUtils.getActivityLabelFromIntent(getContext(),mIntent);

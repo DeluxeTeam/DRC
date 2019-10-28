@@ -52,7 +52,7 @@ public class GrxPerItemColor extends GrxBasePreference implements  DlgFrGrxPerIt
         if(ta.hasValue(R.styleable.grxPreferences_iconsValueTint)) {
             try {
                iconsValueTint = ta.getInt(R.styleable.grxPreferences_iconsValueTint, 0);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
         }

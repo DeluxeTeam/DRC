@@ -2,7 +2,6 @@ package com.grx.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -77,7 +76,7 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
 
     PreferenceScreen mGrxScreen;
     public Map<String, String> mScreensTree;
-    private ArrayList<String> mAuxScreenKeys = new ArrayList<String>();
+    private ArrayList<String> mAuxScreenKeys = new ArrayList<>();
     public LinkedHashMap<String, Integer> mScreenPositions;
     HashSet<String> mGroupKeyList;
     boolean mSyncMode=false;
@@ -90,7 +89,7 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
 
     int mNumPrefs=0;
 
-    Map<String, List<CustomDependencyHelper>> CustomDependencies = new HashMap<String, List<CustomDependencyHelper>>();
+    Map<String, List<CustomDependencyHelper>> CustomDependencies = new HashMap<>();
 
     PreferenceScreen mCurrentPreferenceScreen ;
 
@@ -239,8 +238,7 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
         if(preferenceScreen!=null){
             String p_actual= getPreferenceScreen().getKey();
             mScreenPositions.put(p_actual, getListPosition());
-            PreferenceScreen p = (PreferenceScreen) preferenceScreen;
-            if(p.getDialog()!=null) p.getDialog().dismiss();
+            if(((PreferenceScreen) preferenceScreen).getDialog()!=null) ((PreferenceScreen) preferenceScreen).getDialog().dismiss();
             setPreferenceScreen((PreferenceScreen)preferenceScreen);
             mGrxSettingsActivity.onBackKey(preferenceScreen.getTitle(), true);
             setListPosition(mScreenPositions.get(getPreferenceScreen().getKey()));
@@ -263,12 +261,7 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
             final ListView list = (ListView) rootView.findViewById(android.R.id.list);
             if(list!=null) {
                 list.clearFocus();
-                list.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        list.setSelection(pos);
-                    }
-                });
+                list.post(() -> list.setSelection(pos));
             }
         }
 
@@ -388,19 +381,20 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
         String actions= prefAttrsInfo.getMyProcessActionOrder();
         if(actions==null) actions = getString(R.string.grxs_process_actions_order);
         String [] actions_to_process = actions.split(Pattern.quote("|"));
-        for(int i=0;i<actions_to_process.length;i++){
-            switch (actions_to_process[i]){
+        for (String actionsToProcess : actions_to_process) {
+            switch (actionsToProcess) {
                 case "reboot":
-                    if(prefAttrsInfo.isNeededReboot()){
-                        if(prefAttrsInfo.isNeededRebootDialog()) mGrxSettingsActivity.rebootDevice(true);
+                    if (prefAttrsInfo.isNeededReboot()) {
+                        if (prefAttrsInfo.isNeededRebootDialog())
+                            mGrxSettingsActivity.rebootDevice(true);
                         else mGrxSettingsActivity.rebootDevice(false);
                     }
                     break;
                 case "kill":
-                    if(prefAttrsInfo.getMyPackageToKill()!=null){
+                    if (prefAttrsInfo.getMyPackageToKill() != null) {
                         mGrxSettingsActivity.killPackage(
                                 prefAttrsInfo.isNeededDialogToKillPackage(),
-                                GrxPrefsUtils.getApplicationLabel( getActivity(), prefAttrsInfo.getMyPackageToKill()),
+                                GrxPrefsUtils.getApplicationLabel(getActivity(), prefAttrsInfo.getMyPackageToKill()),
                                 prefAttrsInfo.getMyPackageToKill());
                     }
                     break;
@@ -410,10 +404,10 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
                     break;
                 case "onclick": //bbbbb
                     String keytoclick = prefAttrsInfo.getmKeyToClick();
-                    if(keytoclick!=null)  {
-                        Preference preference =  getPreferenceScreen().findPreference(keytoclick);
-                        if(preference!=null) {
-                            if(preference.isEnabled()) {
+                    if (keytoclick != null) {
+                        Preference preference = getPreferenceScreen().findPreference(keytoclick);
+                        if (preference != null) {
+                            if (preference.isEnabled()) {
                                 String destRule = prefAttrsInfo.getMyOnClickRule().split(Pattern.quote("#"))[2];
                                 performOnClickRule(preference, destRule);
                             }
@@ -423,33 +417,33 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
                     break;
 
                 case "broadcasts":
-                    if(prefAttrsInfo.getMyCommonBcExtra()!=null) {
-                        GrxPrefsUtils.sendCommonBroadCastExtraDelayed(getActivity(),prefAttrsInfo.getMyCommonBcExtra(),prefAttrsInfo.getMyCommonBcExtraValue(),false);
-                        if(mIsDemoMode) {
-                            Toast.makeText(getActivity(),"Common BC send with extra : " + prefAttrsInfo.getMyCommonBcExtra()+" = "+ prefAttrsInfo.getMyCommonBcExtraValue(),Toast.LENGTH_SHORT).show();
+                    if (prefAttrsInfo.getMyCommonBcExtra() != null) {
+                        GrxPrefsUtils.sendCommonBroadCastExtraDelayed(getActivity(), prefAttrsInfo.getMyCommonBcExtra(), prefAttrsInfo.getMyCommonBcExtraValue(), false);
+                        if (mIsDemoMode) {
+                            Toast.makeText(getActivity(), "Common BC send with extra : " + prefAttrsInfo.getMyCommonBcExtra() + " = " + prefAttrsInfo.getMyCommonBcExtraValue(), Toast.LENGTH_SHORT).show();
                         }
                     }
-                    sendPreferenceBroadcasts(prefAttrsInfo.getMyBroadCast1(),prefAttrsInfo.getMyBroadCast1Extra(),
+                    sendPreferenceBroadcasts(prefAttrsInfo.getMyBroadCast1(), prefAttrsInfo.getMyBroadCast1Extra(),
                             prefAttrsInfo.getMyBroadCast2(), prefAttrsInfo.getMyBroadCast2Extra());
                     break;
 
                 case "scripts":
-                    if(!Common.IsRooted) {
-                        if(mGrxSettingsActivity!=null) mGrxSettingsActivity.showRootState();
+                    if (!Common.IsRooted) {
+                        if (mGrxSettingsActivity != null) mGrxSettingsActivity.showRootState();
                         break;
                     }
-                    switch (prefAttrsInfo.getMyScriptType()){
+                    switch (prefAttrsInfo.getMyScriptType()) {
                         case NO_SCRIPT:
                             break;
                         case ARRAY:
-                            runArrayScript(prefAttrsInfo.getMyScriptArrayId(),prefAttrsInfo.getMyScriptToast(),prefAttrsInfo.isNeededConfirmationDialgotToRunScript());
+                            runArrayScript(prefAttrsInfo.getMyScriptArrayId(), prefAttrsInfo.getMyScriptToast(), prefAttrsInfo.isNeededConfirmationDialgotToRunScript());
                             break;
                         case FILE:
                             String arguments = prefAttrsInfo.getMyScriptFileArguments();
-                            if(arguments==null || arguments.isEmpty() || !arguments.contains(" "))
-                                runFileScript(prefAttrsInfo.getMyScriptFileName(),prefAttrsInfo.getMyScriptToast(),prefAttrsInfo.isNeededConfirmationDialgotToRunScript(),prefAttrsInfo.getMyScriptFileArguments());
+                            if (arguments == null || arguments.isEmpty() || !arguments.contains(" "))
+                                runFileScript(prefAttrsInfo.getMyScriptFileName(), prefAttrsInfo.getMyScriptToast(), prefAttrsInfo.isNeededConfirmationDialgotToRunScript(), prefAttrsInfo.getMyScriptFileArguments());
                             else {
-                                runFileScript(prefAttrsInfo.getMyScriptFileName(),prefAttrsInfo.getMyScriptToast(),prefAttrsInfo.isNeededConfirmationDialgotToRunScript(),arguments.split(Pattern.quote(" ")));
+                                runFileScript(prefAttrsInfo.getMyScriptFileName(), prefAttrsInfo.getMyScriptToast(), prefAttrsInfo.isNeededConfirmationDialgotToRunScript(), arguments.split(Pattern.quote(" ")));
                             }
                             break;
                         default:
@@ -494,7 +488,7 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
     private String generateKeyForPreferenceScreen(String clave){
         String tmp = clave;
         if((clave==null)||clave.isEmpty()) {
-            tmp = mCurrentScreen +   Integer.toString(mAutoIndexForKey);
+            tmp = mCurrentScreen + mAutoIndexForKey;
             mAutoIndexForKey++;
         }
         return tmp;
@@ -567,16 +561,16 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
     }
 
     public interface onListReady{
-        public void onListReady(ListView listaprefs);
+        void onListReady(ListView listaprefs);
     }
 
 
     public interface onScreenChange{
-        public void  onScreenChange(String ultima_pantalla);
+        void  onScreenChange(String ultima_pantalla);
     }
 
     public interface onBackKey{
-        public void onBackKey(CharSequence Subtitle, boolean navicon);
+        void onBackKey(CharSequence Subtitle, boolean navicon);
     }
 
     public void updateDividerHeight(int DividerHeight) {
@@ -704,7 +698,7 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
         String dependency_key = customDependencyHelper.get_custom_dependency_key();
         if(CustomDependencies.containsKey(dependency_key)){
             dependencylisteners = CustomDependencies.get(dependency_key);
-        }else dependencylisteners = new ArrayList<CustomDependencyHelper>();
+        }else dependencylisteners = new ArrayList<>();
         dependencylisteners.add(customDependencyHelper);
         CustomDependencies.put(dependency_key,dependencylisteners);
     }
@@ -878,13 +872,10 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
             AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
             ab.setTitle(getString(R.string.grxs_script_dialog_title));
             ab.setMessage(getString(R.string.grxs_script_dialog_msg));
-            ab.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    boolean result = RootPrivilegedUtils.runScriptArray(getActivity(),scriptarrayid);
-                    if(result) show_toast(toasttext);
-                    else show_toast(getString(R.string.grxs_script_array_error));
-                }
+            ab.setPositiveButton(R.string.grxs_ok, (dialogInterface, i) -> {
+                boolean result = RootPrivilegedUtils.runScriptArray(getActivity(),scriptarrayid);
+                if(result) show_toast(toasttext);
+                else show_toast(getString(R.string.grxs_script_array_error));
             });
             ab.create().show();
         }else {
@@ -901,13 +892,10 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
             AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
             ab.setTitle(getString(R.string.grxs_script_dialog_title));
             ab.setMessage(getString(R.string.grxs_script_file_dialog_msg,scriptfile));
-            ab.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    boolean result = RootPrivilegedUtils.runFileScript(getActivity(),scriptfile,scriptargument);
-                    if(result) show_toast(toasttext);
-                    else show_toast(getString(R.string.grxs_script_array_error));
-                }
+            ab.setPositiveButton(R.string.grxs_ok, (dialogInterface, i) -> {
+                boolean result = RootPrivilegedUtils.runFileScript(getActivity(),scriptfile,scriptargument);
+                if(result) show_toast(toasttext);
+                else show_toast(getString(R.string.grxs_script_array_error));
             });
             ab.create().show();
         }else {

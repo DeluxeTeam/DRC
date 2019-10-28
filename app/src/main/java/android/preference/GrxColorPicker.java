@@ -80,15 +80,12 @@ public class GrxColorPicker extends GrxBasePreference implements DlgFrGrxColorPi
         vWidgetArrow.setVisibility(View.GONE);
         if(vWidgetIcon!=null) {
             vWidgetIcon.setVisibility(View.VISIBLE);
-            vWidgetIcon.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    ClipboardManager cbm = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("color", (Integer.toHexString(mIntValue).toUpperCase()));
-                    cbm.setPrimaryClip(clip);
-                    Toast.makeText(getContext(), getContext().getResources().getString(R.string.grxs_copied_clipboard),Toast.LENGTH_LONG).show();
-                    return true;
-                }
+            vWidgetIcon.setOnLongClickListener(v -> {
+                ClipboardManager cbm = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("color", (Integer.toHexString(mIntValue).toUpperCase()));
+                cbm.setPrimaryClip(clip);
+                Toast.makeText(getContext(), getContext().getResources().getString(R.string.grxs_copied_clipboard),Toast.LENGTH_LONG).show();
+                return true;
             });
         }
         return view;

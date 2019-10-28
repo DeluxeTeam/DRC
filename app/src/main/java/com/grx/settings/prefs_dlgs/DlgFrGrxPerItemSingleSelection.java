@@ -3,28 +3,21 @@ package com.grx.settings.prefs_dlgs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.grx.settings.GrxPreferenceScreen;
 import com.grx.settings.R;
 import com.grx.settings.utils.Common;
 import com.grx.settings.utils.GrxPrefsUtils;
-import com.root.RootUtils;
 import com.sldv.Menu;
 import com.sldv.MenuItem;
 import com.sldv.SlideAndDragListView;
@@ -152,23 +145,12 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle);
         builder.setView(getDialogView());
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dismiss();
-            }
-        });
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                setResultAndDoCallback();
-            }
-        });
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> dismiss());
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> setResultAndDoCallback());
 
         initItemsList();
         ini_drag_list();
-        AlertDialog ad = builder.create();
-        return ad;
+        return builder.create();
 
     }
 
@@ -196,13 +178,13 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
 
 
     private String getReturnValue(){
-        String value = "";
+        StringBuilder value = new StringBuilder();
 
         for(int i=0; i< mItemList.size();i++){
-            value+=mItemList.get(i).getValue();
-            value+=mSeparator;
+            value.append(mItemList.get(i).getValue());
+            value.append(mSeparator);
         }
-       return value;
+       return value.toString();
     }
 
     private void initItemsList(){
@@ -210,28 +192,28 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
         mItemList = new ArrayList<>();
 
         TypedArray icons_array=null;
-        String vals_array[] = getResources().getStringArray(mIdValuesArr);
-        String opt_array[] = getResources().getStringArray(mIdOptionsArr);
-        String spinner_vals[]=getResources().getStringArray(mIdSpinnerValuesArray);
+        String[] vals_array = getResources().getStringArray(mIdValuesArr);
+        String[] opt_array = getResources().getStringArray(mIdOptionsArr);
+        String[] spinner_vals = getResources().getStringArray(mIdSpinnerValuesArray);
 
         if(mIdIconsArray!=0){
             icons_array = getResources().obtainTypedArray(mIdIconsArray);
         }
 
-        String values[];
+        String[] values;
         if(mValue==null || mValue.isEmpty()) {
             mValue=generateDefaultValue(vals_array,spinner_vals);
         }
 
         values=mValue.split(Pattern.quote(mSeparator));
 
-        for(int i=0;i<values.length;i++){
-            String[] array = values[i].split(Pattern.quote(";"));
-            int pos = GrxPrefsUtils.getPositionInStringArray(vals_array,array[0]);
-            int posspinner = GrxPrefsUtils.getPositionInStringArray(spinner_vals,array[1]);
-            Drawable drawable=null;
-            if(icons_array!=null) drawable = icons_array.getDrawable(pos);
-            mItemList.add(new ItemInfo(values[i],opt_array[pos], vals_array[pos],spinner_vals[posspinner],drawable));
+        for (String value : values) {
+            String[] array = value.split(Pattern.quote(";"));
+            int pos = GrxPrefsUtils.getPositionInStringArray(vals_array, array[0]);
+            int posspinner = GrxPrefsUtils.getPositionInStringArray(spinner_vals, array[1]);
+            Drawable drawable = null;
+            if (icons_array != null) drawable = icons_array.getDrawable(pos);
+            mItemList.add(new ItemInfo(value, opt_array[pos], vals_array[pos], spinner_vals[posspinner], drawable));
         }
         if(icons_array!=null) icons_array.recycle();
 
@@ -260,15 +242,15 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
     }
 
     private String generateDefaultValue(String[] vals_array, String[] spinner_values_array){
-        String returnval = "";
-        for(int i=0;i<vals_array.length;i++){
-            returnval+=vals_array[i];
-            returnval+=";";
-            returnval+=spinner_values_array[0];
-            returnval+=mSeparator;
+        StringBuilder returnval = new StringBuilder();
+        for (String s : vals_array) {
+            returnval.append(s);
+            returnval.append(";");
+            returnval.append(spinner_values_array[0]);
+            returnval.append(mSeparator);
         }
 
-        return returnval;
+        return returnval.toString();
     }
 
 
@@ -294,40 +276,26 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.grxs_select_option);
         builder.setSingleChoiceItems(getResources().getStringArray(mIdSpinnerOptionsArray),
-                selected, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+                selected, (dialogInterface, i) -> {
 
-                String new_value = getResources().getStringArray(mIdSpinnerValuesArray)[i];
-                if(!curval.equals(new_value)) {
-                    mItemList.get(mItemClicked).setSpinnervalue(new_value);
-                    mAdapter.notifyDataSetChanged();
-                }
-                mItemClicked=-1;
-                dialogInterface.dismiss();
-            }
-        });
+                    String new_value = getResources().getStringArray(mIdSpinnerValuesArray)[i];
+                    if(!curval.equals(new_value)) {
+                        mItemList.get(mItemClicked).setSpinnervalue(new_value);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                    mItemClicked=-1;
+                    dialogInterface.dismiss();
+                });
 
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mItemClicked=-1;
-                dialog.dismiss();
-            }
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> {
+            mItemClicked=-1;
+            dialog.dismiss();
         });
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mItemClicked=-1;
-                  dialog.dismiss();
-            }
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+            mItemClicked=-1;
+              dialog.dismiss();
         });
-        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                mItemClicked=-1;
-            }
-        });
+        builder.setOnDismissListener(dialogInterface -> mItemClicked=-1);
         builder.create().show();
 
     }

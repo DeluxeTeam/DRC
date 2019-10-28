@@ -20,7 +20,6 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,10 +32,8 @@ import android.widget.Toast;
 
 import com.grx.settings.GrxPreferenceScreen;
 import com.grx.settings.R;
-import com.grx.settings.prefssupport.GrxAccessInfo;
 import com.grx.settings.utils.Common;
 import com.grx.settings.utils.GrxPrefsUtils;
-import com.qfcolorpicker.CircleColorDrawable;
 import com.sldv.Menu;
 import com.sldv.MenuItem;
 import com.sldv.SlideAndDragListView;
@@ -183,26 +180,15 @@ public class DlgFrGrxPerAppLedPulse extends DialogFragment implements SlideAndDr
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle);
         builder.setView(getDialogView());
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dismiss();
-            }
-        });
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                setResultAndDoCallback();
-            }
-        });
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> dismiss());
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> setResultAndDoCallback());
 
 
         initSelectedItemsList();
         showSummary();
         iniDragAndDropList();
         checkAddItemsButtonState();
-        AlertDialog ad = builder.create();
-        return ad;
+        return builder.create();
 
     }
 
@@ -212,31 +198,16 @@ public class DlgFrGrxPerAppLedPulse extends DialogFragment implements SlideAndDr
     private View getDialogView(){
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_grxmultiaccess, null);
         vHelpButton = (LinearLayout) view.findViewById(R.id.gid_help_button);
-        vHelpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showHelp();
-            }
-        });
+        vHelpButton.setOnClickListener(v -> showHelp());
         ListDragView = (SlideAndDragListView) view.findViewById(R.id.gid_slv_listview);
 
         vTxtSelectedItems = (TextView) view.findViewById(R.id.gid_items_selected);
         vAddEditButton = (LinearLayout) view.findViewById(R.id.gid_item);
 
-        vAddEditButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openNewSelection();
-            }
-        });
+        vAddEditButton.setOnClickListener(v -> openNewSelection());
 
         vDeleteButton = (LinearLayout) view.findViewById(R.id.gid_delete_button);
-        vDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteAllItems();
-            }
-        });
+        vDeleteButton.setOnClickListener(v -> deleteAllItems());
 
         ListDragView.setDividerHeight(Common.cDividerHeight);
 
@@ -419,20 +390,14 @@ public class DlgFrGrxPerAppLedPulse extends DialogFragment implements SlideAndDr
             AlertDialog ad = new AlertDialog.Builder(getActivity()).create();
             ad.setTitle(getString(R.string.grxs_delete_list));
             ad.setMessage(getString(R.string.grxs_help_delete_all_values));
-            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mItemsList.clear();
-                    mAdapter.notifyDataSetChanged();
-                    showSummary();
-                    checkAddItemsButtonState();
-                }
+            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), (dialog, which) -> {
+                mItemsList.clear();
+                mAdapter.notifyDataSetChanged();
+                showSummary();
+                checkAddItemsButtonState();
             });
-            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), (dialog, which) -> {
 
-                }
             });
             ad.show();
         }
@@ -470,12 +435,12 @@ public class DlgFrGrxPerAppLedPulse extends DialogFragment implements SlideAndDr
     }
 
     private String getResultFromItemList(){
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for(int i=0;i<mItemsList.size();i++){
-            if(mItemsList.get(i).isAppInstalled()) result += mItemsList.get(i).get_value() + mSeparator;
+            if(mItemsList.get(i).isAppInstalled()) result.append(mItemsList.get(i).get_value()).append(mSeparator);
         }
 
-       return result;
+       return result.toString();
     }
 
 
@@ -485,9 +450,9 @@ public class DlgFrGrxPerAppLedPulse extends DialogFragment implements SlideAndDr
         if(mValue!=null && !mValue.isEmpty()) {
             String[] array = mValue.split(Pattern.quote(mSeparator));
             if(array!=null){
-                for(int i=0;i<array.length;i++){
-                    AppLedPulseInfo appLedPulseInfo = new AppLedPulseInfo(array[i],false);
-                    if(appLedPulseInfo.isAppInstalled()) mItemsList.add(appLedPulseInfo);
+                for (String s : array) {
+                    AppLedPulseInfo appLedPulseInfo = new AppLedPulseInfo(s, false);
+                    if (appLedPulseInfo.isAppInstalled()) mItemsList.add(appLedPulseInfo);
                 }
             }
         }

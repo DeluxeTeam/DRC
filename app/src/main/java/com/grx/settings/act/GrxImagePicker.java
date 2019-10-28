@@ -205,9 +205,8 @@ public class GrxImagePicker extends Activity {
                     break;
 
                 case REQ_COD_JUST_GET_URI:
-                    Intent intent = data;
-                    if(mDestFragmentTag!=null) intent.putExtra(Common.TAG_DEST_FRAGMENT_NAME_EXTRA_KEY,mDestFragmentTag);
-                    setResult(Activity.RESULT_OK,intent);
+                    if(mDestFragmentTag!=null) data.putExtra(Common.TAG_DEST_FRAGMENT_NAME_EXTRA_KEY,mDestFragmentTag);
+                    setResult(Activity.RESULT_OK, data);
                     finish();
                     break;
                 default:
@@ -283,14 +282,14 @@ public class GrxImagePicker extends Activity {
             if(!dir_fotos.exists()){
                 dir_fotos.mkdirs();
             }
-            String nombre_fichero = "GRX_"+String.valueOf(System.currentTimeMillis());
+            String nombre_fichero = "GRX_"+ System.currentTimeMillis();
             File fichero_temp = new File(dir_fotos, nombre_fichero+".jpg");
             mImageName = fichero_temp.getAbsolutePath();
             return fichero_temp;
 
         }else{
             File dir_cache = Environment.getDataDirectory();
-            String nombre_fichero = "GRX_"+String.valueOf(System.currentTimeMillis());
+            String nombre_fichero = "GRX_"+ System.currentTimeMillis();
             File fichero_temp = new File(dir_cache, nombre_fichero+".jpg");
             mImageName = fichero_temp.getAbsolutePath();
             return fichero_temp;
@@ -339,7 +338,7 @@ public class GrxImagePicker extends Activity {
             File ftemp;
             InputStream i_s = null;
             FileOutputStream o_s = null;
-            if(output_file_name==null) ftemp = new File(getCacheDir() + File.separator+Common.TMP_PREFIX+ String.valueOf(System.currentTimeMillis()));
+            if(output_file_name==null) ftemp = new File(getCacheDir() + File.separator+Common.TMP_PREFIX+ System.currentTimeMillis());
             else ftemp = new File(output_file_name);
             mLoaderResultName=null;
 
@@ -361,8 +360,8 @@ public class GrxImagePicker extends Activity {
                 mLoaderError=e.getMessage();
                 mLoaderResultName=null;
             } finally {
-                try { i_s.close(); } catch (Exception e) { }
-                try { o_s.close(); } catch (Exception e) { }
+                try { i_s.close(); } catch (Exception ignored) { }
+                try { o_s.close(); } catch (Exception ignored) { }
             }
 
             return mLoaderResultName;

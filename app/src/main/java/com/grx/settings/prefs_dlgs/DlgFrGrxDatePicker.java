@@ -17,7 +17,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.DatePicker;
 
 import com.grx.settings.utils.Common;
 
@@ -94,16 +93,12 @@ public class DlgFrGrxDatePicker extends DialogFragment {
                 System.out.println("Wrong date format (grxsettings)" + casque);
             }
         }
-            DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    if(mCallback!=null) mCallback.onGrxDateSet(String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear+1)+"/"+String.valueOf(year),mkey);
-                    else {
-                        Log.d("grxsettings", "null callback in datepicker");
-                    }
-                }
-            }, year, month, day);
-        return dpd;
+        return new DatePickerDialog(getActivity(), (view, year1, monthOfYear, dayOfMonth) -> {
+            if(mCallback!=null) mCallback.onGrxDateSet(dayOfMonth +"/"+ (monthOfYear + 1) +"/"+ year1,mkey);
+            else {
+                Log.d("grxsettings", "null callback in datepicker");
+            }
+        }, year, month, day);
     }
 
 }

@@ -148,24 +148,19 @@ public class DlgFrColorPalette extends DialogFragment implements View.OnClickLis
         builder.setTitle(R.string.grxs_auto_color);
         builder.setView(getDialogView());
         builder.setNegativeButton(R.string.grxs_cancel, null);
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
 
-                if (ColorAutoListener == null) {
-                    ColorAutoListener = (onColorAutoListener) getFragmentManager().findFragmentByTag(mCallbackFragmentName);
-                }
-                if (ColorAutoListener != null) ColorAutoListener.onColorAuto(current_color, true);
-                else dismiss();
+            if (ColorAutoListener == null) {
+                ColorAutoListener = (onColorAutoListener) getFragmentManager().findFragmentByTag(mCallbackFragmentName);
             }
+            if (ColorAutoListener != null) ColorAutoListener.onColorAuto(current_color, true);
+            else dismiss();
         });
 
         if(state==null) buildPalette();
         else drawColors();
 
-        AlertDialog d = builder.create();
-
-        return d;
+        return builder.create();
     }
 
 
@@ -192,7 +187,7 @@ public class DlgFrColorPalette extends DialogFragment implements View.OnClickLis
     }
 
     public interface onColorAutoListener {
-        public void onColorAuto(int color, boolean auto);
+        void onColorAuto(int color, boolean auto);
     }
 
 
@@ -267,20 +262,17 @@ public class DlgFrColorPalette extends DialogFragment implements View.OnClickLis
         final int color_central = bm.getPixel(bm.getWidth() / 2, bm.getHeight() / 2);
         central_color = color_central;
         current_color = color_central;
-        Palette.from(bm).generate(new Palette.PaletteAsyncListener() {
-            @Override
-            public void onGenerated(Palette palette) {
+        Palette.from(bm).generate(palette -> {
 
-                c_m = palette.getMutedColor(color_central);
-                c_dm = palette.getDarkMutedColor(color_central);
-                c_lm = palette.getLightMutedColor(color_central);
-                c_vb = palette.getVibrantColor(color_central);
-                c_lvb = palette.getLightVibrantColor(color_central);
-                c_dvb = palette.getDarkVibrantColor(color_central);
+            c_m = palette.getMutedColor(color_central);
+            c_dm = palette.getDarkMutedColor(color_central);
+            c_lm = palette.getLightMutedColor(color_central);
+            c_vb = palette.getVibrantColor(color_central);
+            c_lvb = palette.getLightVibrantColor(color_central);
+            c_dvb = palette.getDarkVibrantColor(color_central);
 
-                drawColors();
+            drawColors();
 
-            }
         });
 
     }

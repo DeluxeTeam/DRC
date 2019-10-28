@@ -39,21 +39,20 @@ public class BPRulesUtils {
 
         // process conditions
 
-        String mValuesToCheck=",";
-        List<String> mValuesToContain = new ArrayList<String>();
+        StringBuilder mValuesToCheck= new StringBuilder(",");
+        List<String> mValuesToContain = new ArrayList<>();
 
-        for(int i = 0; i<conditions.length; i++){
-            String value = conditions[i];
-            if(value.startsWith("(") && value.endsWith(")")) {
-                String substring = value.substring(1,value.length()-1);
-                if(substring.contains("NULL"))substring=substring.replace("NULL","");
+        for (String value : conditions) {
+            if (value.startsWith("(") && value.endsWith(")")) {
+                String substring = value.substring(1, value.length() - 1);
+                if (substring.contains("NULL")) substring = substring.replace("NULL", "");
                 mValuesToContain.add(substring);
-            }else mValuesToCheck+=value+",";
+            } else mValuesToCheck.append(value).append(",");
         }
-        if(!mValuesToCheck.endsWith(",")) mValuesToCheck += ",";
-        if(mValuesToCheck.contains("NULL")) {
-            mValuesToCheck=mValuesToCheck.replace("NULL","");
-        }else if(mValuesToCheck.equals(",,")) mValuesToCheck=null;
+        if(!mValuesToCheck.toString().endsWith(",")) mValuesToCheck.append(",");
+        if(mValuesToCheck.toString().contains("NULL")) {
+            mValuesToCheck = new StringBuilder(mValuesToCheck.toString().replace("NULL", ""));
+        }else if(mValuesToCheck.toString().equals(",,")) mValuesToCheck = null;
 
 
         //process build prop property
@@ -65,7 +64,7 @@ public class BPRulesUtils {
         boolean matched = false;
         if(mValuesToCheck!=null) {
             String pattern = "," + value + ",";
-            matched = mValuesToCheck.contains(pattern);
+            matched = mValuesToCheck.toString().contains(pattern);
         }
 
         if(matched)  return rule_isenabled;

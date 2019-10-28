@@ -46,7 +46,7 @@ public class GrxInfoFragment extends Fragment {
     }
 
     public interface onSlidingTabChanged {
-        public void SetObservableScrollView(ObservableScrollView observableScrollView);
+        void SetObservableScrollView(ObservableScrollView observableScrollView);
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -92,12 +92,7 @@ public class GrxInfoFragment extends Fragment {
                 final int color_tint = a.getColor(0, 0);
                 a.recycle();
 
-                tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-                    @Override
-                    public int getIndicatorColor(int position) {
-                        return color_tint;
-                    }
-                });
+                tabs.setCustomTabColorizer(position -> color_tint);
                 tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                     @Override
                     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

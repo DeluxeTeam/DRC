@@ -80,10 +80,8 @@ public class RootPrivilegedUtils {
 
             exitCode = p.waitFor();
 
-        } catch (IOException e1) {
+        } catch (IOException | InterruptedException e1) {
             Log.e("Exception", e1.toString());
-        } catch (InterruptedException e) {
-            Log.e("Exception", e.toString());
         }
         return (exitCode != 255);
     }

@@ -330,8 +330,7 @@ public class SlideAndDragListView<T> extends DragListView<T> implements WrapperA
         if (position != AdapterView.INVALID_POSITION) {
             View view = getChildAt(position - getFirstVisiblePosition());
             if (view instanceof ItemMainLayout) {
-                ItemMainLayout itemMainLayout = (ItemMainLayout) view;
-                return itemMainLayout;
+                return (ItemMainLayout) view;
             }
         }
         return null;

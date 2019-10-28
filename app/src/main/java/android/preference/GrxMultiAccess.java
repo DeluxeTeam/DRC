@@ -64,7 +64,7 @@ public class GrxMultiAccess extends GrxBasePreference implements DlgFrGrxMultiAc
             try {
                 iconsValueTint = ta.getInt(R.styleable.grxPreferences_iconsValueTint, 0);
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         ta.recycle();
@@ -91,7 +91,7 @@ public class GrxMultiAccess extends GrxBasePreference implements DlgFrGrxMultiAc
         if(mStringValue.isEmpty()) return;
 
          String[] uris = mStringValue.split(Pattern.quote(myPrefAttrsInfo.getMySeparator()));
-         for(int i=0;i<uris.length;i++) GrxPrefsUtils.deleteGrxIconFileFromUriString(uris[i]);
+        for (String s : uris) GrxPrefsUtils.deleteGrxIconFileFromUriString(s);
 
          mStringValue= myPrefAttrsInfo.getMyStringDefValue();
          configStringPreference(mStringValue);

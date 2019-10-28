@@ -26,10 +26,10 @@ import java.io.File;
 
 public class AdapterBackups extends BaseAdapter {
     Context context;
-    File ficheros[];
+    File[] ficheros;
 
 
-    public void AdapterBackups(Context ctx, File arr[]){
+    public void AdapterBackups(Context ctx, File[] arr){
         context=ctx;
         ficheros=arr;
 
@@ -47,8 +47,7 @@ public class AdapterBackups extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        long l = (long) position;
-        return l;
+        return (long) position;
     }
 
     @Override

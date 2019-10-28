@@ -43,7 +43,7 @@ public class GrxTimePicker extends GrxBasePreference {
     public int getIntFromStringTime(String time){
         int h=0;
         int m=0;
-        String arr[]=time.split(":");
+        String[] arr = time.split(":");
         if (arr.length==2){
             h=Integer.valueOf(arr[0]);
             m=Integer.valueOf(arr[1]);

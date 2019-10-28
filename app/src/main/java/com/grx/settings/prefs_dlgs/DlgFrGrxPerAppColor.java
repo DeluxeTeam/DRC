@@ -43,7 +43,6 @@ import com.sldv.SlideAndDragListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.regex.Pattern;
 
 
@@ -102,38 +101,18 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
 
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_grxperappcolor, null);
         vHelpButton = (LinearLayout) view.findViewById(R.id.gid_help_button);
-        vHelpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showHelp();
-            }
-        });
+        vHelpButton.setOnClickListener(v -> showHelp());
 
         vTxtSelectedItems = (TextView) view.findViewById(R.id.gid_items_selected);
 
         vAddButton = (LinearLayout) view.findViewById(R.id.gid_add_button);
-        vAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAppSelectionDialog();
-            }
-        });
+        vAddButton.setOnClickListener(v -> showAppSelectionDialog());
 
         vDeleteButton = (LinearLayout) view.findViewById(R.id.gid_delete_button);
-        vDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDeleteItemsDialog();
-            }
-        });
+        vDeleteButton.setOnClickListener(v -> showDeleteItemsDialog());
 
         vSortItemsButton = (LinearLayout) view.findViewById(R.id.gid_sort_button);
-        vSortItemsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sortItemList();
-            }
-        });
+        vSortItemsButton.setOnClickListener(v -> sortItemList());
 
         ListDragView= (SlideAndDragListView) view.findViewById(R.id.gid_slv_listview);
         ListDragView.setDividerHeight(Common.cDividerHeight);
@@ -204,18 +183,8 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle);
         builder.setView(getDialogView());
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dismiss();
-            }
-        });
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                setResultAndDoCallback();
-            }
-        });
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> dismiss());
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> setResultAndDoCallback());
 
         AlertDialog ad = builder.create();
 
@@ -249,9 +218,9 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
         mAppList.clear();
         if (!value.isEmpty()) {
             String[] arr = value.split(Pattern.quote(mSeparator));
-            for (int ind = 0; ind < arr.length; ind++) {
-                int color = getColorFromArrayElement(arr[ind]);
-                String package_name = getPackageOrActivityNameFromArrayElement(arr[ind], 0);
+            for (String s : arr) {
+                int color = getColorFromArrayElement(s);
+                String package_name = getPackageOrActivityNameFromArrayElement(s, 0);
                 String activity_name = null;
                 boolean isInstalled = false;
                 if (package_name != null)
@@ -267,16 +236,16 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
 
 
     private String getResultFromItemList(){
-        String resultado ="";
+        StringBuilder resultado = new StringBuilder();
         for(int ind=0;ind<mAppList.size();ind++){
             GrxAppInfo item = (GrxAppInfo) mAppList.get(ind);
-            resultado+=item.nombre_app();
+            resultado.append(item.nombre_app());
             String act = item.nombre_actividad();
-            resultado+="=";
-            resultado+=String.valueOf(mAppList.get(ind).color_app());
-            resultado+=mSeparator;
+            resultado.append("=");
+            resultado.append(String.valueOf(mAppList.get(ind).color_app()));
+            resultado.append(mSeparator);
         }
-        return resultado;
+        return resultado.toString();
     }
 
 
@@ -450,17 +419,14 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
     private void sortItemList(){
         if(mAppList.size()>1 ){
             try {
-                Collections.sort(mAppList, new Comparator<GrxAppInfo>() {
-                    @Override
-                    public int compare(GrxAppInfo A_appinfo, GrxAppInfo appinfo) {
-                        try {
-                            return String.CASE_INSENSITIVE_ORDER.compare(A_appinfo.etiqueta_app(), appinfo.etiqueta_app());
+                Collections.sort(mAppList, (A_appinfo, appinfo) -> {
+                    try {
+                        return String.CASE_INSENSITIVE_ORDER.compare(A_appinfo.etiqueta_app(), appinfo.etiqueta_app());
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        return 0;
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                    return 0;
                 });
             }catch(Exception e) {
                 e.printStackTrace();
@@ -474,18 +440,12 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
             AlertDialog ad = new AlertDialog.Builder(getActivity()).create();
             ad.setTitle(getString(R.string.grxs_delete_list));
             ad.setMessage(getString(R.string.grxs_help_delete_all_values));
-            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mAppList.clear();
-                    updateChanges();
-                }
+            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), (dialog, which) -> {
+                mAppList.clear();
+                updateChanges();
             });
-            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), (dialog, which) -> {
 
-                }
             });
             ad.show();
         }

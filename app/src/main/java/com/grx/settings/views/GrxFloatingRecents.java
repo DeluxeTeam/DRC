@@ -62,7 +62,7 @@ public class GrxFloatingRecents extends FrameLayout {
     private Runnable DoubleClickRunnable;
     public android.os.Handler mHandler;
     private boolean mDoubleClickPending;
-    private long mDoubleTapTimeOut = Long.valueOf(ViewConfiguration.getDoubleTapTimeout());
+    private long mDoubleTapTimeOut = (long) ViewConfiguration.getDoubleTapTimeout();
 
 
 
@@ -158,22 +158,19 @@ public class GrxFloatingRecents extends FrameLayout {
     private void setUpDoubleTapUp(){
         mHandler = new Handler();
         mDoubleClickPending =false;
-        DoubleClickRunnable = new Runnable() {
-            @Override
-            public void run() {
-                if(mDoubleClickPending && mNumClicks == 2 ){
-                    mNumClicks=0;
-                    mDoubleClickPending =false;
-                    if(mAlpha>=1.0f) mAlpha=0.4f;
-                    else mAlpha=mAlpha+0.1f;
-                    saveAlphaValue(mAlpha);
-                    setAlpha(mAlpha);
+        DoubleClickRunnable = () -> {
+            if(mDoubleClickPending && mNumClicks == 2 ){
+                mNumClicks=0;
+                mDoubleClickPending =false;
+                if(mAlpha>=1.0f) mAlpha=0.4f;
+                else mAlpha=mAlpha+0.1f;
+                saveAlphaValue(mAlpha);
+                setAlpha(mAlpha);
 
-                 }else {
-                    mHandler.removeCallbacks(DoubleClickRunnable);
-                    mNumClicks=0;
-                    mDoubleClickPending =false;
-                }
+             }else {
+                mHandler.removeCallbacks(DoubleClickRunnable);
+                mNumClicks=0;
+                mDoubleClickPending =false;
             }
         };
     }
@@ -209,9 +206,9 @@ public class GrxFloatingRecents extends FrameLayout {
     public String getRecentsStringValueToSave(){
         if(mLastScreens==null || mLastScreens.isEmpty()) return "";
         else {
-            String value ="";
-            for(int i=0; i<mLastScreens.size();i++) value+=mLastScreens.get(i).getmScreenName()+"|";
-            return value;
+            StringBuilder value = new StringBuilder();
+            for(int i=0; i<mLastScreens.size();i++) value.append(mLastScreens.get(i).getmScreenName()).append("|");
+            return value.toString();
         }
     }
 
@@ -240,7 +237,7 @@ public class GrxFloatingRecents extends FrameLayout {
         }else{
             mLastScreens.remove(index);
         }
-        mLastScreens.addFirst(new ScreenInfo(title,xml_name, id));;
+        mLastScreens.addFirst(new ScreenInfo(title,xml_name, id));
         mPendingUpdate=true;
         Common.sp.edit().putString(Common.S_CTRL_RECENTS_SCREENS,getRecentsStringValueToSave()).commit();
         updateRecents();
@@ -410,12 +407,9 @@ public class GrxFloatingRecents extends FrameLayout {
                horizontalScrollView.setHorizontalScrollBarEnabled(true);
                horizontalScrollView.setScrollBarSize(3);
                textView.setTag(String.valueOf(i));
-               textView.setOnClickListener(new OnClickListener() {
-                   @Override
-                   public void onClick(View view) {
-                       int pos = Integer.valueOf( (String) view.getTag() );
-                       if(mCallback!=null) mCallback.setScreenFromGrxFW(mLastScreens.get(pos).getmScreenName(), mLastScreens.get(pos).getScreenId());
-                   }
+               textView.setOnClickListener(view1 -> {
+                   int pos = Integer.valueOf( (String) view1.getTag() );
+                   if(mCallback!=null) mCallback.setScreenFromGrxFW(mLastScreens.get(pos).getmScreenName(), mLastScreens.get(pos).getScreenId());
                });
                return horizontalScrollView;
            }
