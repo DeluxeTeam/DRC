@@ -38,6 +38,7 @@ import com.nineoldandroids.view.ViewPropertyAnimator;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+@SuppressLint("AppCompatCustomView")
 public class FloatingActionButton extends ImageButton {
     private static final int TRANSLATE_DURATION_MILLIS = 200;
 

@@ -1,5 +1,6 @@
 package com.grx.settings.views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,6 +26,7 @@ import com.grx.settings.utils.GrxImageHelper;
  */
 
 
+@SuppressLint("AppCompatCustomView")
 public class ImageViewWithLink extends ImageView implements View.OnClickListener {
 
     private String mUrl;

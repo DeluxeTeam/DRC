@@ -1,5 +1,6 @@
 package com.grx.settings.views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -20,6 +21,7 @@ import com.grx.settings.utils.GrxPrefsUtils;
 
  */
 
+@SuppressLint("AppCompatCustomView")
 public class TextViewWithLink extends TextView implements View.OnClickListener{
 
     private String mUrl;
