@@ -16,6 +16,121 @@
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"  android:orientation="vertical"
                 android:weightSum="1">
 
+                <!-- Changelog 23 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_230" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_230"/>
+
+                <!-- Changelog 22 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_220" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_220"/>
+
+                <!-- Changelog 21 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_210" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_210"/>
+
+                <!-- Changelog 20 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_200" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_200"/>
+
+
+                <!-- Changelog 19 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_190" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_190"/>
+
+                <!-- Changelog 18.2 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_182" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_182"/>
+
+                <!-- Changelog 18.1 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                          android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                          android:text="@string/changelog_181" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                        android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_181"/>
+
+                <!--<com.deluxerom.DeluxeWeather android:layout_height="wrap_content" android:layout_width="wrap_content" />-->
+
+                <!-- Changelog 18 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                          android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                          android:text="@string/changelog_180" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                        android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_180"/>
+
+                <!-- Changelog 17.1 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                          android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                          android:text="@string/changelog_171" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                        android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                        android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_171"/>
+
+                <!-- Changelog 17 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                      android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                      android:text="@string/changelog_170" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_170"/>
+
+                <!-- Changelog 16 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_160" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_160"/>
+
+                <!-- Changelog 15.1 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_151" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_151"/>
+
+                <!-- Changelog 15 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_150" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_150"/>
+
+                <!-- Changelog 14.1 -->
+                <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
+                    android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"
+                    android:text="@string/changelog_141" android:textColor="?complemnt_accent_color"/>
+                <com.grx.settings.views.ArrayTextList
+                    android:layout_marginStart="18dp" android:layout_marginEnd="18dp"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" grxA_entries="@array/changelog_141"/>
+
                 <!-- Changelog 14 -->
                 <TextView android:layout_width="wrap_content"  android:layout_height="wrap_content" android:gravity="center" android:layout_gravity="center"
                     android:textSize="20sp" android:textStyle="bold" android:layout_margin="8dp"

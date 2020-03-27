@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.fab.ObservableScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:updater="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/observableview">
+
+<LinearLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!--    <com.deluxerom.DlxUpdater
+        updater:to_check="drc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.deluxerom.DlxUpdater
+        updater:to_check="rom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />-->
+
+</LinearLayout>
+</com.fab.ObservableScrollView>

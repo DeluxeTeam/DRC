@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -158,58 +159,41 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
 
 
         if(mMaxNumOfAccesses!=1){ //is multivalue
-            builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dismiss();
-                }
+            builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> {
+                mValue = mOriValue;
+                setResultAndExit();
             });
-            builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mValue= getReturnValue();
-                    setResultAndExit();
-                }
+            builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+                mValue= getReturnValue();
+                setResultAndExit();
             });
         }
         mItemList = new ArrayList<>();
         mNumChecked=0;
         initItemsList();
-        if(mMaxNumOfAccesses!=0) mSummAuxString = "( " + String.valueOf(mMaxNumOfAccesses)+" max.)";
+        if (mMaxNumOfAccesses != 0) { mSummAuxString = "( " + mMaxNumOfAccesses + " max.)"; }
         else mSummAuxString=" ";
         updateSummary();
         setListAdapter();
-        AlertDialog ad = builder.create();
-        return ad;
-
+        return builder.create();
     }
 
     private View getMultiSelectView(){
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_grxmultiselect, null);
-        vList = (ListView) view.findViewById(R.id.gid_listview);
+        vList = view.findViewById(R.id.gid_listview);
         if(mMaxNumOfAccesses==0){
-            LinearLayout vCheck = (LinearLayout) view.findViewById(R.id.gid_check_button);
-            vCheck.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    checkAllOptions(true);
-                }
-            });
-            LinearLayout vUncheck = (LinearLayout) view.findViewById(R.id.gid_uncheck_button);
-            vUncheck.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    checkAllOptions(false);
-                }
-            });
+            LinearLayout vCheck = view.findViewById(R.id.gid_check_button);
+            vCheck.setOnClickListener(v -> checkAllOptions(true));
+            LinearLayout vUncheck = view.findViewById(R.id.gid_uncheck_button);
+            vUncheck.setOnClickListener(v -> checkAllOptions(false));
         }else {
-            LinearLayout vBotones = (LinearLayout) view.findViewById(R.id.gid_buttons_container);
+            LinearLayout vBotones = view.findViewById(R.id.gid_buttons_container);
             vBotones.setVisibility(View.GONE);
-            LinearLayout vSeparador = (LinearLayout) view.findViewById(R.id.gid_separator);
+            LinearLayout vSeparador = view.findViewById(R.id.gid_separator);
             vSeparador.setVisibility(View.GONE);
         }
 
-        vSelectedTxt = (TextView) view.findViewById(R.id.gid_items_selected);
+        vSelectedTxt = view.findViewById(R.id.gid_items_selected);
         if(mMaxNumOfAccesses==1) vSelectedTxt.setVisibility(View.GONE);
         vList.setDividerHeight(Common.cDividerHeight);
         return view;
@@ -221,8 +205,8 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
     private void initItemsList(){
 
         TypedArray icons_array=null;
-        String vals_array[] = getResources().getStringArray(mIdValuesArr);
-        String opt_array[] = getResources().getStringArray(mIdOptionsArr);
+        String[] vals_array = getResources().getStringArray(mIdValuesArr);
+        String[] opt_array = getResources().getStringArray(mIdOptionsArr);
         if(mIdIconsArray!=0){
             icons_array = getResources().obtainTypedArray(mIdIconsArray);
         }
@@ -282,39 +266,46 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
         if(mMaxNumOfAccesses==1) vList.setSelection(getLastVisiblePosForSingleChoiceMode());
 
 
-        vList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        vList.setOnItemClickListener((parent, view, position, id) -> {
 
-                if(mMaxNumOfAccesses==1) {
-                    mValue=mItemList.get(position).getValue();
-                    setResultAndExit();
-                }else{
-                    boolean tmp;
-                    tmp=mItemList.get(position).isChecked();
+            if(mMaxNumOfAccesses==1) {
+                mValue=mItemList.get(position).getValue();
+                setResultAndExit();
+            }else{
+                boolean tmp;
+                tmp=mItemList.get(position).isChecked();
 
-                    if(tmp){
-                        tmp=false;
-                        mNumChecked--;
+                if(tmp){
+                    tmp=false;
+                    mNumChecked--;
+                    mItemList.get(position).setChecked(tmp);
+                    mAdapter.notifyDataSetChanged();
+                    updateSummary();
+                    // on the fly when deleted
+                    mValue = getReturnValue();
+                    checkCallback();
+                    if (mCallBack == null) this.dismiss();
+                    mCallBack.GrxSetMultiSelect(mValue);
+                }
+                else{
+                    tmp = true;
+                    if(mMaxNumOfAccesses==0 ){
+                        mNumChecked++;
                         mItemList.get(position).setChecked(tmp);
                         mAdapter.notifyDataSetChanged();
                         updateSummary();
-                    }
-                    else{
-                        tmp = true;
-                        if(mMaxNumOfAccesses==0 ){
+                        // on the fly when added
+                        mValue = getReturnValue();
+                        checkCallback();
+                        if (mCallBack == null) this.dismiss();
+                        mCallBack.GrxSetMultiSelect(mValue);
+                    }else{
+                        if(mNumChecked<mMaxNumOfAccesses) {
                             mNumChecked++;
                             mItemList.get(position).setChecked(tmp);
                             mAdapter.notifyDataSetChanged();
                             updateSummary();
-                        }else{
-                            if(mNumChecked<mMaxNumOfAccesses) {
-                                mNumChecked++;
-                                mItemList.get(position).setChecked(tmp);
-                                mAdapter.notifyDataSetChanged();
-                                updateSummary();
-                            }else Toast.makeText(getActivity(),R.string.grxs_max_choices_warning,Toast.LENGTH_SHORT).show();
-                        }
+                        }else Toast.makeText(getActivity(),R.string.grxs_max_choices_warning,Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -352,6 +343,12 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
         }
         updateSummary();
         mAdapter.notifyDataSetChanged();
+
+        // on-the-fly
+        mValue = getReturnValue();
+        checkCallback();
+        if (mCallBack == null) this.dismiss();
+        mCallBack.GrxSetMultiSelect(mValue);
     }
 
 
@@ -425,10 +422,10 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
             if (convertView == null) {
                 cvh = new CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxmultiselect_item, null);
-                cvh.vIcon = (ImageView) convertView.findViewById(R.id.gid_icon);
-                cvh.vLabel = (TextView) convertView.findViewById(R.id.gid_text);
-                cvh.vRadioButton = (RadioButton) convertView.findViewById(R.id.gid_radiobutton);
-                cvh.vCheckBox = (CheckBox) convertView.findViewById(R.id.gid_checkbox);
+                cvh.vIcon = convertView.findViewById(R.id.gid_icon);
+                cvh.vLabel = convertView.findViewById(R.id.gid_text);
+                cvh.vRadioButton = convertView.findViewById(R.id.gid_radiobutton);
+                cvh.vCheckBox = convertView.findViewById(R.id.gid_checkbox);
                 convertView.setTag(cvh);
             } else {
                 cvh = (CustomViewHolder) convertView.getTag();

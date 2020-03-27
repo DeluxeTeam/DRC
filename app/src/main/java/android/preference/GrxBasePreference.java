@@ -339,20 +339,17 @@ public class GrxBasePreference extends Preference implements
         mLongClickTimeOut = Long.valueOf(ViewConfiguration.getDoubleTapTimeout());
         mDoubleClickPending =false;
 
-        DoubleClickRunnable = new Runnable() {
-            @Override
-            public void run() {
-                if(!mDoubleClickPending){
+        DoubleClickRunnable = () -> {
+            if(!mDoubleClickPending){
+                actionClick();
+            }else {
+                if(mNumClicks ==0) actionClick();
+                else if(mNumClicks !=2) {
                     actionClick();
                 }else {
-                    if(mNumClicks ==0) actionClick();
-                    else if(mNumClicks !=2) {
-                        actionClick();
-                    }else {
-                        if(!mDisableDoubleClick) actionDoubleClick();
-                    }
-
+                    if(!mDisableDoubleClick) actionDoubleClick();
                 }
+
             }
         };
     }

@@ -29,7 +29,8 @@ public class GrxPerItemSingleSelection extends GrxBasePreference implements DlgF
     int iconsValueTint =0;
     boolean shortout = false;
     int spinnerOptionsArrayId = 0, spinnerValuesArrayId=0;
-
+    private boolean mIconblacklistDependency;
+    private boolean mOnTheFly;
 
     public GrxPerItemSingleSelection(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -50,8 +51,16 @@ public class GrxPerItemSingleSelection extends GrxBasePreference implements DlgF
             try {
                 iconsValueTint = ta.getInt(R.styleable.grxperitemsingleselection_iconsValueTint, 0);
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
+        }
+
+        if(ta.hasValue(R.styleable.grxperitemsingleselection_check_icon_blacklist)) {
+            mIconblacklistDependency = ta.getBoolean(R.styleable.grxperitemsingleselection_check_icon_blacklist, false);
+        }
+
+        if(ta.hasValue(R.styleable.grxperitemsingleselection_onTheFly)) {
+            mOnTheFly = ta.getBoolean(R.styleable.grxperitemsingleselection_onTheFly, false);
         }
 
         shortout = ta.getBoolean(R.styleable.grxperitemsingleselection_allowSortOut,false);
@@ -71,7 +80,7 @@ public class GrxPerItemSingleSelection extends GrxBasePreference implements DlgF
                 dlg = DlgFrGrxPerItemSingleSelection.newInstance(this, Common.TAG_PREFSSCREEN_FRAGMENT, myPrefAttrsInfo.getMyKey(), myPrefAttrsInfo.getMyTitle(),mStringValue,
                         myPrefAttrsInfo.getMyOptionsArrayId(), myPrefAttrsInfo.getMyValuesArrayId(), myPrefAttrsInfo.getMyIconsArrayId(), spinnerOptionsArrayId, spinnerValuesArrayId,
                         iconsValueTint,
-                        myPrefAttrsInfo.getMySeparator(),shortout);
+                        myPrefAttrsInfo.getMySeparator(),shortout, mIconblacklistDependency, mOnTheFly);
                 dlg.show(prefsScreen.getFragmentManager(),Common.TAG_DLGFRGRPERITEMSINGLESELECTION);
             }
         }

@@ -5,11 +5,11 @@
     <!-- Estilo de menu de reinicio (Stock/DiÃ¡logo) -->
     <GrxSingleSelection
         android:title="@string/reboot_style"
+        grx:systemType="system"
         android:key="dlx_power_menu_style"
         android:defaultValue="0"
         grx:optionsArray="@array/reboot_style_entries"
         grx:valuesArray="@array/reboot_style_values"
-        grx:systemType="system"
         grx:commonBcExtra="arg"
         grx:commonBcExtraValue="power_menu" />
 
@@ -17,9 +17,9 @@
     <GrxSelectSortItems
         android:title="@string/elements_show"
         grx:depRule="ENABLE#dlx_power_menu_style#STRING#0"
+        grx:systemType="system"
         android:key="dlx_power_menu_container"
         android:defaultValue="power,restart,emergency,grxsettings,"
-        grx:systemType="system"
         grx:separator=","
         grx:commonBcExtra="arg"
         grx:commonBcExtraValue="power_menu"
@@ -29,8 +29,9 @@
     <GrxCheckBoxPreference
         android:title="@string/use_random_reboot"
         grx:depRule="ENABLE#dlx_power_menu_style#STRING#0"
-        android:key="dlx_power_menu_random"
         grx:systemType="system"
+android:key="dlx_power_menu_random"
+        
         grx:commonBcExtra="arg"
         grx:commonBcExtraValue="power_menu"
         android:defaultValue="0" />
@@ -38,8 +39,8 @@
     <GrxCheckBoxPreference
         android:title="@string/pm_split"
         grx:depRule="ENABLE#dlx_power_menu_style#STRING#0"
-        android:key="dlx_power_menu_2columns"
         grx:systemType="system"
+        android:key="dlx_power_menu_2columns"
         grx:commonBcExtra="arg"
         grx:commonBcExtraValue="power_menu"
         android:defaultValue="0" />
@@ -48,19 +49,239 @@
     <GrxSingleSelection
         android:title="@string/icons_style"
         grx:depRule="ENABLE#dlx_power_menu_style#STRING#0"
+        grx:systemType="system"
         android:key="dlx_reboot_style"
         android:defaultValue="0"
         grx:optionsArray="@array/reboot_icon_entries"
         grx:iconsArray="@array/drawables_icono_reinicio"
         grx:valuesArray="@array/reboot_icon_values"
-        grx:systemType="system"
         grx:commonBcExtra="arg"
         grx:commonBcExtraValue="power_menu" />
+
+    <GrxPreferenceCategory grx:hiddenCategory="true" grx:depRule="ENABLE#dlx_power_menu_style#STRING#0">
+
+        <PreferenceScreen android:title="@string/power_text">
+
+            <GrxPerItemColor
+                android:title="@string/power_menu_text_colors"
+                grx:systemType="system"
+                android:key="dlx_power_menu_colors"
+                grx:valuesArray="@array/powermenu_color_values"
+                grx:optionsArray="@array/powermenu_color_entries"
+                android:defaultValue="main/-3947581##desc/-3947581##status/-3947581##mainwhite/-9079435##descwhite/-9079435##statuswhite/-9079435##"
+                grx:separator="##"
+                grx:colorPickerStyle="flower"
+                grx:depRule="ENABLE#dlx_power_menu_style#STRING#0"
+                grx:showAlphaSlider="true"
+                grx:showAutoButton="true"
+                grx:commonBcExtra="arg"
+                grx:commonBcExtraValue="power_menu" />
+
+            <GrxSeekBar
+                android:title="@string/power_size"
+                grx:systemType="system"
+                android:key="dlx_power_text_size"
+                grx:depRule="ENABLE#dlx_power_menu_style#STRING#0"
+                android:defaultValue="15"
+                grx:maxValue="30"
+                grx:minValue="1"
+                grx:commonBcExtra="arg"
+                grx:commonBcExtraValue="power_menu"
+                />
+
+            <GrxSeekBar
+                android:title="@string/power_sub_size"
+                grx:systemType="system"
+                android:key="dlx_power_subtext_size"
+                grx:depRule="ENABLE#dlx_power_menu_style#STRING#0"
+                android:defaultValue="15"
+                grx:maxValue="30"
+                grx:minValue="1"
+                grx:commonBcExtra="arg"
+                grx:commonBcExtraValue="power_menu"
+                />
+
+            <GrxSingleSelection
+                android:title="@string/font"
+                grx:systemType="system"
+                android:key="dlx_power_typeface"
+                grx:depRule="ENABLE#dlx_power_menu_style#STRING#0"
+                android:defaultValue="0"
+                grx:commonBcExtra="arg"
+                grx:commonBcExtraValue="power_menu"
+                grx:iconsArray="@array/agc_estilo_fuente_drawables"
+                grx:optionsArray="@array/agc_estilo_fuente_entries"
+                grx:valuesArray="@array/agc_estilo_fuente_values"
+                />
+
+            <GrxSingleSelection
+                android:title="@string/subtxt_font"
+                grx:systemType="system"
+                android:key="dlx_power_sub_typeface"
+                grx:depRule="ENABLE#dlx_power_menu_style#STRING#0"
+                android:defaultValue="0"
+                grx:commonBcExtra="arg"
+                grx:commonBcExtraValue="power_menu"
+                grx:iconsArray="@array/agc_estilo_fuente_drawables"
+                grx:optionsArray="@array/agc_estilo_fuente_entries"
+                grx:valuesArray="@array/agc_estilo_fuente_values"
+                />
+
+        </PreferenceScreen>
+
+    </GrxPreferenceCategory>
+
+    <!-- Fondo personalizado -->
+    <PreferenceScreen android:title="@string/custombg" >
+
+        <GrxSwitchPreference
+            android:title="@string/visibility"
+            grx:systemType="system"
+            android:key="dlx_power_bg_enabled"
+            android:defaultValue="false"
+            />
+        <GrxSingleSelection
+            android:title="@string/type"
+            grx:systemType="system"
+            android:key="dlx_power_bg_type"
+            android:defaultValue="0"
+            android:dependency="dlx_power_bg_enabled"
+            grx:optionsArray="@array/custom_bg_type_entries"
+            grx:valuesArray="@array/custom_bg_type_values" />
+        <GrxPickImage
+            android:title="@string/select_image"
+            grx:systemType="system"
+            android:key="dlx_power_bg_uri"
+            android:dependency="dlx_power_bg_enabled"
+            grx:depRule="ENABLE#dlx_power_bg_type#STRING#0"
+            />
+        <GrxSeekBar
+            android:title="@string/opacity"
+            grx:systemType="system"
+            android:key="dlx_power_bg_alpha"
+            android:defaultValue="255"
+            android:dependency="dlx_power_bg_enabled"
+            grx:maxValue="255"
+            grx:minValue="0"
+            />
+        <GrxColorPicker
+            android:title="@string/color"
+            grx:systemType="system"
+            android:key="dlx_power_bg_indv_color"
+            android:defaultValue="-1"
+            android:dependency="dlx_power_bg_enabled"
+            grx:depRule="ENABLE#dlx_power_bg_type#STRING#1"
+            grx:colorPickerStyle="flower"
+            grx:iconTint="?complementary_color3"
+            grx:showAlphaSlider="true"
+            grx:showAutoButton="true"
+            grx:saveValueOnFly="true"
+            />
+        <GrxPerItemColor
+            android:title="@string/gradient6"
+            grx:systemType="system"
+            android:key="dlx_power_bg_color_array"
+            grx:valuesArray="@array/custombg_color_values"
+            grx:optionsArray="@array/custombg_color_entries"
+            android:defaultValue="color1/-1##color2/-1##color3/-1##color4/-1##color5/-1##color6/-1##"
+            grx:separator="##"
+            grx:colorPickerStyle="flower"
+            android:dependency="dlx_power_bg_enabled"
+            grx:depRule="ENABLE#dlx_power_bg_type#STRING#2"
+            grx:showAlphaSlider="true"
+            grx:showAutoButton="true" />
+        <GrxSingleSelection
+            android:title="@string/custombg_orientation"
+            grx:systemType="system"
+            android:key="dlx_power_bg_orientation"
+            android:defaultValue="0"
+            android:dependency="dlx_power_bg_enabled"
+            grx:depRule="ENABLE#dlx_power_bg_type#STRING#2"
+            grx:optionsArray="@array/gradient_entries"
+            grx:valuesArray="@array/gradient_values" />
+    </PreferenceScreen>
+
+    <!-- Matrix -->
+    <PreferenceScreen android:title="@string/matrix">
+        <GrxSwitchPreference
+            android:title="@string/visibility"
+            android:key="dlx_power_matrix_visibility"
+            android:defaultValue="false"
+            grx:systemType="system" />
+        <GrxCheckBoxPreference
+            grx:depRule="DISABLE#dlx_power_matrix_random#BOOLEAN#true"
+            android:dependency="dlx_power_matrix_visibility"
+            android:title="@string/use_gradient"
+            android:key="dlx_power_matrix_gradient"
+            android:defaultValue="false"
+            grx:systemType="system" />
+        <GrxCheckBoxPreference
+            android:dependency="dlx_power_matrix_visibility"
+            android:title="@string/invert"
+            android:key="dlx_power_matrix_invert"
+            android:defaultValue="false"
+            grx:systemType="system" />
+        <GrxCheckBoxPreference
+            grx:depRule="DISABLE#dlx_power_matrix_gradient#BOOLEAN#true"
+            android:dependency="dlx_power_matrix_visibility"
+            android:title="@string/random_color"
+            android:key="dlx_power_matrix_random"
+            android:defaultValue="false"
+            grx:systemType="system" />
+        <GrxColorPicker
+            android:dependency="dlx_power_matrix_visibility"
+            android:title="@string/bg_color"
+            android:key="dlx_power_matrix_bg_color"
+            android:defaultValue="0xFF000000"
+            grx:showAlphaSlider="true"
+            grx:showAutoButton="true"
+            grx:systemType="system" />
+        <GrxColorPicker
+            grx:depRule="DISABLE#dlx_power_matrix_random#BOOLEAN#true"
+            android:dependency="dlx_power_matrix_visibility"
+            android:title="@string/primary_text_color"
+            android:key="dlx_power_matrix_txt_color"
+            android:defaultValue="0xFF00FF00"
+            grx:showAlphaSlider="true"
+            grx:showAutoButton="true"
+            grx:systemType="system" />
+        <GrxColorPicker
+            grx:depRule="DISABLE#dlx_power_matrix_random#BOOLEAN#true"
+            android:dependency="dlx_power_matrix_gradient"
+            android:title="@string/second_txt_color_gradient"
+            android:key="dlx_power_matrix_txt_second_color"
+            android:defaultValue="0xFFFFFF00"
+            grx:showAlphaSlider="true"
+            grx:showAutoButton="true"
+            grx:systemType="system" />
+        <GrxSeekBar
+            android:dependency="dlx_power_matrix_visibility"
+            android:title="@string/size"
+            android:key="dlx_power_matrix_txt_size"
+            android:defaultValue="15"
+            grx:maxValue="50"
+            grx:minValue="3"
+            grx:interval="1"
+            grx:showPopup="true"
+            grx:systemType="system" />
+        <GrxSeekBar
+            android:dependency="dlx_power_matrix_visibility"
+            android:title="@string/opacity"
+            android:key="dlx_power_matrix_txt_alpha"
+            android:defaultValue="255"
+            grx:maxValue="255"
+            grx:minValue="1"
+            grx:interval="1"
+            grx:showPopup="true"
+            grx:systemType="system" />
+    </PreferenceScreen>
+
 
     <!--
     <GrxCheckBoxPreference
         android:title="@string/confirm_actions"
-        android:key="dlx_powermenu_confirm_actions"
+        grx:systemType="system"
+android:key="dlx_powermenu_confirm_actions"
         grx:commonBcExtra="arg"
         grx:commonBcExtraValue="reboot"
         android:defaultValue="1" />
@@ -68,7 +289,8 @@
     &lt;!&ndash; Color de texto &ndash;&gt;
     <GrxColorPicker
         android:title="@string/txt_color"
-        android:key="dlx_powermenu_text_1"
+        grx:systemType="system"
+android:key="dlx_powermenu_text_1"
         android:defaultValue="0xFFFFFFFF"
         grx:colorPickerStyle="flower"
         grx:iconTint="?complementary_color3"
@@ -76,12 +298,13 @@
         grx:commonBcExtraValue="reboot"
         grx:showAlphaSlider="true"
         grx:showAutoButton="true"
-        grx:systemType="system" />
+         />
 
     &lt;!&ndash; Color de subtexto &ndash;&gt;
     <GrxColorPicker
         android:title="@string/subtxt_color"
-        android:key="dlx_powermenu_text_2"
+        grx:systemType="system"
+android:key="dlx_powermenu_text_2"
         android:defaultValue="0xFFFFFFFF"
         grx:colorPickerStyle="flower"
         grx:iconTint="?complementary_color3"
@@ -89,54 +312,60 @@
         grx:commonBcExtraValue="reboot"
         grx:showAlphaSlider="true"
         grx:showAutoButton="true"
-        grx:systemType="system" />
+         />
 
     &lt;!&ndash; Fondo personalizado &ndash;&gt;
     <PreferenceScreen android:title="@string/custombg" >
         <GrxSwitchPreference
             android:title="@string/visibility"
-            android:key="dlx_rm_drw_visibility"
+            grx:systemType="system"
+android:key="dlx_rm_drw_visibility"
             android:defaultValue="false"
             grx:broadCast1="deluxerom.drawable_update_dlx_rm_drw_"
-            grx:systemType="system" />
+             />
         <GrxSingleSelection
             android:title="@string/type"
-            android:key="dlx_rm_drw_type"
+            grx:systemType="system"
+android:key="dlx_rm_drw_type"
             android:dependency="dlx_rm_drw_visibility"
             android:defaultValue="0"
             grx:broadCast1="deluxerom.drawable_update_dlx_rm_drw_"
             grx:optionsArray="@array/custom_bg_type_entries"
-            grx:systemType="system"
+            
             grx:valuesArray="@array/custom_bg_type_values" />
         <GrxPickImage
             android:title="@string/select_image"
-            android:key="dlx_rm_drw_image_uri"
+            grx:systemType="system"
+android:key="dlx_rm_drw_image_uri"
             grx:depRule="ENABLE#dlx_rm_drw_type#STRING#0"
             android:dependency="dlx_rm_drw_visibility"
             grx:broadCast1="deluxerom.drawable_update_dlx_rm_drw_"
-            grx:systemType="system" />
+             />
         <GrxSingleSelection
             android:title="@string/image_scale"
-            android:key="dlx_rm_drw_scale"
+            grx:systemType="system"
+android:key="dlx_rm_drw_scale"
             android:dependency="dlx_rm_drw_visibility"
             grx:depRule="ENABLE#dlx_rm_drw_type#STRING#0"
             android:defaultValue="2"
             grx:broadCast1="deluxerom.drawable_update_dlx_rm_drw_"
             grx:optionsArray="@array/crop_entries"
-            grx:systemType="system"
+            
             grx:valuesArray="@array/crop_values" />
         <GrxSeekBar
             android:title="@string/opacity"
-            android:key="dlx_rm_drw_opacity"
+            grx:systemType="system"
+android:key="dlx_rm_drw_opacity"
             android:dependency="dlx_rm_drw_visibility"
             android:defaultValue="255"
             grx:broadCast1="deluxerom.drawable_update_dlx_rm_drw_"
             grx:maxValue="255"
             grx:minValue="0"
-            grx:systemType="system" />
+             />
         <GrxColorPicker
             android:title="@string/color"
-            android:key="dlx_rm_drw_primary"
+            grx:systemType="system"
+android:key="dlx_rm_drw_primary"
             android:dependency="dlx_rm_drw_visibility"
             grx:depRule="DISABLE#dlx_rm_drw_type#STRING#0"
             android:defaultValue="16777215"
@@ -146,10 +375,11 @@
             grx:showAlphaSlider="true"
             grx:showAutoButton="true"
             grx:saveValueOnFly="true"
-            grx:systemType="system" />
+             />
         <GrxColorPicker
             android:title="Color 2"
-            android:key="dlx_rm_drw_secondary"
+            grx:systemType="system"
+android:key="dlx_rm_drw_secondary"
             android:dependency="dlx_rm_drw_visibility"
             grx:depRule="ENABLE#dlx_rm_drw_type#STRING#2"
             android:defaultValue="16777215"
@@ -159,10 +389,11 @@
             grx:showAlphaSlider="true"
             grx:showAutoButton="true"
             grx:saveValueOnFly="true"
-            grx:systemType="system" />
+             />
         <GrxColorPicker
             android:title="Color 3"
-            android:key="dlx_rm_drw_tertiary"
+            grx:systemType="system"
+android:key="dlx_rm_drw_tertiary"
             android:dependency="dlx_rm_drw_visibility"
             grx:depRule="ENABLE#dlx_rm_drw_type#STRING#2"
             android:defaultValue="16777215"
@@ -172,10 +403,11 @@
             grx:showAlphaSlider="true"
             grx:showAutoButton="true"
             grx:saveValueOnFly="true"
-            grx:systemType="system" />
+             />
         <GrxColorPicker
             android:title="Color 4"
-            android:key="dlx_rm_drw_quaternary"
+            grx:systemType="system"
+android:key="dlx_rm_drw_quaternary"
             android:dependency="dlx_rm_drw_visibility"
             grx:depRule="ENABLE#dlx_rm_drw_type#STRING#2"
             android:defaultValue="16777215"
@@ -185,10 +417,11 @@
             grx:showAlphaSlider="true"
             grx:showAutoButton="true"
             grx:saveValueOnFly="true"
-            grx:systemType="system" />
+             />
         <GrxColorPicker
             android:title="Color 5"
-            android:key="dlx_rm_drw_quinary"
+            grx:systemType="system"
+android:key="dlx_rm_drw_quinary"
             android:dependency="dlx_rm_drw_visibility"
             grx:depRule="ENABLE#dlx_rm_drw_type#STRING#2"
             android:defaultValue="16777215"
@@ -198,10 +431,11 @@
             grx:showAlphaSlider="true"
             grx:showAutoButton="true"
             grx:saveValueOnFly="true"
-            grx:systemType="system" />
+             />
         <GrxColorPicker
             android:title="Color 6"
-            android:key="dlx_rm_drw_sextary"
+            grx:systemType="system"
+android:key="dlx_rm_drw_sextary"
             android:dependency="dlx_rm_drw_visibility"
             grx:depRule="ENABLE#dlx_rm_drw_type#STRING#2"
             android:defaultValue="16777215"
@@ -211,16 +445,17 @@
             grx:showAlphaSlider="true"
             grx:showAutoButton="true"
             grx:saveValueOnFly="true"
-            grx:systemType="system" />
+             />
         <GrxSingleSelection
             android:title="@string/custombg_orientation"
-            android:key="dlx_rm_drw_gradient_orientation"
+            grx:systemType="system"
+android:key="dlx_rm_drw_gradient_orientation"
             grx:depRule="ENABLE#dlx_rm_drw_type#STRING#2"
             android:dependency="dlx_rm_drw_visibility"
             android:defaultValue="0"
             grx:broadCast1="deluxerom.drawable_update_dlx_rm_drw_"
             grx:optionsArray="@array/gradient_entries"
-            grx:systemType="system"
+            
             grx:valuesArray="@array/gradient_values" />
     </PreferenceScreen>
 
@@ -228,45 +463,51 @@
     <PreferenceScreen android:title="@string/matrix">
         <GrxSwitchPreference
             android:title="@string/visibility"
-            android:key="dlx_rm_mtx_visibility"
+            grx:systemType="system"
+android:key="dlx_rm_mtx_visibility"
             grx:broadCast1="deluxerom.matrix_update_dlx_rm_mtx_"
             android:defaultValue="false"
-            grx:systemType="system" />
+             />
         <GrxCheckBoxPreference
             android:title="@string/random_color"
-            android:key="dlx_rm_mtx_random"
+            grx:systemType="system"
+android:key="dlx_rm_mtx_random"
             android:dependency="dlx_rm_mtx_visibility"
             grx:broadCast1="deluxerom.matrix_update_dlx_rm_mtx_"
             android:defaultValue="false"
-            grx:systemType="system" />
+             />
         <GrxCheckBoxPreference
             android:title="@string/use_gradient"
-            android:key="dlx_rm_mtx_gradient"
+            grx:systemType="system"
+android:key="dlx_rm_mtx_gradient"
             grx:depRule="DISABLE#dlx_rm_mtx_random#BOOLEAN#true"
             android:dependency="dlx_rm_mtx_visibility"
             grx:broadCast1="deluxerom.matrix_update_dlx_rm_mtx_"
             android:defaultValue="false"
-            grx:systemType="system" />
+             />
         <GrxCheckBoxPreference
             android:title="@string/invert_direction"
-            android:key="dlx_rm_mtx_invert"
+            grx:systemType="system"
+android:key="dlx_rm_mtx_invert"
             android:dependency="dlx_rm_mtx_visibility"
             grx:broadCast1="deluxerom.matrix_update_dlx_rm_mtx_"
             android:defaultValue="false"
-            grx:systemType="system" />
+             />
         <GrxColorPicker
             android:title="@string/bg_color"
-            android:key="dlx_rm_mtx_bg_color"
+            grx:systemType="system"
+android:key="dlx_rm_mtx_bg_color"
             grx:broadCast1="deluxerom.matrix_update_dlx_rm_mtx_"
             android:defaultValue="0xFF000000"
             grx:colorPickerStyle="flower"
             android:dependency="dlx_rm_mtx_visibility"
             grx:showAlphaSlider="true"
             grx:showAutoButton="true"
-            grx:systemType="system" />
+             />
         <GrxColorPicker
             android:title="@string/txt_color"
-            android:key="dlx_rm_mtx_txt_color"
+            grx:systemType="system"
+android:key="dlx_rm_mtx_txt_color"
             android:dependency="dlx_rm_mtx_visibility"
             grx:broadCast1="deluxerom.matrix_update_dlx_rm_mtx_"
             android:defaultValue="0xFF00FF00"
@@ -274,10 +515,11 @@
             grx:colorPickerStyle="flower"
             grx:showAlphaSlider="true"
             grx:showAutoButton="true"
-            grx:systemType="system" />
+             />
         <GrxColorPicker
             android:title="@string/second_txt_color"
-            android:key="dlx_rm_mtx_second_color"
+            grx:systemType="system"
+android:key="dlx_rm_mtx_second_color"
             grx:broadCast1="deluxerom.matrix_update_dlx_rm_mtx_"
             android:defaultValue="0xFFFFFF00"
             grx:colorPickerStyle="flower"
@@ -285,27 +527,29 @@
             android:dependency="dlx_rm_mtx_visibility"
             grx:showAlphaSlider="true"
             grx:showAutoButton="true"
-            grx:systemType="system" />
+             />
         <GrxSeekBar
             android:title="@string/size"
-            android:key="dlx_rm_mtx_size"
+            grx:systemType="system"
+android:key="dlx_rm_mtx_size"
             grx:broadCast1="deluxerom.matrix_update_dlx_rm_mtx_"
             android:defaultValue="35"
             grx:maxValue="50"
             android:dependency="dlx_rm_mtx_visibility"
             grx:minValue="12"
             grx:interval="1"
-            grx:systemType="system" />
+             />
         <GrxSeekBar
             android:title="@string/frequency"
-            android:key="dlx_rm_mtx_frequency"
+            grx:systemType="system"
+android:key="dlx_rm_mtx_frequency"
             grx:broadCast1="deluxerom.matrix_update_dlx_rm_mtx_"
             android:defaultValue="5"
             grx:maxValue="50"
             android:dependency="dlx_rm_mtx_visibility"
             grx:minValue="1"
             grx:interval="1"
-            grx:systemType="system" />
+             />
     </PreferenceScreen>-->
 
 </PreferenceScreen>

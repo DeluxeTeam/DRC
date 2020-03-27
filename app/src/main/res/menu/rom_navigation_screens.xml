@@ -4,13 +4,14 @@
     <Text android:icon="@drawable/ic_statusbar" android:id="@+id/deluxerom_statusbar" android:title="@string/statusbar" />
     <Text android:icon="@drawable/ic_notification_panel" android:id="@+id/deluxerom_notpanel" android:title="@string/notifpanel"/>
     <!--Text android:icon="@drawable/ic_network_speed" android:id="@+id/deluxerom_network" android:title="@string/netwspeed" /-->
-    <Text android:icon="@drawable/ic_vbuttons" android:id="@+id/deluxerom_virtual_buttons" android:title="@string/virtual_buttons"/>
-    <Text android:icon="@drawable/ic_remap_buttons" android:id="@+id/deluxerom_remap_buttons" android:title="@string/remap_buttons"/>
+    <Text android:icon="@drawable/ic_app_link" android:id="@+id/deluxerom_virtual_buttons" android:title="@string/virtual_buttons"/>
+    <Text android:icon="@drawable/ic_remap_boton" android:id="@+id/deluxerom_remap_buttons" android:title="@string/remap_buttons"/>
     <Text android:icon="@drawable/ic_reboot" android:id="@+id/deluxerom_reboot" android:title="@string/rebootmenu"/>
     <Text android:icon="@drawable/ic_lockscreen" android:id="@+id/deluxerom_lockscreen" android:title="@string/lockscreen"/>
     <Text android:icon="@drawable/ic_navbar" android:id="@+id/deluxerom_navbar" android:title="@string/navbar"/>
-    <!--<Text android:icon="@drawable/ic_recents" android:id="@+id/deluxerom_recents" android:title="@string/recents"/-->
+    <Text android:icon="@drawable/ic_recents" android:id="@+id/deluxerom_recents" android:title="@string/recents"/>
     <Text android:icon="@drawable/ic_launcher" android:id="@+id/deluxerom_launcher" android:title="@string/twlauncher" />
-    <Text android:icon="@drawable/ic_others" android:id="@+id/deluxerom_others" android:title="@string/others"/>
+    <Text android:icon="@drawable/ic_other" android:id="@+id/deluxerom_others" android:title="@string/others"/>
+    <Text android:icon="@drawable/ic_kernel_2" android:id="@+id/deluxerom_kernel" android:title="@string/kernel"/>
 
 </menu>

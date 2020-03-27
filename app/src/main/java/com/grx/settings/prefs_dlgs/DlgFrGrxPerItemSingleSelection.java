@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +61,7 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
     private String mValue;
     private String mOriValue;
     private String mSeparator;
+    private boolean mIconblacklistDependency, mOnTheFly;
 
     private int mItemClicked = -1;
 
@@ -84,7 +86,7 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
 
     public static DlgFrGrxPerItemSingleSelection newInstance(DlgFrGrxPerItemSingleSelection.PerItemSingleSelectionDialogListener callback,String HelperFragment, String key, String title, String value,
                                                              int id_array_options, int id_array_values, int id_array_icons, int id_array_spinneroptios, int id_array_spinnervalues,
-                                                             int iconstintcolor, String separtor, boolean shortout
+                                                             int iconstintcolor, String separtor, boolean shortout, boolean check_icon_blacklist, boolean onTheFly
     ) {
 
 
@@ -102,6 +104,8 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
         bundle.putInt("spinner_options_array_id",id_array_spinneroptios);
         bundle.putInt("spinner_values_array_id",id_array_spinnervalues);
         bundle.putBoolean("shortout",shortout);
+        bundle.putBoolean("check_icon_blacklist", check_icon_blacklist);
+        bundle.putBoolean("onTheFly", onTheFly);
         ret.setArguments(bundle);
         ret.saveCallback(callback);
         return ret;
@@ -145,6 +149,8 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
         mIdSpinnerOptionsArray = getArguments().getInt("spinner_options_array_id");
         mIdSpinnerValuesArray = getArguments().getInt("spinner_values_array_id");
         mShortOutOption = getArguments().getBoolean("shortout");
+        mIconblacklistDependency = getArguments().getBoolean("check_icon_blacklist");
+        mOnTheFly = getArguments().getBoolean("onTheFly");
 
         if (state != null) {
             mValue = state.getString("curr_val");
@@ -152,19 +158,12 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle);
         builder.setView(getDialogView());
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> {
+                mValue= mOriValue;
+                mCallBack.onPerItemSingleSelectionSet(mValue);
                 dismiss();
-            }
         });
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                setResultAndDoCallback();
-            }
-        });
-
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> setResultAndDoCallback());
         initItemsList();
         ini_drag_list();
         AlertDialog ad = builder.create();
@@ -225,13 +224,13 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
 
         values=mValue.split(Pattern.quote(mSeparator));
 
-        for(int i=0;i<values.length;i++){
-            String[] array = values[i].split(Pattern.quote(";"));
-            int pos = GrxPrefsUtils.getPositionInStringArray(vals_array,array[0]);
-            int posspinner = GrxPrefsUtils.getPositionInStringArray(spinner_vals,array[1]);
-            Drawable drawable=null;
-            if(icons_array!=null) drawable = icons_array.getDrawable(pos);
-            mItemList.add(new ItemInfo(values[i],opt_array[pos], vals_array[pos],spinner_vals[posspinner],drawable));
+        for (String value : values) {
+            String[] array = value.split(Pattern.quote(";"));
+            int pos = GrxPrefsUtils.getPositionInStringArray(vals_array, array[0]);
+            int posspinner = GrxPrefsUtils.getPositionInStringArray(spinner_vals, array[1]);
+            Drawable drawable = null;
+            if (icons_array != null) drawable = icons_array.getDrawable(pos);
+            mItemList.add(new ItemInfo(value, opt_array[pos], vals_array[pos], spinner_vals[posspinner], drawable));
         }
         if(icons_array!=null) icons_array.recycle();
 
@@ -253,7 +252,10 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
         mDragList.setDividerHeight(Common.cDividerHeight);
         mDragList.setVerticalScrollBarEnabled(true);
         mDragList.setAdapter(mAdapter);
-        mDragList.setOnDragListener(this,mItemList);
+
+        if (mShortOutOption) {
+            mDragList.setOnDragListener(this, mItemList);
+        }
         mDragList.setOnListItemLongClickListener(this);
         mDragList.setOnListItemClickListener(this);
         //mAdapter.notifyDataSetChanged();
@@ -288,46 +290,53 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
 
     @Override
     public void onListItemClick(View v, final int position) {
+
+        if (mIconblacklistDependency && shouldHide(((DlgFrGrxPerItemSingleSelection.ItemInfo) mAdapter.getItem(position)).getValue())) {
+            Toast.makeText(getActivity(), R.string.unhide_first, Toast.LENGTH_LONG).show();
+            return;
+        }
+
         mItemClicked=position;
         final String curval = mItemList.get(position).getSpinnerValue();
         int selected = GrxPrefsUtils.getPositionInStringArray(getResources().getStringArray(mIdSpinnerValuesArray),mItemList.get(position).getSpinnerValue());
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.grxs_select_option);
         builder.setSingleChoiceItems(getResources().getStringArray(mIdSpinnerOptionsArray),
-                selected, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+                selected, (dialogInterface, i) -> {
 
-                String new_value = getResources().getStringArray(mIdSpinnerValuesArray)[i];
+                    String new_value = getResources().getStringArray(mIdSpinnerValuesArray)[i];
+                    if(!curval.equals(new_value)) {
+                        mItemList.get(mItemClicked).setSpinnervalue(new_value);
+                        mAdapter.notifyDataSetChanged();
+                        if (mOnTheFly) setResultAndDoCallback();
+                    }
+                    mItemClicked=-1;
+                    dialogInterface.dismiss();
+                });
+
+        builder.setSingleChoiceItems(getResources().getStringArray(mIdSpinnerOptionsArray), selected, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String new_value = getResources().getStringArray(mIdSpinnerValuesArray)[which];
                 if(!curval.equals(new_value)) {
                     mItemList.get(mItemClicked).setSpinnervalue(new_value);
                     mAdapter.notifyDataSetChanged();
+                    if (mOnTheFly) setResultAndDoCallback();
                 }
-                mItemClicked=-1;
-                dialogInterface.dismiss();
-            }
-        });
-
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
                 mItemClicked=-1;
                 dialog.dismiss();
             }
         });
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mItemClicked=-1;
-                  dialog.dismiss();
-            }
+
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> {
+            mItemClicked=-1;
+            dialog.dismiss();
         });
-        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                mItemClicked=-1;
-            }
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+            mItemClicked=-1;
+              dialog.dismiss();
         });
+        builder.setOnDismissListener(dialogInterface -> mItemClicked=-1);
         builder.create().show();
 
     }
@@ -410,9 +419,11 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
 
             DlgFrGrxPerItemSingleSelection.ItemInfo grxInfoItem = (DlgFrGrxPerItemSingleSelection.ItemInfo) this.getItem(position);
             cvh.vCtxt.setText(grxInfoItem.getText());
+
              int pos =  GrxPrefsUtils.getPositionInStringArray(getResources().getStringArray(mIdSpinnerValuesArray),
                            grxInfoItem.getSpinnerValue());
             cvh.vValue.setText(getResources().getStringArray(mIdSpinnerOptionsArray)[pos]);
+
 
             if(mIdIconsArray==0) cvh.vIcon.setVisibility(View.GONE);
             else {
@@ -420,6 +431,11 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
                 if(mIconsTintColor!=0)cvh.vIcon.setColorFilter(mIconsTintColor);
             }
 
+            if (mIconblacklistDependency) {
+                final float alpha = shouldHide(grxInfoItem.getValue()) ? 0.5f : 1;
+                cvh.vCtxt.setAlpha(alpha);
+                cvh.vValue.setAlpha(alpha);
+            }
 
             // convertView.setMinimumHeight(minheight);
             return convertView;
@@ -433,4 +449,27 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
         }
     };
 
+    private final String blacklist = Common.sp.getString("dlx_icon_blacklist", "rotate,headset,circularbt,minit,weather,netspeed,sb_date,");
+
+    private boolean shouldHide(String value) {
+        if (value.contains("netspeed")) {
+            return blacklist.contains("netspeed");
+        } else if (value.contains("minit")) {
+            return blacklist.contains("minit");
+        } else if (value.contains("circular")) {
+            return blacklist.contains("circular");
+        } else if (value.contains("weather")) {
+            return blacklist.contains("weather");
+        } else if (value.contains("date")) {
+            return blacklist.contains("date");
+        } else if (value.contains("carrier")) {
+            return blacklist.contains("carrier");
+        } else if (value.contains("clock")) {
+            return blacklist.contains(",clock");
+        } else if (value.contains("battery")) {
+            return blacklist.contains("battery");
+        }
+        return false;
     }
+
+}

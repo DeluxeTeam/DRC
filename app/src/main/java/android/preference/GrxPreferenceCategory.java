@@ -70,7 +70,9 @@ public class GrxPreferenceCategory extends PreferenceCategory implements GrxPref
         //  TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.grxPreferencecategory);
 
         if(ta.hasValue(R.styleable.grxPreferencecategory_textColor))
-            mTextColor =ta.getColor(R.styleable.grxPreferencecategory_textColor,0x80000000);
+            try {
+                mTextColor = ta.getColor(R.styleable.grxPreferencecategory_textColor, 0x80000000);
+            } catch (UnsupportedOperationException ignored) {}
 
 
 

@@ -13,6 +13,8 @@
 
 package com.grx.settings.utils;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,10 +32,30 @@ public class BPRulesUtils {
 
         if(BPRule==null || BPRule.isEmpty()) return true;
 
+        // Special case for the kernel. If is not deluxe, remove the prefs
+        if (BPRule.equals("kernel") || BPRule.equals("kernelWarn")) {
+            StringBuilder log = new StringBuilder();
+            try {
+                Process process = Runtime.getRuntime().exec("uname -a");
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    log.append(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String kernel = log.toString();
+            boolean isDeluxe = !kernel.isEmpty() && kernel.contains("Deluxe");
+            if ( BPRule.equals("kernelWarn") ) { return !isDeluxe; }
+            return isDeluxe;
+        }
+
+
         String[] rule = BPRule.split(Pattern.quote("#"));
         if(rule==null || rule.length!=3  ) return true;
 
-        boolean rule_isenabled = (rule[0].toUpperCase().equals("SHOW")) ? true : false;
+        boolean rule_isenabled = rule[0].toUpperCase().equals("SHOW");
         // String propValue = GrxPrefsUtils.getBPProperty(rule[1]);
         String[] conditions = rule[2].split(Pattern.quote(","));
 

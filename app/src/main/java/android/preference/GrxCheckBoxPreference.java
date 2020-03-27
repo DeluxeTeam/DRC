@@ -62,7 +62,9 @@ public class GrxCheckBoxPreference extends CheckBoxPreference implements GrxPref
         else ta = context.obtainStyledAttributes(attrs, R.styleable.grxCheckBoxPreference);
 
         //TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.grxCheckBoxPreference);
-        mColor = ta.getInt(R.styleable.grxCheckBoxPreference_checkboxColor, 0);
+        try {
+            mColor = ta.getInt(R.styleable.grxCheckBoxPreference_checkboxColor, 0);
+        } catch (NumberFormatException ignored) {}
         ta.recycle();
 
     }

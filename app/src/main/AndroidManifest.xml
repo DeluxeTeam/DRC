@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.grx.settings"
-    android:versionCode="1"
-    android:versionName="GrxSettings v2.0">
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
-        tools:ignore="ProtectedPermissions"/>
+    package="com.grx.settings">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="com.sec.android.daemonapp.ap.accuweather.ACCUWEATHER_DAEMON_ACCESS_PROVIDER"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.REBOOT"
-        tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.RECOVERY" tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.DEVICE_POWER"
-        tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.BIND_APPWIDGET"
-        tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission
+        android:name="android.permission.WRITE_SECURE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission
+        android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
+        tools:ignore="ProtectedPermissions" />
+    <!--uses-permission android:name="com.sec.android.daemonapp.ap.accuweather.ACCUWEATHER_DAEMON_ACCESS_PROVIDER" /-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission
+        android:name="android.permission.REBOOT"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.RECOVERY"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.DEVICE_POWER"
+        tools:ignore="ProtectedPermissions" />
+
     <application
         android:name=".GrxSettingsApp"
         android:allowBackup="true"
@@ -34,26 +40,42 @@
         android:theme="@style/Theme.Base.Light"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <meta-data android:name="com.samsung.android.icon_container.has_icon_container" android:value="true"/>
+        <receiver
+            android:name="com.deluxerom.ApplyKernelValues"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="dlx_kernel_values"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.samsung.android.icon_container.has_icon_container"
+            android:value="true" />
 
         <activity
-            android:name="com.grx.settings.GrxSettingsActivity"
+            android:name=".GrxSettingsActivity"
             android:label="@string/grxs_app_name"
-
             android:theme="@style/Grx.NoActionBar">
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.grx.settings.act.GrxImagePicker"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:name=".act.GrxImagePicker"
+            android:excludeFromRecents="true"
             android:exported="false"
-            android:excludeFromRecents="true">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name="com.deluxerom.Search">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

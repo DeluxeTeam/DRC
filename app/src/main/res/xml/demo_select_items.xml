@@ -5,35 +5,42 @@
 
     <GrxPreferenceCategory android:title="GrxSingleSelection" />
 
-    <GrxSingleSelection android:title="Icons and defval" android:key="singleselection_1" android:summary="Summary....."
+    <GrxSingleSelection android:title="Icons and defval" grx:systemType="system"
+android:key="singleselection_1" android:summary="Summary....."
          android:defaultValue="2"
         grx:optionsArray="@array/demo_lists_entries"  grx:valuesArray="@array/demo_lists_values" grx:iconsArray="@array/demo_lists_icons"
         grx:iconsValueTint="?complementary_color3"
         />
 
 
-    <GrxSingleSelection android:icon="@drawable/demo_icon_1" android:title="No icons no defval" android:key="singleselection_2"
+    <GrxSingleSelection android:icon="@drawable/demo_icon_1" android:title="No icons no defval" grx:systemType="system"
+android:key="singleselection_2"
         grx:arrowColor="?colorAccent" grx:iconTint="?complementary_color3"
         grx:optionsArray="@array/demo_lists_entries"  grx:valuesArray="@array/demo_lists_values" />
 
     <GrxSingleSelection android:icon="@drawable/demo_icon_4" grx:iconTint="?complementary_color1"
-        android:title="Icons no defval no widget" android:key="singleselection_3"
+        android:title="Icons no defval no widget" grx:systemType="system"
+android:key="singleselection_3"
         grx:arrowColor="?complementary_color1"
         grx:optionsArray="@array/demo_lists_entries"  grx:valuesArray="@array/demo_lists_values"
         grx:iconsArray="@array/demo_lists_icons" grx:iconsValueTint="?colorAccent"/>
 
-    <GrxPreferenceCategory android:title="GrxMultipleSelection" android:key="cat" grx:textColor="?complementary_color1" grx:centerHorizontal="true" />
+    <GrxPreferenceCategory android:title="GrxMultipleSelection" grx:systemType="system"
+android:key="cat" grx:textColor="?complementary_color1" grx:centerHorizontal="true" />
 
-    <GrxMultipleSelection android:title="Icons, defval, max 3" android:key="multipleselection_1" android:summary="Summary....."
+    <GrxMultipleSelection android:title="Icons, defval, max 3" grx:systemType="system"
+android:key="multipleselection_1" android:summary="Summary....."
          grx:arrowColor="?complementary_color2" android:defaultValue="2|"
         grx:optionsArray="@array/demo_lists_entries"  grx:valuesArray="@array/demo_lists_values" grx:iconsArray="@array/demo_lists_icons"
         grx:iconsValueTint="?complementary_color4" grx:maxChoices="3"/>
 
-    <GrxMultipleSelection android:icon="@drawable/demo_icon_1" android:title="No icons no defval, no max" android:key="multipleselection_2"
+    <GrxMultipleSelection android:icon="@drawable/demo_icon_1" android:title="No icons no defval, no max" grx:systemType="system"
+android:key="multipleselection_2"
          grx:iconTint="?complementary_color3" grx:arrowColor="?complementary_color4"
         grx:optionsArray="@array/demo_lists_entries"  grx:valuesArray="@array/demo_lists_values"/>
 
-    <GrxMultipleSelection android:icon="@drawable/demo_icon_4" grx:iconTint="?complementary_color2" android:defaultValue="2|4|" android:title="Icons, defval, no max, no widg." android:key="multipleselection_3"
+    <GrxMultipleSelection android:icon="@drawable/demo_icon_4" grx:iconTint="?complementary_color2" android:defaultValue="2|4|" android:title="Icons, defval, no max, no widg." grx:systemType="system"
+android:key="multipleselection_3"
         grx:optionsArray="@array/demo_lists_entries"  grx:valuesArray="@array/demo_lists_values" grx:iconsArray="@array/demo_lists_icons"
         grx:iconsValueTint="?complementary_color5" android:summary="Two options by default"/>
 

@@ -51,7 +51,7 @@ public class RootPrivilegedUtils {
         powerManager.reboot(null);
     }
 
-    public static void runRebootDeviceCommands(){
+    public static void runRebootDeviceCommands() {
         RootUtils.runCommand("su");
         RootUtils.runCommand("reboot");
     }

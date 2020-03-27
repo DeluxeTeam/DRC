@@ -4,27 +4,47 @@
     <!--&lt;!&ndash; Animaciones de lista &ndash;&gt;
     <GrxSingleSelection
         android:title="@string/listview_animations"
-        android:key="listview_animation"
+        grx:systemType="system"
+android:key="listview_animation"
         android:defaultValue="0"
         grx:optionsArray="@array/listview_animation_entries"
         grx:valuesArray="@array/listview_animation_values"
-        grx:systemType="system" />
+         />
 
     &lt;!&ndash; Animaciones de interpolador &ndash;&gt;
     <GrxSingleSelection
         android:title="@string/interpolator_animation"
+        grx:systemType="system"
         android:key="listview_interpolator"
         android:defaultValue="0"
         grx:optionsArray="@array/listview_interpolator_entries"
         grx:valuesArray="@array/listview_interpolator_values"
-        grx:systemType="system" />-->
+         />-->
+
+    <GrxPreferenceCategory grx:hiddenCategory="true" grx:bpRule="SHOW#ro.deluxerom.device#(gts3lwifi)">
+    <PreferenceScreen android:title="Temas">
+        <GrxButtonPreference
+            android:key="button_2"
+            grx:script="set_greatlte.sh"
+            grx:button_backgroundColor="?complementary_color3"
+            android:summary="Activa esto para poder usar la tienda de temas"
+            grx:button_Text="CAMBIAR A SM-N950F" grx:button_Style="big"/>
+        <GrxButtonPreference
+            android:key="button_2"
+            grx:script="set_gts3lwifi.sh"
+            grx:button_backgroundColor="?complementary_color3"
+            android:summary="Activa esto después de haber aplicado un tema para volver a su estado original"
+            grx:button_Text="CAMBIAR A SM-T820" grx:button_Style="big"/>
+    </PreferenceScreen>
+    </GrxPreferenceCategory>
 
     <!-- Listado blanco -->
     <GrxMultipleAppSelection
         android:title="@string/whitelist"
         android:summary="@string/whitelist_summary"
-        android:key="dlx_whitelist_slot_general"
         grx:systemType="system"
+        android:key="dlx_whitelist_slot_general"
+        
         grx:saveActivityname="false"
         grx:separator="##"
         grx:commonBcExtra="arg"
@@ -33,48 +53,104 @@
     <!-- Mostrar toast app cerrada -->
     <GrxCheckBoxPreference
         android:title="@string/toast_app_closed"
+        grx:systemType="system"
         android:key="dlx_show_closed_app"
         android:defaultValue="false"
         grx:commonBcExtra="arg"
         grx:commonBcExtraValue="kill_prefs"
-        grx:systemType="system" />
+         />
 
     <!-- Mostrar toast apps recientes cerradas -->
     <GrxCheckBoxPreference
         android:title="@string/toast_recents_closed"
+        grx:systemType="system"
         android:key="dlx_show_closed_recent_apps"
         android:defaultValue="false"
         grx:commonBcExtra="arg"
         grx:commonBcExtraValue="kill_prefs"
-        grx:systemType="system" />
+         />
 
     <!-- Mostrar toast app en lista blanca -->
     <GrxCheckBoxPreference
         android:title="@string/toast_app_whitelisted"
+        grx:systemType="system"
         android:key="dlx_show_cant_close_app"
         android:defaultValue="false"
         grx:commonBcExtra="arg"
         grx:commonBcExtraValue="kill_prefs"
-        grx:systemType="system" />
+         />
 
     <!-- Aviso de batería -->
     <GrxSeekBar
         android:title="@string/low_bt_warning"
+        grx:systemType="system"
         android:key="dlx_low_battery"
         android:defaultValue="15"
         grx:maxValue="99"
         grx:minValue="1"
         grx:interval="1"
-        grx:systemType="system" />
+         />
 
     <!-- Aviso de batería -->
     <GrxSeekBar
         android:title="@string/critical_bt_warning"
+        grx:systemType="system"
         android:key="dlx_critical_battery"
         android:defaultValue="5"
         grx:maxValue="99"
         grx:minValue="1"
         grx:interval="1"
-        grx:systemType="system" />
+         />
+
+    <!-- Duración iluminación retroceso -->
+    <GrxPreferenceCategory grx:hiddenCategory="true" grx:bpRule="SHOW#ro.deluxerom.device#(hero),(gts3lwifi)">
+    <GrxSingleSelection
+        android:title="@string/keylight_duration"
+        grx:systemType="system"
+        android:key="button_key_light"
+        android:defaultValue="1500"
+        grx:optionsArray="@array/keylight_duration_entries"
+        grx:valuesArray="@array/keylight_duration_values" />
+    </GrxPreferenceCategory>
+
+    <GrxSwitchPreference
+        android:title="@string/force_manual_brightness"
+        android:defaultValue="false"
+        grx:systemType="system"
+        grx:commonBcExtra="arg"
+        grx:commonBcExtraValue="force_manual_brightness"
+        android:key="dlx_force_manual_brightness" />
+
+    <GrxSwitchPreference
+        android:title="@string/force_dark"
+        android:defaultValue="false"
+        grx:systemType="system"
+        android:key="current_theme_support_night_mode" />
+
+    <GrxSwitchPreference
+            android:title="@string/fast_charging"
+            android:defaultValue="true"
+            grx:systemType="system"
+            android:key="adaptive_fast_charging" />
+
+
+    <GrxSwitchPreference
+            android:title="@string/secure_flag"
+            android:defaultValue="false"
+            grx:systemType="system"
+            grx:broadCast1="dlx_services_mods"
+            grx:broadCast1Extra="secure_flag"
+            android:key="dlx_secure_flag" />
+
+        <GrxSingleSelection
+                android:title="@string/toast_animation_title"
+                android:key="dlx_toast_animation"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="toast"
+                grx:optionsArray="@array/toast_animation_entries"
+                grx:valuesArray="@array/toast_animation_values"
+                grx:systemType="system" />
+
 
 </PreferenceScreen>

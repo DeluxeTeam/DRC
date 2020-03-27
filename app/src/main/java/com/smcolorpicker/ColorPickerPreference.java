@@ -35,6 +35,7 @@ import android.widget.LinearLayout;
  *
  * @author Sergey Margaritov
  */
+@SuppressWarnings("JavadocReference")
 public class ColorPickerPreference
         extends
         Preference

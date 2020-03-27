@@ -255,7 +255,7 @@ public class GrxSwitchPreference extends SwitchPreference implements GrxPreferen
             default:
                 break;
         }
-        boolean checked = (real==1) ? true : false;
+        boolean checked = real == 1;
         setChecked(checked);
         persistBoolean(checked);
     }

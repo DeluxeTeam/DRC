@@ -158,22 +158,19 @@ public class GrxFloatingRecents extends FrameLayout {
     private void setUpDoubleTapUp(){
         mHandler = new Handler();
         mDoubleClickPending =false;
-        DoubleClickRunnable = new Runnable() {
-            @Override
-            public void run() {
-                if(mDoubleClickPending && mNumClicks == 2 ){
-                    mNumClicks=0;
-                    mDoubleClickPending =false;
-                    if(mAlpha>=1.0f) mAlpha=0.4f;
-                    else mAlpha=mAlpha+0.1f;
-                    saveAlphaValue(mAlpha);
-                    setAlpha(mAlpha);
+        DoubleClickRunnable = () -> {
+            if(mDoubleClickPending && mNumClicks == 2 ){
+                mNumClicks=0;
+                mDoubleClickPending =false;
+                if(mAlpha>=1.0f) mAlpha=0.4f;
+                else mAlpha=mAlpha+0.1f;
+                saveAlphaValue(mAlpha);
+                setAlpha(mAlpha);
 
-                 }else {
-                    mHandler.removeCallbacks(DoubleClickRunnable);
-                    mNumClicks=0;
-                    mDoubleClickPending =false;
-                }
+             }else {
+                mHandler.removeCallbacks(DoubleClickRunnable);
+                mNumClicks=0;
+                mDoubleClickPending =false;
             }
         };
     }

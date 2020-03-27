@@ -247,32 +247,17 @@ public class DlgFrGrxMultiAccess extends DialogFragment implements SlideAndDragL
 
     private  View getDialogView(){
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_grxmultiaccess, null);
-        vHelpButton = (LinearLayout) view.findViewById(R.id.gid_help_button);
-        vHelpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showHelp();
-            }
-        });
-        ListDragView = (SlideAndDragListView) view.findViewById(R.id.gid_slv_listview);
+        vHelpButton = view.findViewById(R.id.gid_help_button);
+        vHelpButton.setOnClickListener(v -> showHelp());
+        ListDragView = view.findViewById(R.id.gid_slv_listview);
 
-        vTxtSelectedItems = (TextView) view.findViewById(R.id.gid_items_selected);
-        vOpenAccessDialogButton = (LinearLayout) view.findViewById(R.id.gid_item);
+        vTxtSelectedItems = view.findViewById(R.id.gid_items_selected);
+        vOpenAccessDialogButton = view.findViewById(R.id.gid_item);
 
-        vOpenAccessDialogButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openSelectAccessDialog();
-            }
-        });
+        vOpenAccessDialogButton.setOnClickListener(v -> openSelectAccessDialog());
 
-        vDeleteButton = (LinearLayout) view.findViewById(R.id.gid_delete_button);
-        vDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteAllItems();
-            }
-        });
+        vDeleteButton = view.findViewById(R.id.gid_delete_button);
+        vDeleteButton.setOnClickListener(v -> deleteAllItems());
 
         ListDragView.setDividerHeight(Common.cDividerHeight);
 
@@ -478,18 +463,12 @@ public class DlgFrGrxMultiAccess extends DialogFragment implements SlideAndDragL
             AlertDialog ad = new AlertDialog.Builder(getActivity()).create();
             ad.setTitle(getString(R.string.grxs_delete_list));
             ad.setMessage(getString(R.string.grxs_help_delete_all_values));
-            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mItemsList.clear();
-                    updateChanges();
-                }
+            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), (dialog, which) -> {
+                mItemsList.clear();
+                updateChanges();
             });
-            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), (dialog, which) -> {
 
-                }
             });
             ad.show();
         }

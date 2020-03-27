@@ -30,6 +30,7 @@ import java.util.List;
  *
  * Created by Vikram.
  */
+@SuppressWarnings("JavadocReference")
 public class SublimeMenu implements Parcelable {
     private static final String TAG = SublimeMenu.class.getSimpleName();
 

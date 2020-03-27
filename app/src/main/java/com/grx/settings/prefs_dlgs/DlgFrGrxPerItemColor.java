@@ -24,6 +24,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -266,20 +267,17 @@ public class DlgFrGrxPerItemColor extends DialogFragment
         timeout = Long.valueOf(ViewConfiguration.getDoubleTapTimeout());
         doble_clic_pendiente=false;
 
-        RDobleClick = new Runnable() {
-            @Override
-            public void run() {
-                if(!doble_clic_pendiente){
+        RDobleClick = () -> {
+            if(!doble_clic_pendiente){
+                clickAction();
+            }else {
+                if(clicks==0) clickAction();
+                else if(clicks!=2) {
                     clickAction();
                 }else {
-                    if(clicks==0) clickAction();
-                    else if(clicks!=2) {
-                        clickAction();
-                    }else {
-                        doubleClickAction();
-                    }
-
+                    doubleClickAction();
                 }
+
             }
         };
     }

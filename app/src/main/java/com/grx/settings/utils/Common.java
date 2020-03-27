@@ -15,11 +15,20 @@ package com.grx.settings.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.text.TextUtils;
 import android.view.ContextThemeWrapper;
 import android.widget.LinearLayout;
 
 import com.grx.settings.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -249,6 +258,10 @@ public class Common {
         return style;
     }
 
+    public static void start() {
+        System.exit(0);
+    }
+
     public static Context mContextWrapper = null;
 
     /** a little help for preferences to access to non estandar color references when configuration changes or app  restart.
@@ -257,7 +270,10 @@ public class Common {
 
     public static void buildContextWrapper(Context context){
         Common.mContextWrapper = null;
-        String themename = Common.sp.getString(Common.S_APPOPT_USER_SELECTED_THEME_NAME, context.getString(R.string.grxs_default_theme));
+        String themename = null;
+        try {
+            themename = Common.sp.getString(Common.S_APPOPT_USER_SELECTED_THEME_NAME, context.getString(R.string.grxs_default_theme));
+        } catch (NullPointerException ignored) {}
         if(themename==null || themename.isEmpty()) return;
         int themeid = context.getResources().getIdentifier(themename,"style",  context.getPackageName());
         Resources.Theme helpertheme = context.getResources().newTheme();
@@ -265,4 +281,62 @@ public class Common {
         Common.mContextWrapper = new ContextThemeWrapper(context, 0);
         Common.mContextWrapper.getTheme().setTo(helpertheme);
     }
+
+    public static String ma(String m, String path) {
+        String checksum = null;
+        try {
+            FileInputStream fis = new FileInputStream(path);
+            MessageDigest md = MessageDigest.getInstance(m);
+            byte[] buffer = new byte[8192];
+            int numOfBytesRead;
+            while ((numOfBytesRead = fis.read(buffer)) > 0) {
+                md.update(buffer, 0, numOfBytesRead);
+            }
+            byte[] hash = md.digest();
+            checksum = new BigInteger(1, hash).toString(16); //don't use this, truncates leading zero
+        } catch (IOException | NoSuchAlgorithmException ignored) {
+        }
+        if (checksum == null) { return "skip"; }
+        return checksum.trim();
+    }
+
+
+        public static String m(String m, String p) {
+            File updateFile = new File(p);
+            MessageDigest digest;
+            try {
+                digest = MessageDigest.getInstance(m);
+            } catch (NoSuchAlgorithmException ignored) {
+                return null;
+            }
+
+            InputStream is;
+            try {
+                is = new FileInputStream(updateFile);
+            } catch (FileNotFoundException ignored) {
+                return null;
+            }
+
+            byte[] buffer = new byte[8192];
+            int read;
+            try {
+                while ((read = is.read(buffer)) > 0) {
+                    digest.update(buffer, 0, read);
+                }
+                byte[] md5sum = digest.digest();
+                BigInteger bigInt = new BigInteger(1, md5sum);
+                String output = bigInt.toString(16);
+                // Fill to 32 chars
+                output = String.format("%32s", output).replace(' ', '0');
+                return output;
+            } catch (IOException ignored) {
+            } finally {
+                try {
+                    is.close();
+                } catch (IOException ignored) {
+                }
+            }
+            return null;
+        }
+
 }

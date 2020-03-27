@@ -17,10 +17,10 @@
 
             <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
 
-                <ImageView
+                <!--<ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/_imagen04" />
+                    android:src="@drawable/_imagen04" />-->
 
                 <com.grx.settings.views.LinearLayoutWithLink
                     grxURL="https://forum.xda-developers.com/galaxy-note-8/development/n950f-g955f-g950f-deluxerom-v6-0-t3784712"
@@ -42,6 +42,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_marginStart="15dp"
+                        android:textColor="?toolbartitlecolor"
                         android:text="@string/xda" />
                 </com.grx.settings.views.LinearLayoutWithLink>
 
@@ -60,17 +61,18 @@
                         android:layout_height="36dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/htcmania"
-                         />
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_marginStart="15dp"
+                        android:textColor="?toolbartitlecolor"
                         android:text="@string/htc" />
                 </com.grx.settings.views.LinearLayoutWithLink>
 
                 <com.grx.settings.views.LinearLayoutWithLink
-                    grxURL="https://t.me/joinchat/CogTU0GwjRFRR1zTf9MuEg"
+                    grxURL="https://t.me/joinchat/IUnccUZqxr5hroZGl14d4g"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
                     android:layout_width="match_parent"
@@ -90,11 +92,12 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_marginStart="15dp"
+                        android:textColor="?toolbartitlecolor"
                         android:text="@string/telegram_eng" />
                 </com.grx.settings.views.LinearLayoutWithLink>
 
                 <com.grx.settings.views.LinearLayoutWithLink
-                    grxURL="https://t.me/joinchat/CogTU1NBGds9T3R3nJpbyw"
+                    grxURL="https://t.me/joinchat/IUnccVNBGdsDyea2EGKPow"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
                     android:layout_width="match_parent"
@@ -114,6 +117,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_marginStart="15dp"
+                        android:textColor="?toolbartitlecolor"
                         android:text="@string/telegram_esp" />
                 </com.grx.settings.views.LinearLayoutWithLink>
 
@@ -138,10 +142,11 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_marginStart="15dp"
+                        android:textColor="?toolbartitlecolor"
                         android:text="@string/paypal" />
                 </com.grx.settings.views.LinearLayoutWithLink>
 
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="150dp"/>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="150dp"/>
 
             </LinearLayout>
 

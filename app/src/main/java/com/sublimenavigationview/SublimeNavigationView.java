@@ -16,6 +16,7 @@
 
 package com.sublimenavigationview;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -411,6 +412,7 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
      * @param newMenuResId id of the menu that you wish
      *                     to switch to. Eg: R.menu.new_menu_id
      */
+    @SuppressLint("ResourceType")
     public void switchMenuTo(@MenuRes int newMenuResId) {
         if (newMenuResId < 1) {
             Log.e(TAG, "Could not switch to new menu: passed menuResourceId was invalid.");

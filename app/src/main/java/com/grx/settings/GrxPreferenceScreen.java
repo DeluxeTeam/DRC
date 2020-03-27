@@ -131,10 +131,10 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
 
         if(savedInstanceState==null){
             Bundle bundle = getArguments();
-            mCurrentScreen = getArguments().getString(Common.EXTRA_SCREEN);
-            mCurrentSubScreen = getArguments().getString(Common.EXTRA_SUB_SCREEN);
-            mCurrentKey = getArguments().getString(Common.EXTRA_KEY);
-            mDividerHeight = getArguments().getInt(Common.EXTRA_DIV_HEIGHT,getResources().getInteger(R.integer.grxi_default_list_divider_height));
+            mCurrentScreen = bundle.getString(Common.EXTRA_SCREEN);
+            mCurrentSubScreen = bundle.getString(Common.EXTRA_SUB_SCREEN);
+            mCurrentKey = bundle.getString(Common.EXTRA_KEY);
+            mDividerHeight = bundle.getInt(Common.EXTRA_DIV_HEIGHT,getResources().getInteger(R.integer.grxi_default_list_divider_height));
         }else{
             Common.buildContextWrapper(getActivity());
             mCurrentScreen=savedInstanceState.getString(Common.EXTRA_SCREEN);
@@ -267,12 +267,7 @@ public class GrxPreferenceScreen extends PreferenceFragment implements
             final ListView list = (ListView) rootView.findViewById(android.R.id.list);
             if(list!=null) {
                 list.clearFocus();
-                list.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        list.setSelection(pos);
-                    }
-                });
+                list.post(() -> list.setSelection(pos));
             }
         }
 

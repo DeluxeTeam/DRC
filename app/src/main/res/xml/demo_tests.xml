@@ -4,7 +4,8 @@
     xmlns:grx="http://schemas.android.com/apk/res-auto">
 
     <GrxPreferenceCategory android:title="GrxAccess" />
-    <GrxAccess android:title="All options" android:key="access_1" android:summary="Select a shortcut, app, activity or customized action"
+    <GrxAccess android:title="All options" grx:systemType="system"
+android:key="access_1" android:summary="Select a shortcut, app, activity or customized action"
         grx:groupKey="gkey_access"
         grx:arrowColor="?complementary_color3"
         grx:showShortcuts="true" grx:showApplications="true" grx:showActivities="true"

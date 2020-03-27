@@ -1,0 +1,1139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="agc_alarma_drawables">
+        <item>@drawable/alarma_stock</item>
+        <item>@drawable/alarma_arena</item>
+        <item>@drawable/alarma_campana</item>
+        <item>@drawable/alarma_clasico_1</item>
+        <item>@drawable/alarma_clasico_2</item>
+        <item>@drawable/alarma_deluxe</item>
+        <item>@drawable/alarma_digital_1</item>
+        <item>@drawable/alarma_digital_2</item>
+        <item>@drawable/alarma_moderno</item>
+        <item>@drawable/alarma_romano</item>
+    </array>
+    <string-array name="agc_alarma_entries">
+        <item>Stock</item>
+        <item>ARENA</item>
+        <item>CAMPANA</item>
+        <item>CLASICO 1</item>
+        <item>CLASICO 2</item>
+        <item>DELUXEROM</item>
+        <item>DIGITAL 1</item>
+        <item>DIGITAL 2</item>
+        <item>MODERNO</item>
+        <item>ROMANO</item>
+    </string-array>
+    <string-array name="agc_alarma_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+    <string-array name="agc_clock_date_options">
+        <item>Gün</item>
+        <item>Ayırıcı</item>
+        <item>Ay</item>
+        <item>Ayırıcı</item>
+        <item>Yıl</item>
+    </string-array>
+    <string-array name="agc_clock_date_values">
+        <item>day</item>
+        <item>separator</item>
+        <item>month</item>
+        <item>separator2</item>
+        <item>year</item>
+    </string-array>
+    <string-array name="agc_clock_options">
+        <item>Saat</item>
+        <item>Boşluk</item>
+        <item>Gün</item>
+        <item>Boşluk</item>
+        <item>Tarih</item>
+    </string-array>
+    <string-array name="agc_clock_values">
+        <item>hour</item>
+        <item>space</item>
+        <item>day</item>
+        <item>space2</item>
+        <item>date</item>
+    </string-array>
+    <string-array name="agc_deviceinfo_entries">
+        <item>device_model</item>
+        <item>device_android_version</item>
+        <item>device_build_version</item>
+        <item>device_rom_version</item>
+        <item>device_battery_level</item>
+        <item>device_network_name</item>
+        <item>device_wifi_info</item>
+        <item>device_ip_info</item>
+        <item>device_next_alarm</item>
+        <item>device_up_time</item>
+        <item>device_cpu_info</item>
+        <item>device_bootloader</item>
+        <item>device_serial</item>
+        <item>device_imei</item>
+        <item>device_ram</item>
+        <item>device_modem</item>
+        <item>device_hardware</item>
+        <item>device_cpu_abi</item>
+        <item>device_storage_info</item>
+        <item>device_ext_storage_info</item>
+    </string-array>
+    <string-array name="agc_deviceinfo_values">
+        <item>device_model</item>
+        <item>device_android_version</item>
+        <item>device_build_version</item>
+        <item>device_rom_version</item>
+        <item>device_battery_level</item>
+        <item>device_network_name</item>
+        <item>device_wifi_info</item>
+        <item>device_ip_info</item>
+        <item>device_next_alarm</item>
+        <item>device_up_time</item>
+        <item>device_cpu_info</item>
+        <item>device_bootloader</item>
+        <item>device_serial</item>
+        <item>device_imei</item>
+        <item>device_ram</item>
+        <item>device_modem</item>
+        <item>device_hardware</item>
+        <item>device_cpu_abi</item>
+        <item>device_storage_info</item>
+        <item>device_ext_storage_info</item>
+    </string-array>
+    <array name="agc_estilo_fuente_drawables">
+        <item>@drawable/defaultt</item>
+        <item>@drawable/abductionsmall</item>
+        <item>@drawable/abeakrg</item>
+        <item>@drawable/addisababa</item>
+        <item>@drawable/agentletouch</item>
+        <item>@drawable/airmolestripe</item>
+        <item>@drawable/aller</item>
+        <item>@drawable/androidclock</item>
+        <item>@drawable/arial</item>
+        <item>@drawable/arial_rb</item>
+        <item>@drawable/aristonexregular</item>
+        <item>@drawable/arraybold</item>
+        <item>@drawable/astandardbold</item>
+        <item>@drawable/attic</item>
+        <item>@drawable/barmeno105</item>
+        <item>@drawable/bauhaus</item>
+        <item>@drawable/beau_sans_pro_book</item>
+        <item>@drawable/beautifuleverytime</item>
+        <item>@drawable/belligerentbold</item>
+        <item>@drawable/blackchancery</item>
+        <item>@drawable/bluehigh</item>
+        <item>@drawable/bluehighbold</item>
+        <item>@drawable/bubbleletters</item>
+        <item>@drawable/cantaneobold</item>
+        <item>@drawable/caprica</item>
+        <item>@drawable/cartoon</item>
+        <item>@drawable/caviardreams_bold</item>
+        <item>@drawable/celtic</item>
+        <item>@drawable/comicsansms</item>
+        <item>@drawable/cooljazz</item>
+        <item>@drawable/darkromanticism</item>
+        <item>@drawable/dustismobold</item>
+        <item>@drawable/feastofflesh</item>
+        <item>@drawable/felipe</item>
+        <item>@drawable/galantnormal</item>
+        <item>@drawable/gezoe</item>
+        <item>@drawable/gillsansmtitalic</item>
+        <item>@drawable/helveticaneuece55roman</item>
+        <item>@drawable/jaramondbold</item>
+        <item>@drawable/laneposhbold</item>
+        <item>@drawable/lauren</item>
+        <item>@drawable/melonio</item>
+        <item>@drawable/metal</item>
+        <item>@drawable/motleycrue</item>
+        <item>@drawable/nokiapure</item>
+        <item>@drawable/petermorgan</item>
+        <item>@drawable/piratebold</item>
+        <item>@drawable/questbold</item>
+        <item>@drawable/roboto</item>
+        <item>@drawable/robotobold</item>
+        <item>@drawable/rosemary</item>
+        <item>@drawable/sansationbold</item>
+        <item>@drawable/segoe</item>
+    </array>
+    <string-array name="agc_estilo_fuente_entries">
+        <item>Default</item>
+        <item>Abductionsmall</item>
+        <item>ABEAKRG</item>
+        <item>AddisAbaba</item>
+        <item>AGentleTouch</item>
+        <item>AirmoleStripe</item>
+        <item>Aller</item>
+        <item>AndroidClock</item>
+        <item>Arial</item>
+        <item>Arial_RB</item>
+        <item>AristonExRegular</item>
+        <item>ArrayBold</item>
+        <item>Astandardbold</item>
+        <item>Attic</item>
+        <item>Barmeno105</item>
+        <item>Bauhaus</item>
+        <item>Beau_Sans_Pro_Book</item>
+        <item>beautifuleverytime</item>
+        <item>Belligerentbold</item>
+        <item>BlackChancery</item>
+        <item>Bluehigh</item>
+        <item>Bluehighbold</item>
+        <item>BubbleLetters</item>
+        <item>Cantaneobold</item>
+        <item>Caprica</item>
+        <item>Cartoon</item>
+        <item>caviardreams_bold</item>
+        <item>Celtic</item>
+        <item>comicsansms</item>
+        <item>Cooljazz</item>
+        <item>Darkromanticism</item>
+        <item>Dustismobold</item>
+        <item>FeastOfFlesh</item>
+        <item>Felipe</item>
+        <item>GalantNormal</item>
+        <item>Gezoe</item>
+        <item>GillSansMTItalic</item>
+        <item>HelveticaNeueCE55Roman</item>
+        <item>Jaramondbold</item>
+        <item>Laneposhbold</item>
+        <item>Lauren</item>
+        <item>Melonio</item>
+        <item>Metal</item>
+        <item>MotleyCrue</item>
+        <item>NokiaPure</item>
+        <item>Petermorgan</item>
+        <item>Piratebold</item>
+        <item>Questbold</item>
+        <item>Roboto</item>
+        <item>Roboto-Bold</item>
+        <item>Rosemary</item>
+        <item>Sansationbold</item>
+        <item>Segoe</item>
+    </string-array>
+    <string-array name="agc_estilo_fuente_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+    </string-array>
+    <string-array name="agc_netw_interval_entries">
+        <item>Gerçek Zamanlı</item>
+        <item>3 saniye</item>
+        <item>5 saniye</item>
+        <item>7 saniye</item>
+        <item>10 saniye</item>
+    </string-array>
+    <string-array name="agc_netw_interval_values">
+        <item>1000</item>
+        <item>3000</item>
+        <item>5000</item>
+        <item>7000</item>
+        <item>10000</item>
+    </string-array>
+    <array name="agc_outdoor_check_off_drawables">
+        <item>@drawable/check_off_1</item>
+        <item>@drawable/check_off_2</item>
+        <item>@drawable/check_off_3</item>
+        <item>@drawable/check_off_4</item>
+        <item>@drawable/check_off_5</item>
+    </array>
+    <string-array name="agc_outdoor_check_off_entries">
+        <item>Cuadrado</item>
+        <item>Ciculo</item>
+        <item>Ciculo2</item>
+        <item>Ring</item>
+        <item>Metallica</item>
+    </string-array>
+    <array name="agc_outdoor_check_on_drawables">
+        <item>@drawable/check_on_1</item>
+        <item>@drawable/check_on_2</item>
+        <item>@drawable/check_on_3</item>
+        <item>@drawable/check_on_4</item>
+        <item>@drawable/check_on_5</item>
+    </array>
+    <string-array name="agc_outdoor_check_on_entries">
+        <item>Cuadrado</item>
+        <item>Ciculo</item>
+        <item>Ciculo2</item>
+        <item>Ring</item>
+        <item>Metallica</item>
+    </string-array>
+    <string-array name="agc_outdoor_check_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="agc_position_clock_entries">
+        <item>Solda</item>
+        <item>Ortalanmış</item>
+        <item>Sağda</item>
+        <item>Navigation bar</item>
+    </string-array>
+    <string-array name="agc_position_clock_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="agc_reboot_options">
+        <item>Kapat</item>
+        <item>Yeniden Başlat</item>
+        <item>Recovery Modda Başlat</item>
+        <item>Download Modda Başlat</item>
+        <item>Mobil Veri</item>
+        <item>Hızlı Yeniden Başlat</item>
+        <item>Arayüz UI Y.Başlat</item>
+        <item>Acil Durum</item>
+        <item>El Feneri</item>
+        <item>Ekranı Kaydet</item>
+        <item>Ekran Görüntüsü Al</item>
+        <item>Ayarlar</item>
+        <item>DRC Kontrol</item>
+    </string-array>
+    <string-array name="agc_reboot_values">
+        <item>power</item>
+        <item>restart</item>
+        <item>recovery</item>
+        <item>download</item>
+        <item>data_mode</item>
+        <item>quickreboot</item>
+        <item>rebootui</item>
+        <item>emergency</item>
+        <item>flashlight</item>
+        <item>screencapture</item>
+        <item>screenshot</item>
+        <item>settings</item>
+        <item>grxsettings</item>
+    </string-array>
+    <string-array name="agc_separator_clock_entries">
+        <item>-</item>
+        <item>.</item>
+        <item>,</item>
+        <item>/</item>
+        <item>\\</item>
+    </string-array>
+    <string-array name="agc_separator_clock_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="agc_signal_position_entries">
+        <item>Solda</item>
+        <item>Ortalanmış</item>
+        <item>Sağda</item>
+    </string-array>
+    <string-array name="agc_signal_position_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="backup_wifi_key">
+        <item>mount -o rw,remount /data</item>
+        <item>mkdir -p /sdcard/backups/wifibackup</item>
+        <item>cp -rf /data/misc/wifi/wpa_supplicant.conf /sdcard/backups/wifibackup</item>
+    </string-array>
+    <string-array name="brightness_color_entries" formatted="false">
+        <item>0% ile 25% Arasındayken Renk</item>
+        <item>25% ile 50% Arasındayken Renk</item>
+        <item>50% ile 75% Arasındayken Renk</item>
+        <item>75% ile 100% Arasındayken Renk</item>
+    </string-array>
+    <string-array name="brightness_color_values">
+        <item>color_025</item>
+        <item>color_2550</item>
+        <item>color_5075</item>
+        <item>color_75100</item>
+    </string-array>
+    <string-array name="clock_color_entries">
+        <item>Saat</item>
+        <item>Dakika</item>
+        <item>Saniye</item>
+        <item>Ayırıcı</item>
+        <item>Gün</item>
+        <item>Tarih</item>
+        <item>AM/PM</item>
+    </string-array>
+    <string-array name="clock_color_values">
+        <item>agc_clock_hour_color</item>
+        <item>agc_clock_min_color</item>
+        <item>agc_clock_second_color</item>
+        <item>agc_clock_separator_color</item>
+        <item>agc_clock_day_color</item>
+        <item>agc_clock_date_color</item>
+        <item>agc_clock_ampm_color</item>
+    </string-array>
+    <string-array name="crop_entries">
+        <item>Uzat</item>
+        <item>Ortala</item>
+        <item>resmi sığdır</item>
+    </string-array>
+    <string-array name="crop_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="custom_bg_type_entries">
+        <item>Resim</item>
+        <item>Tek Renk</item>
+        <item>Renk Eğimi</item>
+    </string-array>
+    <string-array name="custom_bg_type_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="custombg_color_entries">
+        <item>Renk 1</item>
+        <item>Renk 2</item>
+        <item>Renk 3</item>
+        <item>Renk 4</item>
+        <item>Renk 5</item>
+        <item>Renk 6</item>
+    </string-array>
+    <string-array name="custombg_color_values">
+        <item>color1</item>
+        <item>color2</item>
+        <item>color3</item>
+        <item>color4</item>
+        <item>color5</item>
+        <item>color6</item>
+    </string-array>
+    <string-array name="data_usage_gravity_entries">
+        <item>Solda</item>
+        <item>Ortalanmış</item>
+        <item>Sağda</item>
+    </string-array>
+    <string-array name="data_usage_gravity_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="delete_wifi_backup">
+        <item>mount -o rw,remount /data</item>
+        <item>rm -r /sdcard/backups/wifibackup</item>
+    </string-array>
+    <string-array name="demo_build_prop_options">
+        <item>grx.demo.prop HELLO</item>
+        <item>grx.demo.prop REMOVE_PREFERENCE</item>
+        <item>grx.demo.prop REMOVE_SCREEN</item>
+        <item>grx.demo.prop REMOVE_GROUP</item>
+        <item>grx.demo.prop REMOVE_GROUP,HELLO</item>
+        <item>grx.demo.prop REMOVE_SCREEN,REMOVE_PREFERENCE</item>
+    </string-array>
+    <string-array name="demo_changelog">
+        <item>30 hightly customizable type of preferences</item>
+        <item>Preferences can be declared using their short class name.</item>
+        <item>Easy navigation panel configuration, with groups support.</item>
+        <item>Many user options for configuring the app. Some of them are disabled by the dev through booleans.</item>
+        <item>6 themes included. Easy customization and creation of new themes.</item>
+        <item>Customizable dependency rules, which although simple, allow a more advanced behavior than the use of Android standard dependencies</item>
+        <item>"Up to 6 actions can be launched after a preference change:
+
+ - Simulate onclicks on other preferences (under customizable conditions)
+ - Change Group Keys values
+ - Send up to two customizables broadcast
+ - Run a script: the script can be defined in a string-array, a file (in this case you can pass arguments)
+ - Reboot the device with confirmation dialgo or not
+ - Kill an app (confirmation dialog ooptional)
+
+ These actions are executed in a predefined order (in a string) but can be overriden in every preference."</item>
+        <item>Hide or show groups of screens, screens and preferences based on build prop properties values</item>
+        <item>Nested screens with support to kept seen the toolbar.</item>
+        <item>"Support for system, global and secure settings.
+ The app should be installed in priv-app to get access to secure and global, or to mod your rom to allow not privileged apps to get it. These preferences are updated in case the user go to settings, change the preference value and come back to the app."</item>
+        <item>Customizable Rom Info section, with sliding tabs support. Mods developers can design as many screens as they need to show information about their works. Some extended views has been added in order to make this work easier.</item>
+        <item>Floating Action Button, with a standardized operation throughout the application.</item>
+        <item>Floating Area with links to recents screens</item>
+        <item>Backup and restore of preferences with synchronization of stored values in settings system</item>
+        <item>From your mods you can easily open a screen, sub-screen and even simulate a click on a preference through intents with predefined intent extras strings</item>
+    </string-array>
+    <integer-array name="demo_lists_colors">
+        <item>0xFFFFFFFF</item>
+        <item>0xFF252525</item>
+        <item>0xFF33B5E5</item>
+        <item>0xFF335599</item>
+        <item>0xFFEEEEEE</item>
+        <item>0xFFFF00FF</item>
+        <item>0xFF00FFFF</item>
+        <item>0xFF00FF00</item>
+        <item>0xFF0000FF</item>
+        <item>0xFF658941</item>
+        <item>0xFF985233</item>
+        <item>0xFF876941</item>
+        <item>0xFFE6D3A5</item>
+    </integer-array>
+    <string-array name="demo_lists_entries">
+        <item>Alarm</item>
+        <item>Airplane</item>
+        <item>Battery</item>
+        <item>Brightness</item>
+        <item>Clock</item>
+        <item>Alarm 1</item>
+        <item>Airplane 1</item>
+        <item>Battery 1</item>
+        <item>Clock 1</item>
+        <item>Alarm 2</item>
+        <item>Airplane 2</item>
+        <item>Battery 2</item>
+        <item>Brightness 2</item>
+    </string-array>
+    <array name="demo_lists_icons">
+        <item>@drawable/demo_icon_1</item>
+        <item>@drawable/demo_icon_2</item>
+        <item>@drawable/demo_icon_3</item>
+        <item>@drawable/demo_icon_4</item>
+        <item>@drawable/demo_icon_5</item>
+        <item>@drawable/demo_icon_1</item>
+        <item>@drawable/demo_icon_2</item>
+        <item>@drawable/demo_icon_3</item>
+        <item>@drawable/demo_icon_4</item>
+        <item>@drawable/demo_icon_1</item>
+        <item>@drawable/demo_icon_2</item>
+        <item>@drawable/demo_icon_3</item>
+        <item>@drawable/demo_icon_4</item>
+    </array>
+    <string-array name="demo_lists_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="demo_preferences">
+        <item>"For a detailed description of the preferences added and their customizable xml attributes, visit the github project, folder demo and guide.
+ In demo mode you can check all the existing preferences, and the main options added to them. Use demo screens as reference when you add your own preferences and screens.
+ Some styiling attributes have been added, you can see them in the demo."</item>
+    </string-array>
+    <string-array name="demo_screen_timeout_options">
+        <item>15 saniye</item>
+        <item>30 saniye</item>
+        <item>1 dakika</item>
+        <item>2 dakika</item>
+        <item>5 dakika</item>
+        <item>10 dakika</item>
+    </string-array>
+    <string-array name="demo_screen_timeout_values">
+        <item>15000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>120000</item>
+        <item>300000</item>
+        <item>600000</item>
+    </string-array>
+    <string-array name="demo_spinner_options">
+        <item>Solda</item>
+        <item>Ortalanmış</item>
+        <item>Sağda</item>
+    </string-array>
+    <string-array name="demo_spinner_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="demo_tabs_layouts">
+        <item>demo_info_about_tab</item>
+        <item>demo_info_changelog_tab</item>
+        <item>demo_info_credits_tab</item>
+    </string-array>
+    <string-array name="demo_tabs_names">
+        <item>About this app</item>
+        <item>Features</item>
+        <item>Credits</item>
+    </string-array>
+    <string-array name="demo_useroptions">
+        <item>Show Rom info screen.</item>
+        <item>Show App help screen.</item>
+        <item>Theme selection, if this feature is allowed by the develooper</item>
+        <item>Navigation panel header background (image), if this featured is allowed by the develooper</item>
+        <item>Divider height in listviews</item>
+        <item>Thre color pickers styles. Color preferences will use this selection, unless the dev specifies one style on a preference. In led pulse preferences the square style is always used.</item>
+        <item>Show - hide floating action button</item>
+        <item>Floating Action Button position (left, center, right)</item>
+        <item>Floating Recents Screen window, allowing the user to select if it dismissed when pressing back or touching outside of it. The user can place the area anywhere and also to change the transparency</item>
+        <item>Navigation Panel position (right or left) with option to show expand - collapse buttons (for screen groups) or to show groups always expanded</item>
+        <item>Exit Confirmation option</item>
+        <item>Remember last screen</item>
+        <item>Double clicking on most of the preferences allows the user to reset its value to the default value. In color pickers a long click on the selected color allows the user to copy to the clipboard its value</item>
+    </string-array>
+
+    <string-array name="general_color_entries">
+        <item>Sound</item>
+        <item>Bluetooth</item>
+        <item>NFC</item>
+        <item>Alarm</item>
+        <item>WifiCall</item>
+        <item>Location</item>
+        <item>Private mode</item>
+        <item>Gear</item>
+        <item>Power saver</item>
+        <item>Data saver</item>
+        <item>HeadSet</item>
+        <item>Tint on white apps</item>
+    </string-array>
+    <string-array name="general_color_values">
+        <item>sound</item>
+        <item>bluetooth</item>
+        <item>nfc</item>
+        <item>alarm</item>
+        <item>wificall</item>
+        <item>location</item>
+        <item>privatemode</item>
+        <item>gear</item>
+        <item>powersaver</item>
+        <item>datasaver</item>
+        <item>headset</item>
+        <item>tint</item>
+    </string-array>
+    <string-array name="gradient_entries">
+        <item>Yukarıdan aşağıya</item>
+        <item>Aşağıdan yukarıya</item>
+        <item>Soldan sağa</item>
+        <item>Sağdan Sola</item>
+        <item>Çapraz d-left to u-right</item>
+        <item>Çapraz u-right to d-left</item>
+        <item>Çapraz d-right to u-left</item>
+        <item>Çapraz up-left to d-right</item>
+    </string-array>
+    <string-array name="gradient_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    <string-array name="grxa_app_help">
+        <item>Most of the preferences can be reset to their default values by double clicking.</item>
+        <item>Please, read the help buttons which appear in some preferences. That help will tell you how to delete, sort, or whatever is enabled by the dev.</item>
+        <item>You can select you default color picker style. This style is only taken if the dev has not defined an specific style for the color preferences or if you are in a preference using a specific style</item>
+        <item>In color picker preferences you can copy the hex value to the clipboard by long-clicking on the color circle. This feature can be useful when there are many color pickers preferences</item>
+        <item>"Floating Recents Area
+
+ - You can enable or disable in this menu. Floating Action Button has to be enabled. Then long-click on it to show the floating area
+ - You can change the transparency of the area by double - clicking on the title area
+ - You can move the area through the screen by long pressing the title area
+ - When the keyboard is needed the floating area is hiden.
+"</item>
+        <item>"Some options supported by this app have to be enabled by your rom dev:
+
+ - Background image for the Navigation Panel Header
+ - Selectable themes
+"</item>
+    </string-array>
+    <string-array name="grxa_colorpickerstyles">
+        <item>@string/grxs_flower</item>
+        <item>@string/grxs_circle</item>
+        <item>@string/grxs_square</item>
+    </string-array>
+    <string-array name="grxa_divider_height">
+        <item>0 px</item>
+        <item>1 px</item>
+        <item>2 px</item>
+        <item>3 px</item>
+        <item>4 px</item>
+    </string-array>
+    <string-array name="grxa_fab_position">
+        <item>Ortalanmış</item>
+        <item>Solda</item>
+        <item>Sağda</item>
+    </string-array>
+    <string-array name="grxa_ledpulse_toff_options">
+        <item>@string/grxs_pulse_100ms</item>
+        <item>@string/grxs_pulse_300ms</item>
+        <item>@string/grxs_pulse_500ms</item>
+        <item>@string/grxs_pulse_750ms</item>
+        <item>@string/grxs_pulse_1s</item>
+        <item>@string/grxs_pulse_1_75s</item>
+        <item>@string/grxs_pulse_2_5s</item>
+        <item>@string/grxs_pulse_5s</item>
+        <item>@string/grxs_pulse_7s</item>
+        <item>@string/grxs_pulse_10s</item>
+        <item>@string/grxs_pulse_15s</item>
+    </string-array>
+    <string-array name="grxa_ledpulse_toff_values">
+        <item>100</item>
+        <item>300</item>
+        <item>500</item>
+        <item>750</item>
+        <item>1000</item>
+        <item>1750</item>
+        <item>2500</item>
+        <item>5000</item>
+        <item>7000</item>
+        <item>10000</item>
+        <item>15000</item>
+    </string-array>
+    <string-array name="grxa_ledpulse_ton_options">
+        <item>@string/grxs_pulse_always_on</item>
+        <item>@string/grxs_pulse_100ms</item>
+        <item>@string/grxs_pulse_300ms</item>
+        <item>@string/grxs_pulse_500ms</item>
+        <item>@string/grxs_pulse_750ms</item>
+        <item>@string/grxs_pulse_1s</item>
+        <item>@string/grxs_pulse_1_75s</item>
+        <item>@string/grxs_pulse_2_5s</item>
+        <item>@string/grxs_pulse_5s</item>
+        <item>@string/grxs_pulse_7s</item>
+        <item>@string/grxs_pulse_10s</item>
+    </string-array>
+    <string-array name="grxa_ledpulse_ton_values">
+        <item>1</item>
+        <item>100</item>
+        <item>300</item>
+        <item>500</item>
+        <item>750</item>
+        <item>1000</item>
+        <item>1750</item>
+        <item>2500</item>
+        <item>5000</item>
+        <item>7000</item>
+        <item>10000</item>
+    </string-array>
+    <string-array name="grxa_panel_header_options">
+        <item>@string/grxs_remove_header_img</item>
+        <item>@string/grxs_change_header_img</item>
+    </string-array>
+    <string-array name="grxa_threedots_tools">
+        <item>@string/grxs_recovery</item>
+        <item>@string/grxs_restartui</item>
+        <item>@string/grxs_restartphone</item>
+    </string-array>
+    <string-array name="icono_reinicio_entries">
+        <item>Stock</item>
+        <item>Semicirculo</item>
+        <item>Gradiente</item>
+        <item>Hexagonal</item>
+        <item>Spanky</item>
+        <item>Ir Pa Na</item>
+        <item>Es Tonteria</item>
+        <item>Ansia Viva</item>
+        <item>Deluxe</item>
+        <item>Red Bull</item>
+        <item>Hexagonal 2</item>
+        <item>Arcilla</item>
+        <item>Elegante 1</item>
+        <item>Elegante 2</item>
+        <item>Elegante 3</item>
+    </string-array>
+    <string-array name="icono_reinicio_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+    </string-array>
+    <string-array name="immersive_entries">
+        <item>Sürükleyici Kapalı (Varsayılan)</item>
+        <item>Sürükleyici Açık (Tam ekran)</item>
+        <item>StatusBar.ı Gizle</item>
+        <item>NavBar.ı Gizle</item>
+    </string-array>
+    <string-array name="immersive_values">
+        <item>immersive.full</item>
+        <item>immersive.full=*</item>
+        <item>immersive.status=*</item>
+        <item>immersive.navigation=*</item>
+    </string-array>
+    <string-array name="listview_animation_entries">
+        <item>@string/listview_off</item>
+        <item>@string/listview_wave_left</item>
+        <item>@string/listview_wave_right</item>
+        <item>@string/listview_scale</item>
+        <item>@string/listview_alpha</item>
+        <item>@string/listview_stack_top</item>
+        <item>@string/listview_stack_bottom</item>
+        <item>@string/listview_unfold</item>
+        <item>@string/listview_fold</item>
+        <item>@string/listview_translate_left</item>
+        <item>@string/listview_translate_right</item>
+        <item>@string/listview_rotate</item>
+    </string-array>
+    <string-array name="listview_animation_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
+    <string-array name="listview_interpolator_entries">
+        <item>@string/listview_off</item>
+        <item>@string/listview_accelerate_interpolator</item>
+        <item>@string/listview_decelerate_interpolator</item>
+        <item>@string/listview_accelerate_decelerate_interpolator</item>
+        <item>@string/listview_anticipate_interpolator</item>
+        <item>@string/listview_overshoot_interpolator</item>
+        <item>@string/listview_anticipate_overshoot_interpolator</item>
+        <item>@string/listview_bounce_interpolator</item>
+    </string-array>
+    <string-array name="listview_interpolator_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    <string-array name="notifs_color_entries">
+        <item>general_color</item>
+        <item>volume_color</item>
+        <item>alarm_color</item>
+        <item>bluetooth_color</item>
+        <item>location_color</item>
+        <item>privatemode_color</item>
+        <item>powersaver_color</item>
+        <item>headset_color</item>
+        <item>nfc_color</item>
+        <item>datasaver_color</item>
+        <item>telegram_color</item>
+        <item>whatsapp_color</item>
+        <item>facebook_color</item>
+        <item>nodisturb_color</item>
+        <item>gear_color</item>
+        <item>wificall_color</item>
+        <item>screenshot_color</item>
+        <item>screenrecorder_color</item>
+        <item>cast_color</item>
+        <item>contacts_color</item>
+        <item>incallui_color</item>
+        <item>downloads_color</item>
+        <item>playstore_color</item>
+        <item>youtube_color</item>
+        <item>instagram_color</item>
+        <item>twitter_color</item>
+    </string-array>
+    <string-array name="notifs_color_values">
+        <item>agc_sb_general_color</item>
+        <item>agc_sb_volume_color</item>
+        <item>agc_sb_alarm_color</item>
+        <item>agc_sb_bluetooth_color</item>
+        <item>agc_sb_location_color</item>
+        <item>agc_sb_privatemode_color</item>
+        <item>agc_sb_powersaver_color</item>
+        <item>agc_sb_headset_color</item>
+        <item>agc_sb_nfc_color</item>
+        <item>agc_sb_datasaver_color</item>
+        <item>agc_sb_telegram_color</item>
+        <item>agc_sb_whatsapp_color</item>
+        <item>agc_sb_facebook_color</item>
+        <item>agc_sb_nodisturb_color</item>
+        <item>agc_sb_gear_color</item>
+        <item>agc_sb_wificall_color</item>
+        <item>agc_sb_screenshot_color</item>
+        <item>agc_sb_screenrecorder_color</item>
+        <item>agc_sb_cast_color</item>
+        <item>agc_sb_contacts_color</item>
+        <item>agc_sb_incallui_color</item>
+        <item>agc_sb_downloads_color</item>
+        <item>agc_sb_playstore_color</item>
+        <item>agc_sb_youtube_color</item>
+        <item>agc_sb_instagram_color</item>
+        <item>agc_sb_twitter_color</item>
+    </string-array>
+    <string-array name="outdoor_position_entries">
+        <item>Solda</item>
+        <item>Sağda</item>
+    </string-array>
+    <string-array name="outdoor_position_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="quick_tg_entries">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="quick_tg_values">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="reboot_style_entries">
+        <item>Stok Varsayılan</item>
+        <item>Özel Liste</item>
+    </string-array>
+    <string-array name="reboot_style_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="restore_wifi_key">
+        <item>mount -o rw,remount /data</item>
+        <item>cp -rf /sdcard/backups/wifibackup/wpa_supplicant.conf /data/misc/wifi/</item>
+    </string-array>
+    <string-array name="rom_tabs_layouts">
+        <item>rom_info_tab</item>
+        <item>changelog_item</item>
+    </string-array>
+    <string-array name="rom_tabs_names">
+        <item>@string/general_info</item>
+        <item>@string/changelog</item>
+    </string-array>
+    <string-array name="samsung_widgets">
+        <item>com.sec.android.daemonapp/com.sec.android.daemonapp.appwidget.WeatherAppWidget2x1</item>
+        <item>com.sec.android.daemonapp/com.sec.android.daemonapp.appwidget.WeatherAppWidget</item>
+    </string-array>
+    <string-array name="sb_date_entries">
+        <item>@string/day</item>
+        <item>@string/month</item>
+        <item>@string/year</item>
+        <item>@string/year_4</item>
+        <item>@string/empty</item>
+    </string-array>
+    <string-array name="sb_date_values">
+        <item>dd</item>
+        <item>MM</item>
+        <item>yy</item>
+        <item>yyyy</item>
+        <item>empty</item>
+    </string-array>
+    <string-array name="sb_margins">
+        <item>4.0</item>
+        <item>5.0</item>
+        <item>6.0</item>
+        <item>7.0</item>
+        <item>8.0</item>
+        <item>9.0</item>
+    </string-array>
+    <string-array name="sb_positions_options">
+        <item>Solda</item>
+        <item>Ortalanmış</item>
+        <item>Sağda</item>
+    </string-array>
+    <string-array name="sb_positions_options_dual">
+        <item>Solda (ALT)</item>
+        <item>Ortalanmış (ALT)</item>
+        <item>Sağda (ALT)</item>
+        <item>Üst Solda (DUAL)</item>
+        <item>Üst Ortalanmış (DUAL)</item>
+        <item>Üst Sağda (DUAL)</item>
+        <item>DUAL Ortalanmış</item>
+    </string-array>
+    <string-array name="sb_positions_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="sb_positions_values_dual">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="signal_color_entries">
+        <item>WiFi</item>
+        <item>WiFi okları</item>
+        <item>Sinyal</item>
+        <item>Mobil Bağlantı</item>
+        <item>Mobil Bağlantı Okları</item>
+        <item>Roaming</item>
+        <item>̶A̶i̶r̶p̶l̶a̶n̶e̶</item>
+        <item>̶V̶p̶n̶</item>
+        <item>̶E̶t̶h̶</item>
+        <item>̶E̶t̶h̶ ̶ ̶a̶c̶t̶i̶v̶i̶t̶y̶</item>
+        <item>̶B̶o̶o̶s̶t̶e̶r̶ ̶ ̶w̶i̶f̶i</item>
+        <item>̶B̶o̶o̶s̶t̶e̶r̶ ̶ ̶m̶o̶b̶i̶l̶e̶</item>
+        <item>̶B̶o̶o̶s̶t̶e̶r̶ ̶ ̶a̶c̶t̶i̶v̶i̶t̶y̶</item>
+        <item>Tint</item>
+    </string-array>
+    <string-array name="signal_color_values">
+        <item>wifi</item>
+        <item>wifiarrows</item>
+        <item>signal</item>
+        <item>mobiletype</item>
+        <item>mobilearrows</item>
+        <item>roaming</item>
+        <item>airplane</item>
+        <item>vpn</item>
+        <item>eth</item>
+        <item>ethactivity</item>
+        <item>boosterwifi</item>
+        <item>boostermobile</item>
+        <item>boosteractivity</item>
+        <item>tint</item>
+    </string-array>
+    <string-array name="test_sb_views_options">
+        <item>Bildirim Simgeleri</item>
+        <item>knox text(never seen)</item>
+        <item>İnternet Hız Görünümü</item>
+        <item>Sistem Simgeleri</item>
+        <item>Sinyal Kümesi Görünümü</item>
+        <item>Pil Yazısı</item>
+        <item>Pil İkonu</item>
+        <item>Saat</item>
+    </string-array>
+    <string-array name="test_sb_views_values">
+        <item>notifications</item>
+        <item>knox</item>
+        <item>netspeedview</item>
+        <item>statusicons</item>
+        <item>signalclusterview</item>
+        <item>batterytext</item>
+        <item>batterymeterview</item>
+        <item>clock</item>
+    </string-array>
+
+    <string-array name="torchlight_timeout_entries">
+        <item>15 saniye</item>
+        <item>30 saniye</item>
+        <item>1 dakika</item>
+        <item>2 dakika</item>
+        <item>5 dakika</item>
+    </string-array>
+    <string-array name="torchlight_timeout_values">
+        <item>15000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>120000</item>
+        <item>300000</item>
+    </string-array>
+    <string-array name="tw_effect_entries">
+        <item>Acordeon</item>
+        <item>Carta</item>
+        <item>Tarjeta plegable</item>
+        <item>Carrusel</item>
+        <item>Cascada</item>
+        <item>Transportador</item>
+        <item>Abanico</item>
+        <item>Cubo interior</item>
+        <item>Cubo exterior</item>
+        <item>Simple</item>
+        <item>Rotar</item>
+        <item>Espiral</item>
+        <item>Zoom</item>
+        <item>Zoom Vertical</item>
+        <item>Panel</item>
+        <item>Fuelle</item>
+        <item>Persiana</item>
+        <item>Dispersar</item>
+        <item>Profundidad</item>
+        <item>Diagonal</item>
+        <item>Desvanecer</item>
+    </string-array>
+    <string-array name="tw_effect_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+    </string-array>
+</resources>

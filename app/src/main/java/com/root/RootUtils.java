@@ -19,8 +19,8 @@
  */
 package com.root;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
-
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -42,7 +42,7 @@ public class  RootUtils {
     }
 
     public static boolean busyboxInstalled() {
-        return existBinary("busybox") || existBinary("toybox");
+        return existBinary("busybox");
     }
 
     private static boolean existBinary(String binary) {
@@ -69,8 +69,16 @@ public class  RootUtils {
         su.runCommand("chmod " + permission + " " + file);
     }
 
+    // getProp without root
+    @SuppressLint("PrivateApi")
     public static String getProp(String prop) {
-        return runCommand("getprop " + prop);
+        String value = null;
+        try {
+            value = (String) Class.forName("android.os.SystemProperties").getMethod("get", String.class).invoke(null, prop);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
     }
 
     //grx

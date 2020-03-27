@@ -95,7 +95,7 @@ public class SublimeBaseItemView extends LinearLayout {
         }
         setTitle(itemData.getTitle());
 
-        setIconTintList(themer.getIconTintList());
+        //setIconTintList(themer.getIconTintList());
         setIcon(itemData.getIcon());
 
         boolean showHint = !TextUtils.isEmpty(itemData.getHint());
@@ -136,7 +136,7 @@ public class SublimeBaseItemView extends LinearLayout {
         }
         setTitle(itemData.getTitle());
 
-        setIconTintList(themer.getIconTintList());
+        //setIconTintList(themer.getIconTintList());
         setIcon(itemData.getIcon());
 
         boolean showHint = !TextUtils.isEmpty(itemData.getHint());

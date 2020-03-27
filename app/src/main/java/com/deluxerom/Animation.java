@@ -5,25 +5,27 @@ import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
+import com.grx.settings.GrxSettingsActivity;
+import com.grx.settings.R;
+
+import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 @SuppressLint("AppCompatCustomView")
 public class Animation extends ImageView {
-    AnimationDrawable animationDrawable;
-    boolean mAttached;
+
+    private AnimationDrawable animationDrawable;
+    private boolean mAttached;
+    private static boolean v;
 
     public Animation(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-    }
-
-    private void initValues() {
-        if (200 >= 200) {
-            Object obj = null;
-        } else {
-            getDrawable();
-        }
+        setBackgroundResource(R.drawable.deluxe_animation );
     }
 
     private void updateAnim() {
@@ -50,8 +52,7 @@ public class Animation extends ImageView {
             } else {
                 animationDrawable.stop();
             }
-        } else if (!(drawable instanceof Animatable)) {
-        } else {
+        } else if (drawable instanceof Animatable){
             if (z) {
                 ((Animatable) drawable).start();
             } else {
@@ -80,7 +81,7 @@ public class Animation extends ImageView {
         this.mAttached = false;
     }
 
-    protected void onVisibilityChanged(View view, int i) {
+    protected void onVisibilityChanged(@NonNull View view, int i) {
         super.onVisibilityChanged(view, i);
         updateAnimationsState();
     }

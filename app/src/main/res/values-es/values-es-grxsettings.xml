@@ -233,22 +233,6 @@
         <item>Tinta en fondos blancos</item>
     </string-array>
 
-    <string-array name="agc_reboot_options">
-        <item>Power off</item>
-        <item>Reboot</item>
-        <item>Recovery</item>
-        <item>Download</item>
-        <item>Data mode</item>
-        <item>Quick reboot</item>
-        <item>Reboot UI</item>
-        <item>Emergency mode</item>
-        <item>Flashlight</item>
-        <item>Record screen</item>
-        <item>Screenshot</item>
-        <item>Settings</item>
-        <item>DRC</item>
-    </string-array>
-
     <string-array name="crop_entries">
         <item>Centrada ajustada</item>
         <item>Centrada</item>
@@ -299,7 +283,7 @@
     </string-array>
 
     <string-array name="agc_virtual_buttons_entries">
-        <item>Stock</item>
+        <item>Sin acción</item>
         <item>Ejecutar aplicación</item>
         <item>Pulsar retroceso</item>
         <item>Pulsar inicio</item>
@@ -329,6 +313,9 @@
         <item>Play / Pausa</item>
         <item>Siguiente pista</item>
         <item>Pista anterior</item>
+        <item>Poner brillo al máximo</item>
+        <item>Poner brillo al mínimo</item>
+        <item>Búsqueda por voz de Google</item>
     </string-array>
 
     <string-array name="agc_position_clock_entries">
@@ -352,7 +339,7 @@
     </string-array>
 
     <string-array name="qstile_animation_duration_entries">
-        <item>Muy lento (3000ms)</item>
+        <item>Muy lento (3500ms)</item>
         <item>Lento (2500ms)</item>
         <item>Por defecto (2000ms)</item>
         <item>Rápido (1500ms)</item>
@@ -372,6 +359,20 @@
         <item>Anticipar y rebotar</item>
     </string-array>
 
+    <string-array name="qstile_animation_style_entries">
+        <item>Flip vertical</item>
+        <item>Flip horizontal</item>
+        <item>Rotar hacia la derecha</item>
+        <item>Rotar hacia la izquierda</item>
+        <item>Estirar horizontal</item>
+        <item>Estirar vertical</item>
+        <item>Deslizar desde la izquierda</item>
+        <item>Deslizar desde la derecha</item>
+        <item>Deslizar desde arriba</item>
+        <item>Deslizar desde abajo</item>
+        <item>Aparecer</item>
+    </string-array>
+
     <string-array name="agc_netw_interval_entries">
         <item>Tiempo real</item>
         <item>3 segundos</item>
@@ -379,6 +380,23 @@
         <item>7 segundos</item>
         <item>10 segundos</item>
     </string-array>
+
+    <string name="toast_FastFade_animation">Desvanecer rápido</string>
+    <string name="toast_GrowFadeBottom_animation">Desvanecer desde abajo</string>
+    <string name="toast_GrowFadeCenter_animation">Desvanecer desde el centro</string>
+    <string name="toast_GrowFade_animation">Desvanecer progresivo</string>
+    <string name="toast_Honami_animation">Honami</string>
+    <string name="toast_SlideLeftRight_animation">Deslizar izquierda derecha</string>
+    <string name="toast_SlideLeft_animation">Deslizar izquierda</string>
+    <string name="toast_SlideRightLeft_animation">Deslizar derecha izquierda</string>
+    <string name="toast_SlideRight_animation">Deslizar derecha</string>
+    <string name="toast_Tn_animation">Tn</string>
+    <string name="toast_Toko_animation">Toko</string>
+    <string name="toast_Translucent_animation">Translúcida</string>
+    <string name="toast_Xylon_animation">Xylon</string>
+    <string name="toast_default_animation">Defecto</string>
+    <string name="toast_fade_animation">Desvanecer</string>
+    <string name="toast_none_animation">Ninguna</string>
 
     <string name="listview_off">Apagado</string>
     <string name="listview_wave_left">Ola (izquierda)</string>
@@ -470,9 +488,223 @@
         <item>Derecha</item>
     </string-array>
 
+    <string-array name="agc_weather_interval_entries">
+        <item>1 hora</item>
+        <item>2 horas</item>
+        <item>3 horas</item>
+        <item>6 horas</item>
+    </string-array>
+
+    <string-array name="powermenu_color_entries">
+        <item>Título</item>
+        <item>Descripción</item>
+        <item>Estado</item>
+        <item>Título en fondos blancos</item>
+        <item>Descripción en fondos blancos</item>
+        <item>Estado en fondos blancos</item>
+    </string-array>
+
     <string name="general_info">Información general</string>
     <string name="features">Features</string>
     <string name="changelog">Cambios</string>
+
+    <string-array name="changelog_230">
+        <item>Rebasada sobre N950FXXSADTB1</item>
+        <item>Parche de seguridad 01/03/2020</item>
+        <item>Arreglados problemas de instalación</item>
+        <item>Actualizados archivos de S8+/S8 [DTC1]</item>
+        <item>Actualizados archivos de SmartManager chino</item>
+        <item>Actualizado WebView</item>
+        <item>Simplificado el instalador AROMA</item>
+        <item>Añadida pantalla de bloqueo dinámica</item>
+        <item>Añadida otra animación de arranque (Deluxe4)</item>
+        <item>Eliminados algunos mods conflictivos/ineficientes</item>
+    </string-array>
+
+    <string-array name="changelog_220">
+        <item>Rebasada sobre N950FXXS9DTA1</item>
+        <item>Parche de seguridad 01/02/2020</item>
+        <item>Actualizado DeluxeKernel® v12</item>
+    </string-array>
+
+    <string-array name="changelog_210">
+        <item>Rebasada sobre N950FXXS8DSK5</item>
+        <item>Parche de seguridad 01/12/2019</item>
+        <item>Arreglado comportamiento de botones virtuales</item>
+        <item>Arreglados colores de notificaciones</item>
+        <item>Arreglada capacidad de batería en N950F</item>
+        <item>Mejoras varias en la batería stock</item>
+        <item>Añadida opción para mover porcentaje a la derecha</item>
+        <item>Añadidos margenes personalizados en batería stock</item>
+        <item>Añadidos margenes personalizados en porcentaje de batería</item>
+        <item>Añadidos tamaños personalizados de textos en menú de reinicio</item>
+        <item>Añadidas fuentes personalizados de textos en menú de reinicio</item>
+        <item>Añadidos 2 estilos mas en menu de reinicio</item>
+    </string-array>
+
+    <string-array name="changelog_200">
+        <item>Actualizado DeluxeKernel® v11</item>
+        <item>Actualizado Magisk v20.1</item>
+        <item>Actualizado Busybox 1.31.1</item>
+        <item>Arreglados colores personalizados de notificaciones</item>
+        <item>Arreglados errores de tinta en panel de notifs.</item>
+        <item>Arreglado icono de no molestar</item>
+        <item>Forzados efectos de menu de reinicio a usar pantalla completa</item>
+        <item>Añadida opción por vista para usar margenes personalizados solo en barra de estado</item>
+        <item>Añadidos colores en barra de estado de panel de notifs.</item>
+        <item>Añadida tinta en barra de batería</item>
+        <item>Añadido 1 estilo mas de toggles</item>
+        <item>Mantenido fondo de notificaciones stock en pantalla de bloqueo (Transparencia)</item>
+        <item>Otros ajustes menores</item>
+    </string-array>
+
+    <string-array name="changelog_190">
+        <item>Rebasada sobre N950FXXU7DSJ1</item>
+        <item>Parche de seguridad 01/10/2019</item>
+        <item>Actualizado TWRP 3.3.1-1</item>
+        <item>Actualizado TouchWiz 10.0.40.6</item>
+        <item>Actualizado Magisk v20</item>
+        <item>Arreglado FC al cambiar ajustes de clima en barra de estado</item>
+        <item>Arreglados iconos de menu de reinicio duplicados</item>
+        <item>Revisión general del código para menor gasto de recursos</item>
+        <item>Mejoras en DRC</item>
+        <item>Eliminado aviso MTP</item>
+        <item>Añadido indicador de batería para dispositivos bluetooth</item>
+        <item>Añadida posición por elemento en barra de estado del panel de notifs.</item>
+        <item>Añadidas baterías personalizadas (minit/circular) en barra de estado del panel de notifs.</item>
+        <item>Añadida opción para bloquear el uso del panel de notifs. en pantalla de bloqueo</item>
+        <item>Añadidas opciones doble toque en botones virtuales</item>
+        <item>Añadida barra de batería en barra de estado</item>
+        <item>Añadido 1 estilo mas de iconos en menu de reinicio</item>
+        <item>Añadidos colores de textos en menu de reinicio</item>
+        <item>Añadido fondo personalizado en menu de reinicio</item>
+        <item>Añadido efecto matrix en menu de reinicio</item>
+        <item>Añadido color en fondos blancos en velocímetro de red</item>
+        <item>Añadido fondo personalizado progresivo en panel de notifs.</item>
+        <item>Añadido efecto matrix progresivo en panel de notifs.</item>
+        <item>Añadida opción para forzar o no el cambio a brillo manual (En barra de estado, botones virtuales y remapeo de teclas)</item>
+    </string-array>
+
+    <string-array name="changelog_182">
+        <item>DeluxeKernel_v10.1 (Siempre permissive)</item>
+        <item>Actualizados archivos de S8+/S8 con la base de septiembre</item>
+        <item>Añadidas animaciones toast</item>
+        <item>Añadida temperatura en barra de estado</item>
+        <item>Añadida versión de la ROM en ajustes DeluxeROM®</item>
+        <item>Detenidas actualizaciones automáticas de TouchWiz</item>
+    </string-array>
+
+    <string-array name="changelog_181">
+        <item>Actualizados archivos S8+/S8 de la última base</item>
+        <item>Incluido FIX de UI de la v18</item>
+        <item>Añadida opción por tecla para no vibrar en pulsación corta</item>
+        <item>Añadida opción para ajustar el brillo deslizando la barra de estado</item>
+        <item>Añadida opción para responder en notificaciones con el dispositivo bloqueado</item>
+        <item>Añadida opción para eliminar notificaciones permanentes</item>
+        <item>Añadido un estilo mas de barra de navegación</item>
+    </string-array>
+
+    <string-array name="changelog_180">
+        <item>Rebasada sobre N950FXXS7DSHC</item>
+        <item>Parche de seguridad 01/09/2019</item>
+        <item>Actualizados ramdisks</item>
+        <item>Actualizado TouchWiz a la última versión y añadido 4x4</item>
+        <item>Arreglados varios CSCs (NZC, PET, TEB, TCE)</item>
+        <item>Añadida bootanimation de AC/DC</item>
+        <item>Añadidos lenguajes pre-instalados</item>
+        <item>Añadida opción en AROMA para usar última configuración</item>
+        <item>Añadida personalización del led de notificaciones</item>
+        <item>Añadidos colores de iconos de barra de navegación personalizados</item>
+        <item>Añadido tamaño y máximo de iconos en recientes personalizados</item>
+    </string-array>
+
+    <string-array name="changelog_171">
+        <item>Actualizado DeluxeKernel®_v10</item>
+        <item>Movido fix de Snapchat para selección del usuario (Toggle DRC > Otros)</item>
+        <item>Reactivada la animación del boton inicio (SOLO al usar estilo stock)</item>
+        <item>Arreglado comportamiento de barra de navegación al cambiar el orden (con iconos no stock)</item>
+        <item>Añadidos mas estilos de barra de navegación</item>
+        <item>Añadidos temas DlxUI (Noche/Día automático), DlxDark y DlxLight a DRC</item>
+        <item>Arreglados elementos escondidos en barra de estado (A veces se restauraban)</item>
+        <item>Añadido opción en AROMA para iniciar directamente con barra de estado dual</item>
+        <item>Eliminada opción "Mostrar en panel expandido" del panel MultiSIM</item>
+    </string-array>
+
+    <string-array name="changelog_170">
+        <item>Rebasada sobre N950FXXS7DSH1</item>
+        <item>Actualizado DeluxeKernel®_v9.1</item>
+        <item>Arregladas algunas preferencias (180º, color de panel…)</item>
+        <item>Arreglados problemas de instalador</item>
+        <item>Arreglados tests de HW / códigos USSD</item>
+        <item>Arreglada capacidad de batería en S8+/S8</item>
+        <item>Añadida opción en el toggle DRC para forzar modo noche usando temas</item>
+        <item>Añadida opción en el toggle DRC para activar/desactivar la carga rápida</item>
+        <item>Añadida personalización del panel MultiSIM</item>
+        <item>Añadidos colores de notificaciones</item>
+        <item>Añadidos iconos de barra de navegación</item>
+        <item>Añadidos margenes personalizados en baterias, velocímetro de red, fecha, etc…</item>
+        <item>Añadido color personalizado para icono de deslizar del panel</item>
+        <item>Añadido "Búsqueda por voz de Google" como acción personalizada</item>
+    </string-array>
+
+    <string-array name="changelog_160">
+        <item>Rebasada sobre N950FXXS7DSG1</item>
+        <item>Actualizado DeluxeKernel®_v9</item>
+        <item>Añadido control de vibración individual</item>
+        <item>Añadida carpeta segura</item>
+        <item>Añadido color de texto de toggles</item>
+        <item>Añadidas animaciones de toggle</item>
+        <item>Añadido margen superior/inferior en reloj</item>
+    </string-array>
+
+    <string-array name="changelog_151">
+        <item>Rebasada sobre N950FXXU6DSF6</item>
+        <item>Actualizado DeluxeKernel®_v8.2</item>
+        <item>Actualizados archivos S8+/S8</item>
+        <item>Arreglado test de hardware S8+/S8</item>
+        <item>Arreglados problemas con VoLTE</item>
+        <item>Añadido de nuevo bypass 2Sims+SD</item>
+        <item>Arreglados colores de llamadas WiFi / VoLTE</item>
+        <item>Arregladas preferencias ocultas en DRC</item>
+        <item>Arreglada función copiar/restaurar en DRC</item>
+        <item>Añadidos toggles personalizados para QR Scanner</item>
+        <item>Añadida opción para despertar o no con huella</item>
+        <item>Añadida barra de RAM en recientes</item>
+        <item>Añadida opción \"Permitir giro de 180º\" al toggle de rotación</item>
+        <item>Optimizado el código de 3Minit para un menor gasto de recursos</item>
+        <item>Revisados en general todos los mods para pequeñas correcciones</item>
+    </string-array>
+
+    <string-array name="changelog_150">
+        <item>Rebasada sobre N950FXXS6DSF2</item>
+        <item>Arreglado zoom en S8+/S8</item>
+        <item>Actualizado DeluxeKernel®_v8.1</item>
+        <item>Añadida sección de kernel en DRC (gestos/gobernadores/SELinux)</item>
+        <item>Añadidos ajustes rápidos al toggle de DRC</item>
+        <item>Añadida opción "ninguna" a la fecha (ej: dd/mm/ninguna)</item>
+        <item>Añadidos margenes derecho e izquierdo a la fecha</item>
+        <item>Añadidos 2 estilos mas de toggles</item>
+        <item>Añadida selección de margenes de barra de estado</item>
+        <item>Añadido remapeo completo de teclas (pulsación corta/larga/doble/triple)</item>
+        <item>Añadida opción para esconder barra de estado en pantalla de bloqueo</item>
+        <item>Mejorada la seguridad del menu de reinicio en pantalla de bloqueo</item>
+        <item>Mejorado el código del reloj (Menor gasto de recursos en segundo plano)</item>
+        <item>Mejorado el código de colores de panel (Lectura lenta de las opciones)</item>
+        <item>Arreglado tamaño personalizado de la barra de navegación (desactivado si está en modo gestos)</item>
+        <item>Arreglado selector de color de la barra de brillo</item>
+        <item>Arreglado problema de tintado en batería circular</item>
+        <item>Arreglado icono NFC (no podía esconderse en barra de estado)</item>
+    </string-array>
+
+    <string-array name="changelog_141">
+        <item>Actualizados archivos S8+/S8</item>
+        <item>Actualizado DeluxeKernel_v8</item>
+        <item>Añadidos segundos / AM-PM al reloj</item>
+        <item>Unificado DRC N8-S8-S7</item>
+        <item>Añadido día a la fecha</item>
+        <item>Añadido GooglePackageInstaller en SmartManager stock</item>
+        <item>Arreglados problemas del instalador</item>
+    </string-array>
 
     <string-array name="changelog_140">
         <item>Rebasado sobre N950FXXS5DSD5</item>
@@ -483,7 +715,7 @@
         <item>Añadidos colores de batería y porcentaje</item>
         <item>Añadida fecha personalizada</item>
         <item>Añadido fondo personalizado en barra de estado</item>
-        <item>Added barra de estado dual</item>
+        <item>Añadida barra de estado dual</item>
         <item>Añadido bluetooth_conectado a la lista de iconos escondidos</item>
         <item>Añadidos toggles personalizados</item>
         <item>Añadidos colores de panel (Toggles, iconos, brillo…)</item>
@@ -586,6 +818,15 @@
         <item>Basada en primera beta para N950F</item>
     </string-array>
 
+    <string name="changelog_230">Cambios v23</string>
+    <string name="changelog_220">Cambios v22</string>
+    <string name="changelog_180">Cambios v18</string>
+    <string name="changelog_171">Cambios v17.1</string>
+    <string name="changelog_170">Cambios v17</string>
+    <string name="changelog_160">Cambios v16</string>
+    <string name="changelog_151">Cambios v15.1</string>
+    <string name="changelog_150">Cambios v15</string>
+    <string name="changelog_141">Cambios v14.1</string>
     <string name="changelog_140">Cambios v14</string>
     <string name="changelog_130">Cambios v13</string>
     <string name="changelog_120">Cambios v12</string>
@@ -595,12 +836,216 @@
     <string name="changelog_111">Cambios v11.1</string>
     <string name="changelog_110">Cambios v11</string>
 
+    <!-- G93xF changelogs -->
+    <string name="changelog_046">Cambios v4.6</string>
+    <string name="changelog_045">Cambios v4.5</string>
+    <string name="changelog_044">Cambios v4.4</string>
+    <string name="changelog_043">Cambios v4.3</string>
+    <string name="changelog_042">Cambios v4.2</string>
+    <string name="changelog_041">Cambios v4.1</string>
+    <string name="changelog_040">Cambios v4</string>
+    <string name="changelog_032">Cambios v3.2</string>
+    <string name="changelog_031">Cambios v3.1</string>
+    <string name="changelog_030">Cambios v3</string>
+    <string name="changelog_021">Cambios v2.1</string>
+    <string name="changelog_020">Cambios v2</string>
+    <string name="changelog_010">Cambios v1</string>
+
+    <string-array name="changelog_047">
+        <item>Actualizado Magisk v20.1</item>
+        <item>Actualizado Busybox 1.31.1</item>
+        <item>Arreglado FC al forzar modo noche</item>
+        <item>Arreglado FC al usar notificaciones detalladas</item>
+        <item>Arreglados colores personalizados de notificaciones</item>
+        <item>Arreglados errores de tinta en panel de notifs.</item>
+        <item>Arreglada iluminación de teclas al remapear</item>
+        <item>Arreglado icono de no molestar</item>
+        <item>Forzados efectos de menu de reinicio a usar pantalla completa</item>
+        <item>Añadida opción por vista para usar margenes personalizados solo en barra de estado</item>
+        <item>Añadidos colores en barra de estado de panel de notifs.</item>
+        <item>Añadida tinta en barra de batería</item>
+        <item>Añadido 1 estilo mas de toggles</item>
+        <item>Mantenido fondo de notificaciones stock en pantalla de bloqueo (Transparencia)</item>
+        <item>Arreglado comportamiento de botones virtuales</item>
+        <item>Arreglados colores de notificaciones</item>
+        <item>Arreglada capacidad de batería en G930F</item>
+        <item>Mejoras varias en la batería stock</item>
+        <item>Añadida opción para mover porcentaje a la derecha</item>
+        <item>Añadidos margenes personalizados en batería stock</item>
+        <item>Añadidos margenes personalizados en porcentaje de batería</item>
+        <item>Añadidos tamaños personalizados de textos en menú de reinicio</item>
+        <item>Añadidas fuentes personalizados de textos en menú de reinicio</item>
+        <item>Añadidos 2 estilos mas en menu de reinicio</item>
+        <item>Otros ajustes menores</item>
+    </string-array>
+
+    <string-array name="changelog_046">
+        <item>Actualizado TouchWiz 10.0.40.6</item>
+        <item>Actualizado Magisk v20</item>
+        <item>Arreglado FC al usar modo de brillo automático</item>
+        <item>Arreglados iconos de menu de reinicio duplicados</item>
+        <item>Revisión general del código para menor gasto de recursos</item>
+        <item>Mejoras en DRC</item>
+        <item>Eliminado aviso MTP</item>
+        <item>Añadido CSC XEF</item>
+        <item>Añadido desbloqueo facial con opción de no deslizar</item>
+        <item>Añadido indicador de batería para dispositiv1os bluetooth</item>
+        <item>Añadida posición por elemento en barra de estado del panel de notifs.</item>
+        <item>Añadidas baterías personalizadas (minit/circular) en barra de estado del panel de notifs.</item>
+        <item>Añadida opción para bloquear el uso del panel de notifs. en pantalla de bloqueo</item>
+        <item>Añadidas opciones doble toque en botones virtuales</item>
+        <item>Añadida barra de batería en barra de estado</item>
+        <item>Añadido 1 estilo mas de iconos en menu de reinicio</item>
+        <item>Añadidos colores de textos en menu de reinicio</item>
+        <item>Añadido fondo personalizado en menu de reinicio</item>
+        <item>Añadido efecto matrix en menu de reinicio</item>
+        <item>Añadido color en fondos blancos en velocímetro de red</item>
+        <item>Añadido fondo personalizado progresivo en panel de notifs.</item>
+        <item>Añadido efecto matrix progresivo en panel de notifs.</item>
+        <item>Añadida opción para forzar o no el cambio a brillo manual (En barra de estado, botones virtuales y remapeo de teclas)</item>
+    </string-array>
+
+    <string-array name="changelog_045">
+        <item>Actualizado DeluxeKernel_SE_v3.1 (Siempre permissive)</item>
+        <item>Añadidas animaciones toast</item>
+        <item>Añadida temperatura en barra de estado</item>
+        <item>Añadida versión de la ROM en ajustes DeluceROM®</item>
+        <item>Detenidas actualizaciones automáticas de TouchWiz</item>
+    </string-array>
+
+    <string-array name="changelog_044">
+        <item>Añadida bootanimation de AC/DC</item>
+        <item>Añadida opción en AROMA para usar última configuración</item>
+        <item>Añadida personalización del led de notificaciones</item>
+        <item>Añadidos colores de iconos de barra de navegación personalizados</item>
+        <item>Añadido tamaño y máximo de iconos en recientes personalizados</item>
+        <item>Añadida opción por tecla para no vibrar en pulsación corta</item>
+        <item>Añadida opción para ajustar el brillo deslizando la barra de estado</item>
+        <item>Añadida opción para responder en notificaciones con el dispositivo bloqueado</item>
+        <item>Añadida opción para eliminar notificaciones permanentes</item>
+        <item>Añadido un estilo mas de barra de navegación</item>
+    </string-array>
+
+    <string-array name="changelog_043">
+        <item>Actualizado DeluxeKernel®_v3</item>
+        <item>Movido fix de Snapchat para selección del usuario (Toggle DRC > Otros)</item>
+        <item>Reactivada la animación del boton inicio (SOLO al usar estilo stock)</item>
+        <item>Arreglado comportamiento de barra de navegación al cambiar el orden (con iconos no stock)</item>
+        <item>Añadidos mas estilos de barra de navegación</item>
+        <item>Añadidos temas DlxUI (Noche/Día automático), DlxDark y DlxLight a DRC</item>
+        <item>Arreglados elementos escondidos en barra de estado (A veces se restauraban)</item>
+        <item>Añadido opción en AROMA para iniciar directamente con barra de estado dual</item>
+        <item>Eliminada opción "Mostrar en panel expandido" del panel MultiSIM</item>
+    </string-array>
+
+    <string-array name="changelog_042">
+        <item>Añadida opción en el toggle DRC para forzar modo noche usando temas</item>
+        <item>Añadida opción en el toggle DRC para activar/desactivar la carga rápida</item>
+        <item>Añadida personalización del panel MultiSIM</item>
+        <item>Añadidos colores de notificaciones</item>
+        <item>Añadidos iconos de barra de navegación</item>
+        <item>Añadidos margenes personalizados en baterias, velocímetro de red, fecha, etc…</item>
+        <item>Añadido color personalizado para icono de deslizar del panel</item>
+        <item>Añadido "Búsqueda por voz de Google" como acción personalizada</item>
+    </string-array>
+
+    <string-array name="changelog_041">
+        <item>Arreglada pulsación larga en teclas físicas</item>
+        <item>Añadido control de vibración individual</item>
+        <item>Añadida carpeta segura</item>
+        <item>Añadidos colores de texto de toggles</item>
+        <item>Añadidas animaciones de toggles</item>
+        <item>Añadido margen superior/inferior al reloj</item>
+    </string-array>
+
+    <string-array name="changelog_040">
+        <item>Rebasada sobre N935FXXS5CSF1</item>
+        <item>Actualizado DeluxeKernel®_v2.1</item>
+        <item>Añadida sección de kernel en DRC (SELinux,gestos/gobernadores)</item>
+        <item>Añadidos ajustes rápidos al toggle DRC</item>
+        <item>Añadida opción \"Ninguno\" como elemento de fecha</item>
+        <item>Añadidos margenes derecha/izquierda en fecha</item>
+        <item>Añadidos 2 estilos mas de toggle</item>
+        <item>Añadidos margenes personalizados de barra de estado</item>
+        <item>Añadido remapeo completo de teclas (pulsaciones corta/larga/doble/triple)</item>
+        <item>Añadida opción para esconder barra de estado en pantalla de bloqueo</item>
+        <item>Añadida opción \"Permitir giro de 180º\" al toggle de rotación</item>
+        <item>Mejorada la seguridad del menu de reinicio (recovery, descarga…)</item>
+        <item>Mejorado el código para mostrar segundos (menor gasto de recursos)</item>
+        <item>Mejorado codigo de colores de panel (Cambio lento a modo noche)</item>
+        <item>Arreglado tamaño personalizado de la barra de navegación (desactivado mientras se usen gestos)</item>
+        <item>Arreglados colores de brillo que no actuaban</item>
+        <item>Arreglados problemas de tintado en batería circular</item>
+        <item>Arreglado icono NFC en barra de estado (No podía esconderse)</item>
+        <item>Arreglado color de llamadas WiFi / VoLTE</item>
+        <item>Arregladas preferencias ocultas en DRC</item>
+        <item>Arreglada función copiar/restaurar en DRC</item>
+        <item>Añadido opción para despertar móvil al tocar la huella (Sin presionar)</item>
+        <item>Añadida barra de RAM a recientes</item>
+        <item>Optimizado 3MinitBattery para un menor gasto de recursos</item>
+        <item>Revisados en general todos los mods para pequeñas correcciones</item>
+    </string-array>
+
+    <string-array name="changelog_032">
+        <item>No publicada para usuarios</item>
+    </string-array>
+
+    <string-array name="changelog_031">
+        <item>Actualizado DeluxeKernel_v2</item>
+        <item>Añadidos segundos / AM-PM al reloj</item>
+        <item>Unificado DRC N8-S8-S7</item>
+        <item>Añadido día a la fecha</item>
+        <item>Añadida duración de iluminación de teclas</item>
+        <item>Añadido GooglePackageInstaller en SmartManager stock</item>
+        <item>Arreglados problemas de instalación</item>
+    </string-array>
+
+    <string-array name="changelog_030">
+        <item>Actualizado TW con los mods previos</item>
+        <item>Arreglada app en doble toque en TW</item>
+        <item>Añadidos colores de iconos de señal</item>
+        <item>Añadidos colores de batería y porcentaje</item>
+        <item>Añadida fecha personalizada</item>
+        <item>Añadido fondo personalizado en barra de estado</item>
+        <item>Añadida barra de estado dual</item>
+        <item>Añadido bluetooth_conectado a la lista de iconos escondidos</item>
+        <item>Añadidos toggles personalizados</item>
+        <item>Añadidos colores de panel (Toggles, iconos, brillo…)</item>
+        <item>Añadido menu de apagado e icono de usuario al panel</item>
+        <item>Añadido DRC al menú de reinicio</item>
+        <item>Añadida opción para usar 1 columna o 2 en menú de reinicio</item>
+        <item>Añadidos toggles DRC/AppLock y VoLTE</item>
+        <item>Reescrito código de menú de reinicio para arreglar pequeños bugs</item>
+    </string-array>
+    <string-array name="changelog_021">
+        <item>NO PUBLICADA PARA USUARIOS</item>
+        <item>Actualizadas apps Gear</item>
+        <item>Añadido remapeo inicio/recientes/retroceso</item>
+        <item>Añadido pasar canciones con teclas de volumen</item>
+        <item>Añadido doble toque a TouchWiz</item>
+        <item>Añadido máx. de toggles visibles en panel</item>
+        <item>Arregladas características CSC</item>
+        <item>Añadido bootanimation Deluxe®</item>
+        <item>16 escalas de animación en ajustes</item>
+        <item>Mejoras en DRC</item>
+    </string-array>
+    <string-array name="changelog_020">
+        <item>Rebasada sobre N935FXXU4CSC4</item>
+        <item>Arreglados problemas de audio</item>
+        <item>Añadidas apps Gear en AROMA</item>
+        <item>Añadido TouchWiz con opción 6x6, 7x7 y 8x8</item>
+    </string-array>
+    <string-array name="changelog_010">
+        <item>Versión inicial</item>
+        <item>Basada en N935FXXU4CSC4</item>
+    </string-array>
+
     <string-array name="general_color_entries">
         <item>Modo de sonido</item>
         <item>Bluetooth</item>
         <item>NFC</item>
         <item>Alarma</item>
-        <item>Llamadas WiFi</item>
+        <item>Llamadas WiFi / VoLTE</item>
         <item>Localización</item>
         <item>Modo privado</item>
         <item>Gear</item>
@@ -614,7 +1059,7 @@
 
     <string name="grxs_reset_all_prefs">Resetear valores</string>
     <string name="grxs_tit_reset_all_prefs">Resetear TODAS las opciones</string>
-    <string name="grxs_msg_reset_all_prefs">¿Estás seguro que quieres resetear TODAS las preferencias y opciones a su valor por defecto?</string>
+    <string name="grxs_msg_reset_all_prefs">¿Estás seguro que quieres resetear TODAS las preferencias y opciones a su valor por defecto? El teléfono se reiniciará</string>
 
     <string name="grxs_recovery">Reiniciar en modo recovery</string>
     <string name="grxs_restartui">Reiniciar UI</string>
@@ -631,5 +1076,534 @@
     <string name="vibrate_skip_tracks">Vibrar con doble click/long press</string>
     <string name="vibrate_skip_tracks_summary">El mod usa la intensidad definida en Respuesta de Vibración en settings. Sin embargo no necesitas tener activado el switch general Respuesta de vibración</string>
     <string name="vibrate_skip_intensity">Intensidad Respuesta Vibración</string>
+
+    <string name="opacity">Opacidad</string>
+    <string name="custombg_orientation">Orientación</string>
+    <string name="battery">Batería</string>
+    <string name="stock_battery">Mostrar batería stock</string>
+    <string name="battery_percentage">Mostrar porcentaje</string>
+    <string name="battery_color_percentage">Color de porcentaje</string>
+    <string name="font">Fuente</string>
+    <string name="size">Tamaño</string>
+    <string name="clock">Reloj</string>
+    <string name="visibility">Visibilidad</string>
+    <string name="position">Posición</string>
+    <string name="Colors">Colores</string>
+    <string name="elements_order">Elementos a mostrar / orden</string>
+    <string name="elements_order_date">Elementos a mostrar y orden (fecha)</string>
+    <string name="date_separator">Separador de fecha</string>
+    <string name="seconds">Segundos</string>
+    <string name="wholeday">Mostrar día completo</string>
+    <string name="wholeyear">Mostrar año completo</string>
+    <string name="ampm_uppercase">Usar mayusculas en AM/PM</string>
+    <string name="fonts">Fuentes</string>
+    <string name="day">Dia</string>
+    <string name="hour_min_sec">Horas/Minutos/Segundos</string>
+    <string name="date">Fecha</string>
+    <string name="ampm">AM/PM</string>
+    <string name="sizes">Tamaños</string>
+    <string name="hour_separator">Separador de hora</string>
+    <string name="left_margin">Margen izquierdo</string>
+    <string name="right_margin">Margen derecho</string>
+    <string name="carrier_text">Texto de operadora</string>
+    <string name="use_custom_text">Usar texto personalizado</string>
+    <string name="all_uppercase">Usar mayusculas</string>
+    <string name="custom_text">Texto personalizado</string>
+    <string name="color">Color</string>
+    <string name="weather">Clima</string>
+    <string name="update_every">Actualizar cada</string>
+    <string name="icon_colors_position">Selecciona iconos y colores</string>
+    <string name="general_colors">Colores generales</string>
+    <string name="signal_colors">Colores de señal</string>
+    <string name="keep_whatsapp">Mantener WhatsApp sin colorear</string>
+    <string name="keep_whatsapp_summary">Algunos clientes de WhatsApp permiten usar iconos multi-color, mantén esta
+        opción para no sobreescribirlo.
+    </string>
+    <string name="wifi_icon">Icono WiFi</string>
+    <string name="signal_icon">Icono de señal</string>
+    <string name="alarm_icon">Icono de alarma</string>
+    <string name="bluetooth_icon">Icono bluetooth</string>
+    <string name="sound_icon">Icono de sonido</string>
+    <string name="use_lte">Usar icono LTE</string>
+    <string name="hidden_icons">Iconos escondidos</string>
+    <string name="signal_position">Posición iconos de señal</string>
+    <string name="other_mods">Otros mods</string>
+    <string name="custombg">Fondo personalizado</string>
+    <string name="type">Tipo</string>
+    <string name="select_image">Seleccionar imagen</string>
+    <string name="image_scale">Escalado de imagen</string>
+    <string name="heads_up_notif">Notificaciones Heads-Up</string>
+    <string name="dt2s">Doble toque para bloquear</string>
+    <string name="expand_panel">Expandir panel desde el lado derecho</string>
+    <string name="margins_sb">Margenes</string>
+    <string name="use_custom_color">Usar color personalizado</string>
+    <string name="panel_bg">Fondo del panel</string>
+    <string name="settings_button">Botón de ajustes</string>
+    <string name="more_settings_button">Botón de mas ajustes</string>
+    <string name="handler_button">Icono de arrastrar</string>
+    <string name="hour">Hora</string>
+    <string name="toggles_on">Toggles encendidos</string>
+    <string name="toggles_dim">Toggles encendiendo</string>
+    <string name="toggles_off">Toggles apagados</string>
+    <string name="toggles_text">Texto de toggles</string>
+    <string name="toggles_divisor">Divisor de toggles</string>
+    <string name="brightness_icon">Icono de brillo</string>
+    <string name="brightness_settings_icon">Icono de ajustes de brillo</string>
+    <string name="br_bar">Barra de brillo</string>
+    <string name="br_bar_bg">Fondo de barra de brillo</string>
+    <string name="brightness_max">Brillo máximos</string>
+    <string name="brightness_controller">Controlador de brillo</string>
+    <string name="toggle_styles">Estilo de toggles</string>
+    <string name="toggles">Toggles</string>
+    <string name="blur">Blur</string>
+    <string name="intensity">Intensidad</string>
+    <string name="custom_notifs">Personalizar notificaciones</string>
+    <string name="icon">Icono</string>
+    <string name="prim_text">Texto primario</string>
+    <string name="sec_text">Texto secundario</string>
+    <string name="name_app">Nombre de app</string>
+    <string name="hour_div">Divisor de hora</string>
+    <string name="summary">Sumario</string>
+    <string name="expand">Botón de expandir</string>
+    <string name="notif_settings">Texto ajustes de notificaciones</string>
+    <string name="clear_all">Texto limpiar todo</string>
+    <string name="matrix">Matrix</string>
+    <string name="random_color">Usar colores aleatorios</string>
+    <string name="use_gradient">Usar degradado</string>
+    <string name="invert_direction">Invertir dirección</string>
+    <string name="bg_color">Color de fondo</string>
+    <string name="txt_color">Color de texto</string>
+    <string name="second_txt_color">Color de texto secundario</string>
+    <string name="frequency">Frecuencia</string>
+    <string name="outdoor_mode">Modo exterior</string>
+    <string name="icon_on">Icono encendido</string>
+    <string name="icon_off">Icono apagado</string>
+    <string name="color_on">Color encendido</string>
+    <string name="color_off">Color apagado</string>
+    <string name="rotation">Rotación</string>
+    <string name="datausage">Uso de datos</string>
+    <string name="device_info">Información de dispositivo</string>
+    <string name="titles_color">Color de titulos</string>
+    <string name="values_color">Color de valores</string>
+    <string name="titles_size">Tamaño de titulos</string>
+    <string name="values_size">Tamaño de valores</string>
+    <string name="titles_font">Fuente para titulos</string>
+    <string name="values_font">fuente para valores</string>
+    <string name="multiuser_icon">Icono multi-usuario</string>
+    <string name="maxtoggles">Max. toggles visibles</string>
+    <string name="doubletap">Doble toque</string>
+    <string name="app">App</string>
+    <string name="app_txt_color">Color texto de apps</string>
+    <string name="app_txt_size">Tamaño texto de apps</string>
+    <string name="ls_rotation">Rotación</string>
+    <string name="hide_sb">Esconder barra de estado</string>
+    <string name="wake_usb">Encender al conectar USB</string>
+    <string name="biometrics_reboot">Biometricos al reiniciar</string>
+    <string name="fp_touch">Despertar al tocar huella</string>
+    <string name="quick_reply">Respuesta rápida siempre</string>
+    <string name="recents_icon">Icono de recientes</string>
+    <string name="home_icon">Icono de inicio</string>
+    <string name="back_icon">Icono de retroceso</string>
+    <string name="use_custom_size">Usar tamaño personalizado</string>
+    <string name="landscape_size">Tamaño (cuando está rotado)</string>
+    <string name="show_on_ls">Mostrar en pantalla de bloqueo</string>
+    <string name="split_up_down">Separar subida/bajada</string>
+    <string name="main_color">Color principal</string>
+    <string name="up_color">Color de subida</string>
+    <string name="down_color">Color de descarga</string>
+    <string name="arrows_color">Color de flechas</string>
+    <string name="listview_animations">Animación de listado</string>
+    <string name="interpolator_animation">Animación de interpolador</string>
+    <string name="whitelist">Lista blanca</string>
+    <string name="low_bt_warning">Aviso de batería baja</string>
+    <string name="elements_show">Elementos a mostrar</string>
+    <string name="confirm_actions">Confirmar acciones</string>
+    <string name="icons_style">Estilo de iconos</string>
+    <string name="subtxt_color">Color de subtexto</string>
+    <string name="recents_blur_color">Color de blur</string>
+    <string name="rambar">Barra de RAM</string>
+    <string name="ram_bg_used">Fondo usado</string>
+    <string name="ram_bg_free">Fondo libre</string>
+    <string name="txt_used">Texto usado</string>
+    <string name="txt_free">Texto libre</string>
+    <string name="used_ram_size">Tamaño de RAM usada</string>
+    <string name="free_ram_size">Tamaño de RAM libre</string>
+    <string name="used_ram_font">Fuente de RAM usada</string>
+    <string name="free_ram_font">fuente de RAM libre</string>
+    <string name="no_recents_apps">Texto -No hay apps recientes-</string>
+    <string name="up_margin">Margen superior</string>
+    <string name="down_margin">MArgen inferior</string>
+    <string name="closeall_text">Texto -Cerrar todo-</string>
+    <string name="more_settings_icon">Icono de mas ajustes</string>
+    <string name="recents">Recientes</string>
+    <string name="long_press">Pulsación larga</string>
+    <string name="home">Inicio</string>
+    <string name="back">Retroceso</string>
+    <string name="vbuttons_on_sb">Botones virtuales en barra de estado</string>
+    <string name="left">Izquierda</string>
+    <string name="short_press">Pulsación corta</string>
+    <string name="short_press_app">App en pulsación corta</string>
+    <string name="long_press_app">App en pulsación larga</string>
+    <string name="center">Centro</string>
+    <string name="right">Derecha</string>
+    <string name="gs_rom_name">DeluxeROM</string>
+    <string name="grxs_app_name">DRC</string>
+    <string name="statusbar">Barra de estado</string>
+    <string name="notifpanel">Panel de notificaciones</string>
+    <string name="netwspeed">Velocímetro de red</string>
+    <string name="virtual_buttons">Botones virtuales</string>
+    <string name="remap_buttons">Remapear botones</string>
+    <string name="rebootmenu">Menu de reinicio</string>
+    <string name="lockscreen">Pantalla de bloqueo</string>
+    <string name="navbar">Barra de navegación</string>
+    <string name="twlauncher">Inicio TW</string>
+    <string name="others">Otros mods</string>
+    <string name="minitbattery">3MinitBattery</string>
+    <string name="irispreview">Vista previa de iris</string>
+    <string name="vbuttons_on_nb">Botón virtual en barra de navegación</string>
+    <string name="screenoff_app">Pantalla apagada - App</string>
+    <string name="screenoff_shortaction">Pantalla apagada - Pulsación corta</string>
+    <string name="screenon_app">Pantalla encendida - App</string>
+    <string name="screenon_short">Pantalla encendida - Pulsación corta</string>
+    <string name="whitelist_summary">Las apps seleccionadas aquí quedarán extentas de la acción -Cerrar aplicación-.</string>
+
+    <string name="grx_circular_battery">Opciones de batería circular</string>
+    <string name="bold_text">Texto en negrita</string>
+    <string name="battery_size">Tamaño de batería</string>
+    <string name="batt_stroke">Grosor de batería</string>
+    <string name="batt_alpha_animation">Duración animación transparencia en carga</string>
+    <string name="batt_animation_time">Duración cambio en animación carga</string>
+    <string name="batt_colors">Colores del icono</string>
+    <string name="batt_framecolor_dark_bgs">Color fondo en backgrounds oscuros</string>
+    <string name="batt_dark_bgs">Color nivel en backgrounds oscuros</string>
+    <string name="batt_text_dark_bgs">Color texto en backgrounds oscuros</string>
+    <string name="batt_framecolor_light_bgs">Color fondo en backgrounds claros</string>
+    <string name="batt_light_bgs">Color nivel en backgrounds claros</string>
+    <string name="batt_text_light_bgs">Color texto en backgrounds oscuros</string>
+    <string name="enable_grxbat">Habilitar batería circular</string>
+
+    <string name="batteries">Baterías</string>
+    <string name="stock_bt_options">Opciones de batería stock</string>
+    <string name="minit_bt_options">Opciones de 3MinitBattery</string>
+    <string name="color_on_white_bg">Color en fondos blancos</string>
+    <string name="clock_preferences">Preferencias de reloj</string>
+    <string name="carrier_preferences">Preferencias texto de operadora</string>
+    <string name="datausage_on_expanded">Mostrar también en panel expandido</string>
+    <string name="color_on_dark_bg">Color en modo noche</string>
+    <string name="critical_bt_warning">Aviso nivel de batería crítico</string>
+    <string name="toast_app_closed">Mostrar aviso de app cerrada</string>
+    <string name="toast_recents_closed">Mostrar aviso de apps recientes cerradas</string>
+    <string name="toast_app_whitelisted">Mostrar aviso de app en lista blanca</string>
+    <string name="extended_power_menu">Menu de reinicio stock / extendido</string>
+    <string name="extended_power_menu_desc">CARACTERÍSTICA EXPERIMENTAL, PUEDE CONTENER FALLOS.</string>
+    <string name="minit_tint">Tintar icono en fondos blancos</string>
+    <string name="reboot_style">Estilo de menú de reinicio</string>
+    <string name="timeout">Tiempo visible</string>
+    <string name="netw_prefs">Preferencias de red</string>
+    <string name="paypal">Donaciones en PayPal</string>
+    <string name="telegram_esp">Grupo de soporte en Telegram (ESP)</string>
+    <string name="telegram_eng">Grupo de soporte en Telegram (ENG)</string>
+    <string name="htc">Hilo en HTCMania</string>
+    <string name="xda">Hilo en XDA</string>
+    <string name="activity_not_found">No se puede abrir esta actividad</string>
+    <string name="custom_navbar_info">NOTA : HABILITAR EL FONDO PERSONALIZADO FORZARÁ SU VISIBILIDAD SIEMPRE, INCLUSO EN PANTALLA DE INICIO. ASEGURATE DE SELECCIONAR SOLO CONTENIDO LOCAL EN CASO DE USAR IMAGEN, NUNCA DE DRIVE O CUALQUIER OTRA NUBE.</string>
+    <string name="show_all_icons">Mostrar todos los iconos en barra de estado</string>
+    <string name="color_per_icon">Color por icono</string>
+    <string name="general_colors_info">NOTA : ESTOS COLORES NO AFECTAN A LA BARRA DE ESTADO DEL PANEL DE NOTIFICACIONES. RECUERDA QUE PUEDES MOSTRAR TODOS LOS ICONOS DE LA BARRA EN Barra de estado > Mostrar todos los iconos</string>
+    <string name="icons_warning">NOTA : EL CAMBIO DE ICONOS PUEDE TARDAR ENTRE 2 Y 5 SEGUNDOS PARA TENER EFECTO</string>
+    <string name="select_icons">Selecciona iconos</string>
+    <string name="use_random_reboot">Usar orden aleatorio</string>
+    <string name="grxs_rom_info">Información de la ROM</string>
+    <string name="rows_portrait">Toggles en modo vertical</string>
+
+    <string name="rows_landscape">Toggles en modo horizontal</string>
+
+    <string name="max_rows">Máx. de toggles visibles</string>
+
+    <string name="volume_keys">Teclas de volumen</string>
+
+    <string name="screen_off">Pantalla apagada</string>
+
+    <string name="screen_on">Pantalla encendida</string>
+
+    <string name="bg_tgs">Fondo y toggles</string>
+
+    <string name="bluetooth_connected">Bluetooth conectado</string>
+
+    <string name="bolt">Rayo</string>
+
+    <string name="bolt_on_white_bgs">Rayo en fondos blancos</string>
+
+    <string name="buttons">Botones</string>
+
+    <string name="clock_date_settings_buttons">Reloj/Fecha/Ajustes</string>
+
+    <string name="date_preferences">Preferencias de fecha</string>
+
+    <string name="day_mode">Modo día</string>
+
+    <string name="empty_level">Nivel vacio</string>
+
+    <string name="empty_level_on_white_bgs">Nivel vacio en fondos blancos</string>
+
+    <string name="more_settings">Mas ajustes</string>
+
+    <string name="night_mode">Modo noche</string>
+
+    <string name="notifications">Notificaciones</string>
+
+    <string name="notifs_on_dual">Mostrar notifs. en barra dual</string>
+
+    <string name="panel_mods">Panel (Colores/Toggles/Botones)</string>
+
+    <string name="percentage">Porcentaje</string>
+
+    <string name="percentage_on_white_bgs">Porcentaje en fondos blancos</string>
+
+    <string name="pm_split">Usar 2 columnas</string>
+
+    <string name="power_menu">Menú de apagado</string>
+
+    <string name="sb_date">Fecha</string>
+
+    <string name="search">Buscar</string>
+
+    <string name="settings">Ajustes</string>
+
+    <string name="tile_bg_dim">Fondo de toggle dim</string>
+
+    <string name="tile_bg_off">Fondo de toggle apagado</string>
+
+    <string name="tile_bg_on">Fondo de toggle encendido</string>
+
+    <string name="tile_icon_bg_dim">Icono de toggle dim</string>
+
+    <string name="tile_icon_bg_off">Icono de toggle apagado</string>
+
+    <string name="tile_icon_bg_on">Icono de toggle encendido</string>
+
+    <string name="first_value">Primer valor</string>
+
+    <string name="second_value">Segundo valor</string>
+
+    <string name="third_value">Tercer valor</string>
+
+    <string name="separator">Separador</string>
+    <string name="loaded_level">Nivel cargado</string>
+    <string name="loaded_level_on_white_bgs">Nivel cargado en fondos blancos</string>
+    <string name="month">Mes</string>
+    <string name="year">Año</string>
+    <string name="brightness_detail">Detalles de brillo</string>
+    <string name="brightness_icon_slider">Iconos/Barra de brillo</string>
+    <string name="brightness_max_disabled">Brillo máx. inactivo</string>
+    <string name="brightness_max_enabled">Brillo máx. activo</string>
+    <string name="brightness_slider_bg">Nivel de brillo activo</string>
+    <string name="brightness_slider_fg">Nivel de brillo inactivo</string>
+    <string name="cannot_update">No se puede actualizar</string>
+    <string name="check_apps">Actualizaciones DRC</string>
+    <string name="check_rom">Actualizaciones de la ROM</string>
+    <string name="grxs_auto_color_suggestions">Colores sugeridos</string>
+    <string name="grxs_auto_color">Auto-selección de color</string>
+    <string name="navbar_prefs">Preferencias barra de navegación</string>
+    <string name="show_ampm">Mostrar AM/PM (Solo en 12h)</string>
+    <string name="show_day">Mostrar día</string>
+    <string name="show_day_at_end">Poner día a la derecha</string>
+    <string name="show_long_day">Día completo</string>
+    <string name="show_seconds">Mostrar segundos</string>
+    <string name="use_custom_colors">Usar colores personalizados</string>
+    <string name="user">Usuario</string>
+    <string name="year_4">Año (4 digitos)</string>
+    <string name="no_navbar_help">NO HAY BARRA DE NAVEGACIÓN INSTALADA. POR FAVOR, INSTALA DE NUEVO LA ROM Y SELECCIONA \"AÑADIR BARRA DE NAVEGACIÓN\" EN EL INSTALADOR AROMA.</string>
+    <string name="keylight_duration">Tiempo de iluminación de teclas</string>
+    <string name="double_tap">Doble toque</string>
+    <string name="dt2w">Doble toque para encender</string>
+    <string name="empty">Ninguno</string>
+    <string name="enable_remap">Habilitar remapeo</string>
+    <string name="external_storage">Alamcenamiento externo</string>
+    <string name="gestures">Gestos</string>
+    <string name="governors">Gobernadores</string>
+    <string name="govs_scheds">Gobernadores de CPU / Planificadores IO</string>
+    <string name="gradient6">Degradado de colores (6)</string>
+    <string name="internal_storage">Almacenamiento interno</string>
+    <string name="io_schedulers">Planificadores I/O</string>
+    <string name="kernel">Kernel</string>
+    <string name="kernel_gesture_vibration">Intensidad de vibración</string>
+    <string name="no_deluxe_kernel">Estas opciones son solo validas para DeluxeKernel. Para otros kernels, usa la aplicación incluida, como MTweaks.</string>
+    <string name="padding">Ajuste de margenes</string>
+    <string name="powerkey">Encendido</string>
+    <string name="s2s">Deslizar para bloquear</string>
+    <string name="s2w">Deslizar para desbloquear</string>
+    <string name="sb_padding">Margen</string>
+    <string name="selinux_status">Estado de SELinux</string>
+    <string name="triple_tap">Triple toque</string>
+    <string name="updates">Actualizaciones</string>
+    <string name="volume_down">Volumen abajo</string>
+    <string name="volume_up">Volumen arriba</string>
+    <string name="tw_animations">Animación de transición</string>
+    <string name="tw_blur">Blur en menu y carpetas</string>
+    <string name="only_user_restored">No hay permisos root, solo las preferencias de usuario serán reestablecidas.</string>
+    <string name="percent_bg">Fondo de porcentaje</string>
+    <string name="percent_ram_size">Tamaño de porcentaje</string>
+    <string name="percentage_txt_color">Color deporcentaje</string>
+    <string name="search_box">Cuadro de búsqueda</string>
+    <string name="wof">Despertar al tocar huella</string>
+    <string name="vibrate">Vibración</string>
+    <string name="duration">Duración (ms)</string>
+
+    <string-array name="panel_notifs_color_entries">
+        <item>Icono</item>
+        <item>Nombre</item>
+        <item>Título</item>
+        <item>Mensaje</item>
+        <item>Nombre de usuario/grupo</item>
+        <item>Mensaje de usuario/grupo</item>
+        <item>Botón expandir</item>
+        <item>Fecha / Hora</item>
+        <item>Overflow (Numero)</item>
+        <item>Acción (Responder, marcar como leído…)</item>
+        <item>Ajustes de notificaciones</item>
+        <item>Borrar todo</item>
+        <item>Color de fondo</item>
+    </string-array>
+
+    <string name="notifs_manager">Control de notificaciones (Led/Sonido/Vibración)</string>
+    <string name="noti_manager">Control de notificaciones</string>
+    <string name="noti_manager_sum">Color de led, sonidos y vibraciones</string>
+
+    <string name="per_app_led_color">Color de led por app</string>
+    <string name="led_color_info">Ten en cuenta que el rango de colores del led no es muy amplio, por lo que no todos los colores son posibles.</string>
+    <string name="led_category">Configuración del led</string>
+
+    <string name="led_quiet_hrs">Horas de led inactivo</string>
+    <string name="led_quiet_hrs_info">Desactiva las notificaciones led en un rango determinado. Si quieres que estén desactivadas siempre, selecciona misma hora de inicio y final.</string>
+    <string name="start_time">Desde …</string>
+    <string name="end_tme">Hasta …</string>
+    <string name="enable_led_quiethrs">Activar horas de led inactivo</string>
+
+    <string name="notisounds_quiet_hrs">Horas de sonido desactivado</string>
+    <string name="notisounds_quiet_hrs_enable">Activar horas de sonido desactivado</string>
+    <string name="notisounds_quiet_hrs_info">Desactiva el sonido de las notificaciones (siempre que estén activas) en un rango determinado.</string>
+    <string name="quiet_also_led">Usar también horas de led inactivo</string>
+
+    <string name="vibration_quiet_hrs">Horas de vibración desactivada</string>
+    <string name="vibration_quiet_hrs_enable">Activar horas de vibración desactivada</string>
+    <string name="vibration_quiet_hrs_info">Desactiva la vibración de las notificaciones (siempre que estén activas) en un rango determinado.</string>
+
+    <string-array name="agc_reboot_options">
+        <item>Ajustes</item>
+        <item>Apagar</item>
+        <item>Captura de pantalla</item>
+        <item>DRC</item>
+        <item>Datos móviles</item>
+        <item>Grabar pantalla</item>
+        <item>Linterna</item>
+        <item>Modo download</item>
+        <item>Modo emergencia</item>
+        <item>Modo recovery</item>
+        <item>Reinicio UI</item>
+        <item>Reinicio rápido</item>
+        <item>Reinicio</item>
+    </string-array>
+    <string-array name="agc_reboot_values">
+        <item>settings</item>
+        <item>power</item>
+        <item>screenshot</item>
+        <item>grxsettings</item>
+        <item>data_mode</item>
+        <item>screencapture</item>
+        <item>flashlight</item>
+        <item>download</item>
+        <item>emergency</item>
+        <item>recovery</item>
+        <item>rebootui</item>
+        <item>quickreboot</item>
+        <item>restart</item>
+    </string-array>
+
+    <string-array name="hidden_icons_options">
+        <item>@string/minitbattery</item>
+        <item>@string/power_saving</item>
+        <item>@string/data_saver</item>
+        <item>@string/alarm</item>
+        <item>@string/headset</item>
+        <item>@string/circularbt</item>
+        <item>@string/battery_and_text</item>
+        <item>@string/bluetooth</item>
+        <item>@string/bluetooth_connected</item>
+        <item>@string/weather</item>
+        <item>@string/hotspot</item>
+        <item>@string/mobile</item>
+        <item>@string/sb_date</item>
+        <item>@string/wearable_gear</item>
+        <item>@string/wifi_calling</item>
+        <item>@string/location</item>
+        <item>@string/airplane</item>
+        <item>@string/volume</item>
+        <item>@string/private_mode</item>
+        <item>@string/secure_mode</item>
+        <item>@string/nfc</item>
+        <item>@string/bluetooth_level</item>
+        <item>@string/rcs</item>
+        <item>@string/clock</item>
+        <item>@string/smart_network</item>
+        <item>@string/rotation</item>
+        <item>@string/cast</item>
+        <item>@string/carrier</item>
+        <item>@string/netspeed</item>
+        <item>@string/wifi</item>
+        <item>@string/wifi_p2p</item>
+    </string-array>
+    <string-array name="hidden_icons_values">
+        <item>minit</item>
+        <item>power_saver</item>
+        <item>data_saver</item>
+        <item>alarm_clock</item>
+        <item>headset</item>
+        <item>circularbt</item>
+        <item>battery</item>
+        <item>bluetooth</item>
+        <item>bluetooth_connected</item>
+        <item>weather</item>
+        <item>hotspot</item>
+        <item>mobile</item>
+        <item>sb_date</item>
+        <item>wearable_gear</item>
+        <item>ims_volte</item>
+        <item>location</item>
+        <item>airplane</item>
+        <item>volume</item>
+        <item>private_mode</item>
+        <item>secure</item>
+        <item>nfc</item>
+        <item>bt_level</item>
+        <item>com.samsung.rcs</item>
+        <item>clock</item>
+        <item>smart_network</item>
+        <item>rotate</item>
+        <item>cast</item>
+        <item>carrier</item>
+        <item>netspeed</item>
+        <item>wifi</item>
+        <item>wifi_p2p</item>
+    </string-array>
+
+    <string-array name="changelog_010_t820">
+        <item>Versión inicial</item>
+        <item>Basada en T820XXU3CSH9 (PHE)</item>
+    </string-array>
+
+    <string-array name="brightness_color_entries">
+        <item>De  0% a 25%</item>
+        <item>De  25% a 50%</item>
+        <item>De  50% a 75%</item>
+        <item>De  75% a 100%</item>
+    </string-array>
+
+    <string-array name="kernel_s2s_entries">
+        <item>Desactivado</item>
+        <item>Deslizar hacia la derecha</item>
+        <item>Deslizar hacia la izquierda</item>
+        <item>Deslizar hacia derecha/izquierda</item>
+    </string-array>
 
 </resources>

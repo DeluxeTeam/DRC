@@ -7,12 +7,25 @@
     <string-array name="rom_tabs_names"> <!-- do not change this array name !!!! -->
         <item>@string/general_info</item>
         <item>@string/changelog</item>
+        <!--item>@string/updates</item-->
     </string-array>
 
     <string-array name="rom_tabs_layouts"> <!-- do not change this array name !!!! -->
         <item>rom_info_tab</item>
         <item>changelog_item</item>
+        <!--item>updates</item-->
     </string-array>
 
+    <string-array name="rom_tabs_layouts_se"> <!-- do not change this array name !!!! -->
+        <item>rom_info_tab_se</item>
+        <item>changelog_item_se</item>
+        <!--item>updates</item-->
+    </string-array>
+
+    <string-array name="rom_tabs_layouts_t820"> <!-- do not change this array name !!!! -->
+        <item>rom_info_tab_t820</item>
+        <item>changelog_item_t820</item>
+        <!--item>updates</item-->
+    </string-array>
 
 </resources>

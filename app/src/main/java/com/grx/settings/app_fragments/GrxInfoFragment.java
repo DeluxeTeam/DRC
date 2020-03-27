@@ -30,7 +30,7 @@ import com.grx.settings.GrxSettingsActivity;
 import com.grx.settings.R;
 import com.fab.ObservableScrollView;
 import com.grx.settings.utils.SlidingTabLayout;
-
+import com.root.RootUtils;
 
 
 public class GrxInfoFragment extends Fragment {
@@ -53,8 +53,16 @@ public class GrxInfoFragment extends Fragment {
         super.onCreate(savedInstanceState);
         boolean isdemo = getResources().getBoolean(R.bool.grxb_demo_mode);
 
-        mTabsLayouts=  isdemo ? getResources().getStringArray(R.array.demo_tabs_layouts) : getResources().getStringArray(R.array.rom_tabs_layouts);
-        mTabsNames= isdemo ? getResources().getStringArray(R.array.demo_tabs_names) : getResources().getStringArray(R.array.rom_tabs_names);
+        // If is hero/2lte use rom_tabs_layout_se
+        boolean iss7 = GrxSettingsActivity.DEVICE_PROP.contains("hero");
+        int res = isdemo ? R.array.demo_tabs_layouts : iss7 ? R.array.rom_tabs_layouts_se : R.array.rom_tabs_layouts;
+
+        if (!isdemo && GrxSettingsActivity.DEVICE_PROP.contains("gts3lwifi")) {
+            res = R.array.rom_tabs_layouts_t820;
+        }
+
+        mTabsLayouts = getResources().getStringArray(res);
+        mTabsNames = isdemo ? getResources().getStringArray(R.array.demo_tabs_names) : getResources().getStringArray(R.array.rom_tabs_names);
         mNumOfTabs=0;
         if(mTabsLayouts!=null) mNumOfTabs=mTabsLayouts.length;
         create_views();

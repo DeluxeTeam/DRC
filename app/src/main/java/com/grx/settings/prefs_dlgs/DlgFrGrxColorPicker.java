@@ -328,7 +328,7 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
         lightnessSlider.setColor(getQFStartColor(mQFinitialColors));
 
         TypedArray a = getActivity().getTheme().obtainStyledAttributes( new int[] {R.attr.main_bg_color});
-        int bgcolor = a.getColor(0,0);
+        int bgcolor = Color.BLACK;//a.getColor(0,0);
         a.recycle();
 
         mQFcolorPickerView.setBackgroundDrawable(new CircleColorDrawable(bgcolor)) ;

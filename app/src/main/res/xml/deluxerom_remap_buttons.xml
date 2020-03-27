@@ -5,283 +5,1192 @@
     <GrxPreferenceCategory android:title="@string/screen_on">
         <!-- Recents -->
         <PreferenceScreen android:title="@string/recents">
-            <!-- Short press -->
-            <!--<GrxSingleSelection
-                android:title="@string/long_press"
-                android:key="dlx_shortpress_recents"
-                android:defaultValue="0"
-                grx:broadCast1="deluxe_update_keys"
-                grx:optionsArray="@array/agc_virtual_buttons_entries"
+            <GrxSwitchPreference
+                android:title="@string/enable_remap"
                 grx:systemType="system"
-                grx:valuesArray="@array/agc_virtual_buttons_values" />
-            <GrxAppSelection
-                android:title="@string/app"
-                android:key="dlx_shortpress_recents_app"
-                grx:systemType="system"
-                grx:depRule="ENABLE#dlx_shortpress_recents#STRING#1"
-                grx:broadCast1="deluxe_update_keys"
-                grx:saveActivityname="true"
-                grx:showSystemapps="false" />-->
-            <!-- Long press -->
+                android:key="dlx_remap_recents_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="recents_remap"
+                android:defaultValue="false" />
             <GrxSingleSelection
-                android:title="@string/long_press"
-                android:key="dlx_longpress_recents"
-                android:defaultValue="0"
-                grx:broadCast1="deluxe_update_keys"
-                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:title="@string/short_press"
                 grx:systemType="system"
+                android:key="dlx_remap_recents_short"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_recents_on"
+                grx:broadCast1Extra="recents_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
                 grx:valuesArray="@array/agc_virtual_buttons_values" />
             <GrxAppSelection
                 android:title="@string/app"
-                android:key="dlx_longpress_recents_app"
                 grx:systemType="system"
-                grx:depRule="ENABLE#dlx_longpress_recents#STRING#1"
-                grx:broadCast1="deluxe_update_keys"
+                android:key="dlx_remap_recents_short_app"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_recents_on"
+                grx:depRule="ENABLE#dlx_remap_recents_short#STRING#1"
+                grx:broadCast1Extra="recents_remap"
                 grx:saveActivityname="true"
                 grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/double_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_recents_double"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_recents_on"
+                grx:broadCast1Extra="recents_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_recents_double_app"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_recents_on"
+                grx:depRule="ENABLE#dlx_remap_recents_double#STRING#1"
+                grx:broadCast1Extra="recents_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/triple_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_recents_triple"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="recents_remap"
+                android:dependency="dlx_remap_recents_on"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_recents_triple_app"
+                android:dependency="dlx_remap_recents_on"
+                grx:depRule="ENABLE#dlx_remap_recents_triple#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="recents_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                grx:systemType="system"
+                android:key="dlx_remap_recents_long"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="recents_remap"
+                android:dependency="dlx_remap_recents_on"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_recents_long_app"
+                android:dependency="dlx_remap_recents_on"
+                grx:depRule="ENABLE#dlx_remap_recents_long#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="recents_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSwitchPreference
+                android:title="@string/vibrate"
+                grx:systemType="system"
+                android:dependency="dlx_remap_recents_on"
+                android:key="dlx_remap_recents_vibrate"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="recents_remap"
+                android:defaultValue="false" />
+            <GrxCheckBoxPreference
+                android:title="@string/disable_vibrate_short"
+                grx:systemType="system"
+                android:dependency="dlx_remap_recents_vibrate"
+                android:key="dlx_remap_recents_block_short"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="recents_remap"
+                android:defaultValue="false" />
+            <GrxSeekBar
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="recents_remap"
+                android:title="@string/duration"
+                grx:systemType="system"
+                android:key="dlx_remap_recents_vibrate_time"
+                android:defaultValue="0"
+                grx:minValue="1"
+                grx:maxValue="100"
+                android:dependency="dlx_remap_recents_vibrate"
+                grx:showPopup="true"
+                grx:interval="1"/>
         </PreferenceScreen>
         <!-- Home -->
         <PreferenceScreen android:title="@string/home">
-            <!-- Short press -->
-            <!--<GrxSingleSelection
-                android:title="@string/long_press"
-                android:key="dlx_shortpress_home"
-                android:defaultValue="0"
-                grx:broadCast1="deluxe_update_keys"
-                grx:optionsArray="@array/agc_virtual_buttons_entries"
+            <GrxSwitchPreference
+                android:title="@string/enable_remap"
                 grx:systemType="system"
-                grx:valuesArray="@array/agc_virtual_buttons_values" />
-            <GrxAppSelection
-                android:title="@string/app"
-                android:key="dlx_shortpress_home_app"
-                grx:systemType="system"
-                grx:depRule="ENABLE#dlx_shortpress_home#STRING#1"
-                grx:broadCast1="deluxe_update_keys"
-                grx:saveActivityname="true"
-                grx:showSystemapps="false" />-->
-            <!-- Long press -->
+                android:key="dlx_remap_home_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="home_remap"
+                android:defaultValue="false" />
             <GrxSingleSelection
-                android:title="@string/long_press"
-                android:key="dlx_longpress_home"
-                android:defaultValue="0"
-                grx:broadCast1="deluxe_update_keys"
-                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:title="@string/short_press"
                 grx:systemType="system"
+                android:key="dlx_remap_home_short"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_home_on"
+                grx:broadCast1Extra="home_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
                 grx:valuesArray="@array/agc_virtual_buttons_values" />
             <GrxAppSelection
                 android:title="@string/app"
-                android:key="dlx_longpress_home_app"
                 grx:systemType="system"
-                grx:depRule="ENABLE#dlx_longpress_home#STRING#1"
-                grx:broadCast1="deluxe_update_keys"
+                android:key="dlx_remap_home_short_app"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_home_on"
+                grx:depRule="ENABLE#dlx_remap_home_short#STRING#1"
+                grx:broadCast1Extra="home_remap"
                 grx:saveActivityname="true"
                 grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/double_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_home_double"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_home_on"
+                grx:broadCast1Extra="home_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_home_double_app"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_home_on"
+                grx:depRule="ENABLE#dlx_remap_home_double#STRING#1"
+                grx:broadCast1Extra="home_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/triple_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_home_triple"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="home_remap"
+                android:dependency="dlx_remap_home_on"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_home_triple_app"
+                android:dependency="dlx_remap_home_on"
+                grx:depRule="ENABLE#dlx_remap_home_triple#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="home_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                grx:systemType="system"
+                android:key="dlx_remap_home_long"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="home_remap"
+                android:dependency="dlx_remap_home_on"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_home_long_app"
+                android:dependency="dlx_remap_home_on"
+                grx:depRule="ENABLE#dlx_remap_home_long#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="home_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSwitchPreference
+                android:title="@string/vibrate"
+                grx:systemType="system"
+                android:dependency="dlx_remap_home_on"
+                android:key="dlx_remap_home_vibrate"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="home_remap"
+                android:defaultValue="false" />
+            <GrxCheckBoxPreference
+                    android:title="@string/disable_vibrate_short"
+                    grx:systemType="system"
+                    android:dependency="dlx_remap_home_vibrate"
+                    android:key="dlx_remap_home_block_short"
+                    grx:broadCast1="dlx_services_mods"
+                    grx:broadCast1Extra="home_remap"
+                    android:defaultValue="false" />
+            <GrxSeekBar
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="home_remap"
+                android:title="@string/duration"
+                grx:systemType="system"
+                android:key="dlx_remap_home_vibrate_time"
+                android:defaultValue="0"
+                grx:minValue="1"
+                grx:maxValue="100"
+                android:dependency="dlx_remap_home_vibrate"
+                grx:showPopup="true"
+                grx:interval="1"/>
         </PreferenceScreen>
         <!-- Back -->
         <PreferenceScreen android:title="@string/back">
-            <!-- Short press -->
-            <!--<GrxSingleSelection
-                android:title="@string/long_press"
-                android:key="dlx_shortpress_back"
-                android:defaultValue="0"
-                grx:broadCast1="deluxe_update_keys"
-                grx:optionsArray="@array/agc_virtual_buttons_entries"
+            <GrxSwitchPreference
+                android:title="@string/enable_remap"
                 grx:systemType="system"
-                grx:valuesArray="@array/agc_virtual_buttons_values" />
-            <GrxAppSelection
-                android:title="@string/app"
-                android:key="dlx_shortpress_back_app"
-                grx:systemType="system"
-                grx:depRule="ENABLE#dlx_shortpress_back#STRING#1"
-                grx:broadCast1="deluxe_update_keys"
-                grx:saveActivityname="true"
-                grx:showSystemapps="false" />-->
-            <!-- Long press -->
+                android:key="dlx_remap_back_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="back_remap"
+                android:defaultValue="false" />
             <GrxSingleSelection
-                android:title="@string/long_press"
-                android:key="dlx_longpress_back"
-                android:defaultValue="0"
-                grx:broadCast1="deluxe_update_keys"
-                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:title="@string/short_press"
                 grx:systemType="system"
+                android:key="dlx_remap_back_short"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_back_on"
+                grx:broadCast1Extra="back_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
                 grx:valuesArray="@array/agc_virtual_buttons_values" />
             <GrxAppSelection
                 android:title="@string/app"
-                android:key="dlx_longpress_back_app"
                 grx:systemType="system"
-                grx:depRule="ENABLE#dlx_longpress_back#STRING#1"
-                grx:broadCast1="deluxe_update_keys"
+                android:key="dlx_remap_back_short_app"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_back_on"
+                grx:depRule="ENABLE#dlx_remap_back_short#STRING#1"
+                grx:broadCast1Extra="back_remap"
                 grx:saveActivityname="true"
                 grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/double_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_back_double"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_back_on"
+                grx:broadCast1Extra="back_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_back_double_app"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_back_on"
+                grx:depRule="ENABLE#dlx_remap_back_double#STRING#1"
+                grx:broadCast1Extra="back_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/triple_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_back_triple"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="back_remap"
+                android:dependency="dlx_remap_back_on"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_back_triple_app"
+                android:dependency="dlx_remap_back_on"
+                grx:depRule="ENABLE#dlx_remap_back_triple#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="back_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                grx:systemType="system"
+android:key="dlx_remap_back_long"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="back_remap"
+                android:dependency="dlx_remap_back_on"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+android:key="dlx_remap_back_long_app"
+
+                android:dependency="dlx_remap_back_on"
+                grx:depRule="ENABLE#dlx_remap_back_long#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="back_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSwitchPreference
+                android:title="@string/vibrate"
+                grx:systemType="system"
+                android:dependency="dlx_remap_back_on"
+                android:key="dlx_remap_back_vibrate"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="back_remap"
+                android:defaultValue="false" />
+            <GrxCheckBoxPreference
+                    android:title="@string/disable_vibrate_short"
+                    grx:systemType="system"
+                    android:dependency="dlx_remap_back_vibrate"
+                    android:key="dlx_remap_back_block_short"
+                    grx:broadCast1="dlx_services_mods"
+                    grx:broadCast1Extra="back_remap"
+                    android:defaultValue="false" />
+            <GrxSeekBar
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="back_remap"
+                android:title="@string/duration"
+                grx:systemType="system"
+                android:key="dlx_remap_back_vibrate_time"
+                android:defaultValue="0"
+                grx:minValue="1"
+                grx:maxValue="100"
+                android:dependency="dlx_remap_back_vibrate"
+                grx:showPopup="true"
+                grx:interval="1"/>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/powerkey">
+            <GrxSwitchPreference
+                android:title="@string/enable_remap"
+                grx:systemType="system"
+                android:key="dlx_remap_power_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="power_remap"
+                android:defaultValue="false" />
+            <GrxSingleSelection
+                android:title="@string/short_press"
+                grx:systemType="system"
+                android:key="dlx_remap_power_short"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_power_on"
+                grx:broadCast1Extra="power_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_power_short_app"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_power_on"
+                grx:depRule="ENABLE#dlx_remap_power_short#STRING#1"
+                grx:broadCast1Extra="power_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/double_tap"
+                grx:systemType="system"
+android:key="dlx_remap_power_double"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_power_on"
+                grx:broadCast1Extra="power_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+android:key="dlx_remap_power_double_app"
+                
+                grx:broadCast1="dlx_services_mods"
+                android:dependency="dlx_remap_power_on"
+                grx:depRule="ENABLE#dlx_remap_power_double#STRING#1"
+                grx:broadCast1Extra="power_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/triple_tap"
+                grx:systemType="system"
+android:key="dlx_remap_power_triple"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="power_remap"
+                android:dependency="dlx_remap_power_on"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+android:key="dlx_remap_power_triple_app"
+                
+                android:dependency="dlx_remap_power_on"
+                grx:depRule="ENABLE#dlx_remap_power_triple#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="power_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                grx:systemType="system"
+android:key="dlx_remap_power_long"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="power_remap"
+                android:dependency="dlx_remap_power_on"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_power_long_app"
+                android:dependency="dlx_remap_power_on"
+                grx:depRule="ENABLE#dlx_remap_power_long#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="power_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSwitchPreference
+                android:title="@string/vibrate"
+                grx:systemType="system"
+                android:dependency="dlx_remap_power_on"
+                android:key="dlx_remap_power_vibrate"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="power_remap"
+                android:defaultValue="false" />
+            <GrxCheckBoxPreference
+                    android:title="@string/disable_vibrate_short"
+                    grx:systemType="system"
+                    android:dependency="dlx_remap_power_vibrate"
+                    android:key="dlx_remap_power_block_short"
+                    grx:broadCast1="dlx_services_mods"
+                    grx:broadCast1Extra="power_remap"
+                    android:defaultValue="false" />
+            <GrxSeekBar
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="power_remap"
+                android:title="@string/duration"
+                grx:systemType="system"
+                android:key="dlx_remap_power_vibrate_time"
+                android:defaultValue="0"
+                grx:minValue="1"
+                grx:maxValue="100"
+                android:dependency="dlx_remap_power_vibrate"
+                grx:showPopup="true"
+                grx:interval="1"/>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/volume_up">
+            <GrxSwitchPreference
+                android:title="@string/enable_remap"
+                grx:systemType="system"
+                android:key="dlx_remap_volup_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up"
+                android:defaultValue="false" />
+            <GrxSingleSelection
+                android:title="@string/short_press"
+                grx:systemType="system"
+                android:key="dlx_remap_volup_short"
+                android:dependency="dlx_remap_volup_on"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_volup_short_app"
+                grx:depRule="ENABLE#dlx_remap_volup_short#STRING#1"
+                android:dependency="dlx_remap_volup_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/double_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_volup_double"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_volup_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:depRule="ENABLE#dlx_remap_volup_double#STRING#1"
+                grx:systemType="system"
+                android:key="dlx_remap_volup_double_app"
+                android:dependency="dlx_remap_volup_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/triple_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_volup_triple"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_volup_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:depRule="ENABLE#dlx_remap_volup_triple#STRING#1"
+                grx:systemType="system"
+                android:key="dlx_remap_volup_triple_app"
+                android:dependency="dlx_remap_volup_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                grx:systemType="system"
+                android:key="dlx_remap_volup_long"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_volup_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_volup_long_app"
+                android:dependency="dlx_remap_volup_on"
+                grx:depRule="ENABLE#dlx_remap_volup_long#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSwitchPreference
+                android:title="@string/vibrate"
+                grx:systemType="system"
+                android:dependency="dlx_remap_volup_on"
+                android:key="dlx_remap_volup_vibrate"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up"
+                android:defaultValue="false" />
+            <GrxCheckBoxPreference
+                    android:title="@string/disable_vibrate_short"
+                    grx:systemType="system"
+                    android:dependency="dlx_remap_volup_vibrate"
+                    android:key="dlx_remap_volup_block_short"
+                    grx:broadCast1="dlx_services_mods"
+                    grx:broadCast1Extra="vol_up"
+                    android:defaultValue="false" />
+            <GrxSeekBar
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up"
+                android:title="@string/duration"
+                grx:systemType="system"
+                android:key="dlx_remap_volup_vibrate_time"
+                android:defaultValue="0"
+                grx:minValue="1"
+                grx:maxValue="100"
+                android:dependency="dlx_remap_volup_vibrate"
+                grx:showPopup="true"
+                grx:interval="1"/>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/volume_down">
+            <GrxSwitchPreference
+                android:title="@string/enable_remap"
+                grx:systemType="system"
+                android:key="dlx_remap_voldown_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down"
+                android:defaultValue="false" />
+            <GrxSingleSelection
+                android:title="@string/short_press"
+                grx:systemType="system"
+                android:key="dlx_remap_voldown_short"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_voldown_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_voldown_short_app"
+                grx:depRule="ENABLE#dlx_remap_voldown_short#STRING#1"
+                android:dependency="dlx_remap_voldown_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/double_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_voldown_double"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_voldown_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:depRule="ENABLE#dlx_remap_voldown_double#STRING#1"
+                grx:systemType="system"
+                android:key="dlx_remap_voldown_double_app"
+                android:dependency="dlx_remap_voldown_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/triple_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_voldown_triple"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_voldown_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:depRule="ENABLE#dlx_remap_voldown_triple#STRING#1"
+                grx:systemType="system"
+                android:key="dlx_remap_voldown_triple_app"
+                android:dependency="dlx_remap_voldown_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                grx:systemType="system"
+                android:key="dlx_remap_voldown_long"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_voldown_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_voldown_long_app"
+                android:dependency="dlx_remap_voldown_on"
+                grx:depRule="ENABLE#dlx_remap_voldown_long#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSwitchPreference
+                android:title="@string/vibrate"
+                grx:systemType="system"
+                android:dependency="dlx_remap_voldown_on"
+                android:key="dlx_remap_voldown_vibrate"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down"
+                android:defaultValue="false" />
+            <GrxCheckBoxPreference
+                    android:title="@string/disable_vibrate_short"
+                    grx:systemType="system"
+                    android:dependency="dlx_remap_voldown_vibrate"
+                    android:key="dlx_remap_voldown_block_short"
+                    grx:broadCast1="dlx_services_mods"
+                    grx:broadCast1Extra="vol_down"
+                    android:defaultValue="false" />
+            <GrxSeekBar
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down"
+                android:title="@string/duration"
+                grx:systemType="system"
+                android:key="dlx_remap_voldown_vibrate_time"
+                android:defaultValue="0"
+                grx:minValue="1"
+                grx:maxValue="100"
+                android:dependency="dlx_remap_voldown_vibrate"
+                grx:showPopup="true"
+                grx:interval="1"/>
+        </PreferenceScreen>
+    </GrxPreferenceCategory>
+    <GrxPreferenceCategory grx:hiddenCategory="true" grx:bpRule="SHOW#ro.deluxerom.device#(great),(dream)">
+        <PreferenceScreen android:title="Bixby" grx:bpRule="SHOW#ro.deluxerom.device#(great),(dream)">
+            <GrxSwitchPreference
+                android:title="@string/enable_remap"
+                grx:systemType="system"
+                android:key="dlx_remap_bixby_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixby_remap"
+                android:defaultValue="false" />
+            <GrxSingleSelection
+                android:title="@string/short_press"
+                grx:systemType="system"
+                android:key="dlx_remap_bixby_short"
+                android:defaultValue="0"
+                android:dependency="dlx_remap_bixby_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixby_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:dependency="dlx_remap_bixby_on"
+                android:key="dlx_remap_bixby_short_app"
+                grx:depRule="ENABLE#dlx_remap_bixby_short#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixby_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/double_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_bixby_double"
+                android:dependency="dlx_remap_bixby_on"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixby_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:depRule="ENABLE#dlx_remap_bixby_double#STRING#1"
+                grx:systemType="system"
+                android:key="dlx_remap_bixby_double_app"
+                android:dependency="dlx_remap_bixby_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixby_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/triple_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_bixby_triple"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixby_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_bixby_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:depRule="ENABLE#dlx_remap_bixby_triple#STRING#1"
+                grx:systemType="system"
+                android:key="dlx_remap_bixby_triple_app"
+                android:dependency="dlx_remap_bixby_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixby_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                grx:systemType="system"
+                android:key="dlx_remap_bixby_long"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixby_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_bixby_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_bixby_long_app"
+                android:dependency="dlx_remap_bixby_on"
+                grx:depRule="ENABLE#dlx_remap_bixby_long#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixby_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSwitchPreference
+                android:title="@string/vibrate"
+                grx:systemType="system"
+                android:dependency="dlx_remap_bixby_on"
+                android:key="dlx_remap_bixby_vibrate"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixby_remap"
+                android:defaultValue="false" />
+            <GrxCheckBoxPreference
+                    android:title="@string/disable_vibrate_short"
+                    grx:systemType="system"
+                    android:dependency="dlx_remap_bixby_vibrate"
+                    android:key="dlx_remap_bixby_block_short"
+                    grx:broadCast1="dlx_services_mods"
+                    grx:broadCast1Extra="bixby_remap"
+                    android:defaultValue="false" />
+            <GrxSeekBar
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixby_remap"
+                android:title="@string/duration"
+                grx:systemType="system"
+                android:key="dlx_remap_bixby_vibrate_time"
+                android:defaultValue="0"
+                grx:minValue="1"
+                grx:maxValue="100"
+                android:dependency="dlx_remap_bixby_vibrate"
+                grx:showPopup="true"
+                grx:interval="1"/>
         </PreferenceScreen>
     </GrxPreferenceCategory>
 
     <!-- Screen off -->
-    <GrxPreferenceCategory android:title="@string/screen_off">
+    <GrxPreferenceCategory android:title="@string/screen_off"/>
         <!-- Volume keys -->
-        <PreferenceScreen android:title="@string/volume_keys">
-            <GrxPreferenceCategory android:title="@string/skip_tracks_category">
-                <GrxSwitchPreference
-                    android:title="@string/enable_skip_tracks"
-                    android:key="b_skip_tracks"
-                    android:defaultValue="true" />
-                <GrxSeekBar
-                    android:title="@string/time_skip_tracks"
-                    android:dependency="b_skip_tracks"
-                    android:key="b_timeout_skip_tracks"
-                    android:defaultValue="500"
-                    grx:minValue="350"
-                    grx:maxValue="2000"
-                    grx:units=" mS"
-                    grx:showPopup="true"
-                    grx:interval="50"/>
-                <GrxInfoText android:summary="@string/info_skip_tracks" />
-                <GrxCheckBoxPreference
-                    android:title="@string/double_tap_skip_tracks"
-                    android:key="b_doble_click_skip_tracks"
-                    android:dependency="b_skip_tracks"
-                    android:defaultValue="true" />
-                <GrxSeekBar
-                    android:title="@string/time_dc_skip_tracks"
-                    android:dependency="b_doble_click_skip_tracks"
-                    android:key="b_timeout_dc_skip_tracks"
-                    android:defaultValue="500"
-                    grx:minValue="100"
-                    grx:maxValue="1000"
-                    grx:units=" mS"
-                    grx:showPopup="true"
-                    grx:interval="50"/>
-                <GrxCheckBoxPreference
-                    android:title="@string/vibrate_skip_tracks"
-                    android:key="b_vibrate_skip_tracks"
-                    android:summary="@string/vibrate_skip_tracks_summary"
-                    android:dependency="b_skip_tracks"
-                    android:defaultValue="false" />
-                <GrxSeekBar
-                    android:title="@string/vibrate_skip_intensity"
-                    android:dependency="b_vibrate_skip_tracks"
+        <PreferenceScreen android:title="@string/volume_up">
+            <GrxSwitchPreference
+                android:title="@string/enable_remap"
+                grx:systemType="system"
+                android:key="dlx_remap_volupscoff_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up_scoff"
+                android:defaultValue="false" />
+            <GrxSingleSelection
+                android:title="@string/short_press"
+                grx:systemType="system"
+                android:key="dlx_remap_volupscoff_short"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up_scoff"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_volupscoff_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_volupscoff_short_app"
+                grx:depRule="ENABLE#dlx_remap_volupscoff_short#STRING#1"
+                android:dependency="dlx_remap_volupscoff_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up_scoff"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/double_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_volupscoff_double"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up_scoff"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_volupscoff_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:depRule="ENABLE#dlx_remap_volupscoff_double#STRING#1"
+                grx:systemType="system"
+                android:key="dlx_remap_volupscoff_double_app"
+                android:dependency="dlx_remap_volupscoff_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up_scoff"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/triple_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_volupscoff_triple"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up_scoff"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_volupscoff_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:depRule="ENABLE#dlx_remap_volupscoff_triple#STRING#1"
+                grx:systemType="system"
+                android:key="dlx_remap_volupscoff_triple_app"
+                android:dependency="dlx_remap_volupscoff_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up_scoff"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                grx:systemType="system"
+                android:key="dlx_remap_volupscoff_long"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up_scoff"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_volupscoff_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_volupscoff_long_app"
+                android:dependency="dlx_remap_volupscoff_on"
+                grx:depRule="ENABLE#dlx_remap_volupscoff_long#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up_scoff"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSwitchPreference
+                android:title="@string/vibrate"
+                grx:systemType="system"
+                android:dependency="dlx_remap_volupscoff_on"
+                android:key="dlx_remap_volupscoff_vibrate"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up_scoff"
+                android:defaultValue="false" />
+            <GrxCheckBoxPreference
+                    android:title="@string/disable_vibrate_short"
                     grx:systemType="system"
-                    android:key="VIB_FEEDBACK_MAGNITUDE"
-                    android:defaultValue="2"
-                    grx:minValue="0"
-                    grx:maxValue="5"
-                    grx:units=""
-                    grx:showPopup="true"
-                    grx:interval="1"/>
-            </GrxPreferenceCategory>
+                    android:dependency="dlx_remap_volupscoff_vibrate"
+                    android:key="dlx_remap_volupscoff_block_short"
+                    grx:broadCast1="dlx_services_mods"
+                    grx:broadCast1Extra="vol_up_scoff"
+                    android:defaultValue="false" />
+            <GrxSeekBar
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_up_scoff"
+                android:title="@string/duration"
+                grx:systemType="system"
+                android:key="dlx_remap_volupscoff_vibrate_time"
+                android:defaultValue="0"
+                grx:minValue="1"
+                grx:maxValue="100"
+                android:dependency="dlx_remap_volupscoff_vibrate"
+                grx:showPopup="true"
+                grx:interval="1"/>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/volume_down">
+            <GrxSwitchPreference
+                android:title="@string/enable_remap"
+                grx:systemType="system"
+                android:key="dlx_remap_voldownscoff_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down_scoff"
+                android:defaultValue="false" />
+            <GrxSingleSelection
+                android:title="@string/short_press"
+                grx:systemType="system"
+                android:key="dlx_remap_voldownscoff_short"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down_scoff"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_voldownscoff_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_voldownscoff_short_app"
+                grx:depRule="ENABLE#dlx_remap_voldownscoff_short#STRING#1"
+                android:dependency="dlx_remap_voldownscoff_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down_scoff"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/double_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_voldownscoff_double"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down_scoff"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_voldownscoff_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:depRule="ENABLE#dlx_remap_voldownscoff_double#STRING#1"
+                grx:systemType="system"
+                android:key="dlx_remap_voldownscoff_double_app"
+                android:dependency="dlx_remap_voldownscoff_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down_scoff"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/triple_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_voldownscoff_triple"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down_scoff"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_voldownscoff_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:depRule="ENABLE#dlx_remap_voldownscoff_triple#STRING#1"
+                grx:systemType="system"
+                android:key="dlx_remap_voldownscoff_triple_app"
+                android:dependency="dlx_remap_voldownscoff_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down_scoff"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                grx:systemType="system"
+                android:key="dlx_remap_voldownscoff_long"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down_scoff"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_voldownscoff_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_voldownscoff_long_app"
+                android:dependency="dlx_remap_voldownscoff_on"
+                grx:depRule="ENABLE#dlx_remap_voldownscoff_long#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down_scoff"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSwitchPreference
+                android:title="@string/vibrate"
+                grx:systemType="system"
+                android:dependency="dlx_remap_voldownscoff_on"
+                android:key="dlx_remap_voldownscoff_vibrate"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down_scoff"
+                android:defaultValue="false" />
+            <GrxCheckBoxPreference
+                    android:title="@string/disable_vibrate_short"
+                    grx:systemType="system"
+                    android:dependency="dlx_remap_voldownscoff_vibrate"
+                    android:key="dlx_remap_voldownscoff_block_short"
+                    grx:broadCast1="dlx_services_mods"
+                    grx:broadCast1Extra="vol_down_scoff"
+                    android:defaultValue="false" />
+            <GrxSeekBar
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="vol_down_scoff"
+                android:title="@string/duration"
+                grx:systemType="system"
+                android:key="dlx_remap_voldownscoff_vibrate_time"
+                android:defaultValue="0"
+                grx:minValue="1"
+                grx:maxValue="100"
+                android:dependency="dlx_remap_voldownscoff_vibrate"
+                grx:showPopup="true"
+                grx:interval="1"/>
+        </PreferenceScreen>
+    <GrxPreferenceCategory grx:hiddenCategory="true" grx:bpRule="SHOW#ro.deluxerom.device#(great),(dream)">
+        <PreferenceScreen android:title="Bixby">
+            <GrxSwitchPreference
+                android:title="@string/enable_remap"
+                grx:systemType="system"
+                android:key="dlx_remap_bixbyscoff_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixbyscoff_remap"
+                android:defaultValue="false" />
+            <GrxSingleSelection
+                android:title="@string/short_press"
+                grx:systemType="system"
+                android:key="dlx_remap_bixbyscoff_short"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixbyscoff_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_bixbyscoff_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:depRule="ENABLE#dlx_remap_bixbyscoff_short#STRING#1"
+                grx:systemType="system"
+                android:key="dlx_remap_bixbyscoff_short_app"
+                android:dependency="dlx_remap_bixbyscoff_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixbyscoff_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/double_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_bixbyscoff_double"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixbyscoff_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_bixbyscoff_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_bixbyscoff_double_app"
+                android:dependency="dlx_remap_bixbyscoff_on"
+                grx:depRule="ENABLE#dlx_remap_bixbyscoff_double#STRING#1"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixbyscoff_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/triple_tap"
+                grx:systemType="system"
+                android:key="dlx_remap_bixbyscoff_triple"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixbyscoff_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_bixbyscoff_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:depRule="ENABLE#dlx_remap_bixbyscoff_triple#STRING#1"
+                grx:systemType="system"
+                android:key="dlx_remap_bixbyscoff_triple_app"
+                android:dependency="dlx_remap_bixbyscoff_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixbyscoff_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSingleSelection
+                android:title="@string/long_press"
+                grx:systemType="system"
+                android:key="dlx_remap_bixbyscoff_long"
+                android:defaultValue="0"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixbyscoff_remap"
+                grx:optionsArray="@array/agc_virtual_buttons_entries"
+                android:dependency="dlx_remap_bixbyscoff_on"
+                grx:valuesArray="@array/agc_virtual_buttons_values" />
+            <GrxAppSelection
+                android:title="@string/app"
+                grx:systemType="system"
+                android:key="dlx_remap_bixbyscoff_long_app"
+                grx:depRule="ENABLE#dlx_remap_bixbyscoff_long#STRING#1"
+                android:dependency="dlx_remap_bixbyscoff_on"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixbyscoff_remap"
+                grx:saveActivityname="true"
+                grx:showSystemapps="false" />
+            <GrxSwitchPreference
+                android:title="@string/vibrate"
+                grx:systemType="system"
+                android:dependency="dlx_remap_bixbyscoff_on"
+                android:key="dlx_remap_bixbyscoff_vibrate"
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixbyscoff_remap"
+                android:defaultValue="false" />
+            <GrxCheckBoxPreference
+                    android:title="@string/disable_vibrate_short"
+                    grx:systemType="system"
+                    android:dependency="dlx_remap_bixbyscoff_vibrate"
+                    android:key="dlx_remap_bixbyscoff_block_short"
+                    grx:broadCast1="dlx_services_mods"
+                    grx:broadCast1Extra="bixbyscoff_remap"
+                    android:defaultValue="false" />
+            <GrxSeekBar
+                grx:broadCast1="dlx_services_mods"
+                grx:broadCast1Extra="bixbyscoff_remap"
+                android:title="@string/duration"
+                grx:systemType="system"
+                android:key="dlx_remap_bixbyscoff_vibrate_time"
+                android:defaultValue="0"
+                grx:minValue="1"
+                grx:maxValue="100"
+                android:dependency="dlx_remap_bixbyscoff_vibrate"
+                grx:showPopup="true"
+                grx:interval="1"/>
         </PreferenceScreen>
     </GrxPreferenceCategory>
-
-    <!-- &lt;!&ndash; Recientes &ndash;&gt;
-     <PreferenceScreen android:title="@string/recents">
-         <GrxSingleSelection
-             android:title="@string/long_press"
-             android:key="dlx_long_recent_action"
-             android:defaultValue="0"
-             grx:broadCast1="dlx_remap"
-             grx:optionsArray="@array/agc_virtual_buttons_entries"
-             grx:systemType="system"
-             grx:valuesArray="@array/agc_virtual_buttons_values" />
-         <GrxAppSelection
-             android:title="@string/app"
-             android:key="dlx_long_recent_app"
-             grx:systemType="system"
-             grx:depRule="ENABLE#dlx_long_recent_action#STRING#1"
-             grx:broadCast1="dlx_remap"
-             grx:saveActivityname="true"
-             grx:showSystemapps="false" />
-     </PreferenceScreen>
-
-     &lt;!&ndash; Inicio &ndash;&gt;
-     <PreferenceScreen android:title="@string/home">
-         <GrxSingleSelection
-             android:title="@string/long_press"
-             android:key="dlx_long_home_action"
-             android:defaultValue="0"
-             grx:broadCast1="dlx_remap"
-             grx:optionsArray="@array/agc_virtual_buttons_entries"
-             grx:systemType="system"
-             grx:valuesArray="@array/agc_virtual_buttons_values" />
-         <GrxAppSelection
-             android:title="@string/app"
-             android:key="dlx_long_home_app"
-             grx:systemType="system"
-             grx:depRule="ENABLE#dlx_long_home_action#STRING#1"
-             grx:broadCast1="dlx_remap"
-             grx:saveActivityname="true"
-             grx:showSystemapps="false" />
-         <GrxSingleSelection
-             android:title="@string/doubletap"
-             android:key="dlx_double_home_action"
-             android:defaultValue="0"
-             grx:broadCast1="dlx_remap"
-             grx:optionsArray="@array/agc_virtual_buttons_entries"
-             grx:systemType="system"
-             grx:valuesArray="@array/agc_virtual_buttons_values" />
-         <GrxAppSelection
-             android:title="@string/app"
-             android:key="dlx_double_home_app"
-             grx:systemType="system"
-             grx:depRule="ENABLE#dlx_double_home_action#STRING#1"
-             grx:broadCast1="dlx_remap"
-             grx:saveActivityname="true"
-             grx:showSystemapps="false" />
-     </PreferenceScreen>
-
-     &lt;!&ndash; Retroceso &ndash;&gt;
-     <PreferenceScreen android:title="@string/back">
-         <GrxSingleSelection
-             android:title="@string/long_press"
-             android:key="dlx_long_back_action"
-             android:defaultValue="0"
-             grx:broadCast1="dlx_remap"
-             grx:optionsArray="@array/agc_virtual_buttons_entries"
-             grx:systemType="system"
-             grx:valuesArray="@array/agc_virtual_buttons_values" />
-         <GrxAppSelection
-             android:title="@string/app"
-             android:key="dlx_long_back_app"
-             grx:systemType="system"
-             grx:depRule="ENABLE#dlx_long_back_action#STRING#1"
-             grx:broadCast1="dlx_remap"
-             grx:saveActivityname="true"
-             grx:showSystemapps="false" />
-     </PreferenceScreen>
-
-     &lt;!&ndash; Bixby &ndash;&gt;
-     <PreferenceScreen android:title="Bixby">
-         <GrxSingleSelection
-             android:title="@string/screenon_short"
-             android:key="dlx_bixby_short_on"
-             android:defaultValue="0"
-             grx:broadCast1="dlx_remap"
-             grx:optionsArray="@array/agc_virtual_buttons_entries"
-             grx:systemType="system"
-             grx:valuesArray="@array/agc_virtual_buttons_values" />
-         <GrxAppSelection
-             android:title="@string/screenon_app"
-             android:key="dlx_bixby_short_app_on"
-             grx:systemType="system"
-             grx:depRule="ENABLE#dlx_bixby_short_on#STRING#1"
-             grx:broadCast1="dlx_remap"
-             grx:saveActivityname="true"
-             grx:showSystemapps="false" />
-         <GrxSingleSelection
-             android:title="@string/screenoff_shortaction"
-             android:key="dlx_bixby_short_off"
-             android:defaultValue="0"
-             grx:broadCast1="dlx_remap"
-             grx:optionsArray="@array/agc_virtual_buttons_entries"
-             grx:systemType="system"
-             grx:valuesArray="@array/agc_virtual_buttons_values" />
-         <GrxAppSelection
-             android:title="@string/screenoff_app"
-             android:key="dlx_bixby_short_app_off"
-             grx:systemType="system"
-             grx:depRule="ENABLE#dlx_bixby_short_off#STRING#1"
-             grx:broadCast1="dlx_remap"
-             grx:saveActivityname="true"
-             grx:showSystemapps="false" />
-     </PreferenceScreen>-->
-
 </PreferenceScreen>

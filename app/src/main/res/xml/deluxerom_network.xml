@@ -4,117 +4,130 @@
     <!-- Velocímetro de red -->
     <GrxSwitchPreference
         android:title="@string/visibility"
-        android:key="dlx_netw_visibility"
+        grx:systemType="system"
+android:key="dlx_netw_visibility"
         android:defaultValue="0"
         grx:broadCast1="update_network"
-        grx:systemType="system" />
+         />
     <GrxCheckBoxPreference
         android:title="@string/show_on_ls"
-        android:key="dlx_netw_ls"
+        grx:systemType="system"
+android:key="dlx_netw_ls"
         android:defaultValue="0"
         android:dependency="dlx_netw_visibility"
         grx:broadCast1="update_network"
-        grx:systemType="system" />
+         />
     <GrxSingleSelection
         android:title="@string/position"
-        android:key="dlx_netw_position"
+        grx:systemType="system"
+android:key="dlx_netw_position"
         android:defaultValue="0"
         grx:optionsArray="@array/data_usage_gravity_entries"
         grx:valuesArray="@array/data_usage_gravity_values"
-        grx:systemType="system"
+        
         android:dependency="dlx_netw_visibility"
         grx:broadCast1="update_network" />
     <GrxSingleSelection
         android:title="@string/update_every"
-        android:key="dlx_netw_intervals"
+        grx:systemType="system"
+android:key="dlx_netw_intervals"
         android:defaultValue="1000"
         grx:optionsArray="@array/agc_netw_interval_entries"
         grx:valuesArray="@array/agc_netw_interval_values"
-        grx:systemType="system"
+        
         android:dependency="dlx_netw_visibility"
         grx:broadCast1="update_network" />
     <GrxCheckBoxPreference
         android:title="@string/split_up_down"
-        android:key="dlx_netw_showall"
-        android:defaultValue="0"
         grx:systemType="system"
+android:key="dlx_netw_showall"
+        android:defaultValue="0"
+        
         android:dependency="dlx_netw_visibility"
         grx:broadCast1="update_network" />
     <GrxColorPicker
         android:title="@string/main_color"
-        android:key="dlx_netw_singlecolor"
+        grx:systemType="system"
+android:key="dlx_netw_singlecolor"
         android:defaultValue="-1107296257"
         grx:colorPickerStyle="flower"
         grx:saveValueOnFly="true"
         grx:depRule="ENABLE#dlx_netw_showall#BOOLEAN#0"
         grx:broadCast1="update_network"
-        grx:systemType="system" />
+         />
     <GrxColorPicker
         android:title="@string/up_color"
-        android:key="dlx_netw_upcolor"
+        grx:systemType="system"
+android:key="dlx_netw_upcolor"
         android:defaultValue="-1107296257"
         grx:colorPickerStyle="flower"
         grx:saveValueOnFly="true"
         android:dependency="dlx_netw_showall"
         grx:broadCast1="update_network"
-        grx:systemType="system" />
+         />
     <GrxColorPicker
         android:title="@string/down_color"
-        android:key="dlx_netw_downcolor"
+        grx:systemType="system"
+android:key="dlx_netw_downcolor"
         android:defaultValue="-1107296257"
         grx:colorPickerStyle="flower"
         grx:saveValueOnFly="true"
         android:dependency="dlx_netw_showall"
         grx:broadCast1="update_network"
-        grx:systemType="system" />
+         />
     <GrxColorPicker
         android:title="@string/arrows_color"
-        android:key="dlx_netw_arrowscolor"
+        grx:systemType="system"
+android:key="dlx_netw_arrowscolor"
         android:defaultValue="-1107296257"
         grx:colorPickerStyle="flower"
         grx:saveValueOnFly="true"
         android:dependency="dlx_netw_showall"
         grx:broadCast1="update_network"
-        grx:systemType="system" />
+         />
     <GrxSingleSelection
         android:title="@string/font"
-        android:key="dlx_netw_font"
+        grx:systemType="system"
+android:key="dlx_netw_font"
         android:defaultValue="0"
         android:dependency="dlx_netw_visibility"
         grx:broadCast1="update_network"
         grx:iconsArray="@array/agc_estilo_fuente_drawables"
         grx:optionsArray="@array/agc_estilo_fuente_entries"
         grx:valuesArray="@array/agc_estilo_fuente_values"
-        grx:systemType="system" />
+         />
     <GrxSeekBar
         android:title="@string/size"
-        android:key="dlx_netw_size"
+        grx:systemType="system"
+android:key="dlx_netw_size"
         android:defaultValue="12"
         android:dependency="dlx_netw_visibility"
         grx:broadCast1="update_network"
         grx:maxValue="25"
         grx:minValue="1"
         grx:interval="1"
-        grx:systemType="system" />
+         />
     <GrxSeekBar
         android:title="@string/left_margin"
-        android:key="dlx_netw_start"
+        grx:systemType="system"
+android:key="dlx_netw_start"
         android:defaultValue="0"
         android:dependency="dlx_netw_visibility"
         grx:broadCast1="update_network"
         grx:maxValue="70"
         grx:minValue="0"
         grx:interval="1"
-        grx:systemType="system" />
+         />
     <GrxSeekBar
         android:title="@string/right_margin"
-        android:key="dlx_netw_end"
+        grx:systemType="system"
+android:key="dlx_netw_end"
         android:defaultValue="0"
         android:dependency="dlx_netw_visibility"
         grx:broadCast1="update_network"
         grx:maxValue="70"
         grx:minValue="0"
         grx:interval="1"
-        grx:systemType="system" />
+         />
 
 </PreferenceScreen>

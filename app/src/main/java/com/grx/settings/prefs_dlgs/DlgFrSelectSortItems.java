@@ -141,62 +141,37 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
 
     private View getDialogView(){
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_grxmultiplewidgets_grxselectsortitems, null);
-        DragListView = (SlideAndDragListView) view.findViewById(R.id.gid_slv_listview);
-        SelectItemsList=(ListView)view.findViewById(R.id.gid_listview);
-        vSeparator=(LinearLayout) view.findViewById(R.id.gid_separator);
+        DragListView = view.findViewById(R.id.gid_slv_listview);
+        SelectItemsList = view.findViewById(R.id.gid_listview);
+        vSeparator = view.findViewById(R.id.gid_separator);
 
-        vHelpButton = (LinearLayout) view.findViewById(R.id.gid_help_button);
-        vHelpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showHelp();
-            }
-        });
-        vTxtSelectedInfo = (TextView) view.findViewById(R.id.gid_items_selected);
-        vAddButton = (LinearLayout) view.findViewById(R.id.gid_item);
-        vAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showSelectableItems();
-            }
-        });
+        vHelpButton = view.findViewById(R.id.gid_help_button);
+        vHelpButton.setOnClickListener(v -> showHelp());
+        vTxtSelectedInfo = view.findViewById(R.id.gid_items_selected);
+        vAddButton = view.findViewById(R.id.gid_item);
+        vAddButton.setOnClickListener(v -> showSelectableItems());
 
-        vDeleteButton = (LinearLayout) view.findViewById(R.id.gid_delete_button);
-        vDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clearAllSelectedItems();
+        vDeleteButton = view.findViewById(R.id.gid_delete_button);
+        vDeleteButton.setOnClickListener(v -> clearAllSelectedItems());
 
-            }
-        });
-
-        vBackButton = (LinearLayout) view.findViewById(R.id.gid_button_back);
-        vBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showSelectedItems();
-            }
-        });
+        vBackButton = view.findViewById(R.id.gid_button_back);
+        vBackButton.setOnClickListener(v -> showSelectedItems());
 
         DragListView.setDividerHeight(Common.cDividerHeight);
         SelectItemsList.setDividerHeight(Common.cDividerHeight);
 
         SelectItemsList.setAdapter(mAdapter2);
 
-        SelectItemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(mAvailableItemsList.get(position).is_selected()) unSelectItem(position);
-                else {
-                    if(mMaxNumOfAccesses!=0){
-                        if(mSelectedItemsList.size()>=mMaxNumOfAccesses) {
-                            if(!mAvailableItemsList.get(position).is_selected()) {
-                                Toast.makeText(getActivity(),getString(R.string.grxs_max_choices_warning),Toast.LENGTH_SHORT).show();
-                            }
-
-                        }else addSelectedItem(position);
-                    }else addSelectedItem(position);
-                }
+        SelectItemsList.setOnItemClickListener((parent, view1, position, id) -> {
+            if(mAvailableItemsList.get(position).is_selected()) unSelectItem(position);
+            else {
+                if(mMaxNumOfAccesses!=0){
+                    if(mSelectedItemsList.size()>=mMaxNumOfAccesses) {
+                        if(!mAvailableItemsList.get(position).is_selected()) {
+                            Toast.makeText(getActivity(),getString(R.string.grxs_max_choices_warning),Toast.LENGTH_SHORT).show();
+                        }
+                    } else addSelectedItem(position);
+                } else addSelectedItem(position);
             }
         });
         return view;
@@ -259,12 +234,7 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
         builder.setTitle(mTitle);
         builder.setView(getDialogView());
         builder.setNegativeButton(R.string.grxs_cancel, null);
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                setResultAndDoCallback();
-            }
-        });
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> setResultAndDoCallback());
 
         iniSelectedAndAvailableItems(mValue);
         setSummary();
@@ -273,20 +243,14 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
         if (mCurrentView==0) showSelectedItems();
         else showSelectableItems();
         final AlertDialog ad = builder.create();
-        ad.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                mNegativeButton = ad.getButton(DialogInterface.BUTTON_NEGATIVE);
-                if(mCurrentView!=0) mNegativeButton.setText(getString(R.string.grxs_back));
-                else mNegativeButton.setText(getString(R.string.grxs_cancel));
-                mNegativeButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(mCurrentView==0) dismiss();
-                        else showSelectedItems();
-                    }
-                });
-            }
+        ad.setOnShowListener(dialog -> {
+            mNegativeButton = ad.getButton(DialogInterface.BUTTON_NEGATIVE);
+            if(mCurrentView!=0) mNegativeButton.setText(getString(R.string.grxs_back));
+            else mNegativeButton.setText(getString(R.string.grxs_cancel));
+            mNegativeButton.setOnClickListener(v -> {
+                if(mCurrentView==0) dismiss();
+                else showSelectedItems();
+            });
         });
         return ad;
 
@@ -332,8 +296,8 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
         mAvailableItemsList.clear();
 
         TypedArray icons_array=null;
-        String vals_array[] = getResources().getStringArray(mIdValuesArr);
-        String opt_array[] = getResources().getStringArray(mIdOptionsArr);
+        String[] vals_array = getResources().getStringArray(mIdValuesArr);
+        String[] opt_array = getResources().getStringArray(mIdOptionsArr);
         if(mIdIconsArray!=0){
             icons_array = getResources().obtainTypedArray(mIdIconsArray);
         }
@@ -415,20 +379,14 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
             AlertDialog ad = new AlertDialog.Builder(getActivity()).create();
             ad.setTitle(getString(R.string.grxs_delete_list));
             ad.setMessage(getString(R.string.grxs_help_delete_all_values));
-            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mSelectedItemsList.clear();
-                    notifyChanges();
-                    updateAvailableOptions();
-                    updateAddbutton();
-                }
+            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), (dialog, which) -> {
+                mSelectedItemsList.clear();
+                notifyChanges();
+                updateAvailableOptions();
+                updateAddbutton();
             });
-            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), (dialog, which) -> {
 
-                }
             });
             ad.show();
         }
@@ -493,9 +451,9 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
             if (convertView == null) {
                 cvh = new CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxmultiaccess_multioption_item, null);
-                cvh.vImgGrabber= (ImageView) convertView.findViewById(R.id.gid_icon);
-                cvh.vTxt = (TextView) convertView.findViewById(R.id.gid_text);
-                cvh.vIcono = (ImageView) convertView.findViewById(R.id.gid_icon2);
+                cvh.vImgGrabber=  convertView.findViewById(R.id.gid_icon);
+                cvh.vTxt = convertView.findViewById(R.id.gid_text);
+                cvh.vIcono = convertView.findViewById(R.id.gid_icon2);
                 convertView.setTag(cvh);
             } else {
                 cvh = (CustomViewHolder) convertView.getTag();
@@ -540,9 +498,9 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
             if (convertView == null) {
                 cvh = new CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxmultiaccess_multioption_item, null);
-                cvh.vImgGrabber= (ImageView) convertView.findViewById(R.id.gid_icon);
-                cvh.vTxt = (TextView) convertView.findViewById(R.id.gid_text);
-                cvh.vIcono = (ImageView) convertView.findViewById(R.id.gid_icon2);
+                cvh.vImgGrabber= convertView.findViewById(R.id.gid_icon);
+                cvh.vTxt = convertView.findViewById(R.id.gid_text);
+                cvh.vIcono = convertView.findViewById(R.id.gid_icon2);
                 convertView.setTag(cvh);
             } else {
                 cvh = (CustomViewHolder) convertView.getTag();

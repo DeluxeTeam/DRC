@@ -672,25 +672,28 @@ public class GrxPrefsUtils {
             Intent intent = new Intent();
             try {
                 intent.setAction(action);
-                if(extraval!=null && !extraval.isEmpty()) intent.putExtra("extravalue", extraval);
+                if(extraval!=null && !extraval.isEmpty()) {
+                    intent.putExtra("extravalue", extraval);
+                    intent.putExtra("arg", extraval);
+                }
                 context.sendBroadcast(intent);
             }catch (Exception e){
                 e.printStackTrace();
                 Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
             }
         }else {
-            Runnable BC = new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent();
-                    try{
-                        intent.setAction(action);
-                        if(extraval!=null && !extraval.isEmpty()) intent.putExtra("extravalue", extraval);
-                        context.sendBroadcast(intent);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                        Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
+            Runnable BC = () -> {
+                Intent intent = new Intent();
+                try{
+                    intent.setAction(action);
+                    if(extraval!=null && !extraval.isEmpty()) {
+                        intent.putExtra("extravalue", extraval);
+                        intent.putExtra("arg", extraval);
                     }
+                    context.sendBroadcast(intent);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
                 }
             };
 
@@ -711,17 +714,14 @@ public class GrxPrefsUtils {
                 Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
             }
         }else {
-            Runnable BC = new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent();
-                    try{
-                        intent.setAction(action);
-                        context.sendBroadcast(intent);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                        Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
-                    }
+            Runnable BC = () -> {
+                Intent intent = new Intent();
+                try{
+                    intent.setAction(action);
+                    context.sendBroadcast(intent);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
                 }
             };
 
@@ -747,18 +747,15 @@ public class GrxPrefsUtils {
                 Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
             }
         }else {
-            Runnable BC = new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent();
-                    try{
-                        intent.setAction(action);
-                        intent.putExtra(extra,extravalue);
-                        context.sendBroadcast(intent);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                        Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
-                    }
+            Runnable BC = () -> {
+                Intent intent = new Intent();
+                try{
+                    intent.setAction(action);
+                    intent.putExtra(extra,extravalue);
+                    context.sendBroadcast(intent);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
                 }
             };
 

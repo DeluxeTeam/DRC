@@ -69,7 +69,7 @@ public class GrxSingleSelection extends GrxBasePreference implements DlgFrMultiS
     @Override
     public void configStringPreference(String value){
         setWidgetIcon(null);
-        String vals_array[] = getContext().getResources().getStringArray(myPrefAttrsInfo.getMyValuesArrayId());
+        String[] vals_array = getContext().getResources().getStringArray(myPrefAttrsInfo.getMyValuesArrayId());
         int pos = -1;
         for(int i=0;i<vals_array.length;i++) {
             if (value.equals(vals_array[i])) {
@@ -78,7 +78,7 @@ public class GrxSingleSelection extends GrxBasePreference implements DlgFrMultiS
             }
         }
         if(pos!=-1) {
-            String opt_array[] = getContext().getResources().getStringArray(myPrefAttrsInfo.getMyOptionsArrayId());
+            String[] opt_array = getContext().getResources().getStringArray(myPrefAttrsInfo.getMyOptionsArrayId());
             mLabel = opt_array[pos];
             if(myPrefAttrsInfo.getMyIconsArrayId()!=0){
                 TypedArray icons_array=getContext().getResources().obtainTypedArray(myPrefAttrsInfo.getMyIconsArrayId());
@@ -143,6 +143,5 @@ public class GrxSingleSelection extends GrxBasePreference implements DlgFrMultiS
             configStringPreference(mStringValue);
         }
     }
-
 
 }

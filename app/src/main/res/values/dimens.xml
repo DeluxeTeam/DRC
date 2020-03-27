@@ -32,4 +32,5 @@
     <dimen name="grx_altura_item_accesos">42dp</dimen>
     <dimen name="grx_padding_lista_preferencias">60dp</dimen>
     <dimen name="dialog_aux_buttons_size">28dp</dimen>
+
 </resources>

@@ -15,17 +15,12 @@ package com.grx.settings.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
+import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
+import com.grx.settings.R;
 import com.grx.settings.act.GrxImagePicker;
 
 import java.io.File;
@@ -225,6 +220,9 @@ public class GrxImageHelper {
 
                 InputStream inputStream = context.getContentResolver().openInputStream(img_uri);
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                if (bitmap == null) {
+                    bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.menu_help);
+                }
                 int sx = bitmap.getWidth();
                 int sy = bitmap.getHeight();
 
@@ -237,14 +235,12 @@ public class GrxImageHelper {
                 Bitmap small_bitmap = Bitmap.createScaledBitmap(bitmap, fsx, fsy, false);
                 bitmap.recycle();
                 drawable = new BitmapDrawable(context.getResources(), small_bitmap);
-            } catch (FileNotFoundException e) {
+            } catch (FileNotFoundException | SecurityException e) {
                 e.printStackTrace();
             }
         }
         return drawable;
     }
-
-
 
     public static Bitmap load_bitmap_from_uri_string(Context context, String uri, int sizeX, int sizeY){
         Bitmap small_bitmap = null;
