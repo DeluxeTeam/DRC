@@ -19,10 +19,10 @@ import android.graphics.drawable.Drawable;
 
 public class GrxCustomOptionInfo {
 
-    String mTitle;
-    String mValue;
-    Drawable mIcon;
-    boolean mIsSelected;
+    private final String mTitle;
+    private final String mValue;
+    private final Drawable mIcon;
+    private boolean mIsSelected;
 
 
     public GrxCustomOptionInfo(String tit, String val, Drawable icon){

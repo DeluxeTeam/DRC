@@ -30,12 +30,11 @@ import com.grx.settings.GrxSettingsActivity;
 import com.grx.settings.R;
 import com.fab.ObservableScrollView;
 import com.grx.settings.utils.SlidingTabLayout;
-import com.root.RootUtils;
 
 
 public class GrxInfoFragment extends Fragment {
 
-    ViewPager mViewPager;
+    private ViewPager mViewPager;
 
     private int mNumOfTabs;
     private String[] mTabsNames;
@@ -46,7 +45,7 @@ public class GrxInfoFragment extends Fragment {
     }
 
     public interface onSlidingTabChanged {
-        public void SetObservableScrollView(ObservableScrollView observableScrollView);
+        void SetObservableScrollView(ObservableScrollView observableScrollView);
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -73,7 +72,7 @@ public class GrxInfoFragment extends Fragment {
     }
 
 
-    public void create_views(){
+    private void create_views(){
         mViews=new ObservableScrollView[mNumOfTabs];
         for(int i=0; i<mNumOfTabs;i++){
             mViews[i] = get_view(mTabsLayouts[i]);
@@ -85,71 +84,65 @@ public class GrxInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        switch (mNumOfTabs){
-            case 0: return null;
+        if (mNumOfTabs == 0) {
+            return null;
             //case 1: return mViews[0];
-            default:
-                View view = inflater.inflate(R.layout.grx_info_tabs, container, false);
-                mViewPager = (ViewPager) view.findViewById(R.id.gid_viewpager);
-                mViewPager.setAdapter(new CustomPagerAdapter(getActivity()));
-                // Assiging the Sliding Tab Layout View
-                final SlidingTabLayout tabs = (SlidingTabLayout) view.findViewById(R.id.gid_tabs);
-                tabs.setDistributeEvenly(false);
-                //grx tab indicator color
-                TypedArray a = getActivity().getTheme().obtainStyledAttributes(new int[]{R.attr.tabs_indicator_color});
-                final int color_tint = a.getColor(0, 0);
-                a.recycle();
-
-                tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-                    @Override
-                    public int getIndicatorColor(int position) {
-                        return color_tint;
-                    }
-                });
-                tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                    @Override
-                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-                    }
-
-                    @Override
-                    public void onPageSelected(int position) {
-                        GrxSettingsActivity grxsettingsactivity = (GrxSettingsActivity) getActivity();
-                        if (grxsettingsactivity != null)
-                            grxsettingsactivity.SetObservableScrollView((ObservableScrollView) mViews[position]);
-                    }
-
-                    @Override
-                    public void onPageScrollStateChanged(int state) {
-
-                    }
-                });
-
-                int pos= 0;
-                if(Common.sp.getBoolean(Common.S_APPOPT_REMEMBER_SCREEN, getResources().getBoolean(R.bool.grxb_remember_screen_default))) pos= Common.sp.getInt("tab_pos",0);
-                if(pos<mViewPager.getAdapter().getCount()) {
-                    mViewPager.setCurrentItem(pos);
-                }
-                tabs.setViewPager(mViewPager);
-                if(mNumOfTabs==1) tabs.setVisibility(View.GONE);
-
-                return view;
-
         }
+        View view = inflater.inflate(R.layout.grx_info_tabs, container, false);
+        mViewPager = (ViewPager) view.findViewById(R.id.gid_viewpager);
+        mViewPager.setAdapter(new CustomPagerAdapter(getActivity()));
+        // Assiging the Sliding Tab Layout View
+        final SlidingTabLayout tabs = (SlidingTabLayout) view.findViewById(R.id.gid_tabs);
+        tabs.setDistributeEvenly(false);
+        //grx tab indicator color
+        TypedArray a = getActivity().getTheme().obtainStyledAttributes(new int[]{R.attr.tabs_indicator_color});
+        final int color_tint = a.getColor(0, 0);
+        a.recycle();
 
+        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return color_tint;
+            }
+        });
+        tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                GrxSettingsActivity grxsettingsactivity = (GrxSettingsActivity) getActivity();
+                if (grxsettingsactivity != null)
+                    grxsettingsactivity.SetObservableScrollView((ObservableScrollView) mViews[position]);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        int pos = 0;
+        if (Common.sp.getBoolean(Common.S_APPOPT_REMEMBER_SCREEN, getResources().getBoolean(R.bool.grxb_remember_screen_default)))
+            pos = Common.sp.getInt("tab_pos", 0);
+        if (pos < mViewPager.getAdapter().getCount()) {
+            mViewPager.setCurrentItem(pos);
+        }
+        tabs.setViewPager(mViewPager);
+        if (mNumOfTabs == 1) tabs.setVisibility(View.GONE);
+
+        return view;
 
 
     }
 
 
 
-    public class CustomPagerAdapter extends PagerAdapter {
+    class CustomPagerAdapter extends PagerAdapter {
 
-        private Context mContext;
-
-        public CustomPagerAdapter(Context context) {
-            mContext = context;
+        CustomPagerAdapter(Context context) {
         }
 
         @Override

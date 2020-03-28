@@ -23,10 +23,8 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,7 +77,7 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
 
 
     private boolean mQFWheelType;
-    private Integer[] mQFinitialColors = new Integer[]{null, null, null, null, null};
+    private final Integer[] mQFinitialColors = new Integer[]{null, null, null, null, null};
     private ColorPickerView mQFcolorPickerView;
     private ImageView mQFColorPreview;
 
@@ -89,11 +87,9 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
 
     private com.smcolorpicker.ColorPickerView mSMColorPicker;
 
-    private ColorPickerPanelView mSMOldColorView;
     private ColorPickerPanelView mSMNewColorView;
     private EditText mSMHexValView;
     private ColorStateList mSMHexDefaultTextColor;
-    private int mSMOrientation;
 
 
     /********************************/
@@ -179,46 +175,34 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(mTitle)
                     .setView(getQFcolorPickerView())
-                    .setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (mSaveOnFly && mCallBack != null) {
-                                mCallBack.onGrxColorSet(mCurrentColor);
-                            }
-                            dismiss();
+                    .setNegativeButton(R.string.grxs_cancel, (dialog, which) -> {
+                        if (mSaveOnFly && mCallBack != null) {
+                            mCallBack.onGrxColorSet(mCurrentColor);
                         }
+                        dismiss();
                     })
-                    .setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if(mCallBack!=null) {
-                                mCallBack.onGrxColorSet(mQFcolorPickerView.getSelectedColor());
-                            }
+                    .setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+                        if(mCallBack!=null) {
+                            mCallBack.onGrxColorSet(mQFcolorPickerView.getSelectedColor());
                         }
                     });
 
             if(showAutoButton) builder.setNeutralButton("Auto",null);
             final AlertDialog ad = builder.create();
             if(showAutoButton){
-                ad.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialog) {
-                        Button button = ad.getButton(DialogInterface.BUTTON_NEUTRAL);
+                ad.setOnShowListener(dialog -> {
+                    Button button = ad.getButton(DialogInterface.BUTTON_NEUTRAL);
 
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                    button.setOnClickListener(v -> {
 
-                                if((getTag()!=null && !getTag().isEmpty())){
-                                    GrxSettingsActivity grxSettingsActivity = (GrxSettingsActivity) getActivity();
-                                    Intent intent = new Intent(grxSettingsActivity, GrxImagePicker.class);
-                                    intent.putExtra(Common.TAG_DEST_FRAGMENT_NAME_EXTRA_KEY,getTag());
-                                    intent = GrxImageHelper.intent_img_crop_circular(intent);
-                                    grxSettingsActivity.do_fragment_gallery_image_picker(intent);
-                                }
-                            }
-                        });
-                    }
+                        if ((getTag() != null && !getTag().isEmpty())) {
+                            GrxSettingsActivity grxSettingsActivity = (GrxSettingsActivity) getActivity();
+                            Intent intent = new Intent(grxSettingsActivity, GrxImagePicker.class);
+                            intent.putExtra(Common.TAG_DEST_FRAGMENT_NAME_EXTRA_KEY, getTag());
+                            intent = GrxImageHelper.intent_img_crop_circular(intent);
+                            grxSettingsActivity.do_fragment_gallery_image_picker(intent);
+                        }
+                    });
                 });
             }
 
@@ -229,41 +213,27 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(mTitle)
                     .setView(getSMcolorPickerView(mCurrentColor, mOriginalColor))
-                    .setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dismiss();
-                        }
-                    })
-                    .setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if(mCallBack!=null) {
-                                mCallBack.onGrxColorSet(mSMNewColorView.getColor());
-                            }
+                    .setNegativeButton(R.string.grxs_cancel, (dialog, which) -> dismiss())
+                    .setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+                        if(mCallBack!=null) {
+                            mCallBack.onGrxColorSet(mSMNewColorView.getColor());
                         }
                     });
             if(showAutoButton) builder.setNeutralButton("Auto",null);
             final AlertDialog ad = builder.create();
             if(showAutoButton){
-                ad.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialog) {
-                        Button button = ad.getButton(DialogInterface.BUTTON_NEUTRAL);
+                ad.setOnShowListener(dialog -> {
+                    Button button = ad.getButton(DialogInterface.BUTTON_NEUTRAL);
 
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if((getTag()!=null && !getTag().isEmpty())){
-                                    GrxSettingsActivity activity = (GrxSettingsActivity) getActivity();
-                                    Intent intent = new Intent(activity, GrxImagePicker.class);
-                                    intent.putExtra(Common.TAG_DEST_FRAGMENT_NAME_EXTRA_KEY,getTag());
-                                    intent = GrxImageHelper.intent_img_crop_circular(intent);
-                                    activity.do_fragment_gallery_image_picker(intent);
-                                }
-                            }
-                        });
-                    }
+                    button.setOnClickListener(v -> {
+                        if ((getTag() != null && !getTag().isEmpty())) {
+                            GrxSettingsActivity activity = (GrxSettingsActivity) getActivity();
+                            Intent intent = new Intent(activity, GrxImagePicker.class);
+                            intent.putExtra(Common.TAG_DEST_FRAGMENT_NAME_EXTRA_KEY, getTag());
+                            intent = GrxImageHelper.intent_img_crop_circular(intent);
+                            activity.do_fragment_gallery_image_picker(intent);
+                        }
+                    });
                 });
             }
             return ad;
@@ -290,7 +260,7 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
         if(auto) {
             if(pickerStyle!=2) setQFcolor(color);
             else {
-                setSMColor(color,true,false);
+                setSMColor(color);
                 mSMColorPicker.setColor(color);
             }
         }
@@ -303,7 +273,7 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
 
     private View getQFcolorPickerView(){
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_qf_colorpicker,null);
-        mQFcolorPickerView = (ColorPickerView) view.findViewById(R.id.colorpickerview);
+        mQFcolorPickerView = view.findViewById(R.id.colorpickerview);
         mQFcolorPickerView.setInitialColors(mQFinitialColors, getQFStartOffset(mQFinitialColors));
 
         ColorPickerView.WHEEL_TYPE wheelType;
@@ -314,16 +284,16 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
         ColorWheelRenderer renderer = ColorWheelRendererBuilder.getRenderer(wheelType);
         mQFcolorPickerView.setRenderer(renderer);
         if(showAlphaSlider){
-            AlphaSlider alphaSlider = (AlphaSlider) view.findViewById(R.id.alpha_slider);
+            AlphaSlider alphaSlider = view.findViewById(R.id.alpha_slider);
             alphaSlider.setVisibility(View.VISIBLE);
             mQFcolorPickerView.setAlphaSlider(alphaSlider);
             alphaSlider.setColor(getQFStartColor(mQFinitialColors));
-            TextView textView =(TextView) view.findViewById(R.id.v_txt_alfa);
+            TextView textView = view.findViewById(R.id.v_txt_alfa);
             textView.setVisibility(View.VISIBLE);
 
         }
 
-        LightnessSlider lightnessSlider = (LightnessSlider) view.findViewById(R.id.lightness_slider);
+        LightnessSlider lightnessSlider = view.findViewById(R.id.lightness_slider);
         mQFcolorPickerView.setLightnessSlider(lightnessSlider);
         lightnessSlider.setColor(getQFStartColor(mQFinitialColors));
 
@@ -332,7 +302,7 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
         a.recycle();
 
         mQFcolorPickerView.setBackgroundDrawable(new CircleColorDrawable(bgcolor)) ;
-        EditText colorEdit = (EditText) view.findViewById(R.id.edit_text);
+        EditText colorEdit = view.findViewById(R.id.edit_text);
         colorEdit.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         colorEdit.setSingleLine();
         colorEdit.setVisibility(View.GONE);
@@ -341,15 +311,12 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
         colorEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
         mQFcolorPickerView.setColorEdit(colorEdit);
         mQFcolorPickerView.setDensity(12);
-        mQFColorPreview = (ImageView) view.findViewById(R.id.color_preview);
+        mQFColorPreview = view.findViewById(R.id.color_preview);
         mQFColorPreview.setImageDrawable(new CircleColorDrawable( mQFinitialColors[0] ));
-        mQFcolorPickerView.addOnColorChangedListener(new OnColorChangedListener() {
-            @Override
-            public void onColorChanged(int selectedColor) {
-                mQFColorPreview.setImageDrawable(new CircleColorDrawable( selectedColor));
-                if(mSaveOnFly) {
-                    if(mCallBack!=null) mCallBack.onGrxColorSet(selectedColor);
-                }
+        mQFcolorPickerView.addOnColorChangedListener(selectedColor -> {
+            mQFColorPreview.setImageDrawable(new CircleColorDrawable( selectedColor));
+            if(mSaveOnFly) {
+                if(mCallBack!=null) mCallBack.onGrxColorSet(selectedColor);
             }
         });
 
@@ -373,7 +340,7 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
         return start;
     }
 
-    public void setQFcolor(int color){
+    private void setQFcolor(int color){
         this.mQFcolorPickerView.setColor(color,true);
         mQFColorPreview.setImageDrawable(new CircleColorDrawable( color));
         mCurrentColor =color;
@@ -387,42 +354,38 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View mLayout = inflater.inflate(R.layout.dlg_sm_colorpicker, null);
-        mSMOrientation = getActivity().getResources().getConfiguration().orientation;
+        int mSMOrientation = getActivity().getResources().getConfiguration().orientation;
 
-        mSMColorPicker = (com.smcolorpicker.ColorPickerView) mLayout.findViewById(R.id.color_picker_view);
+        mSMColorPicker = mLayout.findViewById(R.id.color_picker_view);
         mSMColorPicker.setAlphaSliderVisible(showAlphaSlider);
 
-        mSMOldColorView = (ColorPickerPanelView) mLayout.findViewById(R.id.old_color_panel);
-        mSMNewColorView = (ColorPickerPanelView) mLayout.findViewById(R.id.new_color_panel);
+        ColorPickerPanelView mSMOldColorView = mLayout.findViewById(R.id.old_color_panel);
+        mSMNewColorView = mLayout.findViewById(R.id.new_color_panel);
 
-        mSMHexValView = (EditText) mLayout.findViewById(R.id.hex_val);
+        mSMHexValView = mLayout.findViewById(R.id.hex_val);
         mSMHexValView.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         mSMHexValView.setVisibility(View.VISIBLE);
         updateSMHexLengthFilter();
         mSMHexDefaultTextColor = mSMHexValView.getTextColors();
-        mSMHexValView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    String s = mSMHexValView.getText().toString();
-                    if (s.length() > 5 || s.length() < 10) {
-                        try {
-                            int c = ColorPickerPreference.convertToColorInt(s.toString());
-                            mSMColorPicker.setColor(c, true);
-                            mSMHexValView.setTextColor(mSMHexDefaultTextColor);
-                        } catch (IllegalArgumentException e) {
-                            mSMHexValView.setTextColor(Color.RED);
-                        }
-                    } else {
+        mSMHexValView.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                String s = mSMHexValView.getText().toString();
+                if (s.length() > 5 || s.length() < 10) {
+                    try {
+                        int c = ColorPickerPreference.convertToColorInt(s.toString());
+                        mSMColorPicker.setColor(c, true);
+                        mSMHexValView.setTextColor(mSMHexDefaultTextColor);
+                    } catch (IllegalArgumentException e) {
                         mSMHexValView.setTextColor(Color.RED);
                     }
-                    return true;
+                } else {
+                    mSMHexValView.setTextColor(Color.RED);
                 }
-                return false;
+                return true;
             }
+            return false;
         });
 
         ((LinearLayout) mSMOldColorView.getParent()).setPadding(
@@ -432,29 +395,18 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
                 0
         );
 
-        mSMColorPicker.setOnColorChangedListener(new com.smcolorpicker.ColorPickerView.OnColorChangedListener() {
-            @Override
-            public void onColorChanged(int color) {
-                setSMColor(color,true, false);
-            }
-        });
+        mSMColorPicker.setOnColorChangedListener(color -> setSMColor(color));
         mSMOldColorView.setColor(originalColor);
-        mSMOldColorView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCurrentColor=mOriginalColor;
-                mSMNewColorView.setColor(mOriginalColor);
-                updateSMHexValue(mOriginalColor);
-                mSMColorPicker.setColor(mOriginalColor,false);
-            }
+        mSMOldColorView.setOnClickListener(view -> {
+            mCurrentColor=mOriginalColor;
+            mSMNewColorView.setColor(mOriginalColor);
+            updateSMHexValue(mOriginalColor);
+            mSMColorPicker.setColor(mOriginalColor,false);
         });
-        mSMNewColorView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mCallBack!=null)
-                    mCallBack.onGrxColorSet(mSMNewColorView.getColor());
-                dismiss();
-            }
+        mSMNewColorView.setOnClickListener(view -> {
+            if(mCallBack!=null)
+                mCallBack.onGrxColorSet(mSMNewColorView.getColor());
+            dismiss();
         });
 
         mSMColorPicker.setColor(currentColor, true);
@@ -463,11 +415,11 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
     }
 
 
-    private void setSMColor(int color, boolean updatetext, boolean callback){
+    private void setSMColor(int color){
         mCurrentColor=color;
     //    mSMColorPicker.setColor(mCurrentColor, callback);
         mSMNewColorView.setColor(mCurrentColor);
-        if(updatetext) updateSMHexValue(mCurrentColor);
+        if(true) updateSMHexValue(mCurrentColor);
         if(mSaveOnFly){
             if(mCallBack!=null){
                 mCallBack.onGrxColorSet(mCurrentColor);
@@ -491,7 +443,7 @@ public class DlgFrGrxColorPicker extends DialogFragment implements
         mSMHexValView.setTextColor(mSMHexDefaultTextColor);
     }
 
-    public int getSMColor() {
+    private int getSMColor() {
         return mSMColorPicker.getColor();
     }
 

@@ -34,10 +34,10 @@ import java.util.List;
 public class SublimeMenu implements Parcelable {
     private static final String TAG = SublimeMenu.class.getSimpleName();
 
-    public static final int NO_GROUP_ID = -1;
-    public static final int NO_ITEM_ID = -1;
+    private static final int NO_GROUP_ID = -1;
+    private static final int NO_ITEM_ID = -1;
 
-    protected static final SublimeBaseMenuItem HEADER_STUB = new SublimeBaseMenuItem(null,
+    static final SublimeBaseMenuItem HEADER_STUB = new SublimeBaseMenuItem(null,
             NO_GROUP_ID, NO_ITEM_ID, "", "", SublimeBaseMenuItem.ItemType.HEADER, false, false) {
         @Override
         public boolean invoke() {
@@ -58,25 +58,25 @@ public class SublimeMenu implements Parcelable {
     /**
      * Contains all of the items for this menu
      */
-    private ArrayList<SublimeBaseMenuItem> mItems = new ArrayList<>();
+    private final ArrayList<SublimeBaseMenuItem> mItems = new ArrayList<>();
 
     /**
      * Contains all of the groups for this menu
      */
-    private ArrayList<SublimeGroup> mGroups = new ArrayList<>();
+    private final ArrayList<SublimeGroup> mGroups = new ArrayList<>();
 
     /**
      * Contains only the items that are currently visible.  This will be created/refreshed from
      * {@link #getVisibleItems()}
      */
-    private ArrayList<SublimeBaseMenuItem> mVisibleItems = new ArrayList<>();
+    private final ArrayList<SublimeBaseMenuItem> mVisibleItems = new ArrayList<>();
 
     // We only require _one_ presenter
     private SublimeMenuPresenter mPresenter;
 
     private boolean mBlockUpdates;
 
-    private ArrayList<SublimeBaseMenuItem> mAdapterData = new ArrayList<>();
+    private final ArrayList<SublimeBaseMenuItem> mAdapterData = new ArrayList<>();
 
     /**
      * Called by menu to notify of close and selection changes.
@@ -172,10 +172,10 @@ public class SublimeMenu implements Parcelable {
     }*/
 
     //grx bp rule
-     protected SublimeGroup addGroup(int groupId, boolean isCollapsible,
-                                    boolean collapsed, boolean enabled,
-                                    boolean visible,
-                                    SublimeGroup.CheckableBehavior checkableBehavior, String bprule) {
+    SublimeGroup addGroup(int groupId, boolean isCollapsible,
+                          boolean collapsed, boolean enabled,
+                          boolean visible,
+                          SublimeGroup.CheckableBehavior checkableBehavior, String bprule) {
         SublimeGroup group = new SublimeGroup(this,
                 groupId,
                 isCollapsible, collapsed, enabled,
@@ -215,7 +215,6 @@ public class SublimeMenu implements Parcelable {
     private SublimeBaseMenuItem addInternal(int group, int id, CharSequence title,
                                             CharSequence hint,
                                             SublimeBaseMenuItem.ItemType itemType,
-                                            boolean valueProvidedAsync,
                                             CharSequence badgeText,
                                             boolean showsIconSpace, boolean addedByUser) {
         SublimeBaseMenuItem item;
@@ -227,31 +226,31 @@ public class SublimeMenu implements Parcelable {
                 break;
             case BADGE:
                 item = new SublimeTextWithBadgeMenuItem(this, group, id, title,
-                        hint, valueProvidedAsync, badgeText, showsIconSpace);
+                        hint, false, badgeText, showsIconSpace);
                 break;
             case SWITCH:
                 item = new SublimeSwitchMenuItem(this, group, id, title,
-                        hint, valueProvidedAsync, showsIconSpace);
+                        hint, false, showsIconSpace);
                 break;
             case CHECKBOX:
                 item = new SublimeCheckboxMenuItem(this, group, id, title,
-                        hint, valueProvidedAsync,
+                        hint, false,
                         showsIconSpace);
                 break;
             case GROUP_HEADER:
                 isGroupHeader = true;
                 item = new SublimeGroupHeaderMenuItem(this, group, id, title,
-                        hint, valueProvidedAsync, showsIconSpace);
+                        hint, false, showsIconSpace);
                 break;
                 //grxgrx
             case CENTERED:
                 item = new GrxSublimeCenteredText(this, group, id, title,
-                        hint, valueProvidedAsync, false);
+                        hint, false, false);
                 break;
             default:
                 // TEXT
                 item = new SublimeTextMenuItem(this, group, id, title,
-                        hint, valueProvidedAsync, showsIconSpace);
+                        hint, false, showsIconSpace);
                 break;
         }
 
@@ -443,7 +442,6 @@ public class SublimeMenu implements Parcelable {
     private SublimeBaseMenuItem createInternal(int group, int id, CharSequence title,
                                                CharSequence hint,
                                                SublimeBaseMenuItem.ItemType itemType,
-                                               boolean valueProvidedAsync,
                                                CharSequence badgeText,
                                                boolean showsIconSpace) {
         SublimeBaseMenuItem item;
@@ -454,25 +452,25 @@ public class SublimeMenu implements Parcelable {
                 break;
             case BADGE:
                 item = new SublimeTextWithBadgeMenuItem(this, group, id, title,
-                        hint, valueProvidedAsync, badgeText, showsIconSpace);
+                        hint, false, badgeText, showsIconSpace);
                 break;
             case SWITCH:
                 item = new SublimeSwitchMenuItem(this, group, id, title,
-                        hint, valueProvidedAsync, showsIconSpace);
+                        hint, false, showsIconSpace);
                 break;
             case CHECKBOX:
                 item = new SublimeCheckboxMenuItem(this, group, id, title,
-                        hint, valueProvidedAsync,
+                        hint, false,
                         showsIconSpace);
                 break;
             case GROUP_HEADER:
                 item = new SublimeGroupHeaderMenuItem(this, group, id, title,
-                        hint, valueProvidedAsync, showsIconSpace);
+                        hint, false, showsIconSpace);
                 break;
             default:
                 // TEXT
                 item = new SublimeTextMenuItem(this, group, id, title,
-                        hint, valueProvidedAsync, showsIconSpace);
+                        hint, false, showsIconSpace);
                 break;
         }
 
@@ -533,21 +531,21 @@ public class SublimeMenu implements Parcelable {
                                               boolean showsIconSpace) {
         return createInternal(groupId, generateUniqueItemID()/* itemId */,
                 title, hint, SublimeBaseMenuItem.ItemType.TEXT,
-                false /*valueProvidedAsync*/, null, showsIconSpace);
+                /*valueProvidedAsync*/ null, showsIconSpace);
     }
 
     public SublimeBaseMenuItem addTextItem(int groupId,
                                            CharSequence title, CharSequence hint,
                                            boolean showsIconSpace) {
         return addInternal(groupId, generateUniqueItemID()/* itemId */, title, hint, SublimeBaseMenuItem.ItemType.TEXT,
-                false /*valueProvidedAsync*/, null, showsIconSpace, true);
+                /*valueProvidedAsync*/ null, showsIconSpace, true);
     }
 
-    protected SublimeBaseMenuItem addTextItem(int groupId, int itemId,
-                                              CharSequence title, CharSequence hint,
-                                              boolean showsIconSpace) {
+    SublimeBaseMenuItem addTextItem(int groupId, int itemId,
+                                    CharSequence title, CharSequence hint,
+                                    boolean showsIconSpace) {
         return addInternal(groupId, itemId, title, hint, SublimeBaseMenuItem.ItemType.TEXT,
-                false /*valueProvidedAsync*/, null, showsIconSpace, false);
+                /*valueProvidedAsync*/ null, showsIconSpace, false);
     }
 
     //grx centered text
@@ -558,21 +556,20 @@ public class SublimeMenu implements Parcelable {
                                               boolean showsIconSpace) {
         return createInternal(groupId, generateUniqueItemID()/* itemId */,
                 title, hint, SublimeBaseMenuItem.ItemType.CENTERED,
-                false /*valueProvidedAsync*/, null, showsIconSpace);
+                /*valueProvidedAsync*/ null, showsIconSpace);
     }
 
     public SublimeBaseMenuItem addTGrxCenterdextItem(int groupId,
                                            CharSequence title, CharSequence hint,
                                            boolean showsIconSpace) {
         return addInternal(groupId, generateUniqueItemID()/* itemId */, title, hint, SublimeBaseMenuItem.ItemType.CENTERED,
-                false /*valueProvidedAsync*/, null, false, true);
+                /*valueProvidedAsync*/ null, false, true);
     }
 
-    protected SublimeBaseMenuItem addTGrxCenterdextItem(int groupId, int itemId,
-                                              CharSequence title, CharSequence hint,
-                                              boolean showsIconSpace) {
+    SublimeBaseMenuItem addTGrxCenterdextItem(int groupId, int itemId,
+                                              CharSequence title, CharSequence hint) {
         return addInternal(groupId, itemId, title, hint, SublimeBaseMenuItem.ItemType.CENTERED,
-                false /*valueProvidedAsync*/, null, false, false);
+                /*valueProvidedAsync*/ null, false, false);
     }
 //
 
@@ -584,7 +581,7 @@ public class SublimeMenu implements Parcelable {
                                                        boolean showsIconSpace) {
         return createInternal(groupId, generateUniqueItemID()/* itemId */, title,
                 hint, SublimeBaseMenuItem.ItemType.BADGE,
-                false /*valueProvidedAsync*/, badgeText, showsIconSpace);
+                /*valueProvidedAsync*/ badgeText, showsIconSpace);
     }
 
     public SublimeBaseMenuItem addTextWithBadgeItem(int groupId,
@@ -593,37 +590,37 @@ public class SublimeMenu implements Parcelable {
                                                     boolean showsIconSpace) {
         return addInternal(groupId, generateUniqueItemID()/* itemId */, title,
                 hint, SublimeBaseMenuItem.ItemType.BADGE,
-                false /*valueProvidedAsync*/, badgeText, showsIconSpace, true);
+                /*valueProvidedAsync*/ badgeText, showsIconSpace, true);
     }
 
-    protected SublimeBaseMenuItem addTextWithBadgeItem(int groupId, int itemId,
-                                                       CharSequence title, CharSequence hint,
-                                                       CharSequence badgeText,
-                                                       boolean showsIconSpace) {
+    SublimeBaseMenuItem addTextWithBadgeItem(int groupId, int itemId,
+                                             CharSequence title, CharSequence hint,
+                                             CharSequence badgeText,
+                                             boolean showsIconSpace) {
         return addInternal(groupId, itemId, title, hint, SublimeBaseMenuItem.ItemType.BADGE,
-                false /*valueProvidedAsync*/, badgeText, showsIconSpace, false);
+                /*valueProvidedAsync*/ badgeText, showsIconSpace, false);
     }
 
     public SublimeBaseMenuItem createCheckboxItem(int groupId,
                                                   CharSequence title, CharSequence hint,
                                                   boolean showsIconSpace) {
         return createInternal(groupId, generateUniqueItemID()/* itemId */, title, hint, SublimeBaseMenuItem.ItemType.CHECKBOX,
-                false /*valueProvidedAsync*/, null, showsIconSpace);
+                /*valueProvidedAsync*/ null, showsIconSpace);
     }
 
     public SublimeBaseMenuItem addCheckboxItem(int groupId,
                                                CharSequence title, CharSequence hint,
                                                boolean showsIconSpace) {
         return addInternal(groupId, generateUniqueItemID()/* itemId */, title, hint, SublimeBaseMenuItem.ItemType.CHECKBOX,
-                false /*valueProvidedAsync*/, null, showsIconSpace, true);
+                /*valueProvidedAsync*/ null, showsIconSpace, true);
     }
 
-    protected SublimeBaseMenuItem addCheckboxItem(int groupId, int itemId,
-                                                  CharSequence title, CharSequence hint,
-                                                  boolean showsIconSpace) {
+    SublimeBaseMenuItem addCheckboxItem(int groupId, int itemId,
+                                        CharSequence title, CharSequence hint,
+                                        boolean showsIconSpace) {
         return addInternal(groupId, itemId, title,
                 hint, SublimeBaseMenuItem.ItemType.CHECKBOX,
-                false /*valueProvidedAsync*/, null, showsIconSpace, false);
+                /*valueProvidedAsync*/ null, showsIconSpace, false);
     }
 
     public SublimeBaseMenuItem createSwitchItem(int groupId,
@@ -631,7 +628,7 @@ public class SublimeMenu implements Parcelable {
                                                 boolean showsIconSpace) {
         return createInternal(groupId, generateUniqueItemID()/* itemId */, title,
                 hint, SublimeBaseMenuItem.ItemType.SWITCH,
-                false /*valueProvidedAsync*/, null, showsIconSpace);
+                /*valueProvidedAsync*/ null, showsIconSpace);
     }
 
     public SublimeBaseMenuItem addSwitchItem(int groupId,
@@ -639,15 +636,15 @@ public class SublimeMenu implements Parcelable {
                                              boolean showsIconSpace) {
         return addInternal(groupId, generateUniqueItemID()/* itemId */, title,
                 hint, SublimeBaseMenuItem.ItemType.SWITCH,
-                false /*valueProvidedAsync*/, null, showsIconSpace, true);
+                /*valueProvidedAsync*/ null, showsIconSpace, true);
     }
 
-    protected SublimeBaseMenuItem addSwitchItem(int groupId, int itemId,
-                                                CharSequence title, CharSequence hint,
-                                                boolean showsIconSpace) {
+    SublimeBaseMenuItem addSwitchItem(int groupId, int itemId,
+                                      CharSequence title, CharSequence hint,
+                                      boolean showsIconSpace) {
         return addInternal(groupId, itemId, title,
                 hint, SublimeBaseMenuItem.ItemType.SWITCH,
-                false /*valueProvidedAsync*/, null, showsIconSpace, false);
+                /*valueProvidedAsync*/ null, showsIconSpace, false);
     }
 
     public SublimeBaseMenuItem createGroupHeaderItem(int groupId,
@@ -660,7 +657,7 @@ public class SublimeMenu implements Parcelable {
 
         return createInternal(groupId, generateUniqueItemID()/* itemId */, title, hint,
                 SublimeBaseMenuItem.ItemType.GROUP_HEADER,
-                false /*valueProvidedAsync*/, null, showsIconSpace);
+                /*valueProvidedAsync*/ null, showsIconSpace);
     }
 
     public SublimeBaseMenuItem addGroupHeaderItem(int groupId,
@@ -673,33 +670,33 @@ public class SublimeMenu implements Parcelable {
 
         return addInternal(groupId, generateUniqueItemID()/* itemId */, title, hint,
                 SublimeBaseMenuItem.ItemType.GROUP_HEADER,
-                false /*valueProvidedAsync*/, null, showsIconSpace, true);
+                /*valueProvidedAsync*/ null, showsIconSpace, true);
     }
 
-    protected SublimeBaseMenuItem addGroupHeaderItem(int groupId, int itemId,
-                                                     CharSequence title, CharSequence hint,
-                                                     boolean showsIconSpace) {
+    SublimeBaseMenuItem addGroupHeaderItem(int groupId, int itemId,
+                                           CharSequence title, CharSequence hint,
+                                           boolean showsIconSpace) {
         return addInternal(groupId, itemId, title, hint,
                 SublimeBaseMenuItem.ItemType.GROUP_HEADER,
-                false /*valueProvidedAsync*/, null, showsIconSpace, false);
+                /*valueProvidedAsync*/ null, showsIconSpace, false);
     }
 
     public SublimeBaseMenuItem createSeparatorItem(int groupId) {
         return createInternal(groupId, generateUniqueItemID()/* itemId */, null, null,
                 SublimeBaseMenuItem.ItemType.SEPARATOR,
-                false /*valueProvidedAsync*/, null, false);
+                /*valueProvidedAsync*/ null, false);
     }
 
     public SublimeBaseMenuItem addSeparatorItem(int groupId) {
         return addInternal(groupId, generateUniqueItemID()/* itemId */, null, null,
                 SublimeBaseMenuItem.ItemType.SEPARATOR,
-                false /*valueProvidedAsync*/, null, false, true);
+                /*valueProvidedAsync*/ null, false, true);
     }
 
-    protected SublimeBaseMenuItem addSeparatorItem(int groupId, int itemId) {
+    SublimeBaseMenuItem addSeparatorItem(int groupId, int itemId) {
         return addInternal(groupId, itemId, null, null,
                 SublimeBaseMenuItem.ItemType.SEPARATOR,
-                false /*valueProvidedAsync*/, null, false, false);
+                /*valueProvidedAsync*/ null, false, false);
     }
 
     public void addBefore(int pivotId, SublimeBaseMenuItem item) {
@@ -800,7 +797,7 @@ public class SublimeMenu implements Parcelable {
         }
     }
 
-    protected List<SublimeBaseMenuItem> getItemsForGroup(int groupId) {
+    private List<SublimeBaseMenuItem> getItemsForGroup(int groupId) {
         ArrayList<SublimeBaseMenuItem> groupItems = new ArrayList<>();
 
         final int N = mItems.size();
@@ -815,7 +812,7 @@ public class SublimeMenu implements Parcelable {
         return groupItems;
     }
 
-    protected int getVisibleItemCountForGroup(List<SublimeBaseMenuItem> groupItems) {
+    private int getVisibleItemCountForGroup(List<SublimeBaseMenuItem> groupItems) {
         int visibleItems = 0;
         for (SublimeBaseMenuItem menuItem : groupItems) {
             if (menuItem.isVisible()) {
@@ -921,7 +918,7 @@ public class SublimeMenu implements Parcelable {
         }
     }
 
-    public int size() {
+    private int size() {
         return mItems.size();
     }
 
@@ -938,7 +935,7 @@ public class SublimeMenu implements Parcelable {
         return !(item == null || !item.isEnabled()) && item.invoke();
     }
 
-    public ArrayList<SublimeBaseMenuItem> getVisibleItems() {
+    private ArrayList<SublimeBaseMenuItem> getVisibleItems() {
         // Refresh the visible items
         mVisibleItems.clear();
 
@@ -966,7 +963,7 @@ public class SublimeMenu implements Parcelable {
         return this;
     }
 
-    public void finalizeUpdates() {
+    private void finalizeUpdates() {
         if (mBlockUpdates) {
             Log.e(TAG, "Cannot finalize updates until 'allowUpdates()' is called.");
             return;
@@ -1000,16 +997,16 @@ public class SublimeMenu implements Parcelable {
 
         // Used with ChangeType: ITEM_INSERTED, ITEM_REMOVED, ITEM_CHANGED,
         // RANGE_INSERTED, RANGE_REMOVED, RANGE_CHANGED
-        private int mAffectedPosition;
+        private final int mAffectedPosition;
 
         // Used with ChangeType: ITEM_MOVED
-        private int mMovedFromPosition;
-        private int mMovedToPosition;
+        private final int mMovedFromPosition;
+        private final int mMovedToPosition;
 
         // Used with ChangeType: RANGE_INSERTED, RANGE_REMOVED, RANGE_CHANGED
-        private int mNumberOfAffectedItems;
+        private final int mNumberOfAffectedItems;
 
-        private ChangeType mChangeType;
+        private final ChangeType mChangeType;
 
         public Change(ChangeType changeType, int affectedPosition, int movedFromPosition,
                       int movedToPosition, int numberOfAffectedItems) {
@@ -1041,7 +1038,7 @@ public class SublimeMenu implements Parcelable {
         }
     }
 
-    protected ArrayList<SublimeBaseMenuItem> getAdapterData() {
+    ArrayList<SublimeBaseMenuItem> getAdapterData() {
         // Possibly redundant check unless this method is
         // called from outside of SublimeMenuPresenterNew.
         // We shouldn't return 'null' here.
@@ -1176,7 +1173,7 @@ public class SublimeMenu implements Parcelable {
      * @param groupId   id of group that's been collapsed/expanded
      * @param collapsed 'true' if group has been collapsed, 'false' if expanded
      */
-    protected void onGroupExpandedOrCollapsed(int groupId, boolean collapsed) {
+    void onGroupExpandedOrCollapsed(int groupId, boolean collapsed) {
         if (mBlockUpdates || mPresenter == null) return;
 
         List<SublimeBaseMenuItem> groupItems = getItemsForGroup(groupId);
@@ -1228,7 +1225,7 @@ public class SublimeMenu implements Parcelable {
      * @param groupId id of group that is now visible/invisible
      * @param visible 'true' if the group is now visible, 'false' otherwise
      */
-    protected void onGroupVisibilityChanged(int groupId, boolean visible) {
+    void onGroupVisibilityChanged(int groupId, boolean visible) {
         if (mBlockUpdates || mPresenter == null) return;
 
         List<SublimeBaseMenuItem> groupItems = getItemsForGroup(groupId);
@@ -1277,7 +1274,7 @@ public class SublimeMenu implements Parcelable {
      *
      * @param sublimeGroup group for which 'collapsible' status has changed
      */
-    protected void onGroupCollapsibleStatusChanged(SublimeGroup sublimeGroup) {
+    void onGroupCollapsibleStatusChanged(SublimeGroup sublimeGroup) {
         if (mBlockUpdates || mPresenter == null) return;
 
         List<SublimeBaseMenuItem> groupItems = getItemsForGroup(sublimeGroup.getGroupId());
@@ -1308,7 +1305,7 @@ public class SublimeMenu implements Parcelable {
      * @param enabled 'true' if the group has been 'enabled', false
      *                otherwise
      */
-    protected void onGroupEnabledOrDisabled(int groupId, boolean enabled) {
+    void onGroupEnabledOrDisabled(int groupId, boolean enabled) {
         if (mBlockUpdates || mPresenter == null) return;
 
         List<SublimeBaseMenuItem> groupItems = getItemsForGroup(groupId);
@@ -1339,7 +1336,7 @@ public class SublimeMenu implements Parcelable {
      * @param groupId              'id' for which to set the new 'checkableBehavior'
      * @param newCheckableBehavior the 'checkableBehavior' to set
      */
-    protected void onGroupCheckableBehaviorChanged(
+    void onGroupCheckableBehaviorChanged(
             int groupId, SublimeGroup.CheckableBehavior newCheckableBehavior) {
         List<SublimeBaseMenuItem> groupItems = getItemsForGroup(groupId);
 
@@ -1373,7 +1370,7 @@ public class SublimeMenu implements Parcelable {
     //---------------------------Parcelable---------------------------//
     //----------------------------------------------------------------//
 
-    public SublimeMenu(Parcel in) {
+    private SublimeMenu(Parcel in) {
         readParcel(in);
     }
 

@@ -1,14 +1,5 @@
 package com.sublimenavigationview;
 
-import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Typeface;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.widget.ProgressBar;
-
-import com.grx.settings.R;
-
 
 /*
  * Grouxho - espdroids.com - 2018

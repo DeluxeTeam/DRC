@@ -12,15 +12,15 @@ import android.view.View;
 import com.grx.settings.R;
 
 public abstract class AbsCustomSlider extends View {
-	protected Bitmap bitmap;
-	protected Canvas bitmapCanvas;
-	protected Bitmap bar;
-	protected Canvas barCanvas;
-	protected OnValueChangedListener onValueChangedListener;
-	protected int barOffsetX;
-	protected int handleRadius = 20;
-	protected int barHeight = 5;
-	protected float value = 1;
+	private Bitmap bitmap;
+	private Canvas bitmapCanvas;
+	Bitmap bar;
+	private Canvas barCanvas;
+	private OnValueChangedListener onValueChangedListener;
+	private int barOffsetX;
+	int handleRadius = 20;
+	int barHeight = 5;
+	float value = 1;
 
 	public AbsCustomSlider(Context context) {
 		super(context);
@@ -34,7 +34,7 @@ public abstract class AbsCustomSlider extends View {
 		super(context, attrs, defStyleAttr);
 	}
 
-	protected void updateBar() {
+	void updateBar() {
 		handleRadius = getDimension(R.dimen.default_slider_handler_radius);
 		barHeight = getDimension(R.dimen.default_slider_bar_height);
 		barOffsetX = handleRadius;
@@ -45,7 +45,7 @@ public abstract class AbsCustomSlider extends View {
 		invalidate();
 	}
 
-	protected void createBitmaps() {
+	void createBitmaps() {
 		int width = getWidth();
 		int height = getHeight();
 		bar = Bitmap.createBitmap(width - barOffsetX * 2, barHeight, Bitmap.Config.ARGB_8888);
@@ -131,7 +131,7 @@ public abstract class AbsCustomSlider extends View {
 		return true;
 	}
 
-	protected int getDimension(@DimenRes int id) {
+	private int getDimension(@DimenRes int id) {
 		return getResources().getDimensionPixelSize(id);
 	}
 

@@ -66,7 +66,7 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
     // Theme controller
     private SublimeThemer mThemer;
 
-    public boolean mError;
+    private boolean mError;
 
     public SublimeNavigationView(Context context) {
         this(context, null);
@@ -376,14 +376,9 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
                 inflateMenu(menuResId);
             }
 
-            mMenu.setCallback(new SublimeMenu.Callback() {
-                public boolean onMenuItemSelected(SublimeMenu menu, SublimeBaseMenuItem item,
-                                                  OnNavigationMenuEventListener.Event event) {
-                    return SublimeNavigationView.this.mEventListener != null
-                            && SublimeNavigationView.this
-                            .mEventListener.onNavigationMenuEvent(event, item);
-                }
-            });
+            mMenu.setCallback((menu, item, event) -> SublimeNavigationView.this.mEventListener != null
+                    && SublimeNavigationView.this
+                    .mEventListener.onNavigationMenuEvent(event, item));
 
             mPresenter = new SublimeMenuPresenter();
             applyThemer();
@@ -422,14 +417,9 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
         mMenu = new SublimeMenu(newMenuResId);
         inflateMenu(newMenuResId);
 
-        mMenu.setCallback(new SublimeMenu.Callback() {
-            public boolean onMenuItemSelected(SublimeMenu menu, SublimeBaseMenuItem item,
-                                              OnNavigationMenuEventListener.Event event) {
-                return SublimeNavigationView.this.mEventListener != null
-                        && SublimeNavigationView.this
-                        .mEventListener.onNavigationMenuEvent(event, item);
-            }
-        });
+        mMenu.setCallback((menu, item, event) -> SublimeNavigationView.this.mEventListener != null
+                && SublimeNavigationView.this
+                .mEventListener.onNavigationMenuEvent(event, item));
 
         mMenu.setMenuPresenter(getContext(), mPresenter);
     }
@@ -450,14 +440,9 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
 
         mMenu = newMenu;
 
-        mMenu.setCallback(new SublimeMenu.Callback() {
-            public boolean onMenuItemSelected(SublimeMenu menu, SublimeBaseMenuItem item,
-                                              OnNavigationMenuEventListener.Event event) {
-                return SublimeNavigationView.this.mEventListener != null
-                        && SublimeNavigationView.this
-                        .mEventListener.onNavigationMenuEvent(event, item);
-            }
-        });
+        mMenu.setCallback((menu, item, event) -> SublimeNavigationView.this.mEventListener != null
+                && SublimeNavigationView.this
+                .mEventListener.onNavigationMenuEvent(event, item));
 
         mMenu.setMenuPresenter(getContext(), mPresenter);
     }
@@ -503,14 +488,9 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
                 }
 
                 if (mMenu != null) {
-                    mMenu.setCallback(new SublimeMenu.Callback() {
-                        public boolean onMenuItemSelected(SublimeMenu menu, SublimeBaseMenuItem item,
-                                                          OnNavigationMenuEventListener.Event event) {
-                            return SublimeNavigationView.this.mEventListener != null
-                                    && SublimeNavigationView.this
-                                    .mEventListener.onNavigationMenuEvent(event, item);
-                        }
-                    });
+                    mMenu.setCallback((menu, item, event) -> SublimeNavigationView.this.mEventListener != null
+                            && SublimeNavigationView.this
+                            .mEventListener.onNavigationMenuEvent(event, item));
                     mMenu.setMenuPresenter(getContext(), mPresenter);
                 }
     }catch (BadParcelableException e){
@@ -569,8 +549,7 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
 
     //added by Grx to have access to MenuView
     public SublimeNavMenuView getMenuView(){
-        SublimeNavMenuView vMenu = (SublimeNavMenuView) findViewById(R.id.grx_sublime_menu);
-        return vMenu;
+        return (SublimeNavMenuView) findViewById(R.id.grx_sublime_menu);
     }
 
     /**
@@ -674,7 +653,7 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
     //----------------------------------------------------------------//
 
     public static class SavedState extends View.BaseSavedState {
-        public Bundle sMenuState;
+        final Bundle sMenuState;
         public static final Creator<SublimeNavigationView.SavedState> CREATOR
                 = new Creator<SublimeNavigationView.SavedState>() {
             public SublimeNavigationView.SavedState createFromParcel(Parcel parcel) {
@@ -686,17 +665,17 @@ public class SublimeNavigationView extends ScrimInsetsFrameLayout {
             }
         };
 
-        public SavedState(Parcel in) {
+        SavedState(Parcel in) {
             super(in);
             sMenuState = in.readBundle();
         }
 
-        public SavedState(Parcelable superState) {
+        SavedState(Parcelable superState) {
             super(superState);
             sMenuState = new Bundle();
         }
 
-        public Bundle getMenuState() {
+        Bundle getMenuState() {
             return sMenuState;
         }
 

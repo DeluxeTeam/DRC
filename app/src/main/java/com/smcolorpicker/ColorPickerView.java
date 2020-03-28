@@ -144,7 +144,7 @@ public class ColorPickerView extends View {
     //
 
     public interface OnColorChangedListener {
-        public void onColorChanged(int color);
+        void onColorChanged(int color);
     }
 
     public ColorPickerView(Context context) {
@@ -336,7 +336,7 @@ public class ColorPickerView extends View {
 
         canvas.drawRect(rect, mAlphaPaint);
 
-        if (mAlphaSliderText != null && mAlphaSliderText != "") {
+        if (mAlphaSliderText != null && !mAlphaSliderText.equals("")) {
             canvas.drawText(mAlphaSliderText, rect.centerX(), rect.centerY() + 4 * mDensity, mAlphaTextPaint);
         }
 
@@ -941,7 +941,7 @@ public class ColorPickerView extends View {
      *
      * @param text Text that should be shown.
      */
-    public void setAlphaSliderText(String text) {
+    private void setAlphaSliderText(String text) {
         mAlphaSliderText = text;
         invalidate();
     }

@@ -70,7 +70,7 @@ public class GrxNumberPicker extends GrxBasePreference implements DlgFrGrxNumber
     }
 
 
-    public String getTextValue(){
+    private String getTextValue(){
         String value;
         value =  Integer.toString(mIntValue);
         if ((mUnits != null) && (!mUnits.isEmpty())){

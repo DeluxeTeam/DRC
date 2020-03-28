@@ -48,7 +48,7 @@ import java.util.Set;
 public class DlgGrxAppSelection extends DialogFragment implements AdapterView.OnItemClickListener {
 
 
-    ArrayList<GrxQuickAppInfo> mAppsInfo;
+    private ArrayList<GrxQuickAppInfo> mAppsInfo;
 
     private ListView mListView;
     private OnGrxAppListener mCallBack;
@@ -57,16 +57,15 @@ public class DlgGrxAppSelection extends DialogFragment implements AdapterView.On
     private ProgressBar pb;
     private TextView vtxtprogressbar;
 
-    AsyncTask<Void, Void, Void> loader;
+    private AsyncTask<Void, Void, Void> loader;
     private boolean bOrdenar;
     private boolean bSistema;
-    private String Title;
     private String key;
     private String mHelperFragmentName;
 
     private int lastposition=0;
 
-    public boolean mSaveActivityname;
+    private boolean mSaveActivityname;
 
 
     public interface OnGrxAppListener{
@@ -115,7 +114,7 @@ public class DlgGrxAppSelection extends DialogFragment implements AdapterView.On
         bSistema=getArguments().getBoolean("appsys");
         bOrdenar=getArguments().getBoolean("sort");
         key=getArguments().getString("key");
-        Title=getArguments().getString("tit");
+        String title = getArguments().getString("tit");
         mSaveActivityname = getArguments().getBoolean("save_actname",getActivity().getResources().getBoolean(R.bool.grxb_saveActivityname_default));
 
         if(state!=null){
@@ -123,32 +122,27 @@ public class DlgGrxAppSelection extends DialogFragment implements AdapterView.On
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(Title)
+        builder.setTitle(title)
                 .setView(getDialogView())
-                .setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dismiss();
-                    }
-                });
+                .setNegativeButton(R.string.grxs_cancel, (dialog, which) -> dismiss());
         return builder.create();
     }
 
 
-    public View getDialogView(){
+    private View getDialogView(){
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_grxappselection,null);
-        mListView = (ListView) view.findViewById(R.id.gid_listview);
+        mListView = view.findViewById(R.id.gid_listview);
         mListView.setOnItemClickListener(this);
         mListView.setFastScrollEnabled(true);
         mListView.setScrollingCacheEnabled(false);
         mListView.setAnimationCacheEnabled(false);
 
 
-        vtxtprogressbar =(TextView) view.findViewById(R.id.gid_progressbar_txt);
+        vtxtprogressbar = view.findViewById(R.id.gid_progressbar_txt);
         vtxtprogressbar.setVisibility(View.VISIBLE);
         if(bOrdenar) vtxtprogressbar.setText(getString(R.string.grxs_building_sorting_list));
         else vtxtprogressbar.setText(getString(R.string.grxs_building_list));
-        pb = (ProgressBar) view.findViewById(R.id.gid_progressbar);
+        pb = view.findViewById(R.id.gid_progressbar);
         loader = new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
@@ -207,7 +201,7 @@ public class DlgGrxAppSelection extends DialogFragment implements AdapterView.On
         List<ApplicationInfo> AppsTmp;
         ApplicationInfo applicationInfo;
 
-        ArrayList<GrxQuickAppInfo> mQuickInfoTmp = new ArrayList<GrxQuickAppInfo>();
+        ArrayList<GrxQuickAppInfo> mQuickInfoTmp = new ArrayList<>();
 
         AppsTmp = getActivity().getPackageManager().getInstalledApplications(0);
         for(int ind=0;ind<AppsTmp.size();ind++) {
@@ -240,16 +234,13 @@ public class DlgGrxAppSelection extends DialogFragment implements AdapterView.On
 
 
         try{
-            Collections.sort(mQuickInfoTmp, new Comparator<GrxQuickAppInfo>() {
-                @Override
-                public int compare(GrxQuickAppInfo A_appinfo, GrxQuickAppInfo appinfo) {
-                    try{
-                        return String.CASE_INSENSITIVE_ORDER.compare(A_appinfo.getLabel(), appinfo.getLabel());
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    return 0;
+            Collections.sort(mQuickInfoTmp, (A_appinfo, appinfo) -> {
+                try{
+                    return String.CASE_INSENSITIVE_ORDER.compare(A_appinfo.getLabel(), appinfo.getLabel());
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
+                return 0;
             });
 
         }catch (Exception e){
@@ -266,15 +257,15 @@ public class DlgGrxAppSelection extends DialogFragment implements AdapterView.On
 
     private class Qadapter extends BaseAdapter implements SectionIndexer {
 
-        List<DlgGrxAppSelection.GrxQuickAppInfo> mList;
-        HashMap<String, Integer> mapIndex;
-        String[] sections;
+        final List<DlgGrxAppSelection.GrxQuickAppInfo> mList;
+        final HashMap<String, Integer> mapIndex;
+        final String[] sections;
 
 
         Qadapter(List<DlgGrxAppSelection.GrxQuickAppInfo> qlist) {
             this.mList = qlist;
 
-            mapIndex = new LinkedHashMap<String, Integer>();
+            mapIndex = new LinkedHashMap<>();
 
             for (int x = 0; x < mList.size(); x++) {
                 String ch = mList.get(x).getLabel().substring(0, 1).toUpperCase();
@@ -283,7 +274,7 @@ public class DlgGrxAppSelection extends DialogFragment implements AdapterView.On
             }
 
             Set<String> sectionLetters = mapIndex.keySet();
-            ArrayList<String> sectionList = new ArrayList<String>(sectionLetters);
+            ArrayList<String> sectionList = new ArrayList<>(sectionLetters);
             Collections.sort(sectionList);
             sections = new String[sectionList.size()];
             sectionList.toArray(sections);
@@ -332,9 +323,9 @@ public class DlgGrxAppSelection extends DialogFragment implements AdapterView.On
             if (convertView == null) {
                 cvh = new DlgGrxAppSelection.Qadapter.CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxappselection_item, null);
-                cvh.vimgLogo = (ImageView) convertView.findViewById(R.id.gid_edit_button);
-                cvh.vtxtName = (TextView) convertView.findViewById(R.id.gid_edit_item_text);
-                cvh.vtxtpaquete = (TextView) convertView.findViewById(R.id.gid_packagename_text);
+                cvh.vimgLogo = convertView.findViewById(R.id.gid_edit_button);
+                cvh.vtxtName = convertView.findViewById(R.id.gid_edit_item_text);
+                cvh.vtxtpaquete = convertView.findViewById(R.id.gid_packagename_text);
                 convertView.setTag(cvh);
             } else {
                 cvh = (DlgGrxAppSelection.Qadapter.CustomViewHolder) convertView.getTag();
@@ -349,31 +340,31 @@ public class DlgGrxAppSelection extends DialogFragment implements AdapterView.On
         }
 
         class CustomViewHolder {
-            public ImageView vimgLogo;
-            public TextView vtxtName;
-            public TextView vtxtpaquete;
+            ImageView vimgLogo;
+            TextView vtxtName;
+            TextView vtxtpaquete;
         }
     }
 
     private class GrxQuickAppInfo {
 
-        private String mPackageName;
-        private String mActivityName;
-        private String mLabel;
-        private Drawable mIcon;
+        private final String mPackageName;
+        private final String mActivityName;
+        private final String mLabel;
+        private final Drawable mIcon;
 
-        public  GrxQuickAppInfo(String packagename,  String activity, String label, Drawable icon){
+        GrxQuickAppInfo(String packagename, String activity, String label, Drawable icon){
             mPackageName=packagename;
             mActivityName = activity;
             mLabel=label;
             mIcon = icon;
         }
 
-        public String getLabel(){
+        String getLabel(){
             return mLabel;
         }
 
-        public String getValue(){
+        String getValue(){
             if(mSaveActivityname){
                 if(mActivityName!=null && !mActivityName.isEmpty()) return mPackageName+"/"+mActivityName;
                 else return mPackageName;
@@ -384,7 +375,7 @@ public class DlgGrxAppSelection extends DialogFragment implements AdapterView.On
             return mPackageName;
         }
 
-        public Drawable getIcon(){
+        Drawable getIcon(){
             return mIcon;
         }
 

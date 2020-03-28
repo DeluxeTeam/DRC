@@ -1059,7 +1059,7 @@
 
     <string name="grxs_reset_all_prefs">Resetear valores</string>
     <string name="grxs_tit_reset_all_prefs">Resetear TODAS las opciones</string>
-    <string name="grxs_msg_reset_all_prefs">¿Estás seguro que quieres resetear TODAS las preferencias y opciones a su valor por defecto? El teléfono se reiniciará</string>
+    <string name="grxs_msg_reset_all_prefs">¿Estás seguro que quieres resetear TODAS las preferencias y opciones a su valor por defecto?</string>
 
     <string name="grxs_recovery">Reiniciar en modo recovery</string>
     <string name="grxs_restartui">Reiniciar UI</string>

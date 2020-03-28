@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 public class GrxMultipleSelection extends GrxBasePreference implements DlgFrMultiSelect.GrxMultiSelectListener{
 
     private String mLabel;
-    int iconsValueTint =0;
+    private int iconsValueTint =0;
 
 
     public GrxMultipleSelection(Context context, AttributeSet attrs) {
@@ -51,7 +51,7 @@ public class GrxMultipleSelection extends GrxBasePreference implements DlgFrMult
             try {
                 iconsValueTint = ta.getInt(R.styleable.grxsiconsarray_iconsValueTint, 0);
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
 
@@ -84,7 +84,7 @@ public class GrxMultipleSelection extends GrxBasePreference implements DlgFrMult
     public void resetPreference(){
         if(mStringValue!=null && !mStringValue.isEmpty()){
             String[] uris = mStringValue.split(Pattern.quote(myPrefAttrsInfo.getMySeparator()));
-            for(int i=0;i<uris.length;i++) GrxPrefsUtils.deleteGrxIconFileFromUriString(uris[i]);
+            for (String s : uris) GrxPrefsUtils.deleteGrxIconFileFromUriString(s);
         }
         mStringValue = myPrefAttrsInfo.getMyStringDefValue();
         saveNewStringValue(mStringValue);

@@ -16,10 +16,10 @@ import android.graphics.drawable.Drawable;
 
 public class GrxAppInfo {
 
-    private String mPackageName;
-    private String mLabel;
-    private Drawable mIcoApp;
-    private String mActividad;
+    private final String mPackageName;
+    private final String mLabel;
+    private final Drawable mIcoApp;
+    private final String mActividad;
     private int mColor;
 
     public GrxAppInfo(String packageName, String Actividad, String label, Drawable ico_app, int color){

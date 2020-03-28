@@ -35,9 +35,7 @@ public class GrxMultiAccess extends GrxBasePreference implements DlgFrGrxMultiAc
     private boolean mShowUsuApps;
     private boolean mShowActivities;
     private boolean mSaveCustomActionsIcons;
-    int iconsValueTint =0;
-
-    private String mLabel;
+    private int iconsValueTint =0;
 
     public GrxMultiAccess(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -64,7 +62,7 @@ public class GrxMultiAccess extends GrxBasePreference implements DlgFrGrxMultiAc
             try {
                 iconsValueTint = ta.getInt(R.styleable.grxPreferences_iconsValueTint, 0);
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         ta.recycle();
@@ -91,7 +89,7 @@ public class GrxMultiAccess extends GrxBasePreference implements DlgFrGrxMultiAc
         if(mStringValue.isEmpty()) return;
 
          String[] uris = mStringValue.split(Pattern.quote(myPrefAttrsInfo.getMySeparator()));
-         for(int i=0;i<uris.length;i++) GrxPrefsUtils.deleteGrxIconFileFromUriString(uris[i]);
+        for (String s : uris) GrxPrefsUtils.deleteGrxIconFileFromUriString(s);
 
          mStringValue= myPrefAttrsInfo.getMyStringDefValue();
          configStringPreference(mStringValue);
@@ -106,9 +104,10 @@ public class GrxMultiAccess extends GrxBasePreference implements DlgFrGrxMultiAc
             String[] arr = mStringValue.split(Pattern.quote(myPrefAttrsInfo.getMySeparator()));
             numitems=arr.length;
         }
-        if(numitems==0) mLabel=myPrefAttrsInfo.getMySummary();
+        String mLabel;
+        if(numitems==0) mLabel =myPrefAttrsInfo.getMySummary();
         else mLabel = getContext().getString( R.string.grxs_num_selected,numitems ) ;
-        setSummary(myPrefAttrsInfo.getMySummary() + " " +mLabel);
+        setSummary(myPrefAttrsInfo.getMySummary() + " " + mLabel);
     }
 
     public void GrxSetMultiAccess(String value){

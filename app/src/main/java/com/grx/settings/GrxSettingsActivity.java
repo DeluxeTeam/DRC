@@ -16,20 +16,15 @@ package com.grx.settings;
 
 import android.app.*;
 import android.content.*;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.*;
 import android.os.Process;
-import android.provider.DocumentsContract;
 import android.provider.Settings;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -38,7 +33,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.*;
@@ -47,30 +41,17 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -97,10 +78,8 @@ import com.grx.settings.app_fragments.DlgFrGrxNavigationUserOptions;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -118,21 +97,19 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
 
     /*svn*/
-    final String SS_KEY_MENU_1 = "ss.key.menu.1";
-    final String SS_KEY_MENU_2 = "ss.key.menu.2";
-    final String SS_KEY_LAST_ITEM = "ss.key.lastitem";
-    final String SS_KEY_CURRENT_MENU = "ss.key.current.menu";
+    private final String SS_KEY_MENU_1 = "ss.key.menu.1";
+    private final String SS_KEY_MENU_2 = "ss.key.menu.2";
+    private final String SS_KEY_LAST_ITEM = "ss.key.lastitem";
+    private final String SS_KEY_CURRENT_MENU = "ss.key.current.menu";
 
     private SublimeNavigationView mSVN;  //SublimeNavigationView
     private SublimeNavMenuView vSvnMenu; //Sublime Menu View
-    FloatingActionButton mFabSvn; //Standard Floating action Buttom in SNV
+    private FloatingActionButton mFabSvn; //Standard Floating action Buttom in SNV
 
     //Padding for Expand - Collapse Buttoms - SNV main menu
     private int mPaddinOnVGrButtons;
     private int mPaddinOffVGrButtons;
     private LinearLayout vExpandCollapseButtons;
-    private LinearLayout vExpandButton;
-    private LinearLayout vCollapseButton;
 
 
     private int mCurrentMenu;
@@ -145,10 +122,10 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
     private boolean mChangeScreenAfterDrawerClosed=false;
 
-    public Toolbar mToolbar;
+    private Toolbar mToolbar;
 
 
-    GrxPreferenceScreen PrefScreenFragment;
+    private GrxPreferenceScreen PrefScreenFragment;
 
     private boolean mExpandCollapseVisible;
 
@@ -177,38 +154,36 @@ public class GrxSettingsActivity extends AppCompatActivity implements
     private boolean mExitConfirmation = Common.DEF_VAL_EXIT_CONFIRM;
 
     // sync
-    public Map<Integer,String> ResXML;
-    public int mNumSyncPrefs=0;
-    public int mNumSyncScreens=0;
+    private Map<Integer,String> ResXML;
+    private int mNumSyncPrefs=0;
+    private int mNumSyncScreens=0;
 
     //backup restore
 
-    EditText mEditText;
+    private EditText mEditText;
 
     private DlgFrRestore mRestoreDialog = null;
 
-    public ProgressBar mProgressbar;
+    private ProgressBar mProgressbar;
 
     //private  int mTheme;
     private String mThemeS;
     private String mSubScreenIntent=null;
     private String mGrxKeyIntent=null;
 
-    public GrxFloatingRecents mFloatingRecentsWindow;
+    private GrxFloatingRecents mFloatingRecentsWindow;
 
     public static String DEVICE_PROP = "null";
 
-    Runnable mAnimationRunnable;
+    private Runnable mAnimationRunnable;
     Handler mHandler = new Handler();
 
 
-    private boolean calledFromTile = false;
+    private static GrxSettingsActivity GrxSettingsActivityInstance = null;
 
-    public  static GrxSettingsActivity GrxSettingsActivityInstance = null;
+    private getSuBgTask mGetSuBgTask;
 
-    public getSuBgTask mGetSuBgTask;
-
-    public int mSelectedTool = -1;
+    private int mSelectedTool = -1;
 
     /*************************************************************************************************/
     /********************* ROOT AND SCRIPT OPERATIONS ************************************************/
@@ -230,7 +205,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         if ( pr != null && !pr.isEmpty() ) { DEVICE_PROP = pr; }
 
         if(savedInstanceState==null){
-            calledFromTile = getIntent().getIntExtra("GrxTileService",0)!=0;
+            boolean calledFromTile = getIntent().getIntExtra("GrxTileService", 0) != 0;
         }
 
         mGetSuBgTask  = new getSuBgTask();
@@ -301,7 +276,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         updateColorPickerStyleInfo();
         updateSVNHeader();
 
-        mProgressbar = (ProgressBar) findViewById(R.id.gid_progressbar);
+        mProgressbar = findViewById(R.id.gid_progressbar);
 
 
         setCurrentMenuAndScreen(mode);
@@ -755,7 +730,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
     }
 
 
-    public void showSNVHeaderBgSelection(){
+    private void showSNVHeaderBgSelection(){
         if(mDrawer.isDrawerVisible(mSVN)) mDrawer.closeDrawer(mSVN);
         String nav_header_file = Common.IconsDir + File.separator+getString(R.string.grxs_nav_header_bg_image_name);
         File f = new File(nav_header_file);
@@ -1164,7 +1139,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
     ///////////////////******************** PREFERENCES SYNCHRONIZATION *****************************////
     /**************************************************************************************************/
 
-    public void finishPreferencesSynchronization(){
+    private void finishPreferencesSynchronization(){
         final ProgressBar progressBar = mProgressbar;
         // if(!mCurrentScreen.isEmpty() && mCurrentMenuItem!=null) showPreferencesScreen(mCurrentMenuItem,mCurrentScreen);
         Common.SyncUpMode = false;
@@ -1203,7 +1178,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
 
 
-    public void synchronizeNextScreen(){
+    private void synchronizeNextScreen(){
         if(mNumSyncScreens<ResXML.size()){
             android.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
@@ -1266,7 +1241,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
                         ResXML.put(num_screens,getResources().getResourceEntryName(id_xml));
                         num_screens++;
                     }
-                }catch (Exception e){}
+                }catch (Exception ignored){}
             }
         }
         return ResXML.size();
@@ -1353,8 +1328,8 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         AlertDialog.Builder adb= new AlertDialog.Builder(this);
         adb.setTitle(R.string.grxs_tit_backup);
         View view = getLayoutInflater().inflate(R.layout.dlg_backup,null);
-        mEditText = (EditText) view.findViewById(R.id.gid_backup_name);
-        TextView info= (TextView) view.findViewById(R.id.gid_backup_info);
+        mEditText = view.findViewById(R.id.gid_backup_name);
+        TextView info= view.findViewById(R.id.gid_backup_info);
         info.setText(getString(R.string.grxs_info_backup));
         mEditText.append("backup_");
         adb.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> dialog.dismiss());
@@ -1461,7 +1436,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
     /**************************** RESET ALL PREFERENCES DIALG ***********************/
     /********************************************************************************/
 
-    public void showResetAllPreferencesDialog(){
+    private void showResetAllPreferencesDialog(){
         DlgFrGrxNavigationUserOptions dlg = DlgFrGrxNavigationUserOptions.newInstance(Common.INT_ID_APPDLG_RESET_ALL_PREFERENCES);
         getFragmentManager().beginTransaction().add(dlg, Common.S_APPDLG_RESET_ALL_PREFERENCES).commit();
     }
@@ -1472,7 +1447,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
     /*** main dialog */
 
-    public void showRestoreDialog(){
+    private void showRestoreDialog(){
         if(mRestoreDialog!=null) mRestoreDialog.dismiss();
         mRestoreDialog = DlgFrRestore.newInstance(this,getString(R.string.grxs_restore_title), getString(R.string.grxs_restore_message), DlgFrRestore.RESTORE_STATE.ASK_BACKUP);
         mRestoreDialog.show(getFragmentManager(),"DlgFrRestore");
@@ -1511,11 +1486,11 @@ public class GrxSettingsActivity extends AppCompatActivity implements
     /***** Restore AsyncTask **/
 
     private class RestorePreferencesTask extends AsyncTask<Void, Void, Void> {
-        private ProgressDialog dialog;
+        private final ProgressDialog dialog;
         private String mRestoreResultText="";
         private boolean mRestoreResult=true;
-        private String backup_file_name;
-        private Context context;
+        private final String backup_file_name;
+        private final Context context;
 
         private void restorePreferences(){
             int contador=0;
@@ -1537,30 +1512,29 @@ public class GrxSettingsActivity extends AppCompatActivity implements
                 try{
                     Map map= (Map) ois.readObject();
                     Set set = map.entrySet();
-                    Iterator iterator = set.iterator();
-                    while(iterator.hasNext()){
+                    for (Object o : set) {
                         contador++;
-                        Map.Entry entrada = (Map.Entry) iterator.next();
+                        Map.Entry entrada = (Map.Entry) o;
                         String clave = (String) entrada.getKey();
-                        if( entrada.getValue() instanceof Boolean ){
+                        if (entrada.getValue() instanceof Boolean) {
                             Boolean b = (Boolean) entrada.getValue();
-                            sp.edit().putBoolean(clave,b.booleanValue()).commit();
-                        }else if(entrada.getValue() instanceof Float){
+                            sp.edit().putBoolean(clave, b).commit();
+                        } else if (entrada.getValue() instanceof Float) {
                             Float flo = (Float) entrada.getValue();
-                            sp.edit().putFloat(clave,flo.floatValue()).commit();
+                            sp.edit().putFloat(clave, flo).commit();
 
-                        }else if (entrada.getValue() instanceof Integer){
+                        } else if (entrada.getValue() instanceof Integer) {
                             Integer ent = (Integer) entrada.getValue();
-                            sp.edit().putInt(clave,ent.intValue()).commit();
-                        }else if (entrada.getValue() instanceof Long){
+                            sp.edit().putInt(clave, ent).commit();
+                        } else if (entrada.getValue() instanceof Long) {
                             Long lo = (Long) entrada.getValue();
-                            sp.edit().putLong(clave,lo.longValue()).commit();
-                        }else if (entrada.getValue() instanceof String){
+                            sp.edit().putLong(clave, lo).commit();
+                        } else if (entrada.getValue() instanceof String) {
                             String str = (String) entrada.getValue();
-                            sp.edit().putString(clave,str).commit();
-                        }else if (entrada.getValue() instanceof Set){
+                            sp.edit().putString(clave, str).commit();
+                        } else if (entrada.getValue() instanceof Set) {
                             Set s = (Set) entrada.getValue();
-                            sp.edit().putStringSet(clave,s).commit();
+                            sp.edit().putStringSet(clave, s).commit();
                         }
                     }
                 }catch (Exception e){
@@ -1592,7 +1566,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
             mRestoreResult=!error;
         }
 
-        public RestorePreferencesTask(GrxSettingsActivity activity, String backcupname) {
+        RestorePreferencesTask(GrxSettingsActivity activity, String backcupname) {
             dialog = new ProgressDialog(activity);
             dialog.setCancelable(false);
             context = activity;
@@ -1760,7 +1734,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
                 upadePanelHeaderBgInfo(getString(R.string.grxs_image));
                 Bitmap bitmap = GrxImageHelper.load_bmp_image(nav_header_file);
                 if(bitmap!=null){
-                    FrameLayout header = (FrameLayout) mSVN.getHeaderView().findViewById(R.id.gid_snv_header_container);
+                    FrameLayout header = mSVN.getHeaderView().findViewById(R.id.gid_snv_header_container);
                     if(header!=null) {
                         header.setBackground(new BitmapDrawable(bitmap));
                         color_bg = false;
@@ -1769,7 +1743,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
             }else upadePanelHeaderBgInfo(getString(R.string.grxs_default));
         }
         if(color_bg){
-            FrameLayout header = (FrameLayout) mSVN.getHeaderView().findViewById(R.id.gid_snv_header_container);
+            FrameLayout header = mSVN.getHeaderView().findViewById(R.id.gid_snv_header_container);
             if(header!=null){
                 // If is hero/2lte move settings icon a bit up to don't override the animation
                 /*if ( DEVICE_PROP.contains("hero") ) {
@@ -1807,7 +1781,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
     private void updateThemeTextInfo(){
         if(!getResources().getBoolean(R.bool.grxb_allow_theme_change)) return;
         String[] arr= getResources().getStringArray(R.array.grxa_theme_list);
-        mThemeS=mThemeS=Common.sp.getString(Common.S_APPOPT_USER_SELECTED_THEME_NAME,getString(R.string.grxs_default_theme));
+        mThemeS= Common.sp.getString(Common.S_APPOPT_USER_SELECTED_THEME_NAME,getString(R.string.grxs_default_theme));
         int pos = 0;
         String[] values = getResources().getStringArray(R.array.grxa_theme_values);
         for(int i = 0; i< values.length; i++){
@@ -1858,28 +1832,18 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
 
     private void initSublimeNavigationView(){
-        mSVN = (SublimeNavigationView) findViewById(R.id.gid_snv_view);
+        mSVN = findViewById(R.id.gid_snv_view);
         vSvnMenu = mSVN.getMenuView(); //hay que aplicar el padding en SublimeNavMenuView para poder activar o no los botones de grupo y que no se monte
-        vExpandCollapseButtons = (LinearLayout) findViewById(R.id.gid_buttons_container);
+        vExpandCollapseButtons = findViewById(R.id.gid_buttons_container);
         mPaddinOnVGrButtons=mSVN.getPaddingBottom(); //truco para no convertir he dejado inicialmente el padding que me interesa y lo consigo con el método getpadding
         vSvnMenu = mSVN.getMenuView(); //hay que aplicar el padding en SublimeNavMenuView para poder activar o no los botones de grupo y que no se monte
         mPaddinOffVGrButtons = vSvnMenu.getPaddingBottom(); //padding inicial a aplicar al menuview del sublime para cuando se desactivan los botones de grupo
         mSVN.setPadding(0,0,0,0); //dejamos la view como debe, con padding 0. En el xml dejé lo que quería.. por vaguería, je je..
         vExpandCollapseButtons.setPadding(0,0,0,0);
-        vExpandButton = (LinearLayout) vExpandCollapseButtons.findViewById(R.id.gid_button_expand);
-        vCollapseButton = (LinearLayout) vExpandCollapseButtons.findViewById(R.id.gid_button_close);
-        vCollapseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                collapseSNVMenuGropus();
-            }
-        });
-        vExpandButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                expandSNVMenuGropus();
-            }
-        });
+        LinearLayout vExpandButton = vExpandCollapseButtons.findViewById(R.id.gid_button_expand);
+        LinearLayout vCollapseButton = vExpandCollapseButtons.findViewById(R.id.gid_button_close);
+        vCollapseButton.setOnClickListener(v -> collapseSNVMenuGropus());
+        vExpandButton.setOnClickListener(v -> expandSNVMenuGropus());
 
 
 
@@ -1891,7 +1855,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
     private void changeOfScreen(SublimeBaseMenuItem menuItem){
         String tmp_screen_name = getResources().getResourceEntryName(menuItem.getItemId());
-        if(mCurrentScreen.equals(tmp_screen_name)== false){
+        if(!mCurrentScreen.equals(tmp_screen_name)){
             mCurrentScreen=tmp_screen_name;
             int currgroup = 0;
             if(mCurrentMenuItem!=null) {
@@ -1917,113 +1881,105 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
     private void initMenuNavigation(){
 
-        mSVN.setNavigationMenuEventListener(new OnNavigationMenuEventListener() {
-
-            @Override
-            public boolean onNavigationMenuEvent(Event event, SublimeBaseMenuItem menuItem) {
-                String userOption;
-                boolean state;
-                if (mCurrentMenu==0){
-                    switch (event) {
-                        case GROUP_EXPANDED:
-                            break;
-                        case GROUP_COLLAPSED:
-                            break;
-                        default:
-                            changeOfScreen(menuItem);
-                            break;
-                    }
-                }
-                else {
-
-                    switch (event){
-
-                        case CHECKED:
-                            userOption = getResources().getResourceEntryName(menuItem.getItemId());
-                            state = true;
-                            updateUserConfigCheckBox(userOption, state);
-                            break;
-                        case UNCHECKED:
-                            userOption = getResources().getResourceEntryName(menuItem.getItemId());
-                            state = false;
-                            updateUserConfigCheckBox(userOption, state);
-                            break;
-                        default:
-                            try{
-                                userOption = getResources().getResourceEntryName(menuItem.getItemId());
-                            }catch (Resources.NotFoundException e){
-                                return true;
-                            }
-
-                            switch (userOption){
-                                case "grx_mid_theme":
-                                    showThemeSelectionDialog();
-                                    break;
-
-                                case "grx_mid_header_svn_back":
-                                    showSNVHeaderBgSelection();
-                                    break;
-                                case "grx_mid_rom_info":
-                                    showInfoFragment();
-                                    if(mDrawer.isDrawerVisible(mSVN)) mDrawer.closeDrawer(mSVN);
-                                    saveLastScreenValueToSHP();
-                                    break;
-                                case "grx_mid_app_help":
-                                    showHelpFragment();
-                                    if(mDrawer.isDrawerVisible(mSVN)) mDrawer.closeDrawer(mSVN);
-                                    saveLastScreenValueToSHP();
-                                    break;
-
-                                case "grx_mid_color_picker_style":
-                                    showColorPickerStyleDialog();
-                                    break;
-                                //grxgrx
-                                default:break;
-                            }
-
-
-                            if (userOption.equals("grx_mid_fab_position")) {
-
-                                showFABPostionDialog();
-                            }
-                            else {
-                                if (userOption.equals("grx_mid_divider_height")) {
-                                    showDividerHeightDialog();
-                                }
-                            }
-                            break;
-                    }
-                }
-
-                return true;
-            }
-        });
-    }
-
-    private void initUserConfigFAB(){
-        mFabSvn = (FloatingActionButton) mSVN.getHeaderView().findViewById(R.id.gid_user_options_fab);
-        mFabSvn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (mCurrentMenu) {
-                    case 0:
-                        if(mExpandCollapseVisible) hideExpandCollapseNavigationButtons();
-                        mSVN.switchMenuTo(mConfigMenu);
-                        mCurrentMenu=1;
-
+        mSVN.setNavigationMenuEventListener((event, menuItem) -> {
+            String userOption;
+            boolean state;
+            if (mCurrentMenu==0){
+                switch (event) {
+                    case GROUP_EXPANDED:
                         break;
-                    case 1:
-                        if(mExpandCollapseVisible) showExpandColapseNavigationButtons();
-                        mSVN.switchMenuTo(mOptionsMenu);
-                        mCurrentMenu=0;
-                        updateSVNGroups();
-                        if (mCurrentMenuItem!=null){
-                            if(mOptionsMenu.getGroup(mCurrentMenuItem.getGroupId())!=null) mOptionsMenu.getGroup(mCurrentMenuItem.getGroupId()).setStateCollapsed(false);
+                    case GROUP_COLLAPSED:
+                        break;
+                    default:
+                        changeOfScreen(menuItem);
+                        break;
+                }
+            }
+            else {
+
+                switch (event){
+
+                    case CHECKED:
+                        userOption = getResources().getResourceEntryName(menuItem.getItemId());
+                        state = true;
+                        updateUserConfigCheckBox(userOption, state);
+                        break;
+                    case UNCHECKED:
+                        userOption = getResources().getResourceEntryName(menuItem.getItemId());
+                        state = false;
+                        updateUserConfigCheckBox(userOption, state);
+                        break;
+                    default:
+                        try{
+                            userOption = getResources().getResourceEntryName(menuItem.getItemId());
+                        }catch (Resources.NotFoundException e){
+                            return true;
+                        }
+
+                        switch (userOption){
+                            case "grx_mid_theme":
+                                showThemeSelectionDialog();
+                                break;
+
+                            case "grx_mid_header_svn_back":
+                                showSNVHeaderBgSelection();
+                                break;
+                            case "grx_mid_rom_info":
+                                showInfoFragment();
+                                if(mDrawer.isDrawerVisible(mSVN)) mDrawer.closeDrawer(mSVN);
+                                saveLastScreenValueToSHP();
+                                break;
+                            case "grx_mid_app_help":
+                                showHelpFragment();
+                                if(mDrawer.isDrawerVisible(mSVN)) mDrawer.closeDrawer(mSVN);
+                                saveLastScreenValueToSHP();
+                                break;
+
+                            case "grx_mid_color_picker_style":
+                                showColorPickerStyleDialog();
+                                break;
+                            //grxgrx
+                            default:break;
+                        }
+
+
+                        if (userOption.equals("grx_mid_fab_position")) {
+
+                            showFABPostionDialog();
+                        }
+                        else {
+                            if (userOption.equals("grx_mid_divider_height")) {
+                                showDividerHeightDialog();
+                            }
                         }
                         break;
                 }
             }
 
+            return true;
+        });
+    }
+
+    private void initUserConfigFAB(){
+        mFabSvn = mSVN.getHeaderView().findViewById(R.id.gid_user_options_fab);
+        mFabSvn.setOnClickListener(view -> {
+            switch (mCurrentMenu) {
+                case 0:
+                    if(mExpandCollapseVisible) hideExpandCollapseNavigationButtons();
+                    mSVN.switchMenuTo(mConfigMenu);
+                    mCurrentMenu=1;
+
+                    break;
+                case 1:
+                    if(mExpandCollapseVisible) showExpandColapseNavigationButtons();
+                    mSVN.switchMenuTo(mOptionsMenu);
+                    mCurrentMenu=0;
+                    updateSVNGroups();
+                    if (mCurrentMenuItem!=null){
+                        if(mOptionsMenu.getGroup(mCurrentMenuItem.getGroupId())!=null) mOptionsMenu.getGroup(mCurrentMenuItem.getGroupId()).setStateCollapsed(false);
+                    }
+                    break;
+            }
         });
     }
 
@@ -2116,10 +2072,10 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
     private void initToolBar(){
 
-        mToolbar = (Toolbar) findViewById(R.id.gid_toolbar);
+        mToolbar = findViewById(R.id.gid_toolbar);
         setSupportActionBar(mToolbar);
 
-        mDrawer = (DrawerLayout) findViewById(R.id.gid_snv_drawer_layout);
+        mDrawer = findViewById(R.id.gid_snv_drawer_layout);
 
 
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -2133,18 +2089,14 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         };
         mDrawer.setDrawerListener(toggle);
         toggle.syncState();
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( mDrawer.isDrawerVisible(mSVN) ) {
-                    if(!mDrawerInLeftPosition) mDrawer.closeDrawer(Gravity.RIGHT);
-                    else mDrawer.closeDrawer(Gravity.LEFT);
-                }else {
-                    if(!mDrawerInLeftPosition) mDrawer.openDrawer(Gravity.RIGHT);
-                    else mDrawer.openDrawer(Gravity.LEFT);
-                }
+        mToolbar.setNavigationOnClickListener(v -> {
+            if( mDrawer.isDrawerVisible(mSVN) ) {
+                if(!mDrawerInLeftPosition) mDrawer.closeDrawer(Gravity.RIGHT);
+                else mDrawer.closeDrawer(Gravity.LEFT);
+            }else {
+                if(!mDrawerInLeftPosition) mDrawer.openDrawer(Gravity.RIGHT);
+                else mDrawer.openDrawer(Gravity.LEFT);
             }
-
         });
 
 
@@ -2166,24 +2118,16 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
     private void setMainFABListeners(){
 
-        fab = (com.fab.FloatingActionButton) findViewById(R.id.gid_main_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDrawer.openDrawer(mSVN);
-            }
-        });
-        fab.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if(mShowFloatingRecentsWindow) {
-                    if(mFloatingRecentsWindow.getVisibility()==View.VISIBLE) mFloatingRecentsWindow.setVisibility(View.GONE);
-                    else {
-                        mFloatingRecentsWindow.setVisibility(View.VISIBLE);
-                    }
+        fab = findViewById(R.id.gid_main_fab);
+        fab.setOnClickListener(view -> mDrawer.openDrawer(mSVN));
+        fab.setOnLongClickListener(view -> {
+            if(mShowFloatingRecentsWindow) {
+                if(mFloatingRecentsWindow.getVisibility()==View.VISIBLE) mFloatingRecentsWindow.setVisibility(View.GONE);
+                else {
+                    mFloatingRecentsWindow.setVisibility(View.VISIBLE);
                 }
-                return true;
             }
+            return true;
         });
 
     }
@@ -2259,18 +2203,8 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         if(showdialog){
             AlertDialog.Builder ab = new AlertDialog.Builder(this);
             ab.setCancelable(true);
-            ab.setNegativeButton(getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-            ab.setPositiveButton(getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    doReboot();
-                }
-            }) ;
+            ab.setNegativeButton(getString(R.string.grxs_cancel), (dialogInterface, i) -> dialogInterface.dismiss());
+            ab.setPositiveButton(getString(R.string.grxs_ok), (dialogInterface, i) -> doReboot()) ;
             ab.setTitle(getString(R.string.grxs_reboot_dialog_title));
             ab.setMessage(getString(R.string.grxs_reboot_dialog_message));
             ab.create().show();
@@ -2279,7 +2213,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
     }
 
-    public void doReboot(){
+    private void doReboot(){
         boolean granted = Common.IsRebootPermissionGranted;
         if(granted) RootPrivilegedUtils.rebootDevicePrivileged(this);
         else {
@@ -2300,18 +2234,8 @@ public class GrxSettingsActivity extends AppCompatActivity implements
             final String packagetokill = packagename;
             AlertDialog.Builder ab = new AlertDialog.Builder(this);
             ab.setCancelable(true);
-            ab.setNegativeButton(getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-            ab.setPositiveButton(getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    doKillPackage(packagetokill);
-                }
-            }) ;
+            ab.setNegativeButton(getString(R.string.grxs_cancel), (dialogInterface, i) -> dialogInterface.dismiss());
+            ab.setPositiveButton(getString(R.string.grxs_ok), (dialogInterface, i) -> doKillPackage(packagetokill)) ;
             ab.setTitle(getString(R.string.grxs_killpackage_dialog_title,label));
             ab.setMessage(getString(R.string.grxs_killpackage_dialog_message,label));
             ab.create().show();
@@ -2352,7 +2276,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
             }
         }
 
-        public void setActivity(GrxSettingsActivity activity){
+        void setActivity(GrxSettingsActivity activity){
             mActivity = activity;
         }
     }

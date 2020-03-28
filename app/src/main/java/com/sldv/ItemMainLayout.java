@@ -27,14 +27,14 @@ class ItemMainLayout extends FrameLayout {
     private int mIntention = INTENTION_ZERO;
 
     /* 判断当前是否滑出，若为滑出，则是SCROLL_STATE_OPEN，则过度的滑动都不会去触发slideOpen接口，同理SCROLL_STATE_CLOSE */
-    protected static final int SCROLL_STATE_OPEN = 1;
-    protected static final int SCROLL_STATE_CLOSE = 0;
+    private static final int SCROLL_STATE_OPEN = 1;
+    static final int SCROLL_STATE_CLOSE = 0;
     private int mScrollState = SCROLL_STATE_CLOSE;
     /* 需要scroll back的时候返回的状态 */
-    protected static final int SCROLL_BACK_CLICK_NOTHING = 0;
-    protected static final int SCROLL_BACK_CLICK_OWN = 1;//点击到item了
-    protected static final int SCROLL_BACK_ALREADY_CLOSED = 2;
-    protected static final int SCROLL_BACK_CLICK_MENU_BUTTON = 3;//点击到menu的button了
+    static final int SCROLL_BACK_CLICK_NOTHING = 0;
+    static final int SCROLL_BACK_CLICK_OWN = 1;//点击到item了
+    static final int SCROLL_BACK_ALREADY_CLOSED = 2;
+    static final int SCROLL_BACK_CLICK_MENU_BUTTON = 3;//点击到menu的button了
 
     /* 时间 */
     private static final int SCROLL_TIME = 500;//500ms
@@ -44,11 +44,11 @@ class ItemMainLayout extends FrameLayout {
     private int mBtnLeftTotalWidth;
     private int mBtnRightTotalWidth;
     /* 子view */
-    private ItemBackGroundLayout mItemLeftBackGroundLayout;
-    private ItemBackGroundLayout mItemRightBackGroundLayout;
-    private View mItemCustomView;
+    private final ItemBackGroundLayout mItemLeftBackGroundLayout;
+    private final ItemBackGroundLayout mItemRightBackGroundLayout;
+    private final View mItemCustomView;
     /* Scroller */
-    private Scroller mScroller;
+    private final Scroller mScroller;
     /* 控件是否滑动 */
     private boolean mIsMoving = false;
     /* 是不是要滑过(over) */
@@ -63,7 +63,7 @@ class ItemMainLayout extends FrameLayout {
     private Drawable mNormalListSelectorDrawable;
     private Drawable mTotalListSelectorDrawable;
 
-    protected ItemMainLayout(Context context, View customView) {
+    ItemMainLayout(Context context, View customView) {
         super(context);
         mScroller = new Scroller(context);
         mItemRightBackGroundLayout = new ItemBackGroundLayout(context);
@@ -87,7 +87,7 @@ class ItemMainLayout extends FrameLayout {
      *
      * @return
      */
-    protected View getItemCustomView() {
+    View getItemCustomView() {
         return mItemCustomView;
     }
 
@@ -96,7 +96,7 @@ class ItemMainLayout extends FrameLayout {
      *
      * @return
      */
-    protected ItemBackGroundLayout getItemLeftBackGroundLayout() {
+    ItemBackGroundLayout getItemLeftBackGroundLayout() {
         return mItemLeftBackGroundLayout;
     }
 
@@ -105,7 +105,7 @@ class ItemMainLayout extends FrameLayout {
      *
      * @return
      */
-    protected ItemBackGroundLayout getItemRightBackGroundLayout() {
+    ItemBackGroundLayout getItemRightBackGroundLayout() {
         return mItemRightBackGroundLayout;
     }
 
@@ -114,19 +114,19 @@ class ItemMainLayout extends FrameLayout {
      * @param btnRightTotalWidth
      * @param wannaOver
      */
-    protected void setParams(int btnLeftTotalWidth, int btnRightTotalWidth, boolean wannaOver) {
+    void setParams(int btnLeftTotalWidth, int btnRightTotalWidth, boolean wannaOver) {
         requestLayout();
         mBtnLeftTotalWidth = btnLeftTotalWidth;
         mBtnRightTotalWidth = btnRightTotalWidth;
         mWannaOver = wannaOver;
     }
 
-    protected void setSelector(Drawable drawable) {
+    void setSelector(Drawable drawable) {
         Compat.setBackgroundDrawable(mItemLeftBackGroundLayout, drawable);
         Compat.setBackgroundDrawable(mItemRightBackGroundLayout, drawable);
     }
 
-    protected void handleMotionEvent(MotionEvent ev, final float xDown, final float yDown, final int leftDistance) {
+    void handleMotionEvent(MotionEvent ev, final float xDown, final float yDown, final int leftDistance) {
         getParent().requestDisallowInterceptTouchEvent(false);
         switch (ev.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_MOVE:
@@ -324,7 +324,7 @@ class ItemMainLayout extends FrameLayout {
     /**
      * 删除Item
      */
-    protected void deleteItem(final OnItemDeleteListenerProxy onItemDeleteListenerProxy) {
+    void deleteItem(final OnItemDeleteListenerProxy onItemDeleteListenerProxy) {
         scrollBack();
         final int height = getMeasuredHeight();
         Animation.AnimationListener animationListener = new Animation.AnimationListener() {
@@ -383,7 +383,7 @@ class ItemMainLayout extends FrameLayout {
     /**
      * 归位
      */
-    protected void scrollBack() {
+    void scrollBack() {
         mIntention = INTENTION_SCROLL_BACK;
         mScroller.startScroll(mItemCustomView.getLeft(), 0, -mItemCustomView.getLeft(), 0, SCROLL_BACK_TIME);
         if (mOnItemSlideListenerProxy != null && mScrollState != SCROLL_STATE_CLOSE) {
@@ -398,7 +398,7 @@ class ItemMainLayout extends FrameLayout {
      * @param x 手指点下的位置
      * @return
      */
-    protected int scrollBack(float x) {
+    int scrollBack(float x) {
         if (mScrollState == SCROLL_STATE_CLOSE) {//没有滑开，其实是滑了但是又滑归位了
             return SCROLL_BACK_ALREADY_CLOSED;
         }
@@ -481,17 +481,17 @@ class ItemMainLayout extends FrameLayout {
      *
      * @param onItemSlideListenerProxy
      */
-    protected void setOnItemSlideListenerProxy(OnItemSlideListenerProxy onItemSlideListenerProxy) {
+    void setOnItemSlideListenerProxy(OnItemSlideListenerProxy onItemSlideListenerProxy) {
         mOnItemSlideListenerProxy = onItemSlideListenerProxy;
     }
 
-    protected interface OnItemSlideListenerProxy {
+    interface OnItemSlideListenerProxy {
         void onSlideOpen(View view, int direction);
 
         void onSlideClose(View view, int direction);
     }
 
-    protected interface OnItemDeleteListenerProxy {
+    interface OnItemDeleteListenerProxy {
         void onDeleteBegin();
 
         void onDelete(View view);
@@ -502,7 +502,7 @@ class ItemMainLayout extends FrameLayout {
      *
      * @return
      */
-    protected int getScrollState() {
+    int getScrollState() {
         return mScrollState;
     }
 }

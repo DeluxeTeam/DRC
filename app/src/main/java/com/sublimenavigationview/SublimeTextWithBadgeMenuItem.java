@@ -38,12 +38,12 @@ public class SublimeTextWithBadgeMenuItem extends SublimeBaseMenuItem {
     }
 
     // Restores state
-    public SublimeTextWithBadgeMenuItem(int group, int id,
-                                        CharSequence title, CharSequence hint,
-                                        int iconResId,
-                                        boolean valueProvidedAsync,
-                                        CharSequence badgeText, boolean showsIconSpace,
-                                        int flags) {
+    private SublimeTextWithBadgeMenuItem(int group, int id,
+                                         CharSequence title, CharSequence hint,
+                                         int iconResId,
+                                         boolean valueProvidedAsync,
+                                         CharSequence badgeText, boolean showsIconSpace,
+                                         int flags) {
         super(group, id, title, hint, iconResId, ItemType.BADGE, valueProvidedAsync,
                 showsIconSpace, flags);
         mBadgeText = badgeText;

@@ -16,15 +16,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 
-import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 
@@ -58,7 +55,6 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
     private int mIdIconsArray;
     private String mHelperFragment;
     private String mKey;
-    private String mTitle;
     private String mValue;
     private String mOriValue;
     private String mSeparator;
@@ -139,7 +135,7 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
 
         mHelperFragment=getArguments().getString(Common.TAG_FRAGMENTHELPER_NAME_EXTRA_KEY);
         mKey=getArguments().getString("key");
-        mTitle=getArguments().getString("tit");
+        String mTitle = getArguments().getString("tit");
         mOriValue=getArguments().getString("val");
         mValue=mOriValue;
         mIdOptionsArr= getArguments().getInt("opt_arr_id");
@@ -229,15 +225,15 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
 
             boolean isChecked = false;
             if(selected!=null){
-                for(int ii=0;ii<selected.length;ii++){
-                    if(selected[ii].equals(vals_array[i])){
-                        isChecked=true;
+                for (String s : selected) {
+                    if (s.equals(vals_array[i])) {
+                        isChecked = true;
                         mNumChecked++;
                         break;
                     }
                 }
             }
-            mItemList.add(new GrxInfoItem(opt_array[i], vals_array[i],drwtmp,isChecked));
+            mItemList.add(new GrxInfoItem(opt_array[i], vals_array[i], drwtmp, isChecked));
         }
         if(icons_array!=null) icons_array.recycle();
     }
@@ -322,15 +318,15 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
     }
 
 
-    public String getReturnValue(){
-        String resultado="";
+    private String getReturnValue(){
+        StringBuilder resultado= new StringBuilder();
         for(int i=0;i<mItemList.size();i++){
             if(mItemList.get(i).isChecked()){
-                resultado+=mItemList.get(i).getValue();
-                resultado+=mSeparator;
+                resultado.append(mItemList.get(i).getValue());
+                resultado.append(mSeparator);
             }
         }
-        return resultado;
+        return resultado.toString();
     }
 
 
@@ -360,14 +356,14 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
 
     /******************* Item Info and Adapter ***********/
 
-    private class GrxInfoItem {
+    private static class GrxInfoItem {
 
-        private String mLabel;
-        private String mValue;
-        private Drawable mIcon;
+        private final String mLabel;
+        private final String mValue;
+        private final Drawable mIcon;
         private boolean mIsChecked;
 
-        public GrxInfoItem(String label, String value, Drawable icon, boolean checked){
+        GrxInfoItem(String label, String value, Drawable icon, boolean checked){
 
             mLabel=label;
             mValue=value;
@@ -376,23 +372,23 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
 
         }
 
-        public String getLabel(){
+        String getLabel(){
             return mLabel;
         }
 
-        public String getValue(){
+        String getValue(){
             return mValue;
         }
 
-        public boolean isChecked(){
+        boolean isChecked(){
             return mIsChecked;
         }
 
-        public Drawable getIcon(){
+        Drawable getIcon(){
             return mIcon;
         }
 
-        public void setChecked(boolean checked){
+        void setChecked(boolean checked){
             mIsChecked=checked;
         }
 
@@ -400,7 +396,7 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
 
 
 
-    private BaseAdapter mAdapter = new BaseAdapter() {
+    private final BaseAdapter mAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return mItemList.size();
@@ -453,10 +449,10 @@ public class DlgFrMultiSelect extends DialogFragment  {  //single (ListPreferenc
         }
 
         class CustomViewHolder {
-            public ImageView vIcon;
-            public TextView vLabel;
-            public RadioButton vRadioButton;
-            public CheckBox vCheckBox;
+            ImageView vIcon;
+            TextView vLabel;
+            RadioButton vRadioButton;
+            CheckBox vCheckBox;
         }
     };
 

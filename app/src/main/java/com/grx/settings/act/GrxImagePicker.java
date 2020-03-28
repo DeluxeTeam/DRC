@@ -47,15 +47,15 @@ public class GrxImagePicker extends Activity {
     public static final String S_DIR_IMG = "grx_dir_img";
 
 
-    public static final int REQ_COD_MODO_IMG=20;
-    public static final int REQ_COD_MODO_CAM=30;
-    public static final int REQ_COD_MODO_CROP=40;
-    public static final int REQ_COD_JUST_GET_URI=50;
+    private static final int REQ_COD_MODO_IMG=20;
+    private static final int REQ_COD_MODO_CAM=30;
+    private static final int REQ_COD_MODO_CROP=40;
+    private static final int REQ_COD_JUST_GET_URI=50;
 
     public static final int DEF_TAM_AVATAR=144;
 
-    public static final String S_SPOTLIGHTX = "spotlightX";
-    public static final String S_SPOTLIGHTY = "spotlightY";
+    private static final String S_SPOTLIGHTX = "spotlightX";
+    private static final String S_SPOTLIGHTY = "spotlightY";
     public static final String S_SCALE= "scale";
     public static final String S_CROP = "crop";
     public static final String S_SCALE_UP = "scaleUpIfNeeded";
@@ -63,15 +63,15 @@ public class GrxImagePicker extends Activity {
     public static final String S_ASPECTY = "aspectY";
     public static final String S_OUTPUTX = "outputX";
     public static final String S_OUTPUTY = "outputY";
-    public static final String S_RETURNDATA = "return-data";
-    public static final String S_OUTPUTFORMAT = "outputFormat";
+    private static final String S_RETURNDATA = "return-data";
+    private static final String S_OUTPUTFORMAT = "outputFormat";
     public static final String S_URI_MODE ="uri_mode";
 
     public static final String S_OUTPUT_FILE_NAME = "output_file";
 
-    public static final String S_TIPO_IMG="image/*";
-    public static final String S_ACT_CROP="com.android.camera.action.CROP";
-    public static final String S_TRUE="true";
+    private static final String S_TIPO_IMG="image/*";
+    private static final String S_ACT_CROP="com.android.camera.action.CROP";
+    private static final String S_TRUE="true";
     public static final String S_FALSE="false";
 
 
@@ -95,7 +95,7 @@ public class GrxImagePicker extends Activity {
 
     private ProgressBar progressBar;
 
-    String mDestFragmentTag;
+    private String mDestFragmentTag;
 
     private boolean just_get_uri_mode = false;
 
@@ -205,9 +205,8 @@ public class GrxImagePicker extends Activity {
                     break;
 
                 case REQ_COD_JUST_GET_URI:
-                    Intent intent = data;
-                    if(mDestFragmentTag!=null) intent.putExtra(Common.TAG_DEST_FRAGMENT_NAME_EXTRA_KEY,mDestFragmentTag);
-                    setResult(Activity.RESULT_OK,intent);
+                    if(mDestFragmentTag!=null) data.putExtra(Common.TAG_DEST_FRAGMENT_NAME_EXTRA_KEY,mDestFragmentTag);
+                    setResult(Activity.RESULT_OK, data);
                     finish();
                     break;
                 default:
@@ -283,14 +282,14 @@ public class GrxImagePicker extends Activity {
             if(!dir_fotos.exists()){
                 dir_fotos.mkdirs();
             }
-            String nombre_fichero = "GRX_"+String.valueOf(System.currentTimeMillis());
+            String nombre_fichero = "GRX_"+ System.currentTimeMillis();
             File fichero_temp = new File(dir_fotos, nombre_fichero+".jpg");
             mImageName = fichero_temp.getAbsolutePath();
             return fichero_temp;
 
         }else{
             File dir_cache = Environment.getDataDirectory();
-            String nombre_fichero = "GRX_"+String.valueOf(System.currentTimeMillis());
+            String nombre_fichero = "GRX_"+ System.currentTimeMillis();
             File fichero_temp = new File(dir_cache, nombre_fichero+".jpg");
             mImageName = fichero_temp.getAbsolutePath();
             return fichero_temp;
@@ -298,12 +297,9 @@ public class GrxImagePicker extends Activity {
     }
 
 
-    public static boolean media_is_ok(){
+    private static boolean media_is_ok(){
         String estado = Environment.getExternalStorageState();
-        if(!estado.equals(Environment.MEDIA_MOUNTED)) {
-            return false;
-        }
-        return true;
+        return estado.equals(Environment.MEDIA_MOUNTED);
     }
 
 
@@ -339,7 +335,7 @@ public class GrxImagePicker extends Activity {
             File ftemp;
             InputStream i_s = null;
             FileOutputStream o_s = null;
-            if(output_file_name==null) ftemp = new File(getCacheDir() + File.separator+Common.TMP_PREFIX+ String.valueOf(System.currentTimeMillis()));
+            if(output_file_name==null) ftemp = new File(getCacheDir() + File.separator+Common.TMP_PREFIX+ System.currentTimeMillis());
             else ftemp = new File(output_file_name);
             mLoaderResultName=null;
 
@@ -361,8 +357,8 @@ public class GrxImagePicker extends Activity {
                 mLoaderError=e.getMessage();
                 mLoaderResultName=null;
             } finally {
-                try { i_s.close(); } catch (Exception e) { }
-                try { o_s.close(); } catch (Exception e) { }
+                try { i_s.close(); } catch (Exception ignored) { }
+                try { o_s.close(); } catch (Exception ignored) { }
             }
 
             return mLoaderResultName;
@@ -391,19 +387,16 @@ public class GrxImagePicker extends Activity {
                     delete_tmp_img();
                     setResult(Activity.RESULT_CANCELED);
                     finish();
-                    return;
                 }
             }
         }else{
 
             if(isDestroyed()) {
                 delete_tmp_img();
-                return;
             }else{
                 delete_tmp_img();
                 setResult(Activity.RESULT_CANCELED);
                 finish();
-                return;
             }
         }
     }

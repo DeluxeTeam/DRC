@@ -27,7 +27,7 @@ import com.grx.settings.R;
 
 public class ArrayTextList extends LinearLayout {
 
-    int id_array;
+    private int id_array;
     private int mHeight=0;
 
     public ArrayTextList(Context context) {

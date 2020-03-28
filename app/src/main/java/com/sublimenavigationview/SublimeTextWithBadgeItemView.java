@@ -18,7 +18,6 @@ package com.sublimenavigationview;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -51,8 +50,8 @@ public class SublimeTextWithBadgeItemView extends SublimeBaseItemView {
     @Override
     protected void initializeViews() {
         super.initializeViews();
-        mBadgeView = (StateAwareTextView) findViewById(R.id.badge);
-        mProgress = (ProgressBar) findViewById(R.id.progress);
+        mBadgeView = findViewById(R.id.badge);
+        mProgress = findViewById(R.id.progress);
     }
 
     @Override
@@ -85,15 +84,15 @@ public class SublimeTextWithBadgeItemView extends SublimeBaseItemView {
         mProgress.setEnabled(enabled);
     }
 
-    public void setBadgeTextColor(ColorStateList textColor) {
+    private void setBadgeTextColor(ColorStateList textColor) {
         mBadgeView.setTextColor(textColor);
     }
 
-    public void setBadgeTypeface(Typeface typeface, int typefaceStyle) {
+    private void setBadgeTypeface(Typeface typeface, int typefaceStyle) {
         mBadgeView.setTypeface(typeface, typefaceStyle);
     }
 
-    public void setBadgeTypefaceStyle(int typefaceStyle) {
+    private void setBadgeTypefaceStyle(int typefaceStyle) {
         mBadgeView.setTypeface(mBadgeView.getTypeface(), typefaceStyle);
     }
 

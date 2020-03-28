@@ -12,7 +12,6 @@ import com.grx.settings.R;
 import com.grx.settings.utils.RootPrivilegedUtils;
 import com.root.RootUtils;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.regex.Pattern;

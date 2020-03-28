@@ -43,7 +43,6 @@ import java.util.regex.Pattern;
 public class DlgFrGrxSortList extends DialogFragment implements SlideAndDragListView.OnDragListener, SlideAndDragListView.OnListItemLongClickListener {
 
     private OnSortedList mCallback;
-    private String mTitle;
     private String mValue;
     private String mSeparator;
     private int mIdOptionsArr;
@@ -56,9 +55,6 @@ public class DlgFrGrxSortList extends DialogFragment implements SlideAndDragList
     private ArrayList<GrxInfoItem> mItemList;
     private SlideAndDragListView mDragList;
     private float tam_txt;
-    private int minheight;
-    private String mHelperFragment;
-    private String mKey;
 
     public DlgFrGrxSortList(){}
 
@@ -110,11 +106,11 @@ public class DlgFrGrxSortList extends DialogFragment implements SlideAndDragList
 
     private View getSortListView(){
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_grxsortlist, null);
-        mDragList = (SlideAndDragListView) view.findViewById(R.id.gid_slv_listview);
-        TextView vTxthelp = (TextView) view.findViewById(R.id.gid_help_sort_button);
+        mDragList = view.findViewById(R.id.gid_slv_listview);
+        TextView vTxthelp = view.findViewById(R.id.gid_help_sort_button);
         vTxthelp.setText(R.string.grxs_help_sort_long_press);
         tam_txt = getResources().getDimension(R.dimen.textsize_listas_opciones);
-        minheight = getResources().getDimensionPixelSize(R.dimen.view_minheight_listas_opciones);
+        int minheight = getResources().getDimensionPixelSize(R.dimen.view_minheight_listas_opciones);
         mDragList.setVerticalScrollBarEnabled(true);
         mDragList.setDividerHeight(Common.cDividerHeight);
         return view;
@@ -130,9 +126,9 @@ public class DlgFrGrxSortList extends DialogFragment implements SlideAndDragList
     @Override
     public Dialog onCreateDialog(Bundle state) {
 
-        mHelperFragment=getArguments().getString(Common.TAG_FRAGMENTHELPER_NAME_EXTRA_KEY);
-        mKey=getArguments().getString("key");
-        mTitle=getArguments().getString("tit");
+        String mHelperFragment = getArguments().getString(Common.TAG_FRAGMENTHELPER_NAME_EXTRA_KEY);
+        String mKey = getArguments().getString("key");
+        String mTitle = getArguments().getString("tit");
         mValue=getArguments().getString("val");
         mSeparator = getArguments().getString("sep");
         mIdOptionsArr = getArguments().getInt("opt_arr_id");
@@ -158,13 +154,10 @@ public class DlgFrGrxSortList extends DialogFragment implements SlideAndDragList
         builder.setTitle(mTitle);
         builder.setView(getSortListView());
         builder.setNegativeButton(R.string.grxs_cancel,null);
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (mCallback != null) mCallback.saveSortedList(getReturnValue());
-                mItemList.clear();
-                dismiss();
-            }
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+            if (mCallback != null) mCallback.saveSortedList(getReturnValue());
+            mItemList.clear();
+            dismiss();
         });
 
         initItemsList();
@@ -175,26 +168,26 @@ public class DlgFrGrxSortList extends DialogFragment implements SlideAndDragList
 
     private void initItemsList(){
         TypedArray icons_array=null;
-        String vals_array[] = getResources().getStringArray(mIdValuesArr);
-        String opt_array[] = getResources().getStringArray(mIdOptionsArr);
+        String[] vals_array = getResources().getStringArray(mIdValuesArr);
+        String[] opt_array = getResources().getStringArray(mIdOptionsArr);
         if(mIdIconsArray!=0){
             icons_array = getResources().obtainTypedArray(mIdIconsArray);
         }
 
-        String values[];
+        String[] values;
         if(mValue==null || mValue.isEmpty()) {
             values=vals_array;
             //bbbb
         }
-        else values=mValue.split(Pattern.quote(mSeparator));;
+        else values=mValue.split(Pattern.quote(mSeparator));
 
         mItemList.clear();
-        for(int i=0;i<values.length;i++){
-            int pos = GrxPrefsUtils.getPositionInStringArray(vals_array,values[i]);
-            Drawable drawable=null;
-            if(icons_array!=null) drawable = icons_array.getDrawable(pos);
+        for (String value : values) {
+            int pos = GrxPrefsUtils.getPositionInStringArray(vals_array, value);
+            Drawable drawable = null;
+            if (icons_array != null) drawable = icons_array.getDrawable(pos);
             mItemList.add(
-                    new GrxInfoItem(opt_array[pos], vals_array[pos],drawable)
+                    new GrxInfoItem(opt_array[pos], vals_array[pos], drawable)
             );
         }
         if(icons_array!=null) icons_array.recycle();
@@ -239,40 +232,40 @@ public class DlgFrGrxSortList extends DialogFragment implements SlideAndDragList
 
 
     private String getReturnValue(){
-        String tmp="";
+        StringBuilder tmp= new StringBuilder();
         for(int i=0;i<mItemList.size();i++){
-            tmp+=mItemList.get(i).getValue();
-            tmp+=mSeparator;
+            tmp.append(mItemList.get(i).getValue());
+            tmp.append(mSeparator);
         }
-        return tmp;
+        return tmp.toString();
     }
 
 
-    private class GrxInfoItem {
+    private static class GrxInfoItem {
 
-        private String text;
-        private String value;
-        private Drawable Icono;
+        private final String text;
+        private final String value;
+        private final Drawable Icono;
 
-        public GrxInfoItem(String texto, String valor, Drawable icono){
+        GrxInfoItem(String texto, String valor, Drawable icono){
             text =texto;
             value =valor;
             Icono=icono;
         }
-        public String getTexto(){
+        String getTexto(){
             return text;
         }
 
-        public String getValue(){
+        String getValue(){
             return value;
         }
 
-        public Drawable getIcono(){
+        Drawable getIcono(){
             return Icono;
         }
     }
 
-    private BaseAdapter mAdapter = new BaseAdapter() {
+    private final BaseAdapter mAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return mItemList.size();
@@ -294,9 +287,9 @@ public class DlgFrGrxSortList extends DialogFragment implements SlideAndDragList
             if (convertView == null) {
                 cvh = new CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxsortlist_item, null);
-                cvh.vCtxt = (TextView) convertView.findViewById(R.id.gid_text);
-                cvh.vIcon =(ImageView)   convertView.findViewById(R.id.gid_icon);
-                cvh.vIcon2 =(ImageView)   convertView.findViewById(R.id.gid_icon2);
+                cvh.vCtxt = convertView.findViewById(R.id.gid_text);
+                cvh.vIcon = convertView.findViewById(R.id.gid_icon);
+                cvh.vIcon2 = convertView.findViewById(R.id.gid_icon2);
                 convertView.setTag(cvh);
             } else {
                 cvh = (CustomViewHolder) convertView.getTag();
@@ -331,9 +324,9 @@ public class DlgFrGrxSortList extends DialogFragment implements SlideAndDragList
         }
 
         class CustomViewHolder {
-            public TextView vCtxt;
-            public ImageView vIcon;
-            public ImageView vIcon2;
+            TextView vCtxt;
+            ImageView vIcon;
+            ImageView vIcon2;
         }
     };
 

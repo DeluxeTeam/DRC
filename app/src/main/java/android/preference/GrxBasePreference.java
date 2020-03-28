@@ -15,9 +15,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
@@ -38,7 +36,7 @@ public class GrxBasePreference extends Preference implements
         GrxPreferenceScreen.CustomDependencyListener{
 
 
-    PrefAttrsInfo.PREF_TYPE mTypeOfPreference= PrefAttrsInfo.PREF_TYPE.UNKNOWN;
+    private PrefAttrsInfo.PREF_TYPE mTypeOfPreference= PrefAttrsInfo.PREF_TYPE.UNKNOWN;
 
     /*click*/
     private Runnable DoubleClickRunnable;
@@ -47,33 +45,33 @@ public class GrxBasePreference extends Preference implements
     private Long mLongClickTimeOut;
     private int mNumClicks;
 
-    public boolean mDisableDoubleClick=false;
+    boolean mDisableDoubleClick=false;
 
 
-    public int mLeftIconColor=0;
-    public int mArrowColor =0;
+    private int mLeftIconColor=0;
+    private int mArrowColor =0;
 
     /* icons and widget arrow */
 
-    public ImageView vAndroidIcon;
-    public ImageView vWidgetArrow =null;
-    public ImageView vWidgetIcon =null;
-    public TextView vWidgetText = null;
+    private ImageView vAndroidIcon;
+    ImageView vWidgetArrow =null;
+    ImageView vWidgetIcon =null;
+    TextView vWidgetText = null;
 
 
-    public boolean mArrowNeeded =true;
-    public Drawable mWidgetIcon;
+    private boolean mArrowNeeded =true;
+    Drawable mWidgetIcon;
 
-    public boolean showWidgetArrow =true;
+    private boolean showWidgetArrow =true;
 
 
     /**** string type ****/
 
-    public String mStringValue ="";
+    String mStringValue ="";
 
     /***** int type  **/
 
-    public int mIntValue=0;
+    int mIntValue=0;
 
 
 
@@ -82,12 +80,12 @@ public class GrxBasePreference extends Preference implements
 
 
 
-    public GrxBasePreference(Context context, AttributeSet attrs) {
+    GrxBasePreference(Context context, AttributeSet attrs) {
         super(context,attrs);
         mNumClicks =0;
     }
 
-    public GrxBasePreference(Context context, AttributeSet attrs, int defStyleAttr){
+    GrxBasePreference(Context context, AttributeSet attrs, int defStyleAttr){
         super(context,attrs,defStyleAttr);
         mNumClicks =0;
     }
@@ -95,14 +93,14 @@ public class GrxBasePreference extends Preference implements
     /*** type of pref */
 
 
-    public void setTypeOfPreference(PrefAttrsInfo.PREF_TYPE  type){
+    void setTypeOfPreference(PrefAttrsInfo.PREF_TYPE type){
         mTypeOfPreference=type;
     }
 
 
     /*** initialize string prefs **/
 
-    public void initStringPrefsCommonAttributes(Context context, AttributeSet attrs, boolean isMultiValue, boolean iniArrays ){
+    void initStringPrefsCommonAttributes(Context context, AttributeSet attrs, boolean isMultiValue, boolean iniArrays){
         setTypeOfPreference(PrefAttrsInfo.PREF_TYPE.STRING);
         myPrefAttrsInfo = new PrefAttrsInfo(context, attrs, getTitle(), getSummary(),getKey(), isMultiValue);
         if(iniArrays) myPrefAttrsInfo.initArraysIds(context,attrs);
@@ -110,7 +108,7 @@ public class GrxBasePreference extends Preference implements
 
 
 
-    public void initIntPrefsCommonAttributes(Context context, AttributeSet attrs, int defvalue,boolean iniArrays){
+    void initIntPrefsCommonAttributes(Context context, AttributeSet attrs, int defvalue, boolean iniArrays){
         setTypeOfPreference(PrefAttrsInfo.PREF_TYPE.INT);
         myPrefAttrsInfo = new PrefAttrsInfo(context,attrs,getTitle(),getSummary(),getKey(),defvalue);
         if(iniArrays) myPrefAttrsInfo.initArraysIds(context,attrs);
@@ -118,11 +116,11 @@ public class GrxBasePreference extends Preference implements
 
 
 
-    public void initArraysIds(Context context, AttributeSet attrs){
+    private void initArraysIds(Context context, AttributeSet attrs){
         initArraysIds(context, attrs);
     }
 
-    public void setWidgetIcon(Drawable drawable){
+    void setWidgetIcon(Drawable drawable){
         mWidgetIcon = drawable;
         if(mWidgetIcon!=null) {
             showWidgetArrow = false;
@@ -132,17 +130,17 @@ public class GrxBasePreference extends Preference implements
     }
 
 
-    public void setMyIntDefaultValue(int value){myPrefAttrsInfo.setmMyIntDefaultValue(value);}
+    void setMyIntDefaultValue(int value){myPrefAttrsInfo.setmMyIntDefaultValue(value);}
 
     /****** view **///
 
     @Override
     protected View onCreateView(ViewGroup parent) {
         View view = super.onCreateView(parent);
-        vWidgetArrow = (ImageView) view.findViewById(R.id.gid_widget_arrow);
-        vWidgetIcon = (ImageView) view.findViewById(R.id.gid_widget_icon);
-        vAndroidIcon = (ImageView) view.findViewById(android.R.id.icon);
-        vWidgetText = (TextView) view.findViewById(R.id.gid_widget_text);
+        vWidgetArrow = view.findViewById(R.id.gid_widget_arrow);
+        vWidgetIcon = view.findViewById(R.id.gid_widget_icon);
+        vAndroidIcon = view.findViewById(android.R.id.icon);
+        vWidgetText = view.findViewById(R.id.gid_widget_text);
         if(vAndroidIcon!=null) {
             vAndroidIcon.setLayoutParams(Common.AndroidIconParams);
             if(mLeftIconColor==0) mLeftIconColor = myPrefAttrsInfo.getMyIconTintColor();
@@ -153,8 +151,8 @@ public class GrxBasePreference extends Preference implements
                 mArrowColor = myPrefAttrsInfo.getMyArrowTint();
             }
             if(mArrowColor !=0){
-                int states[][] = {{android.R.attr.state_checked}, {}};
-                int colors[] = {mArrowColor, mArrowColor};
+                int[][] states = {{android.R.attr.state_checked}, {}};
+                int[] colors = {mArrowColor, mArrowColor};
                 vWidgetArrow.setBackgroundTintList(new ColorStateList(states, colors));
             }else {
                 vWidgetArrow.setVisibility(View.GONE);
@@ -172,8 +170,8 @@ public class GrxBasePreference extends Preference implements
         if(vWidgetArrow!=null) {
             if(mArrowColor==0) mArrowColor = myPrefAttrsInfo.getMyArrowTint();
             if(mArrowColor!=0) {
-                int states[][] = {{android.R.attr.state_checked}, {}};
-                int colors[] = {mArrowColor, mArrowColor};
+                int[][] states = {{android.R.attr.state_checked}, {}};
+                int[] colors = {mArrowColor, mArrowColor};
                 vWidgetArrow.setBackgroundTintList(new ColorStateList(states, colors));
             }
             vWidgetArrow.setAlpha(alpha);
@@ -182,7 +180,7 @@ public class GrxBasePreference extends Preference implements
         if(vAndroidIcon!=null) vAndroidIcon.setAlpha(alpha);
     }
 
-    public void refreshView(){
+    void refreshView(){
         if(vWidgetIcon!=null){
             vWidgetIcon.setImageDrawable(mWidgetIcon);
             if(mWidgetIcon!=null) vWidgetIcon.setVisibility(View.VISIBLE);
@@ -372,12 +370,12 @@ public class GrxBasePreference extends Preference implements
     }
 
 
-    public void showDialog(){
+    void showDialog(){
 
     }
 
 
-    public void showResetPreferenceDialog(){
+    private void showResetPreferenceDialog(){
 
         switch (mTypeOfPreference){
             case INT:
@@ -396,24 +394,19 @@ public class GrxBasePreference extends Preference implements
         AlertDialog dlg = new AlertDialog.Builder(getContext()).create();
         dlg.setTitle(getContext().getResources().getString(R.string.grxs_reset_values));
         dlg.setMessage(getContext().getResources().getString(R.string.grxs_reset_message));
-        dlg.setButton(DialogInterface.BUTTON_POSITIVE, getContext().getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                resetPreference();
-            }
-        });
+        dlg.setButton(DialogInterface.BUTTON_POSITIVE, getContext().getString(R.string.grxs_ok), (dialog, which) -> resetPreference());
         dlg.show();
     }
 
 
-    public void resetPreference(){
+    void resetPreference(){
 
     }
 
 
     /***************** save values  *************/
 
-    public void saveNewStringValue(String value) {
+    void saveNewStringValue(String value) {
         mStringValue =value;
         //   if(mStringValue ==null) mStringValue ="";
         if(!myPrefAttrsInfo.isValidKey()) return;
@@ -432,7 +425,7 @@ public class GrxBasePreference extends Preference implements
 
 
 
-    public void saveStringValueInSettings(String value){
+    void saveStringValueInSettings(String value){
         if(!myPrefAttrsInfo.isValidKey()) return;
         if(myPrefAttrsInfo.getMySystemPrefType()== PrefAttrsInfo.SETTINGS_PREF_TYPE.SHARED) {
             if (myPrefAttrsInfo.isAllowedToBeSavedInSettingsDb()) {
@@ -460,7 +453,7 @@ public class GrxBasePreference extends Preference implements
     }
 
 
-    public void saveintValueInSettings(int value){
+    void saveintValueInSettings(int value){
         if(!myPrefAttrsInfo.isValidKey()) return;
 
         if(myPrefAttrsInfo.getMySystemPrefType()== PrefAttrsInfo.SETTINGS_PREF_TYPE.SHARED) {
@@ -488,7 +481,7 @@ public class GrxBasePreference extends Preference implements
         }
     }
 
-    public void saveNewIntValue(int value){
+    void saveNewIntValue(int value){
         // if(mIntValue==value) return;
         mIntValue=value;
         if(!myPrefAttrsInfo.isValidKey()) return;
@@ -520,24 +513,24 @@ public class GrxBasePreference extends Preference implements
 
     /** configure preference **/
 
-    public void configStringPreference(String value){
+    void configStringPreference(String value){
 
     }
 
 
-    public void configIntPreference(int value){
+    void configIntPreference(int value){
 
     }
 
 
-    public void configNeutralPreference(){
+    void configNeutralPreference(){
 
     }
 
 
     /*** other */
 
-    public void checkDepRuleAndAssignKeyIfNeeded(){  // in some type of prefs, we need to make sure we have a key for dep rules
+    void checkDepRuleAndAssignKeyIfNeeded(){  // in some type of prefs, we need to make sure we have a key for dep rules
         String deprul = myPrefAttrsInfo.getMyDependencyRule();
         if(deprul!=null && !deprul.isEmpty()){
             if(!myPrefAttrsInfo.isValidKey()){

@@ -27,11 +27,11 @@ import com.grx.settings.prefssupport.PrefAttrsInfo;
 
 public class GrxObserver extends ContentObserver {
 
-        Context mContext;
-        GrxObserver.OnObservedSettingsKeyChange mCallBack=null;
+        private final Context mContext;
+        private GrxObserver.OnObservedSettingsKeyChange mCallBack=null;
 
         public interface OnObservedSettingsKeyChange{
-            public void observedSettingsKeyChanged(String key);
+            void observedSettingsKeyChanged(String key);
         }
 
         public GrxObserver(android.os.Handler handler, Context context, GrxObserver.OnObservedSettingsKeyChange callback) {
@@ -79,7 +79,7 @@ public class GrxObserver extends ContentObserver {
         }
 
 
-        private class UriInfo{
+        private static class UriInfo{
 
             public UriInfo(String typeOfSettings, String key){
 

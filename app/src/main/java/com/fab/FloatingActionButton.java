@@ -43,11 +43,11 @@ public class FloatingActionButton extends ImageButton {
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({TYPE_NORMAL, TYPE_MINI})
-    public @interface TYPE {
+    private @interface TYPE {
     }
 
-    public static final int TYPE_NORMAL = 0;
-    public static final int TYPE_MINI = 1;
+    private static final int TYPE_NORMAL = 0;
+    private static final int TYPE_MINI = 1;
 
     private boolean mVisible;
 
@@ -115,7 +115,7 @@ public class FloatingActionButton extends ImageButton {
     }
 
     private void initAttributes(Context context, AttributeSet attributeSet) {
-        TypedArray attr = getTypedArray(context, attributeSet, R.styleable.FloatingActionButton);
+        TypedArray attr = getTypedArray(context, attributeSet);
         if (attr != null) {
             try {
                 mColorNormal = attr.getColor(R.styleable.FloatingActionButton_fab_colorNormal,
@@ -158,8 +158,8 @@ public class FloatingActionButton extends ImageButton {
         }
     }
 
-    private TypedArray getTypedArray(Context context, AttributeSet attributeSet, int[] attr) {
-        return context.obtainStyledAttributes(attributeSet, attr, 0, 0);
+    private TypedArray getTypedArray(Context context, AttributeSet attributeSet) {
+        return context.obtainStyledAttributes(attributeSet, R.styleable.FloatingActionButton, 0, 0);
     }
 
     private int getColor(@ColorRes int id) {
@@ -226,7 +226,7 @@ public class FloatingActionButton extends ImageButton {
         return marginBottom;
     }
 
-    public void setColorNormal(int color) {
+    private void setColorNormal(int color) {
         if (color != mColorNormal) {
             mColorNormal = color;
             updateBackground();
@@ -241,7 +241,7 @@ public class FloatingActionButton extends ImageButton {
         return mColorNormal;
     }
 
-    public void setColorPressed(int color) {
+    private void setColorPressed(int color) {
         if (color != mColorPressed) {
             mColorPressed = color;
             updateBackground();
@@ -256,7 +256,7 @@ public class FloatingActionButton extends ImageButton {
         return mColorPressed;
     }
 
-    public void setColorRipple(int color) {
+    private void setColorRipple(int color) {
         if (color != mColorRipple) {
             mColorRipple = color;
             updateBackground();
@@ -298,11 +298,11 @@ public class FloatingActionButton extends ImageButton {
         return mVisible;
     }
 
-    public void show() {
+    private void show() {
         show(true);
     }
 
-    public void hide() {
+    private void hide() {
         hide(true);
     }
 
@@ -310,7 +310,7 @@ public class FloatingActionButton extends ImageButton {
         toggle(true, animate, false);
     }
 
-    public void hide(boolean animate) {
+    private void hide(boolean animate) {
         toggle(false, animate, false);
     }
 
@@ -378,9 +378,9 @@ public class FloatingActionButton extends ImageButton {
         attachToScrollView(scrollView, scrollDirectionListener, null);
     }
 
-    public void attachToListView(@NonNull AbsListView listView,
-                                 ScrollDirectionListener scrollDirectionListener,
-                                 AbsListView.OnScrollListener onScrollListener) {
+    private void attachToListView(@NonNull AbsListView listView,
+                                  ScrollDirectionListener scrollDirectionListener,
+                                  AbsListView.OnScrollListener onScrollListener) {
         AbsListViewScrollDetectorImpl scrollDetector = new AbsListViewScrollDetectorImpl();
         scrollDetector.setScrollDirectionListener(scrollDirectionListener);
         scrollDetector.setOnScrollListener(onScrollListener);
@@ -389,9 +389,9 @@ public class FloatingActionButton extends ImageButton {
         listView.setOnScrollListener(scrollDetector);
     }
 
-    public void attachToRecyclerView(@NonNull RecyclerView recyclerView,
-                                     ScrollDirectionListener scrollDirectionlistener,
-                                     RecyclerView.OnScrollListener onScrollListener) {
+    private void attachToRecyclerView(@NonNull RecyclerView recyclerView,
+                                      ScrollDirectionListener scrollDirectionlistener,
+                                      RecyclerView.OnScrollListener onScrollListener) {
         RecyclerViewScrollDetectorImpl scrollDetector = new RecyclerViewScrollDetectorImpl();
         scrollDetector.setScrollDirectionListener(scrollDirectionlistener);
         scrollDetector.setOnScrollListener(onScrollListener);
@@ -399,9 +399,9 @@ public class FloatingActionButton extends ImageButton {
         recyclerView.addOnScrollListener(scrollDetector);
     }
 
-    public void attachToScrollView(@NonNull ObservableScrollView scrollView,
-                                   ScrollDirectionListener scrollDirectionListener,
-                                   ObservableScrollView.OnScrollChangedListener onScrollChangedListener) {
+    private void attachToScrollView(@NonNull ObservableScrollView scrollView,
+                                    ScrollDirectionListener scrollDirectionListener,
+                                    ObservableScrollView.OnScrollChangedListener onScrollChangedListener) {
         ScrollViewScrollDetectorImpl scrollDetector = new ScrollViewScrollDetectorImpl();
         scrollDetector.setScrollDirectionListener(scrollDirectionListener);
         scrollDetector.setOnScrollChangedListener(onScrollChangedListener);
@@ -443,7 +443,7 @@ public class FloatingActionButton extends ImageButton {
             mScrollDirectionListener = scrollDirectionListener;
         }
 
-        public void setOnScrollListener(AbsListView.OnScrollListener onScrollListener) {
+        void setOnScrollListener(AbsListView.OnScrollListener onScrollListener) {
             mOnScrollListener = onScrollListener;
         }
 
@@ -491,7 +491,7 @@ public class FloatingActionButton extends ImageButton {
             mScrollDirectionListener = scrollDirectionListener;
         }
 
-        public void setOnScrollListener(RecyclerView.OnScrollListener onScrollListener) {
+        void setOnScrollListener(RecyclerView.OnScrollListener onScrollListener) {
             mOnScrollListener = onScrollListener;
         }
 
@@ -539,7 +539,7 @@ public class FloatingActionButton extends ImageButton {
             mScrollDirectionListener = scrollDirectionListener;
         }
 
-        public void setOnScrollChangedListener(ObservableScrollView.OnScrollChangedListener onScrollChangedListener) {
+        void setOnScrollChangedListener(ObservableScrollView.OnScrollChangedListener onScrollChangedListener) {
             mOnScrollChangedListener = onScrollChangedListener;
         }
 

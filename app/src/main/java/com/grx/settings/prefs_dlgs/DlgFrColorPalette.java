@@ -37,33 +37,33 @@ import java.io.FileInputStream;
 public class DlgFrColorPalette extends DialogFragment implements View.OnClickListener {
 
 
-    ImageView vImage;
-    ImageView vColorSample;
-    View vContainer;
+    private ImageView vImage;
+    private ImageView vColorSample;
+    private View vContainer;
 
 
-    ImageView v_c;
-    ImageView v_vb;
-    ImageView v_m;
-    ImageView v_lvb;
-    ImageView v_dvb;
-    ImageView v_lm;
-    ImageView v_dm;
-    int central_color;
-    int c_vb;
-    int c_m;
-    int c_lvb;
-    int c_dvb;
-    int c_dm;
-    int c_lm;
-    int current_color;
+    private ImageView v_c;
+    private ImageView v_vb;
+    private ImageView v_m;
+    private ImageView v_lvb;
+    private ImageView v_dvb;
+    private ImageView v_lm;
+    private ImageView v_dm;
+    private int central_color;
+    private int c_vb;
+    private int c_m;
+    private int c_lvb;
+    private int c_dvb;
+    private int c_dm;
+    private int c_lm;
+    private int current_color;
 
     private onColorAutoListener ColorAutoListener;
 
-    TextView vSampleText;
+    private TextView vSampleText;
 
-    String mCallbackFragmentName;
-    String mImgFile;
+    private String mCallbackFragmentName;
+    private String mImgFile;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -93,26 +93,26 @@ public class DlgFrColorPalette extends DialogFragment implements View.OnClickLis
 
     private View getDialogView() {
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_colorpicker_palette, null);
-        vImage = (ImageView) view.findViewById(R.id.gid_result_color_imageview);
-        vColorSample = (ImageView) view.findViewById(R.id.gid_color_imageview);
+        vImage = view.findViewById(R.id.gid_result_color_imageview);
+        vColorSample = view.findViewById(R.id.gid_color_imageview);
         vContainer = view.findViewById(R.id.gid_result_container);
 
-        v_vb = (ImageView) view.findViewById(R.id.gid_vibrant);
+        v_vb = view.findViewById(R.id.gid_vibrant);
         v_vb.setOnClickListener(this);
-        v_c = (ImageView) view.findViewById(R.id.gid_calculated_palette);
+        v_c = view.findViewById(R.id.gid_calculated_palette);
         v_c.setOnClickListener(this);
-        v_m = (ImageView) view.findViewById(R.id.gid_muted);
+        v_m = view.findViewById(R.id.gid_muted);
         v_m.setOnClickListener(this);
-        v_lvb = (ImageView) view.findViewById(R.id.gid_light_vibrant);
+        v_lvb = view.findViewById(R.id.gid_light_vibrant);
         v_lvb.setOnClickListener(this);
-        v_dvb = (ImageView) view.findViewById(R.id.gid_dark_vibrant);
+        v_dvb = view.findViewById(R.id.gid_dark_vibrant);
         v_dvb.setOnClickListener(this);
-        v_lm = (ImageView) view.findViewById(R.id.gid_light_muted);
+        v_lm = view.findViewById(R.id.gid_light_muted);
         v_lm.setOnClickListener(this);
-        v_dm = (ImageView) view.findViewById(R.id.gid_dark_muted);
+        v_dm = view.findViewById(R.id.gid_dark_muted);
 
         v_dm.setOnClickListener(this);
-        vSampleText = (TextView) view.findViewById(R.id.gid_color_text);
+        vSampleText = view.findViewById(R.id.gid_color_text);
 
         return view;
     }
@@ -148,24 +148,19 @@ public class DlgFrColorPalette extends DialogFragment implements View.OnClickLis
         builder.setTitle(R.string.grxs_auto_color);
         builder.setView(getDialogView());
         builder.setNegativeButton(R.string.grxs_cancel, null);
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
 
-                if (ColorAutoListener == null) {
-                    ColorAutoListener = (onColorAutoListener) getFragmentManager().findFragmentByTag(mCallbackFragmentName);
-                }
-                if (ColorAutoListener != null) ColorAutoListener.onColorAuto(current_color, true);
-                else dismiss();
+            if (ColorAutoListener == null) {
+                ColorAutoListener = (onColorAutoListener) getFragmentManager().findFragmentByTag(mCallbackFragmentName);
             }
+            if (ColorAutoListener != null) ColorAutoListener.onColorAuto(current_color, true);
+            else dismiss();
         });
 
         if(state==null) buildPalette();
         else drawColors();
 
-        AlertDialog d = builder.create();
-
-        return d;
+        return builder.create();
     }
 
 
@@ -192,7 +187,7 @@ public class DlgFrColorPalette extends DialogFragment implements View.OnClickLis
     }
 
     public interface onColorAutoListener {
-        public void onColorAuto(int color, boolean auto);
+        void onColorAuto(int color, boolean auto);
     }
 
 
@@ -255,7 +250,7 @@ public class DlgFrColorPalette extends DialogFragment implements View.OnClickLis
         vImage.setImageDrawable(getDrawableFromBmp());
     }
 
-    public void buildPalette() {
+    private void buildPalette() {
 
         Bitmap bm = readBmpFile();
 
@@ -267,20 +262,17 @@ public class DlgFrColorPalette extends DialogFragment implements View.OnClickLis
         final int color_central = bm.getPixel(bm.getWidth() / 2, bm.getHeight() / 2);
         central_color = color_central;
         current_color = color_central;
-        Palette.from(bm).generate(new Palette.PaletteAsyncListener() {
-            @Override
-            public void onGenerated(Palette palette) {
+        Palette.from(bm).generate(palette -> {
 
-                c_m = palette.getMutedColor(color_central);
-                c_dm = palette.getDarkMutedColor(color_central);
-                c_lm = palette.getLightMutedColor(color_central);
-                c_vb = palette.getVibrantColor(color_central);
-                c_lvb = palette.getLightVibrantColor(color_central);
-                c_dvb = palette.getDarkVibrantColor(color_central);
+            c_m = palette.getMutedColor(color_central);
+            c_dm = palette.getDarkMutedColor(color_central);
+            c_lm = palette.getLightMutedColor(color_central);
+            c_vb = palette.getVibrantColor(color_central);
+            c_lvb = palette.getLightVibrantColor(color_central);
+            c_dvb = palette.getDarkVibrantColor(color_central);
 
-                drawColors();
+            drawColors();
 
-            }
         });
 
     }

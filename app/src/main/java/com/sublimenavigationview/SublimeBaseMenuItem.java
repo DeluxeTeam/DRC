@@ -79,7 +79,7 @@ public abstract class SublimeBaseMenuItem implements Parcelable {
      */
     static final int NO_ICON = 0;
 
-    private ItemType mItemType;
+    private final ItemType mItemType;
     private boolean mValueProvidedAsync, mInvalidateEntireMenu;
 
     private boolean mBlockUpdates;
@@ -151,7 +151,7 @@ public abstract class SublimeBaseMenuItem implements Parcelable {
         mFlags = flags;
     }
 
-    protected void setParentMenu(SublimeMenu menu) {
+    void setParentMenu(SublimeMenu menu) {
         mMenu = menu;
     }
 
@@ -162,8 +162,8 @@ public abstract class SublimeBaseMenuItem implements Parcelable {
      *
      * @return true if the invocation was handled, false otherwise
      */
-    protected boolean invoke(OnNavigationMenuEventListener.Event event,
-                             SublimeBaseMenuItem item) {
+    boolean invoke(OnNavigationMenuEventListener.Event event,
+                   SublimeBaseMenuItem item) {
         if (mMenu.dispatchMenuItemSelected(item, event)) {
             return true;
         }
@@ -183,7 +183,7 @@ public abstract class SublimeBaseMenuItem implements Parcelable {
         return false;
     }
 
-    protected void attemptItemUpdate() {
+    void attemptItemUpdate() {
         if (mBlockUpdates) {
             return;
         }
@@ -251,7 +251,7 @@ public abstract class SublimeBaseMenuItem implements Parcelable {
         return mItemType;
     }
 
-    public Intent getIntent() {
+    private Intent getIntent() {
         return mIntent;
     }
 
@@ -264,7 +264,7 @@ public abstract class SublimeBaseMenuItem implements Parcelable {
         return mTitle;
     }
 
-    public SublimeBaseMenuItem setTitle(CharSequence title) {
+    private SublimeBaseMenuItem setTitle(CharSequence title) {
         mTitle = title;
         attemptItemUpdate();
         return this;
@@ -397,7 +397,7 @@ public abstract class SublimeBaseMenuItem implements Parcelable {
      * @param shown Whether to show (true) or hide (false).
      * @return Whether the item's shown state was changed
      */
-    boolean setVisibleInt(boolean shown) {
+    private boolean setVisibleInt(boolean shown) {
         final int oldFlags = mFlags;
         mFlags = (mFlags & ~HIDDEN) | (shown ? 0 : HIDDEN);
         return oldFlags != mFlags;
@@ -419,11 +419,11 @@ public abstract class SublimeBaseMenuItem implements Parcelable {
         return mTitle.toString();
     }
 
-    public SublimeMenu getMenu() {
+    SublimeMenu getMenu() {
         return mMenu;
     }
 
-    protected int getFlags() {
+    private int getFlags() {
         return mFlags;
     }
 

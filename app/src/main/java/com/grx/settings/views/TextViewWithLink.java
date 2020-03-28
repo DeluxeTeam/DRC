@@ -23,7 +23,6 @@ import com.grx.settings.utils.GrxPrefsUtils;
 public class TextViewWithLink extends TextView implements View.OnClickListener{
 
     private String mUrl;
-    private boolean mAnimateText;
 
     public TextViewWithLink(Context context){
         super(context);
@@ -36,7 +35,7 @@ public class TextViewWithLink extends TextView implements View.OnClickListener{
 
     private void ini_params(Context context, AttributeSet attributeSet) {
         mUrl = attributeSet.getAttributeValue(null, Common.INFO_ATTR_ULR);
-        mAnimateText = attributeSet.getAttributeBooleanValue(null, Common.INFO_ATTR_ANIMATE_TEXT,false);
+        boolean mAnimateText = attributeSet.getAttributeBooleanValue(null, Common.INFO_ATTR_ANIMATE_TEXT, false);
         if(mUrl!=null) {
             setClickable(true);
             setOnClickListener(this);

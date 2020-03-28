@@ -1,5 +1,5 @@
 package com.qfcolorpicker;
 
-public interface OnColorSelectedListener {
+interface OnColorSelectedListener {
 	void onColorSelected(int selectedColor);
 }

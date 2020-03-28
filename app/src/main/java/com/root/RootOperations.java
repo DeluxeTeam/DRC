@@ -55,7 +55,7 @@ public class RootOperations {
         return existFile(file, root ? RootUtils.getSU() : null);
     }
 
-    public static boolean existFile(String file, RootUtils.SU su) {
+    private static boolean existFile(String file, RootUtils.SU su) {
         return su == null ? new File(file).exists() : new RootFile(file, su).exists();
 
     }

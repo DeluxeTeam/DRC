@@ -62,24 +62,21 @@ import java.util.List;
 
 public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItemClickListener, ExpandableListView.OnChildClickListener {
 
-    List<ResolveInfo> mShortCutsList=null;
-    List<ResolveInfo> mUsuAppsList=null;
-    List<GrxActivityInfo> mActivitiesList=null;
-    List<GrxCustomActionInfo> mCustomActionsList=null;
+    private List<ResolveInfo> mShortCutsList=null;
+    private List<ResolveInfo> mUsuAppsList=null;
+    private List<GrxActivityInfo> mActivitiesList=null;
+    private List<GrxCustomActionInfo> mCustomActionsList=null;
     private ArrayList<ItemSpinner> mSpinnerList;
 
-    AsyncTask<Void, Void, Void> loader;
+    private AsyncTask<Void, Void, Void> loader;
 
     private Spinner mSpinner;
     private ProgressBar mProgressBar;
     private TextView vtxtprogressbar;
     private ListView vListView;
-    private ListView vListViewApps;
     private ExpandableListView vExpListView;
     private LinearLayout vSelectionContainer;
     private LinearLayout vButtonsContainer;
-    private LinearLayout vExpandButton;
-    private LinearLayout vCollapseButton;
 
     private int mIdOptionsArr;
     private int mIdValuesArr;
@@ -91,8 +88,6 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
     private boolean mShowCustomActions;
     private String mHelperFragment;
     private String mKey;
-    private String mTitle;
-    private String mValue;
     private GrxAccesListener mCallBack;
     private boolean mMultiOptionMode;
     private boolean mSaveCustomActionsIcons;
@@ -183,11 +178,11 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
     /**** logic for shortcuts *****/
 
     private void getShortCut(int pos){
-        ResolveInfo ri = (ResolveInfo) mShortCutsList.get(pos);
+        ResolveInfo ri = mShortCutsList.get(pos);
         mAuxShortCutActivityLabel=null;
         try {
             mAuxShortCutActivityLabel = ri.loadLabel(getActivity().getPackageManager()).toString();
-        }catch (Exception e){
+        }catch (Exception ignored){
 
         }  //save app label name to a temp var, now lets try to get shortcut  now. This is f.e. Whatsapp chat:  - let´s try to get the contact - group - ... intent now
 
@@ -218,7 +213,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
                     }
                 }
                 if(ico==null){
-                    ico = (Bitmap) data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON);
+                    ico = data.getParcelableExtra(Intent.EXTRA_SHORTCUT_ICON);
                 }
 
                 if(ico!=null){
@@ -226,7 +221,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
                     if(!GrxImageHelper.save_png_from_bitmap(ico,tmp_name)) tmp_name = null;
                     else GrxPrefsUtils.setReadWriteFilePermissions(tmp_name);
                 }
-                getIntentFromShortcut((Intent)data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT), data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME),tmp_name);
+                getIntentFromShortcut(data.getParcelableExtra(Intent.EXTRA_SHORTCUT_INTENT), data.getStringExtra(Intent.EXTRA_SHORTCUT_NAME),tmp_name);
             }
         }
     }
@@ -253,7 +248,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
     }
 
     private void getIntentFromUserapp(int pos){
-        ResolveInfo ri_app = (ResolveInfo) mUsuAppsList.get(pos);
+        ResolveInfo ri_app = mUsuAppsList.get(pos);
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         intent.putExtra(Common.EXTRA_URI_TYPE,Common.ID_ACCESS_APPS);
@@ -305,7 +300,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
     }
 
 
-    public void showCurrentUserSelection(){
+    private void showCurrentUserSelection(){
 
         Drawable icon = null;
         String label=null;
@@ -346,18 +341,18 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         vSelectionContainer.removeAllViews();
         LinearLayout ll = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxaccess_item,null);
 
-        ImageView iv = (ImageView) ll.findViewById(R.id.gid_access_item_img);
+        ImageView iv = ll.findViewById(R.id.gid_access_item_img);
         if (tintcolor!=0) iv.setColorFilter(tintcolor);
         if(drawable==null) iv.setVisibility(View.GONE);
         else iv.setImageDrawable(drawable);
 
         //bbbbbbbbbbbbbbb
 
-        TextView tv = (TextView) ll.findViewById(R.id.gid_access_item_text);
+        TextView tv = ll.findViewById(R.id.gid_access_item_text);
         if(text!=null) tv.setText(text);
         GrxPrefsUtils.animateTextviewMarquee(tv);
         tv.setSelected(true);
-        ImageView arrow = (ImageView) ll.findViewById(R.id.gid_arrow_icon);
+        ImageView arrow = ll.findViewById(R.id.gid_arrow_icon);
         if(clickable) arrow.setVisibility(View.VISIBLE);
        //ll.setClickable(clickable);
         vSelectionContainer.addView(ll);
@@ -367,7 +362,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
 
 
     private String getCurrenttimemillisFileIconName(){
-        return Common.CacheDir + File.separator + Common.TMP_PREFIX+String.valueOf(System.currentTimeMillis()) + ".png";
+        return Common.CacheDir + File.separator + Common.TMP_PREFIX+ System.currentTimeMillis() + ".png";
     }
 
 
@@ -386,49 +381,36 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
     private View getDialogView(){
 
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_grxaccess, null);
-        vButtonsContainer= (LinearLayout) view.findViewById(R.id.gid_buttons_container);
-        vExpandButton = (LinearLayout) vButtonsContainer.findViewById(R.id.gid_button_expand);
-        vCollapseButton = (LinearLayout) vButtonsContainer.findViewById(R.id.gid_button_close);
+        vButtonsContainer= view.findViewById(R.id.gid_buttons_container);
+        LinearLayout vExpandButton = vButtonsContainer.findViewById(R.id.gid_button_expand);
+        LinearLayout vCollapseButton = vButtonsContainer.findViewById(R.id.gid_button_close);
         vButtonsContainer.setVisibility(View.GONE);
-        vExpandButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                expandActivitiesGroups();
+        vExpandButton.setOnClickListener(v -> expandActivitiesGroups());
+
+        vCollapseButton.setOnClickListener(v -> collapseActivitiesGroups());
+        vSelectionContainer = view.findViewById(R.id.gid_aux_info_container);
+        vSelectionContainer.setOnClickListener(v -> {
+            try {
+                if(mCurrentSelectedIntent!=null) startActivity(mCurrentSelectedIntent);
+            }catch ( Exception e){
+                e.printStackTrace();
+                Toast.makeText(getActivity(),getString(R.string.grxs_shortcut_not_allowed),Toast.LENGTH_LONG).show();
             }
         });
 
-        vCollapseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                collapseActivitiesGroups();
-            }
-        });
-        vSelectionContainer = (LinearLayout) view.findViewById(R.id.gid_aux_info_container);
-        vSelectionContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if(mCurrentSelectedIntent!=null) startActivity(mCurrentSelectedIntent);
-                }catch ( Exception e){
-                    e.printStackTrace();
-                    Toast.makeText(getActivity(),getString(R.string.grxs_shortcut_not_allowed),Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        mSpinner = view.findViewById(R.id.gid_spinner);
 
-        mSpinner = (Spinner) view.findViewById(R.id.gid_spinner);
-
-        vListView =(ListView) view.findViewById(R.id.gid_listview);
-        vExpListView = (ExpandableListView) view.findViewById(R.id.gid_expandable_listview);
+        vListView = view.findViewById(R.id.gid_listview);
+        vExpListView = view.findViewById(R.id.gid_expandable_listview);
         vExpListView.setDivider(getResources().getDrawable(R.drawable.list_divider));
         vExpListView.setChildDivider(getResources().getDrawable(R.drawable.list_divider));
 
         vListView.setOnItemClickListener(this);
         vExpListView.setOnChildClickListener(this);
 
-        vtxtprogressbar =(TextView) view.findViewById(R.id.gid_progressbar_txt);
+        vtxtprogressbar = view.findViewById(R.id.gid_progressbar_txt);
         vtxtprogressbar.setText(getString(R.string.grxs_building_sorting_list));
-        mProgressBar = (ProgressBar) view.findViewById(R.id.gid_progressbar);
+        mProgressBar = view.findViewById(R.id.gid_progressbar);
 
         vListView.setDividerHeight(Common.cDividerHeight);
         vExpListView.setDividerHeight(Common.cDividerHeight);
@@ -437,7 +419,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         vListView.setScrollingCacheEnabled(false);
         vListView.setAnimationCacheEnabled(false);
 
-        vListViewApps = (ListView) view.findViewById(R.id.gid_apps_listview);
+        ListView vListViewApps = view.findViewById(R.id.gid_apps_listview);
         vListViewApps.setDividerHeight(Common.cDividerHeight);
 
         return view;
@@ -484,9 +466,9 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
 
         mHelperFragment=getArguments().getString(Common.TAG_FRAGMENTHELPER_NAME_EXTRA_KEY);
         mKey=getArguments().getString("key");
-        mTitle=getArguments().getString("tit");
+        String mTitle = getArguments().getString("tit");
         mOriValue=getArguments().getString("val");
-        mValue=mOriValue;
+        String mValue = mOriValue;
         mShowShortCuts = getArguments().getBoolean("show_shortcuts");
         mShowApplications=getArguments().getBoolean("show_aps");
         mShowActivities=getArguments().getBoolean("show_activities");
@@ -497,39 +479,32 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         mSaveCustomActionsIcons=getArguments().getBoolean("save_icons");
         mMultiOptionMode=getArguments().getBoolean("mode_multi");
 
-        if(mIdOptionsArr==0 || mIdValuesArr == 0 ) mShowCustomActions=false;
-        else mShowCustomActions=true;
+        mShowCustomActions= mIdOptionsArr != 0 && mIdValuesArr != 0;
 
         if (state != null) mValue =  state.getString("curr_val");
 
-        if(mValue!=null && !mValue.isEmpty()){
+        if(mValue !=null && !mValue.isEmpty()){
             try{
                 mCurrentSelectedIntent=Intent.parseUri(mValue,0);
-            }catch (URISyntaxException e){}
+            }catch (URISyntaxException ignored){}
 
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle);
         builder.setView(getDialogView());
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mDeleteTmpFileOnDismiss=true;
-                dismiss();
-            }
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> {
+            mDeleteTmpFileOnDismiss=true;
+            dismiss();
         });
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                checkCallback();
-                mDeleteTmpFileOnDismiss=false;
-                if(mCallBack!=null && mCurrentSelectedIntent!=null) {
-                    String curr_uri = mCurrentSelectedIntent.toUri(0);
-                    if(mOriValue.equals(curr_uri)) mDeleteTmpFileOnDismiss = true;
-                    else mCallBack.GrxSetAccess(curr_uri);
-                } else mDeleteTmpFileOnDismiss = true;
-            }
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+            checkCallback();
+            mDeleteTmpFileOnDismiss=false;
+            if(mCallBack!=null && mCurrentSelectedIntent!=null) {
+                String curr_uri = mCurrentSelectedIntent.toUri(0);
+                if(mOriValue.equals(curr_uri)) mDeleteTmpFileOnDismiss = true;
+                else mCallBack.GrxSetAccess(curr_uri);
+            } else mDeleteTmpFileOnDismiss = true;
         });
 
         iniSpinner();
@@ -582,25 +557,25 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
 
 
 
-    private class ItemSpinner {
-        private String Texto;
-        private int id;
+    private static class ItemSpinner {
+        private final String Texto;
+        private final int id;
 
-        public ItemSpinner(String texto, int i) {
+        ItemSpinner(String texto, int i) {
             Texto = texto;
             id = i;
         }
 
-        public String getLabel() {
+        String getLabel() {
             return Texto;
         }
 
-        public int getId() {
+        int getId() {
             return id;
         }
     }
 
-    private BaseAdapter SpinnerAdapter = new BaseAdapter() {
+    private final BaseAdapter SpinnerAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return mSpinnerList.size();
@@ -622,7 +597,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
             if (convertView == null) {
                 cvh = new CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxaccess_spinner, null);
-                cvh.vCtxt = (TextView) convertView.findViewById(R.id.gid_text);
+                cvh.vCtxt = convertView.findViewById(R.id.gid_text);
                 convertView.setTag(cvh);
             } else {
                 cvh = (CustomViewHolder) convertView.getTag();
@@ -638,7 +613,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         }
 
         class CustomViewHolder {
-            public TextView vCtxt;
+            TextView vCtxt;
         }
     };
 
@@ -656,9 +631,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         for (PackageInfo packinfo : ListaPaquetes){
             intent.setPackage(packinfo.packageName);
             List<ResolveInfo> mActivitiesList = getActivity().getPackageManager().queryIntentActivities(intent, 0);
-            for(ResolveInfo resolveInfo : mActivitiesList) {
-                mShortCutsList.add(resolveInfo);
-            }
+            mShortCutsList.addAll(mActivitiesList);
         }
         Collections.sort(mShortCutsList, new ResolveInfo.DisplayNameComparator(getActivity().getPackageManager()));
     }
@@ -681,7 +654,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
             @Override
             protected Void doInBackground(Void... params) {
                 if(mShortCutsList==null){
-                    mShortCutsList = new ArrayList<ResolveInfo>();
+                    mShortCutsList = new ArrayList<>();
                     buildShortcutsList();
                 }
 
@@ -696,14 +669,14 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
                 vListView.setAdapter(null);
                 vListView.setAdapter(mShortCutsAdapter);
                 vListView.setVisibility(View.VISIBLE);
-                if(mSpinnerList.size()>1) mSpinner.setEnabled(true);;
+                if(mSpinnerList.size()>1) mSpinner.setEnabled(true);
             }
         }.execute();
     }
 
 
 
-    private BaseAdapter mShortCutsAdapter = new BaseAdapter() {
+    private final BaseAdapter mShortCutsAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return mShortCutsList.size();
@@ -725,14 +698,14 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
             if (convertView == null) {
                 cvh = new CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxaccess_item, null);
-                cvh.vImg = (ImageView) convertView.findViewById(R.id.gid_access_item_img);
-                cvh.vTxt = (TextView) convertView.findViewById(R.id.gid_access_item_text);
+                cvh.vImg = convertView.findViewById(R.id.gid_access_item_img);
+                cvh.vTxt = convertView.findViewById(R.id.gid_access_item_text);
                 convertView.setTag(cvh);
             } else {
                 cvh = (CustomViewHolder) convertView.getTag();
             }
             //ResolveInfo item = (ResolveInfo) this.getItem(position);
-            ResolveInfo item = (ResolveInfo) mShortCutsList.get(position);
+            ResolveInfo item = mShortCutsList.get(position);
             cvh.vTxt.setText(item.loadLabel(getActivity().getPackageManager()));
             cvh.vImg.setImageDrawable(item.loadIcon(getActivity().getPackageManager()));
 
@@ -740,8 +713,8 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         }
 
         class CustomViewHolder {
-            public ImageView vImg;
-            public TextView vTxt;
+            ImageView vImg;
+            TextView vTxt;
         }
     };
 
@@ -754,12 +727,12 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
 
     private void buildCustomActionsList(){
         TypedArray icons_array=null;
-        String vals_array[] = getResources().getStringArray(mIdValuesArr);
-        String opt_array[] = getResources().getStringArray(mIdOptionsArr);
+        String[] vals_array = getResources().getStringArray(mIdValuesArr);
+        String[] opt_array = getResources().getStringArray(mIdOptionsArr);
         if(mIdIconsArray!=0){
             icons_array = getResources().obtainTypedArray(mIdIconsArray);
         }
-        mCustomActionsList = new ArrayList<GrxCustomActionInfo>();
+        mCustomActionsList = new ArrayList<>();
         for(int i=0;i<vals_array.length;i++){
             Drawable drwtmp = null;
             String drawable_name = null;
@@ -771,7 +744,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
                 }
             }
 
-            mCustomActionsList.add(new GrxCustomActionInfo(opt_array[i],vals_array[i], drwtmp, drawable_name) );
+            mCustomActionsList.add(new GrxCustomActionInfo(opt_array[i], vals_array[i], drwtmp, drawable_name));
         }
         if(icons_array!=null) icons_array.recycle();
     }
@@ -814,7 +787,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
 
 
 
-    private BaseAdapter mCustomActionAdapter = new BaseAdapter() {
+    private final BaseAdapter mCustomActionAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return mCustomActionsList.size();
@@ -836,14 +809,14 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
             if (convertView == null) {
                 cvh = new CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxaccess_item, null);
-                cvh.vImg = (ImageView) convertView.findViewById(R.id.gid_access_item_img);
-                cvh.vTxt = (TextView) convertView.findViewById(R.id.gid_access_item_text);
+                cvh.vImg = convertView.findViewById(R.id.gid_access_item_img);
+                cvh.vTxt = convertView.findViewById(R.id.gid_access_item_text);
                 if(mIconsTintColor!=0) cvh.vImg.setColorFilter(mIconsTintColor);
                 convertView.setTag(cvh);
             } else {
                 cvh = (CustomViewHolder) convertView.getTag();
             }
-            GrxCustomActionInfo item = (GrxCustomActionInfo) mCustomActionsList.get(position);
+            GrxCustomActionInfo item = mCustomActionsList.get(position);
             cvh.vTxt.setText(item.getLabel());
             if(item.getIcon()!=null) cvh.vImg.setImageDrawable( item.getIcon());
             // else cvh.vImg.setImageDrawable(getResources().getDrawable(R.drawable.circle));
@@ -852,41 +825,41 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         }
 
         class CustomViewHolder {
-            public ImageView vImg;
-            public TextView vTxt;
+            ImageView vImg;
+            TextView vTxt;
         }
     };
 
 
 
-    private class GrxCustomActionInfo{
-        private String mLabel;
-        private String mValue;
-        private Drawable mIcon;
-        private String mDrawableName;
+    private static class GrxCustomActionInfo{
+        private final String mLabel;
+        private final String mValue;
+        private final Drawable mIcon;
+        private final String mDrawableName;
 
-        public GrxCustomActionInfo(String label, String val, Drawable icon, String drawable_name) {
+        GrxCustomActionInfo(String label, String val, Drawable icon, String drawable_name) {
             mValue  = val;
             mLabel = label;
             mIcon = icon;
             mDrawableName = drawable_name;
         }
 
-        public String getLabel() {
+        String getLabel() {
             return mLabel;
 
         }
 
-        public String getVal() {
+        String getVal() {
             return mValue;
 
         }
 
-        public String getDrawableName(){
+        String getDrawableName(){
             return mDrawableName;
         }
 
-        public Drawable getIcon(){
+        Drawable getIcon(){
             return mIcon;
         }
     }
@@ -906,7 +879,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         boolean error=false;
         Intent intent;
 
-        ActivityInfo ai[]=mActivitiesList.get(groupPosition).getPackageInfo().activities;
+        ActivityInfo[] ai =mActivitiesList.get(groupPosition).getPackageInfo().activities;
         if(ai!=null) {
             intent = new Intent();
             intent.setComponent(new ComponentName(ai[childPosition].packageName,ai[childPosition].name ));
@@ -939,10 +912,10 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         List<PackageInfo> ListaPaquetes = getActivity().getPackageManager().getInstalledPackages(PackageManager.GET_ACTIVITIES);
         PackageManager pm = getActivity().getPackageManager();
         int i=0;
-        mActivitiesList = new ArrayList<GrxActivityInfo>();
+        mActivitiesList = new ArrayList<>();
         for(i=0;i<ListaPaquetes.size();i++){
             PackageInfo pi = ListaPaquetes.get(i);
-            ActivityInfo ai[] = pi.activities;
+            ActivityInfo[] ai = pi.activities;
 
             if (ai!=null && ai.length!=0){
                 mActivitiesList.add(new GrxActivityInfo(pi, pi.applicationInfo.loadLabel(pm).toString()));
@@ -951,16 +924,13 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         }
 
         try {
-            Collections.sort(mActivitiesList, new Comparator<GrxActivityInfo>() {
-                @Override
-                public int compare(GrxActivityInfo A_actinfo, GrxActivityInfo actinfo) {
-                    try {
-                        return String.CASE_INSENSITIVE_ORDER.compare(A_actinfo.getLabel(), actinfo.getLabel());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    return 0;
+            Collections.sort(mActivitiesList, (A_actinfo, actinfo) -> {
+                try {
+                    return String.CASE_INSENSITIVE_ORDER.compare(A_actinfo.getLabel(), actinfo.getLabel());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+                return 0;
             });
         }catch (Exception e){
             e.printStackTrace();
@@ -969,21 +939,21 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
     }
 
 
-    private class GrxActivityInfo{
-        private PackageInfo pinfo;
-        private String label;
+    private static class GrxActivityInfo{
+        private final PackageInfo pinfo;
+        private final String label;
 
-        public GrxActivityInfo(PackageInfo pi, String etiqueta) {
+        GrxActivityInfo(PackageInfo pi, String etiqueta) {
             pinfo=pi;
             label=etiqueta;
         }
 
-        public String getLabel() {
+        String getLabel() {
             return label;
 
         }
 
-        public PackageInfo getPackageInfo() {
+        PackageInfo getPackageInfo() {
             return pinfo;
         }
 
@@ -1029,7 +999,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
 
 
 
-    BaseExpandableListAdapter mActivityGroupAdapter = new BaseExpandableListAdapter(){
+    private final BaseExpandableListAdapter mActivityGroupAdapter = new BaseExpandableListAdapter(){
 
         @Override
         public Object getChild(int groupPosition, int childPosition) {
@@ -1104,13 +1074,13 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
             if (convertView == null) {
                 cvh = new CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxaccess_child_activity_item, null);
-                cvh.vTxt = (TextView) convertView.findViewById(R.id.gid_access_item_text);
-                cvh.vImgIcono = (ImageView) convertView.findViewById(R.id.gid_access_item_img);
+                cvh.vTxt = convertView.findViewById(R.id.gid_access_item_text);
+                cvh.vImgIcono = convertView.findViewById(R.id.gid_access_item_img);
                 convertView.setTag(cvh);
             } else {
                 cvh = (CustomViewHolder) convertView.getTag();
             }
-            GrxActivityInfo item = (GrxActivityInfo) mActivitiesList.get(groupPosition);
+            GrxActivityInfo item = mActivitiesList.get(groupPosition);
             String txt_act = (String) getChild(groupPosition,childPosition);
 
             cvh.vImgIcono.setImageDrawable(get_activity_icon(item.getPackageInfo().activities[childPosition],pm));
@@ -1126,13 +1096,13 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
                 //convertView = LayoutInflater.from(getActivity()).inflate(android.R.layout.simple_list_item_1, null);
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxaccess_item, null);
                 //cvh.vTxt = (TextView) convertView.findViewById(android.R.id.text1);
-                cvh.vTxt = (TextView) convertView.findViewById(R.id.gid_access_item_text);
-                cvh.vImgIcono = (ImageView) convertView.findViewById(R.id.gid_access_item_img);
+                cvh.vTxt = convertView.findViewById(R.id.gid_access_item_text);
+                cvh.vImgIcono = convertView.findViewById(R.id.gid_access_item_img);
                 convertView.setTag(cvh);
             } else {
                 cvh = (CustomViewHolder) convertView.getTag();
             }
-            GrxActivityInfo item = (GrxActivityInfo) mActivitiesList.get(groupPosition);
+            GrxActivityInfo item = mActivitiesList.get(groupPosition);
             cvh.vTxt.setTypeface(Typeface.DEFAULT_BOLD);
             cvh.vTxt.setText(item.getLabel());
             cvh.vImgIcono.setImageDrawable(item.getPackageInfo().applicationInfo.loadIcon(getActivity().getPackageManager()));
@@ -1140,8 +1110,8 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         }
 
         class CustomViewHolder {
-            public TextView vTxt;
-            public ImageView vImgIcono;
+            TextView vTxt;
+            ImageView vImgIcono;
         }
 
     };
@@ -1159,9 +1129,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         for (PackageInfo packinfo : ListaPaquetes){
             intent.setPackage(packinfo.packageName);
             List<ResolveInfo> mActivitiesList = getActivity().getPackageManager().queryIntentActivities(intent, 0);
-            for(ResolveInfo resolveInfo : mActivitiesList) {
-                mUsuAppsList.add(resolveInfo);
-            }
+            mUsuAppsList.addAll(mActivitiesList);
         }
 
         Collections.sort(mUsuAppsList, new ResolveInfo.DisplayNameComparator(getActivity().getPackageManager()));
@@ -1185,7 +1153,7 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
             @Override
             protected Void doInBackground(Void... params) {
                 if(mUsuAppsList==null) {
-                    mUsuAppsList = new ArrayList<ResolveInfo>();
+                    mUsuAppsList = new ArrayList<>();
                     buildAppsList();
                 }
                 return null;
@@ -1199,14 +1167,14 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
                 vListView.setAdapter(mUserAppAdapter);
                 mProgressBar.setVisibility(View.GONE);
                 vListView.setVisibility(View.VISIBLE);
-                if(mSpinnerList.size()>1) mSpinner.setEnabled(true);;
+                if(mSpinnerList.size()>1) mSpinner.setEnabled(true);
             }
         }.execute();
     }
 
 
 
-    private BaseAdapter mUserAppAdapter = new BaseAdapter() {
+    private final BaseAdapter mUserAppAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return mUsuAppsList.size();
@@ -1228,14 +1196,14 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
             if (convertView == null) {
                 cvh = new CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxaccess_item, null);
-                cvh.vImgIcono = (ImageView) convertView.findViewById(R.id.gid_access_item_img);
-                cvh.vTxt = (TextView) convertView.findViewById(R.id.gid_access_item_text);
+                cvh.vImgIcono = convertView.findViewById(R.id.gid_access_item_img);
+                cvh.vTxt = convertView.findViewById(R.id.gid_access_item_text);
                 convertView.setTag(cvh);
             } else {
                 cvh = (CustomViewHolder) convertView.getTag();
             }
             //ResolveInfo item = (ResolveInfo) this.getItem(position);
-            ResolveInfo item = (ResolveInfo) mUsuAppsList.get(position);
+            ResolveInfo item = mUsuAppsList.get(position);
             cvh.vTxt.setText(item.loadLabel(getActivity().getPackageManager()));
             cvh.vImgIcono.setImageDrawable(item.loadIcon(getActivity().getPackageManager()));
 
@@ -1243,8 +1211,8 @@ public class DlgFrGrxAccess extends DialogFragment implements AdapterView.OnItem
         }
 
         class CustomViewHolder {
-            public ImageView vImgIcono;
-            public TextView vTxt;
+            ImageView vImgIcono;
+            TextView vTxt;
         }
     };
 

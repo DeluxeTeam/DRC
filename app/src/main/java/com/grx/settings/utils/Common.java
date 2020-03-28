@@ -15,7 +15,6 @@ package com.grx.settings.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.text.TextUtils;
 import android.view.ContextThemeWrapper;
 import android.widget.LinearLayout;
 
@@ -29,10 +28,7 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 
 public class Common {
@@ -186,9 +182,9 @@ public class Common {
 
     //customizable info tabs
 
-    public static String INFO_ATTR_ULR = "grxURL";
-    public static String INFO_ATTR_ROUND_ICON = "grxCircular";
-    public static String INFO_ATTR_ANIMATE_TEXT = "grxAnimateText";
+    public static final String INFO_ATTR_ULR = "grxURL";
+    public static final String INFO_ATTR_ROUND_ICON = "grxCircular";
+    public static final String INFO_ATTR_ANIMATE_TEXT = "grxAnimateText";
 
 
     //shared global values
@@ -228,9 +224,6 @@ public class Common {
         switch (type) {
             case "flower":
                 pickerStyle = 0;
-                break;
-            case "circle":
-                pickerStyle = 1;
                 break;
             case "square":
                 pickerStyle = 2;

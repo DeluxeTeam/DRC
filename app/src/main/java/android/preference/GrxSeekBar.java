@@ -15,8 +15,6 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
@@ -46,11 +44,11 @@ public class GrxSeekBar extends GrxBasePreference implements OnSeekBarChangeList
     private SeekBar mSeekBar;
 
 
-    TextView vTxtPopup;
-    FrameLayout vPopup;
-    TextView vTxtValue;
-    TextView vTxtMax;
-    TextView vTxtMin;
+    private TextView vTxtPopup;
+    private FrameLayout vPopup;
+    private TextView vTxtValue;
+    private TextView vTxtMax;
+    private TextView vTxtMin;
     private int mAuxValue;
 
 
@@ -75,8 +73,8 @@ public class GrxSeekBar extends GrxBasePreference implements OnSeekBarChangeList
         if(mSeekbarColor!=0) {
 
 
-            int states[][] = {{android.R.attr.state_checked}, {}};
-            int colors[] = {mSeekbarColor, mSeekbarColor};
+            int[][] states = {{android.R.attr.state_checked}, {}};
+            int[] colors = {mSeekbarColor, mSeekbarColor};
             mSeekBar.setThumbTintList(new ColorStateList(states, colors));
             //  mSeekBar.getThumb().setTint(mSeekbarColor);
             mSeekBar.getProgressDrawable().setColorFilter(mSeekbarColor, PorterDuff.Mode.MULTIPLY);
@@ -124,13 +122,13 @@ public class GrxSeekBar extends GrxBasePreference implements OnSeekBarChangeList
         View view = super.onCreateView(parent);
         LinearLayout layout = (LinearLayout) view;
         layout.setOrientation(LinearLayout.VERTICAL);
-        vPopup = (FrameLayout) view.findViewById(R.id.gid_popup);
-        vTxtPopup =(TextView) vPopup.findViewById(R.id.gid_popup_txt);
-        vTxtValue =(TextView) view.findViewById(R.id.gid_txt);
-        View widget = view.findViewById(android.R.id.widget_frame);;
+        vPopup = view.findViewById(R.id.gid_popup);
+        vTxtPopup = vPopup.findViewById(R.id.gid_popup_txt);
+        vTxtValue = view.findViewById(R.id.gid_txt);
+        View widget = view.findViewById(android.R.id.widget_frame);
         widget.setPadding(0,0,0,0);
-        vTxtMax = (TextView) widget.findViewById(R.id.gid_seekbar_max_value);
-        vTxtMin = (TextView) widget.findViewById(R.id.gid_seekbar_min_value);
+        vTxtMax = widget.findViewById(R.id.gid_seekbar_max_value);
+        vTxtMin = widget.findViewById(R.id.gid_seekbar_min_value);
         if(myPrefAttrsInfo!=null) {
             if(myPrefAttrsInfo.getMySummary().isEmpty()){
                 FrameLayout.LayoutParams newpopupparams = (FrameLayout.LayoutParams) vPopup.getLayoutParams();
@@ -148,11 +146,11 @@ public class GrxSeekBar extends GrxBasePreference implements OnSeekBarChangeList
     public void onBindView(View view) {
         vTxtMax.setText(String.valueOf(mMax));
         vTxtMin.setText(String.valueOf(mMin));
-        mSeekBar = (SeekBar) view.findViewById(R.id.gid_seekbar);
+        mSeekBar = view.findViewById(R.id.gid_seekbar);
         mSeekBar.setMax(mMax - mMin);
         mSeekBar.setOnSeekBarChangeListener(this);
         mSeekBar.setProgress(mIntValue - mMin);
-        vTxtValue.setText(String.valueOf(mIntValue)+ " "+mUnits);
+        vTxtValue.setText(mIntValue + " "+mUnits);
         setSeekbarColors();
         super.onBindView(view);
         if (view != null && !view.isEnabled()) {
@@ -180,11 +178,11 @@ public class GrxSeekBar extends GrxBasePreference implements OnSeekBarChangeList
         }*/
         mIntValue = newValue;
         seekBar.setProgress(mIntValue - mMin);
-        if(vTxtValue!=null) vTxtValue.setText(String.valueOf(mIntValue)+ " "+mUnits);
-        if(mUnits.isEmpty()) vTxtValue.setText(String.valueOf(mIntValue)+ " "+mUnits);
+        if(vTxtValue!=null) vTxtValue.setText(mIntValue + " "+mUnits);
+        if(mUnits.isEmpty()) vTxtValue.setText(mIntValue + " "+mUnits);
         if(mPopup) {
             if(mUnits.isEmpty()) vTxtPopup.setText(String.valueOf(mIntValue));
-            else vTxtPopup.setText(String.valueOf(mIntValue)+ " "+mUnits);
+            else vTxtPopup.setText(mIntValue + " "+mUnits);
         }
         //persistInt(newValue);  // un-comment for real time changes. BUT do not use customized dependencies if your seekbar´s values range is big and interval little or it will be laggy.
     }
@@ -226,7 +224,7 @@ public class GrxSeekBar extends GrxBasePreference implements OnSeekBarChangeList
                 int temp = 0;
                 try {
                     temp = (Integer) defaultValue;
-                } catch (Exception ex) {
+                } catch (Exception ignored) {
                 }
 
                 mIntValue = temp;
