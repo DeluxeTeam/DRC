@@ -18,7 +18,7 @@ public final class MenuItem {
     public final Drawable background;
     public final int direction;
 
-    public MenuItem(int width, String text, int textSize, int textColor, Drawable icon, Drawable background, int direction) {
+    private MenuItem(int width, String text, int textSize, int textColor, Drawable icon, Drawable background, int direction) {
         this.width = width;
         this.text = text;
         this.textSize = textSize;

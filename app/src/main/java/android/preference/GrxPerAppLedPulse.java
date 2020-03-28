@@ -24,7 +24,6 @@ import java.util.regex.Pattern;
 
 public class GrxPerAppLedPulse extends GrxBasePreference implements DlgFrGrxPerAppLedPulse.PerAppLedPulseListener{
 
-    private String mLabel;
     private boolean showSystemApps;
 
 
@@ -63,9 +62,10 @@ public class GrxPerAppLedPulse extends GrxBasePreference implements DlgFrGrxPerA
             String[] arr = mStringValue.split(Pattern.quote(myPrefAttrsInfo.getMySeparator()));
             numitems=arr.length;
         }
-        if(numitems==0) mLabel="";/*myPrefAttrsInfo.getMySummary();*/
+        String mLabel;
+        if(numitems==0) mLabel ="";/*myPrefAttrsInfo.getMySummary();*/
         else mLabel = getContext().getString( R.string.grxs_num_selected,numitems ) ;
-        setSummary(myPrefAttrsInfo.getMySummary() + " " +mLabel);
+        setSummary(myPrefAttrsInfo.getMySummary() + " " + mLabel);
     }
 
 

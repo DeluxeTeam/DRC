@@ -11,8 +11,8 @@ public final class Menu {
     public static final int ITEM_SCROLL_BACK = 1;
     public static final int ITEM_DELETE_FROM_BOTTOM_TO_TOP = 2;
 
-    private List<MenuItem> mLeftMenuItems;
-    private List<MenuItem> mRightMenuItems;
+    private final List<MenuItem> mLeftMenuItems;
+    private final List<MenuItem> mRightMenuItems;
 
     private boolean mWannaOver = true;
     private boolean mWannaTransparentWhileDragging = true;
@@ -27,7 +27,7 @@ public final class Menu {
         this(wannaTransparentWhileDragging, wannaOver, 0);
     }
 
-    public Menu(boolean wannaTransparentWhileDragging, boolean wannaOver, int menuViewType) {
+    private Menu(boolean wannaTransparentWhileDragging, boolean wannaOver, int menuViewType) {
         mWannaTransparentWhileDragging = wannaTransparentWhileDragging;
         mWannaOver = wannaOver;
         mLeftMenuItems = new ArrayList<>();
@@ -35,11 +35,11 @@ public final class Menu {
         mMenuViewType = menuViewType;
     }
 
-    protected boolean isWannaOver() {
+    boolean isWannaOver() {
         return mWannaOver;
     }
 
-    protected boolean isWannaTransparentWhileDragging() {
+    boolean isWannaTransparentWhileDragging() {
         return mWannaTransparentWhileDragging;
     }
 
@@ -67,7 +67,7 @@ public final class Menu {
         }
     }
 
-    protected int getTotalBtnLength(int direction) {
+    int getTotalBtnLength(int direction) {
         int total = 0;
         if (direction == MenuItem.DIRECTION_LEFT) {
             for (MenuItem menuItem : mLeftMenuItems) {
@@ -88,7 +88,7 @@ public final class Menu {
      * @param direction
      * @return
      */
-    protected List<MenuItem> getMenuItems(int direction) {
+    List<MenuItem> getMenuItems(int direction) {
         if (direction == MenuItem.DIRECTION_LEFT) {
             return mLeftMenuItems;
         } else {

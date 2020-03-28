@@ -33,7 +33,7 @@ import java.util.List;
 public class RootFile {
 
     private final String mFile;
-    private RootUtils.SU mSU;
+    private final RootUtils.SU mSU;
 
     public RootFile(String file) {
         mFile = file;
@@ -79,7 +79,7 @@ public class RootFile {
         return mSU.runCommand(mFile + args.toString());
     }
 
-    public void delete() {
+    private void delete() {
         mSU.runCommand("rm -r '" + mFile + "'");
     }
 

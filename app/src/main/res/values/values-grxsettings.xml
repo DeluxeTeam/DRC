@@ -2739,7 +2739,7 @@
 
     <string name="grxs_reset_all_prefs">Reset app values</string>
     <string name="grxs_tit_reset_all_prefs">Reset ALL values!</string>
-    <string name="grxs_msg_reset_all_prefs">Are you sure you want to reset ALL preferences and options to the default values? Device will be rebooted</string>
+    <string name="grxs_msg_reset_all_prefs">Are you sure you want to reset ALL preferences and options to the default values?</string>
 
     <string name="grxs_recovery">Restart in recovery mode</string>
     <string name="grxs_restartui">Restart UI</string>

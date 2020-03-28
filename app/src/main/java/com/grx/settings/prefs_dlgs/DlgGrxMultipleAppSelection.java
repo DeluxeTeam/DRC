@@ -51,11 +51,10 @@ import java.util.regex.Pattern;
 public class DlgGrxMultipleAppSelection extends DialogFragment implements AdapterView.OnItemClickListener {
 
 
-    DlgGrxMultipleAppSelection.OnAppsSelectedListener mCallBack;
+    private DlgGrxMultipleAppSelection.OnAppsSelectedListener mCallBack;
 
     private String mHelperFragment;
     private String mKey;
-    private String mTitle;
     private String mValue;
     private String mOriValue;
     private String mSeparator;
@@ -64,16 +63,16 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
     private boolean mShowSystemApps;
     private boolean mSaveActivityname;
 
-    public int mNumSelected =0;
+    private int mNumSelected =0;
     private String mCurrentValue;
 
-    ArrayList<GrxQuickAppInfo> mAppsInfo;
-    ArrayList<String> mSelectedApps;
+    private ArrayList<GrxQuickAppInfo> mAppsInfo;
+    private ArrayList<String> mSelectedApps;
 
     private ListView vList;
     private ProgressBar pb;
     private TextView vtxtprogressbar;
-    AsyncTask<Void, Void, Void> loader;
+    private AsyncTask<Void, Void, Void> loader;
 
     private TextView vSelectedTxt;
 
@@ -142,13 +141,13 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
 
     }
 
-    public String getReturnString(){  //grxgrxgrx
-        String resultado="";
+    private String getReturnString(){  //grxgrxgrx
+        StringBuilder resultado= new StringBuilder();
         for(String packagename_activity : mSelectedApps){
-            resultado+=packagename_activity;
-            resultado+=mSeparator;
+            resultado.append(packagename_activity);
+            resultado.append(mSeparator);
         }
-        return resultado;
+        return resultado.toString();
     }
 
     private void checkCallBack(){
@@ -177,10 +176,10 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
     @Override
     public Dialog onCreateDialog(Bundle state) {
 
-        mSelectedApps = new ArrayList<String>();
+        mSelectedApps = new ArrayList<>();
         mHelperFragment = getArguments().getString(Common.TAG_FRAGMENTHELPER_NAME_EXTRA_KEY);
         mKey = getArguments().getString("key");
-        mTitle = getArguments().getString("tit");
+        String mTitle = getArguments().getString("tit");
         mOriValue = getArguments().getString("val");
         mValue = mOriValue;
         mSeparator = getArguments().getString("separator");
@@ -198,26 +197,18 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle);
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dismiss();
-            }
-        });
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> dismiss());
 
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                    mValue = getReturnString();
-                    if(!mValue.equals(mOriValue)) {
-                        checkCallBack();
-                        if (mCallBack != null) mCallBack.OnAppsSelected(mValue);
-                    }
-                mAppsInfo.clear();
-                mSelectedApps.clear();
-                dismiss();
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> {
+                mValue = getReturnString();
+                if(!mValue.equals(mOriValue)) {
+                    checkCallBack();
+                    if (mCallBack != null) mCallBack.OnAppsSelected(mValue);
+                }
+            mAppsInfo.clear();
+            mSelectedApps.clear();
+            dismiss();
 
-            }
         });
         builder.setView(getDialogView());
 
@@ -232,7 +223,7 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
 
     private void updateDialgoSummary(){
         if(mMaxAllowed !=0)
-            vSelectedTxt.setText(getString(R.string.grxs_num_selected,mSelectedApps.size())+" ( " + String.valueOf(mMaxAllowed)+" max )");
+            vSelectedTxt.setText(getString(R.string.grxs_num_selected,mSelectedApps.size())+" ( " + mMaxAllowed +" max )");
         else
             vSelectedTxt.setText(getString(R.string.grxs_num_selected,mSelectedApps.size()));
     }
@@ -250,28 +241,28 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
         }
         mNumSelected=mSelectedApps.size();
         mAppsInfo.get(position).setIsChecked(checked);
-        CheckBox checkBox= (CheckBox) view.findViewById(R.id.gid_checkbox);
+        CheckBox checkBox= view.findViewById(R.id.gid_checkbox);
         checkBox.setChecked(checked);
         updateDialgoSummary();
     }
 
-    public View getDialogView(){
+    private View getDialogView(){
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_grxmultipleappselection,null);
-        vList = (ListView) view.findViewById(R.id.gid_listview);
+        vList = view.findViewById(R.id.gid_listview);
         vList.setFastScrollEnabled(true);
         vList.setScrollingCacheEnabled(false);
         vList.setAnimationCacheEnabled(false);
-        vSelectedTxt = (TextView) view.findViewById(R.id.gid_items_selected);
+        vSelectedTxt = view.findViewById(R.id.gid_items_selected);
 
         if(mMaxAllowed ==0) vSelectedTxt.setVisibility(View.GONE);
 
         vList.setDividerHeight(Common.cDividerHeight);
 
         vList.setOnItemClickListener(this);
-        vtxtprogressbar =(TextView) view.findViewById(R.id.gid_progressbar_txt);
+        vtxtprogressbar = view.findViewById(R.id.gid_progressbar_txt);
         vtxtprogressbar.setVisibility(View.VISIBLE);
         vtxtprogressbar.setText(getString(R.string.grxs_building_sorting_list));
-        pb = (ProgressBar) view.findViewById(R.id.gid_progressbar);
+        pb = view.findViewById(R.id.gid_progressbar);
         loader = new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPreExecute() {
@@ -309,7 +300,7 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
         List<ApplicationInfo> AppsTmp;
         ApplicationInfo applicationInfo;
 
-        ArrayList<GrxQuickAppInfo> mQuickInfoTmp = new ArrayList<GrxQuickAppInfo>();
+        ArrayList<GrxQuickAppInfo> mQuickInfoTmp = new ArrayList<>();
 
         AppsTmp = getActivity().getPackageManager().getInstalledApplications(0);
         for(int ind=0;ind<AppsTmp.size();ind++) {
@@ -344,16 +335,13 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
 
 
         try{
-            Collections.sort(mQuickInfoTmp, new Comparator<GrxQuickAppInfo>() {
-                @Override
-                public int compare(GrxQuickAppInfo A_appinfo, GrxQuickAppInfo appinfo) {
-                    try{
-                        return String.CASE_INSENSITIVE_ORDER.compare(A_appinfo.getLabel(), appinfo.getLabel());
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    return 0;
+            Collections.sort(mQuickInfoTmp, (A_appinfo, appinfo) -> {
+                try{
+                    return String.CASE_INSENSITIVE_ORDER.compare(A_appinfo.getLabel(), appinfo.getLabel());
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
+                return 0;
             });
 
         }catch (Exception e){
@@ -367,15 +355,15 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
 
     private class Qadapter extends BaseAdapter implements SectionIndexer {
 
-        List<GrxQuickAppInfo> mList;
-        HashMap<String, Integer> mapIndex;
-        String[] sections;
+        final List<GrxQuickAppInfo> mList;
+        final HashMap<String, Integer> mapIndex;
+        final String[] sections;
 
 
         Qadapter(List<GrxQuickAppInfo> qlist) {
             this.mList = qlist;
 
-            mapIndex = new LinkedHashMap<String, Integer>();
+            mapIndex = new LinkedHashMap<>();
 
             for (int x = 0; x < mList.size(); x++) {
                 String ch = mList.get(x).getLabel().substring(0, 1).toUpperCase();
@@ -384,7 +372,7 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
             }
 
             Set<String> sectionLetters = mapIndex.keySet();
-            ArrayList<String> sectionList = new ArrayList<String>(sectionLetters);
+            ArrayList<String> sectionList = new ArrayList<>(sectionLetters);
             Collections.sort(sectionList);
             sections = new String[sectionList.size()];
             sectionList.toArray(sections);
@@ -433,10 +421,10 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
             if (convertView == null) {
                 cvh = new CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxmultipleappselection_item, null);
-                cvh.vimgLogo = (ImageView) convertView.findViewById(R.id.gid_edit_button);
-                cvh.vtxtLabel = (TextView) convertView.findViewById(R.id.gid_edit_item_text);
-                cvh.vtxtPkgActName = (TextView) convertView.findViewById(R.id.gid_packagename_text);
-                cvh.vCheckbox =(CheckBox) convertView.findViewById(R.id.gid_checkbox);
+                cvh.vimgLogo = convertView.findViewById(R.id.gid_edit_button);
+                cvh.vtxtLabel = convertView.findViewById(R.id.gid_edit_item_text);
+                cvh.vtxtPkgActName = convertView.findViewById(R.id.gid_packagename_text);
+                cvh.vCheckbox = convertView.findViewById(R.id.gid_checkbox);
                 convertView.setTag(cvh);
             } else {
                 cvh = (CustomViewHolder) convertView.getTag();
@@ -452,32 +440,32 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
         }
 
         class CustomViewHolder {
-            public ImageView vimgLogo;
-            public TextView vtxtLabel;
-            public TextView vtxtPkgActName;
-            public CheckBox vCheckbox;
+            ImageView vimgLogo;
+            TextView vtxtLabel;
+            TextView vtxtPkgActName;
+            CheckBox vCheckbox;
         }
     }
 
 
     private class GrxQuickAppInfo {
 
-        private String mPackageName;
-        private String mActivityName;
-        private String mLabel;
-        private Drawable mIcon;
+        private final String mPackageName;
+        private final String mActivityName;
+        private final String mLabel;
+        private final Drawable mIcon;
         private boolean mSelected;
 
-        public  GrxQuickAppInfo(String packagename, String activity, String label, Drawable icon){
+        GrxQuickAppInfo(String packagename, String activity, String label, Drawable icon){
             mPackageName=packagename;
             mLabel=label;
             mIcon = icon;
             mActivityName = activity;
-            mSelected = mSelectedApps.contains(getValue()) ? true : false;
+            mSelected = mSelectedApps.contains(getValue());
 
         }
 
-        public String getLabel(){
+        String getLabel(){
             return mLabel;
         }
 
@@ -485,23 +473,23 @@ public class DlgGrxMultipleAppSelection extends DialogFragment implements Adapte
             return mPackageName;
         }
 
-        public String getValue(){
+        String getValue(){
             if(mSaveActivityname){
                 if(mActivityName!=null && !mActivityName.isEmpty()) return mPackageName+"/"+mActivityName;
                 else return mPackageName;
             }else return mPackageName;
         }
 
-        public Drawable getIcon(){
+        Drawable getIcon(){
             return mIcon;
         }
 
-        public boolean isSelected(){
+        boolean isSelected(){
             return mSelected;
         }
 
 
-        public void setIsChecked(boolean checked){
+        void setIsChecked(boolean checked){
             mSelected = checked;
         }
 

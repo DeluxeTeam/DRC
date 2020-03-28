@@ -18,13 +18,13 @@ class WrapperAdapter implements WrapperListAdapter, ItemMainLayout.OnItemSlideLi
     private static final int TAG_LEFT = 3 << 24;
     private static final int TAG_RIGHT = 4 << 24;
     /* 上下文 */
-    private Context mContext;
+    private final Context mContext;
     /* 适配器 */
-    private ListAdapter mAdapter;
+    private final ListAdapter mAdapter;
     /* 用户自定义参数 */
-    private Map<Integer, Menu> mMenuMap;
+    private final Map<Integer, Menu> mMenuMap;
     /* SDLV */
-    private SlideAndDragListView mListView;
+    private final SlideAndDragListView mListView;
     /* 当前滑动的item的位置 */
     private int mSlideItemPosition = -1;
     /* 监听器 */
@@ -33,7 +33,7 @@ class WrapperAdapter implements WrapperListAdapter, ItemMainLayout.OnItemSlideLi
     private onItemDeleteListenerProxy mOnItemDeleteListenerProxy;
     private OnScrollListenerProxy mOnScrollListenerProxy;
 
-    protected WrapperAdapter(Context context, SlideAndDragListView listView, ListAdapter adapter, Map<Integer, Menu> map) {
+    WrapperAdapter(Context context, SlideAndDragListView listView, ListAdapter adapter, Map<Integer, Menu> map) {
         mContext = context;
         mListView = listView;
         mListView.setOnSuperScrollListener(this);
@@ -155,7 +155,7 @@ class WrapperAdapter implements WrapperListAdapter, ItemMainLayout.OnItemSlideLi
      *
      * @param position
      */
-    protected void setSlideItemPosition(int position) {
+    void setSlideItemPosition(int position) {
         if (mSlideItemPosition != -1 && mSlideItemPosition != position) {
             returnSlideItemPosition();
         }
@@ -170,14 +170,14 @@ class WrapperAdapter implements WrapperListAdapter, ItemMainLayout.OnItemSlideLi
      *
      * @return
      */
-    protected int getSlideItemPosition() {
+    int getSlideItemPosition() {
         return mSlideItemPosition;
     }
 
     /**
      * 归位mSlideItemPosition
      */
-    protected void returnSlideItemPosition() {
+    void returnSlideItemPosition() {
         if (mSlideItemPosition != -1) {
             ItemMainLayout itemMainLayout = (ItemMainLayout) mListView.getChildAt(mSlideItemPosition - mListView.getFirstVisiblePosition());
             if (itemMainLayout != null) {
@@ -191,7 +191,7 @@ class WrapperAdapter implements WrapperListAdapter, ItemMainLayout.OnItemSlideLi
      * @param x
      * @return 是否滑动归位了
      */
-    protected int returnSlideItemPosition(float x) {
+    int returnSlideItemPosition(float x) {
         if (mSlideItemPosition != -1) {
             ItemMainLayout itemMainLayout = (ItemMainLayout) mListView.getChildAt(mSlideItemPosition - mListView.getFirstVisiblePosition());
             if (itemMainLayout != null) {
@@ -212,7 +212,7 @@ class WrapperAdapter implements WrapperListAdapter, ItemMainLayout.OnItemSlideLi
         return ItemMainLayout.SCROLL_BACK_CLICK_NOTHING;
     }
 
-    protected boolean isWannaTransparentWhileDragging(int position) {
+    boolean isWannaTransparentWhileDragging(int position) {
         int type = getItemViewType(position);
         Menu menu = mMenuMap.get(type);
         return menu.isWannaTransparentWhileDragging();
@@ -223,7 +223,7 @@ class WrapperAdapter implements WrapperListAdapter, ItemMainLayout.OnItemSlideLi
      *
      * @param onAdapterSlideListenerProxy
      */
-    protected void setOnAdapterSlideListenerProxy(OnAdapterSlideListenerProxy onAdapterSlideListenerProxy) {
+    void setOnAdapterSlideListenerProxy(OnAdapterSlideListenerProxy onAdapterSlideListenerProxy) {
         mOnAdapterSlideListenerProxy = onAdapterSlideListenerProxy;
     }
 
@@ -246,7 +246,7 @@ class WrapperAdapter implements WrapperListAdapter, ItemMainLayout.OnItemSlideLi
      *
      * @param onAdapterMenuClickListenerProxy
      */
-    protected void setOnAdapterMenuClickListenerProxy(OnAdapterMenuClickListenerProxy onAdapterMenuClickListenerProxy) {
+    void setOnAdapterMenuClickListenerProxy(OnAdapterMenuClickListenerProxy onAdapterMenuClickListenerProxy) {
         mOnAdapterMenuClickListenerProxy = onAdapterMenuClickListenerProxy;
     }
 
@@ -257,8 +257,6 @@ class WrapperAdapter implements WrapperListAdapter, ItemMainLayout.OnItemSlideLi
                     (Integer) (v.getTag(TAG_LEFT) != null ? v.getTag(TAG_LEFT) : v.getTag(TAG_RIGHT)),
                     v.getTag(TAG_LEFT) != null ? MenuItem.DIRECTION_LEFT : MenuItem.DIRECTION_RIGHT);
             switch (scroll) {
-                case Menu.ITEM_NOTHING:
-                    break;
                 case Menu.ITEM_SCROLL_BACK:
                     //归位
                     returnSlideItemPosition();
@@ -314,31 +312,31 @@ class WrapperAdapter implements WrapperListAdapter, ItemMainLayout.OnItemSlideLi
 
     }
 
-    protected interface OnAdapterMenuClickListenerProxy {
+    interface OnAdapterMenuClickListenerProxy {
         int onMenuItemClick(View v, int itemPosition, int buttonPosition, int direction);
     }
 
-    protected interface OnAdapterSlideListenerProxy {
+    interface OnAdapterSlideListenerProxy {
         void onSlideOpen(View view, int position, int direction);
 
         void onSlideClose(View view, int position, int direction);
     }
 
-    protected void setOnScrollListenerProxy(OnScrollListenerProxy onScrollListenerProxy) {
+    void setOnScrollListenerProxy(OnScrollListenerProxy onScrollListenerProxy) {
         mOnScrollListenerProxy = onScrollListenerProxy;
     }
 
-    protected interface OnScrollListenerProxy {
+    interface OnScrollListenerProxy {
         void onScrollStateChangedProxy(AbsListView view, int scrollState);
 
         void onScrollProxy(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount);
     }
 
-    protected void setOnItemDeleteListenerProxy(onItemDeleteListenerProxy onItemDeleteListenerProxy) {
+    void setOnItemDeleteListenerProxy(onItemDeleteListenerProxy onItemDeleteListenerProxy) {
         mOnItemDeleteListenerProxy = onItemDeleteListenerProxy;
     }
 
-    protected interface onItemDeleteListenerProxy {
+    interface onItemDeleteListenerProxy {
         void onDeleteBegin();
 
         void onItemDelete(View view, int position);

@@ -30,9 +30,9 @@ import java.util.regex.Pattern;
 public class GrxSingleSelection extends GrxBasePreference implements DlgFrMultiSelect.GrxMultiSelectListener{
 
     private String mLabel;
-    int iconsValueTint =0;
+    private int iconsValueTint =0;
 
-    String sep_summary =" - ";
+    private String sep_summary =" - ";
 
     public GrxSingleSelection(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -102,7 +102,7 @@ public class GrxSingleSelection extends GrxBasePreference implements DlgFrMultiS
     public void resetPreference(){
         //   delete files(mValue);
         String[] uris = mStringValue.split(Pattern.quote(myPrefAttrsInfo.getMySeparator()));
-        for(int i=0;i<uris.length;i++) GrxPrefsUtils.deleteGrxIconFileFromUriString(uris[i]);
+        for (String s : uris) GrxPrefsUtils.deleteGrxIconFileFromUriString(s);
 
         mStringValue= myPrefAttrsInfo.getMyStringDefValue();
         configStringPreference(mStringValue);

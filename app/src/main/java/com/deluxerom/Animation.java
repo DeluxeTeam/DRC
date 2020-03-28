@@ -9,12 +9,8 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
-import com.grx.settings.GrxSettingsActivity;
-import com.grx.settings.R;
 
-import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import com.grx.settings.R;
 
 @SuppressLint("AppCompatCustomView")
 public class Animation extends ImageView {

@@ -28,7 +28,6 @@ import com.grx.settings.utils.GrxImageHelper;
 public class ImageViewWithLink extends ImageView implements View.OnClickListener {
 
     private String mUrl;
-    private boolean mCircular;
 
     public ImageViewWithLink(Context context){
         super(context);
@@ -41,7 +40,7 @@ public class ImageViewWithLink extends ImageView implements View.OnClickListener
 
     private void ini_params(Context context, AttributeSet attributeSet){
         mUrl = attributeSet.getAttributeValue(null, Common.INFO_ATTR_ULR);
-        mCircular = attributeSet.getAttributeBooleanValue(null,Common.INFO_ATTR_ROUND_ICON,false);
+        boolean mCircular = attributeSet.getAttributeBooleanValue(null, Common.INFO_ATTR_ROUND_ICON, false);
         Drawable drawable = getDrawable();
         if(drawable!=null && mCircular){
             Bitmap bitmap=GrxImageHelper.get_circular_bitmap(GrxImageHelper.drawableToBitmap(drawable));

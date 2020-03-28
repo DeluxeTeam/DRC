@@ -56,7 +56,6 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
     private String mHelperFragment;
     private String mKey;
     private String mTitle;
-    private String mOriValue;
 
     private boolean mShowAllApps;
     private int mMaxNumOfApps;
@@ -74,10 +73,7 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
     private int mIdItemClicked;
 
 
-    private LinearLayout vHelpButton;
-    private LinearLayout vDeleteButton;
     private LinearLayout vAddButton;
-    private LinearLayout vSortItemsButton;
     private TextView vTxtSelectedItems;
     private SlideAndDragListView ListDragView;
 
@@ -101,41 +97,21 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
     private View getDialogView(){
 
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_grxperappcolor, null);
-        vHelpButton = (LinearLayout) view.findViewById(R.id.gid_help_button);
-        vHelpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showHelp();
-            }
-        });
+        LinearLayout vHelpButton = view.findViewById(R.id.gid_help_button);
+        vHelpButton.setOnClickListener(v -> showHelp());
 
-        vTxtSelectedItems = (TextView) view.findViewById(R.id.gid_items_selected);
+        vTxtSelectedItems = view.findViewById(R.id.gid_items_selected);
 
-        vAddButton = (LinearLayout) view.findViewById(R.id.gid_add_button);
-        vAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAppSelectionDialog();
-            }
-        });
+        vAddButton = view.findViewById(R.id.gid_add_button);
+        vAddButton.setOnClickListener(v -> showAppSelectionDialog());
 
-        vDeleteButton = (LinearLayout) view.findViewById(R.id.gid_delete_button);
-        vDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDeleteItemsDialog();
-            }
-        });
+        LinearLayout vDeleteButton = view.findViewById(R.id.gid_delete_button);
+        vDeleteButton.setOnClickListener(v -> showDeleteItemsDialog());
 
-        vSortItemsButton = (LinearLayout) view.findViewById(R.id.gid_sort_button);
-        vSortItemsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sortItemList();
-            }
-        });
+        LinearLayout vSortItemsButton = view.findViewById(R.id.gid_sort_button);
+        vSortItemsButton.setOnClickListener(v -> sortItemList());
 
-        ListDragView= (SlideAndDragListView) view.findViewById(R.id.gid_slv_listview);
+        ListDragView= view.findViewById(R.id.gid_slv_listview);
         ListDragView.setDividerHeight(Common.cDividerHeight);
 
         return view;
@@ -186,8 +162,8 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
         mHelperFragment=getArguments().getString(Common.TAG_FRAGMENTHELPER_NAME_EXTRA_KEY);
         mKey=getArguments().getString("key");
         mTitle=getArguments().getString("tit");
-        mOriValue=getArguments().getString("val");
-        mValue=mOriValue;
+        String mOriValue = getArguments().getString("val");
+        mValue= mOriValue;
         mShowAllApps = getArguments().getBoolean("show_allapps");
         mMaxNumOfApps = getArguments().getInt("max_items",0);
         mDefColor = getArguments().getInt("defcolor");
@@ -204,18 +180,8 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle);
         builder.setView(getDialogView());
-        builder.setNegativeButton(R.string.grxs_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dismiss();
-            }
-        });
-        builder.setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                setResultAndDoCallback();
-            }
-        });
+        builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> dismiss());
+        builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> setResultAndDoCallback());
 
         AlertDialog ad = builder.create();
 
@@ -236,7 +202,7 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
     }
 
 
-    private String getPackageOrActivityNameFromArrayElement(String element, int index){
+    private String getPackageOrActivityNameFromArrayElement(String element){
         String[] array;
         String package_activity="";
         array = element.split(Pattern.quote("="));
@@ -249,9 +215,9 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
         mAppList.clear();
         if (!value.isEmpty()) {
             String[] arr = value.split(Pattern.quote(mSeparator));
-            for (int ind = 0; ind < arr.length; ind++) {
-                int color = getColorFromArrayElement(arr[ind]);
-                String package_name = getPackageOrActivityNameFromArrayElement(arr[ind], 0);
+            for (String s : arr) {
+                int color = getColorFromArrayElement(s);
+                String package_name = getPackageOrActivityNameFromArrayElement(s);
                 String activity_name = null;
                 boolean isInstalled = false;
                 if (package_name != null)
@@ -267,16 +233,16 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
 
 
     private String getResultFromItemList(){
-        String resultado ="";
+        StringBuilder resultado = new StringBuilder();
         for(int ind=0;ind<mAppList.size();ind++){
-            GrxAppInfo item = (GrxAppInfo) mAppList.get(ind);
-            resultado+=item.nombre_app();
+            GrxAppInfo item = mAppList.get(ind);
+            resultado.append(item.nombre_app());
             String act = item.nombre_actividad();
-            resultado+="=";
-            resultado+=String.valueOf(mAppList.get(ind).color_app());
-            resultado+=mSeparator;
+            resultado.append("=");
+            resultado.append(String.valueOf(mAppList.get(ind).color_app()));
+            resultado.append(mSeparator);
         }
-        return resultado;
+        return resultado.toString();
     }
 
 
@@ -350,13 +316,10 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
 
         switch (direction) {
             case MenuItem.DIRECTION_LEFT:
-                switch (buttonPosition) {
-                    case 0:
-                        return Menu.ITEM_DELETE_FROM_BOTTOM_TO_TOP;
-                    default:
-                        return Menu.ITEM_NOTHING;
+                if (buttonPosition == 0) {
+                    return Menu.ITEM_DELETE_FROM_BOTTOM_TO_TOP;
                 }
-
+                return Menu.ITEM_NOTHING;
 
 
             case MenuItem.DIRECTION_RIGHT:
@@ -450,17 +413,14 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
     private void sortItemList(){
         if(mAppList.size()>1 ){
             try {
-                Collections.sort(mAppList, new Comparator<GrxAppInfo>() {
-                    @Override
-                    public int compare(GrxAppInfo A_appinfo, GrxAppInfo appinfo) {
-                        try {
-                            return String.CASE_INSENSITIVE_ORDER.compare(A_appinfo.etiqueta_app(), appinfo.etiqueta_app());
+                Collections.sort(mAppList, (A_appinfo, appinfo) -> {
+                    try {
+                        return String.CASE_INSENSITIVE_ORDER.compare(A_appinfo.etiqueta_app(), appinfo.etiqueta_app());
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        return 0;
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                    return 0;
                 });
             }catch(Exception e) {
                 e.printStackTrace();
@@ -474,18 +434,12 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
             AlertDialog ad = new AlertDialog.Builder(getActivity()).create();
             ad.setTitle(getString(R.string.grxs_delete_list));
             ad.setMessage(getString(R.string.grxs_help_delete_all_values));
-            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    mAppList.clear();
-                    updateChanges();
-                }
+            ad.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.grxs_ok), (dialog, which) -> {
+                mAppList.clear();
+                updateChanges();
             });
-            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            ad.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.grxs_cancel), (dialog, which) -> {
 
-                }
             });
             ad.show();
         }
@@ -535,7 +489,7 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
         Toast.makeText(getActivity(),getString(R.string.grxs_copied_clipboard),Toast.LENGTH_LONG).show();
     }
 
-    private BaseAdapter mAdapter = new BaseAdapter() {
+    private final BaseAdapter mAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return mAppList.size();
@@ -557,10 +511,10 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
             if (convertView == null) {
                 cvh = new CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.dlg_grxperappcolor_item_multi, null);
-                cvh.vimgLogo = (ImageView) convertView.findViewById(R.id.gid_edit_button);
-                cvh.vtxtName = (TextView) convertView.findViewById(R.id.gid_edit_item_text);
-                cvh.vtxtpaquete = (TextView) convertView.findViewById(R.id.gid_packagename_text);
-                cvh.vcolorapp = (ImageView) convertView.findViewById(R.id.gid_app_color);
+                cvh.vimgLogo = convertView.findViewById(R.id.gid_edit_button);
+                cvh.vtxtName = convertView.findViewById(R.id.gid_edit_item_text);
+                cvh.vtxtpaquete = convertView.findViewById(R.id.gid_packagename_text);
+                cvh.vcolorapp = convertView.findViewById(R.id.gid_app_color);
                 convertView.setTag(cvh);
             } else {
                 cvh = (CustomViewHolder) convertView.getTag();
@@ -577,10 +531,10 @@ public class DlgFrGrxPerAppColor extends DialogFragment implements
         }
 
         class CustomViewHolder {
-            public ImageView vimgLogo;
-            public TextView vtxtName;
-            public TextView vtxtpaquete;
-            public ImageView vcolorapp;
+            ImageView vimgLogo;
+            TextView vtxtName;
+            TextView vtxtpaquete;
+            ImageView vcolorapp;
         }
     };
 

@@ -15,8 +15,6 @@ package android.preference;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,13 +28,13 @@ import com.grx.settings.utils.Common;
 
 public class GrxButtonPreference extends GrxBasePreference {
 
-    TextView vButton =null;
-    String mButtonText=null;
+    private TextView vButton =null;
+    private String mButtonText=null;
 
 
     private int buttonbgcolor=0, buttontextcolor=0;
 
-    int mButtonStyle=0;
+    private int mButtonStyle=0;
 
     public GrxButtonPreference(Context context, AttributeSet attrs) {
         super(context,attrs);
@@ -108,8 +106,6 @@ public class GrxButtonPreference extends GrxBasePreference {
     protected View onCreateView(ViewGroup parent) {
         View view = super.onCreateView(parent);
         switch (mButtonStyle){
-            case 0:
-                break;
             case 1:
                 vButton =(Button) view.findViewById(R.id.gid_button);
                 vButton.setText(mButtonText);
@@ -122,7 +118,7 @@ public class GrxButtonPreference extends GrxBasePreference {
                 setButtonAndTextColors();
                 vButton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 if(getIcon()==null){
-                    LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.gid_icon_frame);
+                    LinearLayout linearLayout = view.findViewById(R.id.gid_icon_frame);
                     if(linearLayout!=null) linearLayout.setVisibility(View.GONE);
 
                 }
@@ -133,19 +129,14 @@ public class GrxButtonPreference extends GrxBasePreference {
 
         if(vButton!=null){
             setSelectable(false);
-            vButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    execButtonAction();
-                }
-            });
+            vButton.setOnClickListener(view1 -> execButtonAction());
         }
 
         return view;
     }
 
 
-    public void execButtonAction(){
+    private void execButtonAction(){
 
         getOnPreferenceChangeListener().onPreferenceChange(this,mIntValue);
 

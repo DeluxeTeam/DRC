@@ -45,8 +45,6 @@ public class SublimeMenuPresenter {
     private int mPaddingTopDefault;
     private SublimeThemer mThemer;
 
-    private Context mContext;
-
     private boolean mInitializing;
 
     public SublimeMenuPresenter() {
@@ -59,13 +57,12 @@ public class SublimeMenuPresenter {
      * We can now finalize the initialization phase to allow
      * invalidation of the menu when required.
      */
-    protected void setInitializationDone() {
+    void setInitializationDone() {
         mInitializing = false;
         invalidateEntireMenu();
     }
 
     public void initForMenu(Context context, SublimeMenu menu) {
-        mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         mMenu = menu;
         mPaddingTopDefault = context.getResources()
@@ -102,8 +99,8 @@ public class SublimeMenuPresenter {
         return mMenuView;
     }
 
-    protected void reportChange(SublimeMenu.Change change,
-                                List<SublimeBaseMenuItem> freshData) {
+    void reportChange(SublimeMenu.Change change,
+                      List<SublimeBaseMenuItem> freshData) {
         if (mAdapter == null) return;
 
         mAdapter.refreshData(freshData);
@@ -180,22 +177,22 @@ public class SublimeMenuPresenter {
         invalidateEntireMenu();
     }
 
-    protected boolean hasHeader() {
+    boolean hasHeader() {
         return mHeader != null && mHeader.getChildCount() > 0;
     }
 
     ////////////////////// RV
 
-    public interface Holders {
+    interface Holders {
         void initialize(SublimeBaseMenuItem sublimeMenuItemDef, int boundPosition);
     }
 
     public abstract class BaseHolder extends RecyclerView.ViewHolder
             implements Holders, View.OnClickListener {
 
-        protected int mPosition;
+        int mPosition;
 
-        public BaseHolder(View itemView) {
+        BaseHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
         }
@@ -216,7 +213,7 @@ public class SublimeMenuPresenter {
     }
 
     private class MenuViewNavigationHeaderHolder extends BaseHolder {
-        public MenuViewNavigationHeaderHolder(View itemView) {
+        MenuViewNavigationHeaderHolder(View itemView) {
             super(itemView);
         }
 
@@ -233,7 +230,7 @@ public class SublimeMenuPresenter {
     }
 
     private class MenuViewSeparatorHolder extends BaseHolder {
-        public MenuViewSeparatorHolder(View itemView) {
+        MenuViewSeparatorHolder(View itemView) {
             super(itemView);
         }
 
@@ -249,7 +246,7 @@ public class SublimeMenuPresenter {
     }
 
     private class MenuViewSubHeaderHolder extends BaseHolder {
-        public MenuViewSubHeaderHolder(View itemView) {
+        MenuViewSubHeaderHolder(View itemView) {
             super(itemView);
         }
 
@@ -267,7 +264,7 @@ public class SublimeMenuPresenter {
     }
 
     private class MenuViewTextHolder extends BaseHolder {
-        public MenuViewTextHolder(View itemView) {
+        MenuViewTextHolder(View itemView) {
             super(itemView);
         }
 
@@ -282,7 +279,7 @@ public class SublimeMenuPresenter {
 
 
     private class MenuViewCenteredTextHolder extends BaseHolder {
-        public MenuViewCenteredTextHolder (View itemView) {
+        MenuViewCenteredTextHolder(View itemView) {
             super(itemView);
         }
 
@@ -296,7 +293,7 @@ public class SublimeMenuPresenter {
     }
 
     private class MenuViewCheckboxHolder extends BaseHolder {
-        public MenuViewCheckboxHolder(View itemView) {
+        MenuViewCheckboxHolder(View itemView) {
             super(itemView);
         }
 
@@ -311,7 +308,7 @@ public class SublimeMenuPresenter {
     }
 
     private class MenuViewSwitchHolder extends BaseHolder {
-        public MenuViewSwitchHolder(View itemView) {
+        MenuViewSwitchHolder(View itemView) {
             super(itemView);
         }
 
@@ -331,7 +328,7 @@ public class SublimeMenuPresenter {
     }
 
     private class MenuViewTextWithBadgeHolder extends BaseHolder {
-        public MenuViewTextWithBadgeHolder(View itemView) {
+        MenuViewTextWithBadgeHolder(View itemView) {
             super(itemView);
         }
 
@@ -407,7 +404,7 @@ public class SublimeMenuPresenter {
             menuViewHolder.initialize(getItem(position), position);
         }
 
-        public SublimeBaseMenuItem getItem(int position) {
+        SublimeBaseMenuItem getItem(int position) {
             return mItems.get(position);
         }
 
@@ -418,7 +415,7 @@ public class SublimeMenuPresenter {
 
         @Override
         public long getItemId(int position) {
-            return (long) position;
+            return position;
         }
 
         private int resolveItemViewType(SublimeBaseMenuItem item) {
@@ -443,7 +440,7 @@ public class SublimeMenuPresenter {
             }
         }
 
-        public void refreshData(List<SublimeBaseMenuItem> freshData) {
+        void refreshData(List<SublimeBaseMenuItem> freshData) {
             mItems.clear();
             mItems.addAll(freshData);
         }

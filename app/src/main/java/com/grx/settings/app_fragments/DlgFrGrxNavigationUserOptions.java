@@ -70,19 +70,19 @@ public class DlgFrGrxNavigationUserOptions extends DialogFragment{
             SharedPreferences sp = getActivity().createPackageContext(getActivity().getPackageName(),CONTEXT_IGNORE_SECURITY).getSharedPreferences(getActivity().getPackageName()+"_preferences",MODE_PRIVATE);
             ret=sp.getInt(key, defv);
 
-        }catch (PackageManager.NameNotFoundException e){
+        }catch (PackageManager.NameNotFoundException ignored){
 
         }
         return ret;
     }
 
-    private String s_sp_val(String key, String defv){
+    private String s_sp_val(String defv){
         String ret = defv;
         try{
             SharedPreferences sp = getActivity().createPackageContext(getActivity().getPackageName(),CONTEXT_IGNORE_SECURITY).getSharedPreferences(getActivity().getPackageName()+"_preferences",MODE_PRIVATE);
-            ret=sp.getString(key, defv);
+            ret=sp.getString(Common.S_APPOPT_COLORPICKERSTYLE, defv);
 
-        }catch (PackageManager.NameNotFoundException e){
+        }catch (PackageManager.NameNotFoundException ignored){
 
         }
         return ret;
@@ -92,7 +92,7 @@ public class DlgFrGrxNavigationUserOptions extends DialogFragment{
 
         final int fab_pos = sp_val(Common.S_APPOPT_FAB_POS, 0);
 
-        AlertDialog adb = new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.grxs_fab_position)
                 .setSingleChoiceItems(R.array.grxa_fab_position, fab_pos,null)
                 .setNegativeButton(R.string.grxs_cancel,null)
@@ -105,13 +105,12 @@ public class DlgFrGrxNavigationUserOptions extends DialogFragment{
                         }
                     }
                 }).create();
-
-        return adb;
     }
 
 
     private Dialog dlg_exitConfirmation(){
-        AlertDialog adb = new AlertDialog.Builder(getActivity())
+
+        return new AlertDialog.Builder(getActivity())
             .setTitle(R.string.grxs_exit_title)
             .setMessage(R.string.grxs_exit_message)
                 .setNegativeButton(R.string.grxs_cancel,null)
@@ -123,15 +122,13 @@ public class DlgFrGrxNavigationUserOptions extends DialogFragment{
                         }
                     }
         }).create();
-
-        return adb;
     }
 
     private Dialog dlg_dividerHeight(){
 
         final int div_height = sp_val( Common.S_APPOPT_DIV_HEIGHT, getResources().getInteger(R.integer.grxi_default_list_divider_height));
 
-        AlertDialog adb = new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.grxs_divider_height)
                 .setSingleChoiceItems(R.array.grxa_divider_height, div_height,null)
                 .setNegativeButton(R.string.grxs_cancel,null)
@@ -144,14 +141,12 @@ public class DlgFrGrxNavigationUserOptions extends DialogFragment{
                         }
                     }
                 }).create();
-
-        return adb;
     }
 
 
     private Dialog dlg_panelHeaderBg(){
 
-        AlertDialog adb = new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.grxs_nav_header_bg_title)
                 .setSingleChoiceItems(R.array.grxa_panel_header_options,1,null)
                 .setNegativeButton(R.string.grxs_cancel,null)
@@ -164,8 +159,6 @@ public class DlgFrGrxNavigationUserOptions extends DialogFragment{
                         }
                     }
                 }).create();
-
-        return adb;
     }
 
 
@@ -185,7 +178,8 @@ public class DlgFrGrxNavigationUserOptions extends DialogFragment{
         //final int curr_theme = sp_val(Common.S_APPOPT_USER_SELECTED_THEME, getResources().getInteger(R.integer.grxi_default_theme));
         final int curr_theme = pos;
 
-        AlertDialog adb = new AlertDialog.Builder(getActivity())
+
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.grxs_select_theme)
                 .setSingleChoiceItems(R.array.grxa_theme_list, curr_theme,null)
                 .setNegativeButton(R.string.grxs_cancel,null)
@@ -199,16 +193,15 @@ public class DlgFrGrxNavigationUserOptions extends DialogFragment{
                     }
                 }).create();
 
-
-        return adb;
-
     }
 
 
     private Dialog dlg_setColorPickerStyle(){
-        String curr = s_sp_val(Common.S_APPOPT_COLORPICKERSTYLE,getResources().getString(R.string.grxs_colorPickerStyle_default));
+        String curr = s_sp_val(getResources().getString(R.string.grxs_colorPickerStyle_default));
         final int index = Common.getColorPickerStyleIndex(curr);
-        AlertDialog adb = new AlertDialog.Builder(getActivity())
+
+
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.grxs_color_picker_style)
                 .setSingleChoiceItems(R.array.grxa_colorpickerstyles, index,null)
                 .setNegativeButton(R.string.grxs_cancel,null)
@@ -223,13 +216,12 @@ public class DlgFrGrxNavigationUserOptions extends DialogFragment{
                 }).create();
 
 
-        return adb;
-
-
     }
 
     private Dialog dlg_runTool(){
-        AlertDialog adb = new AlertDialog.Builder(getActivity())
+
+
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.grxs_tools)
                 .setSingleChoiceItems(R.array.grxa_threedots_tools, -1,null)
                 .setNegativeButton(R.string.grxs_cancel,null)
@@ -244,13 +236,10 @@ public class DlgFrGrxNavigationUserOptions extends DialogFragment{
                 }).create();
 
 
-        return adb;
-
-
     }
 
     private Dialog dlg_resetAllPreferences(){
-        AlertDialog adb = new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.grxs_tit_reset_all_prefs)
                 .setMessage(R.string.grxs_msg_reset_all_prefs)
                 .setNegativeButton(R.string.grxs_cancel,null)
@@ -262,7 +251,6 @@ public class DlgFrGrxNavigationUserOptions extends DialogFragment{
                         }
                     }
                 }).create();
-        return adb;
     }
 
     @Override

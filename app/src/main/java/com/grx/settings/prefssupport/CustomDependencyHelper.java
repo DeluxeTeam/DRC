@@ -22,26 +22,20 @@ import java.util.regex.Pattern;
 
 public class CustomDependencyHelper {
 
-    GrxPreferenceScreen.CustomDependencyListener mListener;
+    private final GrxPreferenceScreen.CustomDependencyListener mListener;
 
-    private String mDependencyRule;
-
-    private String mSeparator;
-
-    private String mDependencyKey;
+    private final String mDependencyKey;
     private int mDependencyType;
     private boolean mEnableDependent = false;
     private String mValuesToCheck;
-    private List<String> mValuesToContain = new ArrayList<String>();
+    private final List<String> mValuesToContain = new ArrayList<>();
 
     public CustomDependencyHelper(GrxPreferenceScreen.CustomDependencyListener listener, String rule, String separator){
 
         mListener=listener;
-        mDependencyRule = rule;
-        mSeparator=separator;
 
 
-        String arr[] = rule.split(Pattern.quote("#"));
+        String[] arr = rule.split(Pattern.quote("#"));
 
         if(arr[0].toUpperCase().equals("ENABLE")) mEnableDependent = true;
 
@@ -71,14 +65,13 @@ public class CustomDependencyHelper {
             //String[] values = arr[3].split(Pattern.quote(","));
             String[] values = arr[3].split(Pattern.quote(","));
         mValuesToCheck=",";
-        for(int i = 0; i<values.length; i++){
-            String value = values[i];
-            if(value.startsWith("(") && value.endsWith(")")) {
-                String substring = value.substring(1,value.length()-1);
-                if(substring.contains("NULL"))substring=substring.replace("NULL","");
-                mValuesToContain.add(substring);
-            }else mValuesToCheck+=value+",";
-        }
+            for (String value : values) {
+                if (value.startsWith("(") && value.endsWith(")")) {
+                    String substring = value.substring(1, value.length() - 1);
+                    if (substring.contains("NULL")) substring = substring.replace("NULL", "");
+                    mValuesToContain.add(substring);
+                } else mValuesToCheck += value + ",";
+            }
         if(!mValuesToCheck.endsWith(",")) mValuesToCheck += ",";
         if(mValuesToCheck.contains("NULL")) {
             mValuesToCheck=mValuesToCheck.replace("NULL","");
@@ -106,7 +99,7 @@ public class CustomDependencyHelper {
                    String pattern = "," + value + ",";
                    matched = mValuesToCheck.contains(pattern);
                }
-               if(matched) return (matched==true) ? mEnableDependent : !mEnableDependent;
+               if(matched) return (matched) == mEnableDependent;
                for (int i = 0; i<mValuesToContain.size();i++){
                    String tmp = mValuesToContain.get(i);
                    if(value.contains(tmp)){
@@ -117,9 +110,9 @@ public class CustomDependencyHelper {
 
 
            case 3:
-               boolean dependency_value = (value.toUpperCase().equals("TRUE")) ? true: false;
-               boolean rule_value = (mValuesToCheck.toUpperCase().equals("TRUE")) ? true: false;
-               return (dependency_value == rule_value) ? mEnableDependent : !mEnableDependent;
+               boolean dependency_value = value.toUpperCase().equals("TRUE");
+               boolean rule_value = mValuesToCheck.toUpperCase().equals("TRUE");
+               return (dependency_value == rule_value) == mEnableDependent;
        }
        return true;
    }

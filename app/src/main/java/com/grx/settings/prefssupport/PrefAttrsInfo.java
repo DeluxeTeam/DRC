@@ -20,8 +20,6 @@ import com.grx.settings.R;
 import com.grx.settings.utils.BPRulesUtils;
 import com.grx.settings.utils.Common;
 
-import java.util.regex.Pattern;
-
 
 public class PrefAttrsInfo {
 
@@ -63,7 +61,7 @@ public class PrefAttrsInfo {
 
     public enum SETTINGS_PREF_TYPE {
         SHARED, SYSTEM, SECURE, GLOBAL;
-        public static SETTINGS_PREF_TYPE indexOf(int index) {
+        static SETTINGS_PREF_TYPE indexOf(int index) {
             switch (index) {
                 case 0:
                     return SHARED;
@@ -79,11 +77,10 @@ public class PrefAttrsInfo {
     }
 
 
-    public String mMyKey;
-    public String mMyTitle;
-    public String mMySummary;
+    private String mMyKey;
+    private String mMyTitle;
+    private String mMySummary;
 
-    private boolean mIsMultiValue;
     private String mMyStringDefaultValue;
     private String mMyStringSeparator="";
     private int mMyMaxItemsNum= 0;
@@ -174,12 +171,11 @@ public class PrefAttrsInfo {
     /*** string */
 
     public PrefAttrsInfo(Context context, AttributeSet attrs, CharSequence title, CharSequence summary, String key, boolean isMultivalue) {
-        mIsMultiValue = isMultivalue;
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.grxPreferences);
         mMyStringDefaultValue = ta.getString(R.styleable.grxPreferences_android_defaultValue);
         if(mMyStringDefaultValue==null) mMyStringDefaultValue="";
 
-        if(mIsMultiValue){
+        if(isMultivalue){
             mMyStringSeparator = ta.getString(R.styleable.grxPreferences_separator);
             if(mMyStringSeparator== null) mMyStringSeparator = context.getResources().getString(R.string.grxs_separator_default);
             mMyMaxItemsNum=ta.getInt(R.styleable.grxPreferences_maxChoices,0);
@@ -269,14 +265,14 @@ public class PrefAttrsInfo {
         if(ta.hasValue(R.styleable.grxPreferences_iconTint)) {
             try {
                 mIconTint = ta.getInt(R.styleable.grxPreferences_iconTint, 0);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
 
         if(ta.hasValue(R.styleable.grxPreferences_arrowColor)) {
             try {
                 mArrowTint = ta.getColor(R.styleable.grxPreferences_arrowColor, 0);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
 

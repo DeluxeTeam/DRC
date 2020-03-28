@@ -26,11 +26,10 @@ public class GrxAccessInfo {
 
     private String mLabel = null;
     private String mGrxDrawableName = null;
-    private String mGrxValue = null;
     private String mGrxIconPath = null;
     private int mGrxTypeOfAccess = -1;
 
-    Drawable mDrawableIcon;
+    private Drawable mDrawableIcon;
 
 
     public GrxAccessInfo(String uri, Context c){
@@ -52,7 +51,7 @@ public class GrxAccessInfo {
         mLabel = GrxPrefsUtils.getActivityLabelFromIntent(context, intent);
         mGrxIconPath = GrxPrefsUtils.getFileNameFromGrxIntent(intent);
         mGrxDrawableName = intent.getStringExtra(Common.EXTRA_URI_DRAWABLE_NAME);
-        mGrxValue = intent.getStringExtra(Common.EXTRA_URI_VALUE);
+        String mGrxValue = intent.getStringExtra(Common.EXTRA_URI_VALUE);
         mGrxTypeOfAccess = intent.getIntExtra(Common.EXTRA_URI_TYPE,-1);
         mDrawableIcon = GrxPrefsUtils.getDrawableFromGrxIntent(context,intent);
 

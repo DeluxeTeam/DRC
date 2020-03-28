@@ -40,15 +40,13 @@ public class GrxAccess extends GrxBasePreference implements
     private boolean mShowShortCuts;
     private boolean mShowUsuApps;
     private boolean mShowActivities;
-    int iconsValueTint =0;
-    int mType=-1;
+    private int iconsValueTint =0;
+    private int mType=-1;
 
 
     private String mLabel;
 
-    private int mTypoe = -1;
-
-    public GrxAccess(Context context, AttributeSet attrs) {
+            public GrxAccess(Context context, AttributeSet attrs) {
         super(context,attrs);
         initAttributes(context,attrs);
     }
@@ -77,7 +75,7 @@ public class GrxAccess extends GrxBasePreference implements
             try {
                 iconsValueTint = ta.getInt(R.styleable.grxPreferences_iconsValueTint, 0);
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         ta.recycle();
@@ -89,8 +87,7 @@ public class GrxAccess extends GrxBasePreference implements
 
      @Override
      protected View onCreateView(ViewGroup parent) {
-         View view = super.onCreateView(parent);
-         return view;
+         return super.onCreateView(parent);
 
      }
 
@@ -122,7 +119,7 @@ public class GrxAccess extends GrxBasePreference implements
         }
 
         mLabel = GrxPrefsUtils.getActivityLabelFromIntent(getContext(), intent);
-        mTypoe = intent.getIntExtra(Common.EXTRA_URI_TYPE,-1);
+        int mTypoe = intent.getIntExtra(Common.EXTRA_URI_TYPE, -1);
 
 
         setSummary(mLabel);

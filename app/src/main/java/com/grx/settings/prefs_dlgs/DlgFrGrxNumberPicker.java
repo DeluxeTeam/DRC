@@ -31,15 +31,15 @@ import com.grx.settings.utils.Common;
 
 public class DlgFrGrxNumberPicker extends DialogFragment {
 
-    String mkey;
-    String mHelperFragmentName;
-    String mTitle;
-    int mMin;
-    int mMax;
-    int mValue;
-    String mUnits;
+    private String mkey;
+    private String mHelperFragmentName;
+    private String mTitle;
+    private int mMin;
+    private int mMax;
+    private int mValue;
+    private String mUnits;
     private OnGrxNumberPickerSetListener mCallback;
-    NumberPicker numberPicker;
+    private NumberPicker numberPicker;
 
     public DlgFrGrxNumberPicker(){}
 
@@ -140,7 +140,7 @@ public class DlgFrGrxNumberPicker extends DialogFragment {
         numberPicker.setMaxValue(mMax);
         numberPicker.setScaleX((float) 1.25);
         numberPicker.setScaleY((float) 1.25);
-        numberPicker.setMinValue(mMin > 0 ? mMin : 0);
+        numberPicker.setMinValue(Math.max(mMin, 0));
         numberPicker.setValue(mValue);
         numberPicker.setWrapSelectorWheel(false);
         numberLayout.addView(numberPicker);
@@ -162,7 +162,7 @@ public class DlgFrGrxNumberPicker extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle state) {
-        AlertDialog dlg = new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(mTitle)
                 .setView(number_picker_view())
                 .setPositiveButton(R.string.grxs_ok, new DialogInterface.OnClickListener() {
@@ -175,7 +175,6 @@ public class DlgFrGrxNumberPicker extends DialogFragment {
                     }
                 })
                 .create();
-        return dlg;
     }
 
 }

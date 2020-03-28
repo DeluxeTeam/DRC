@@ -34,15 +34,16 @@ import java.util.regex.Pattern;
 
 public class GrxLedPulse extends GrxBasePreference implements DlgFrAppLedPulse.AppLedPulseListener  {
 
-    TextView mPulseOnView, mPulseOffView;
+    private TextView mPulseOnView;
+    private TextView mPulseOffView;
 
     private boolean mShowPulse=true;
 
-    String mColor="#FFFFFFFF";
-    String mPulseOn;
-    String mPulseOff;
+    private String mColor="#FFFFFFFF";
+    private String mPulseOn;
+    private String mPulseOff;
 
-    String mDefValue;
+    private String mDefValue;
 
     public GrxLedPulse(Context context, AttributeSet attrs) {
         super(context,attrs);
@@ -78,11 +79,11 @@ public class GrxLedPulse extends GrxBasePreference implements DlgFrAppLedPulse.A
         View view = super.onCreateView(parent);
 
         if(getIcon()==null){
-            LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.gid_icon_frame);
+            LinearLayout linearLayout = view.findViewById(R.id.gid_icon_frame);
             if(linearLayout!=null) linearLayout.setVisibility(View.GONE);
         }
-        mPulseOffView = (TextView) view.findViewById(R.id.gid_pulse_off);
-        mPulseOnView = (TextView) view.findViewById(R.id.gid_pulse_on);
+        mPulseOffView = view.findViewById(R.id.gid_pulse_off);
+        mPulseOnView = view.findViewById(R.id.gid_pulse_on);
         vWidgetIcon.setVisibility(View.VISIBLE);
         if(!mShowPulse){
             mPulseOffView.setVisibility(View.GONE);
@@ -169,7 +170,7 @@ public class GrxLedPulse extends GrxBasePreference implements DlgFrAppLedPulse.A
   private void refresPrefView(){
       CircleColorDrawable colorChoiceDrawable = null;
       Drawable currentDrawable = vWidgetIcon.getDrawable();
-      if (currentDrawable!=null && currentDrawable instanceof CircleColorDrawable)
+      if (currentDrawable instanceof CircleColorDrawable)
           colorChoiceDrawable = (CircleColorDrawable) currentDrawable;
       if (colorChoiceDrawable==null) {
           colorChoiceDrawable = new CircleColorDrawable(Color.parseColor(mColor));

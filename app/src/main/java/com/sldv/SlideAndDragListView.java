@@ -330,8 +330,7 @@ public class SlideAndDragListView<T> extends DragListView<T> implements WrapperA
         if (position != AdapterView.INVALID_POSITION) {
             View view = getChildAt(position - getFirstVisiblePosition());
             if (view instanceof ItemMainLayout) {
-                ItemMainLayout itemMainLayout = (ItemMainLayout) view;
-                return itemMainLayout;
+                return (ItemMainLayout) view;
             }
         }
         return null;
@@ -446,7 +445,7 @@ public class SlideAndDragListView<T> extends DragListView<T> implements WrapperA
      * @param position
      * @return
      */
-    protected boolean startDrag(int position) {
+    private boolean startDrag(int position) {
         boolean canDrag = scrollBackByDrag(position);
         //找到那个位置的view
         View view = getChildAt(position - getFirstVisiblePosition());
@@ -607,11 +606,11 @@ public class SlideAndDragListView<T> extends DragListView<T> implements WrapperA
      *
      * @param l
      */
-    protected void setOnSuperScrollListener(OnScrollListener l) {
+    void setOnSuperScrollListener(OnScrollListener l) {
         super.setOnScrollListener(l);
     }
 
-    public interface OnListScrollListener {
+    interface OnListScrollListener {
         int SCROLL_STATE_IDLE = 0;
         int SCROLL_STATE_TOUCH_SCROLL = 1;
         int SCROLL_STATE_FLING = 2;

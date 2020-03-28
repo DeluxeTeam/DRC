@@ -49,7 +49,7 @@ public class SublimeCheckboxItemView extends SublimeBaseItemView {
     @Override
     protected void initializeViews() {
         super.initializeViews();
-        mCheckbox = (CheckBox) findViewById(R.id.checkbox_ctrl);
+        mCheckbox = findViewById(R.id.checkbox_ctrl);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class SublimeCheckboxItemView extends SublimeBaseItemView {
         mCheckbox.setChecked(checked);
     }
 
-    public void setCheckableItemTintList(ColorStateList checkableItemTintList) {
+    private void setCheckableItemTintList(ColorStateList checkableItemTintList) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mCheckbox.setButtonTintList(checkableItemTintList);
         } else {

@@ -43,34 +43,35 @@ import java.util.LinkedList;
  */
 
 public class GrxFloatingRecents extends FrameLayout {
-    private WindowManager mWindowmanager;
-    public WindowManager.LayoutParams mLayoutParams;
-    public int lastX, lastY;
-    public int paramX, paramY;
-    public int mTextColor;
-    ListView mListView;
+    private final WindowManager mWindowmanager;
+    private final WindowManager.LayoutParams mLayoutParams;
+    private int lastX;
+    private int lastY;
+    private int paramX;
+    private int paramY;
+    private final int mTextColor;
+    private final ListView mListView;
     private boolean mPendingUpdate = false;
     private float mAlpha=readSavedAlphaValue();
     private boolean mWasMoving =false;
-    private boolean mHideWithBackKey=false;
     private boolean mHideWhenOutside=false;
 
-    private int mMaxSeen;
-    private int mMaxManaged;
+    private final int mMaxSeen;
+    private final int mMaxManaged;
 
     private int mNumClicks;
     private Runnable DoubleClickRunnable;
-    public android.os.Handler mHandler;
+    private android.os.Handler mHandler;
     private boolean mDoubleClickPending;
-    private long mDoubleTapTimeOut = Long.valueOf(ViewConfiguration.getDoubleTapTimeout());
+    private final long mDoubleTapTimeOut = Long.valueOf(ViewConfiguration.getDoubleTapTimeout());
 
 
 
-    int textviewHeight;
+    private final int textviewHeight;
 
-    LinkedList<ScreenInfo> mLastScreens;
+    private final LinkedList<ScreenInfo> mLastScreens;
 
-    GrxFloatingRecents.OnGrxFWsetScreenCallback mCallback=null;
+    private GrxFloatingRecents.OnGrxFWsetScreenCallback mCallback=null;
 
 
 
@@ -203,12 +204,12 @@ public class GrxFloatingRecents extends FrameLayout {
         mCallback=callBack;
     }
 
-    public String getRecentsStringValueToSave(){
+    private String getRecentsStringValueToSave(){
         if(mLastScreens==null || mLastScreens.isEmpty()) return "";
         else {
-            String value ="";
-            for(int i=0; i<mLastScreens.size();i++) value+=mLastScreens.get(i).getmScreenName()+"|";
-            return value;
+            StringBuilder value = new StringBuilder();
+            for(int i=0; i<mLastScreens.size();i++) value.append(mLastScreens.get(i).getmScreenName()).append("|");
+            return value.toString();
         }
     }
 
@@ -237,7 +238,7 @@ public class GrxFloatingRecents extends FrameLayout {
         }else{
             mLastScreens.remove(index);
         }
-        mLastScreens.addFirst(new ScreenInfo(title,xml_name, id));;
+        mLastScreens.addFirst(new ScreenInfo(title, xml_name, id));
         mPendingUpdate=true;
         Common.sp.edit().putString(Common.S_CTRL_RECENTS_SCREENS,getRecentsStringValueToSave()).commit();
         updateRecents();
@@ -294,7 +295,6 @@ public class GrxFloatingRecents extends FrameLayout {
 
 
         public void setHideOptions(boolean back, boolean outside){
-            mHideWithBackKey = back;
             mHideWhenOutside = outside;
         }
 
@@ -362,7 +362,7 @@ public class GrxFloatingRecents extends FrameLayout {
     }
 
 
-    private BaseAdapter mAdapter = new BaseAdapter() {
+    private final BaseAdapter mAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
 
@@ -407,12 +407,9 @@ public class GrxFloatingRecents extends FrameLayout {
                horizontalScrollView.setHorizontalScrollBarEnabled(true);
                horizontalScrollView.setScrollBarSize(3);
                textView.setTag(String.valueOf(i));
-               textView.setOnClickListener(new OnClickListener() {
-                   @Override
-                   public void onClick(View view) {
-                       int pos = Integer.valueOf( (String) view.getTag() );
-                       if(mCallback!=null) mCallback.setScreenFromGrxFW(mLastScreens.get(pos).getmScreenName(), mLastScreens.get(pos).getScreenId());
-                   }
+               textView.setOnClickListener(view1 -> {
+                   int pos = Integer.valueOf( (String) view1.getTag() );
+                   if(mCallback!=null) mCallback.setScreenFromGrxFW(mLastScreens.get(pos).getmScreenName(), mLastScreens.get(pos).getScreenId());
                });
                return horizontalScrollView;
            }
@@ -426,20 +423,20 @@ public class GrxFloatingRecents extends FrameLayout {
     }
 
 
-    private class ScreenInfo {
+    private static class ScreenInfo {
             String mTitle="";
             String mScreenName="";
             int mId = 0;
 
-            public ScreenInfo(String screen_title, String screen_name, int id){
+            ScreenInfo(String screen_title, String screen_name, int id){
                 mTitle=screen_title;
                 mScreenName=screen_name;
                 mId = id;
             }
 
-            public String getmScreenName(){return mScreenName;}
-            public String getScreenTitle(){return mTitle;}
-            public int getScreenId(){return mId;}
+            String getmScreenName(){return mScreenName;}
+            String getScreenTitle(){return mTitle;}
+            int getScreenId(){return mId;}
     }
 
 }

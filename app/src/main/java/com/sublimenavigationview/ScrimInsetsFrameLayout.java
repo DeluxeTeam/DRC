@@ -32,9 +32,9 @@ import com.grx.settings.R;
  * Borrowed from Support Design library
  */
 public class ScrimInsetsFrameLayout extends FrameLayout {
-    private Drawable mInsetForeground;
+    private final Drawable mInsetForeground;
     private Rect mInsets;
-    private Rect mTempRect;
+    private final Rect mTempRect;
 
     public ScrimInsetsFrameLayout(Context context) {
         this(context, null);
@@ -55,17 +55,15 @@ public class ScrimInsetsFrameLayout extends FrameLayout {
         a.recycle();
         this.setWillNotDraw(true);
         ViewCompat.setOnApplyWindowInsetsListener(this,
-                new android.support.v4.view.OnApplyWindowInsetsListener() {
-                    public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat insets) {
-                        if (null == ScrimInsetsFrameLayout.this.mInsets) {
-                            ScrimInsetsFrameLayout.this.mInsets = new Rect();
-                        }
-
-                        ScrimInsetsFrameLayout.this.mInsets.set(insets.getSystemWindowInsetLeft(), insets.getSystemWindowInsetTop(), insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
-                        ScrimInsetsFrameLayout.this.setWillNotDraw(ScrimInsetsFrameLayout.this.mInsets.isEmpty() || ScrimInsetsFrameLayout.this.mInsetForeground == null);
-                        ViewCompat.postInvalidateOnAnimation(ScrimInsetsFrameLayout.this);
-                        return insets.consumeSystemWindowInsets();
+                (v, insets) -> {
+                    if (null == ScrimInsetsFrameLayout.this.mInsets) {
+                        ScrimInsetsFrameLayout.this.mInsets = new Rect();
                     }
+
+                    ScrimInsetsFrameLayout.this.mInsets.set(insets.getSystemWindowInsetLeft(), insets.getSystemWindowInsetTop(), insets.getSystemWindowInsetRight(), insets.getSystemWindowInsetBottom());
+                    ScrimInsetsFrameLayout.this.setWillNotDraw(ScrimInsetsFrameLayout.this.mInsets.isEmpty() || ScrimInsetsFrameLayout.this.mInsetForeground == null);
+                    ViewCompat.postInvalidateOnAnimation(ScrimInsetsFrameLayout.this);
+                    return insets.consumeSystemWindowInsets();
                 });
     }
 

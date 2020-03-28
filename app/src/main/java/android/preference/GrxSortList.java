@@ -28,7 +28,7 @@ public class GrxSortList extends GrxBasePreference implements DlgFrGrxSortList.O
 
     private boolean mSortIcon;
     private String mDefValue;
-    int iconsValueTint =0;
+    private int iconsValueTint =0;
 
     public GrxSortList(Context context, AttributeSet attrs){
         super(context,attrs);

@@ -25,11 +25,11 @@ import java.io.File;
 
 
 public class AdapterBackups extends BaseAdapter {
-    Context context;
-    File ficheros[];
+    private Context context;
+    private File[] ficheros;
 
 
-    public void AdapterBackups(Context ctx, File arr[]){
+    public void AdapterBackups(Context ctx, File[] arr){
         context=ctx;
         ficheros=arr;
 
@@ -47,15 +47,14 @@ public class AdapterBackups extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        long l = (long) position;
-        return l;
+        return (long) position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View vista = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1,null);
-        TextView tv = (TextView) vista.findViewById(android.R.id.text1);
+        TextView tv = vista.findViewById(android.R.id.text1);
         tv.setText(ficheros[position].getName().replace("."+context.getResources().getString(R.string.grxs_backups_files_extension),""));
         return vista;
     }

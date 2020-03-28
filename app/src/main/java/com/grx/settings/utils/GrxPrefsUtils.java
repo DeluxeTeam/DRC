@@ -73,10 +73,10 @@ public class GrxPrefsUtils {
     public static void deleteAllFilesInFolderWithGivenExtension(String foler, String extension){
         File dir = new File(foler);
         if(dir.exists()&&dir.isDirectory()){
-            File files[]=dir.listFiles();
+            File[] files =dir.listFiles();
             if(files.length!=0){
-                for(int ind=0;ind<files.length;ind++){
-                    if(files[ind].getName().contains(extension)) files[ind].delete();
+                for (File file : files) {
+                    if (file.getName().contains(extension)) file.delete();
                 }
 
             }
@@ -87,10 +87,10 @@ public class GrxPrefsUtils {
     public static void deleteGrxPreferenceTmpFilesInFolder(String folder){
         File dir = new File(folder);
         if(dir.exists()&&dir.isDirectory()){
-            File files[]=dir.listFiles();
+            File[] files =dir.listFiles();
             if(files.length!=0){
-                for(int ind=0;ind<files.length;ind++){
-                    if(files[ind].getName().contains(Common.TMP_PREFIX)) files[ind].delete();
+                for (File file : files) {
+                    if (file.getName().contains(Common.TMP_PREFIX)) file.delete();
                 }
 
             }
@@ -102,19 +102,19 @@ public class GrxPrefsUtils {
         if(to_folder.equals(from_folder)) return;
         File ori_dir = new File(from_folder);
         if(ori_dir.exists() && ori_dir.isDirectory()){
-            File ori_files[]=ori_dir.listFiles();
+            File[] ori_files =ori_dir.listFiles();
             if(ori_files.length!=0){
-                for(int ind=0;ind<ori_files.length;ind++){
-                    if(ori_files[ind].getName().contains(extension)){
-                        File dest_file = new File(to_folder+File.separator+ori_files[ind].getName());
-                        copyFiles(ori_files[ind],dest_file);
+                for (File ori_file : ori_files) {
+                    if (ori_file.getName().contains(extension)) {
+                        File dest_file = new File(to_folder + File.separator + ori_file.getName());
+                        copyFiles(ori_file, dest_file);
                     }
                 }
             }
         }
     }
 
-    public static void copyFiles(File ori_file, File dest_file){
+    private static void copyFiles(File ori_file, File dest_file){
 
         try {
             FileInputStream i_s = new FileInputStream(ori_file);
@@ -144,7 +144,7 @@ public class GrxPrefsUtils {
         if(file_in.exists()) GrxPrefsUtils.copyFiles(file_in,file_out);
     }
 
-    public static void deleteFile(File f){
+    private static void deleteFile(File f){
         if(f!=null) f.delete();
     }
 
@@ -154,11 +154,11 @@ public class GrxPrefsUtils {
     public static void deleteFileOrCreateFolder(String dest_folder, String extension){
         File f = new File(dest_folder);
         if(f.exists() && f.isDirectory()) {
-            File ori_files[]=f.listFiles();
+            File[] ori_files =f.listFiles();
             if(ori_files.length!=0) {
-                for (int ind = 0; ind < ori_files.length; ind++) {
-                    if (ori_files[ind].getName().contains(extension))
-                        deleteFile(ori_files[ind]);
+                for (File ori_file : ori_files) {
+                    if (ori_file.getName().contains(extension))
+                        deleteFile(ori_file);
 
                 }
             }
@@ -174,7 +174,7 @@ public class GrxPrefsUtils {
             f.setWritable(true,false);
             try{
                 Runtime.getRuntime().exec("chmod 777 " + folder);
-            }catch (IOException e){}
+            }catch (IOException ignored){}
 
 
         }
@@ -183,12 +183,12 @@ public class GrxPrefsUtils {
     public static void fixFolderPermissions(String folder, String extension){
         File f = new File(folder);
         if(f.exists() && f.isDirectory()) {
-            File ori_files[]=f.listFiles();
+            File[] ori_files =f.listFiles();
             if(ori_files.length!=0) {
-                for (int ind = 0; ind < ori_files.length; ind++) {
-                    if (ori_files[ind].getName().contains(extension))
-                        ori_files[ind].setWritable(true,false);
-                    ori_files[ind].setReadable(true,false);
+                for (File ori_file : ori_files) {
+                    if (ori_file.getName().contains(extension))
+                        ori_file.setWritable(true, false);
+                    ori_file.setReadable(true, false);
 
 
                 }
@@ -201,11 +201,11 @@ public class GrxPrefsUtils {
     public static String getFormattedStringFromArrayResId(Context context, int array_id, String separator){
         if(array_id==0) return "";
 
-        String array[] = context.getResources().getStringArray(array_id);
+        String[] array = context.getResources().getStringArray(array_id);
         String output = "";
-        for(int i=0;i<array.length;i++){
-            output+=array[i];
-            output+=separator;
+        for (String s : array) {
+            output += s;
+            output += separator;
         }
         return output;
     }
@@ -234,7 +234,7 @@ public class GrxPrefsUtils {
                     if(a_i!=null) string = a_i.loadLabel(context.getPackageManager()).toString();
                 }
 
-            }catch (Exception e){}
+            }catch (Exception ignored){}
         }
 
         if(string==null) string = "?";
@@ -267,14 +267,13 @@ public class GrxPrefsUtils {
 
         if(app_label.equals(label)) label=activity_name;
         else {
-            label=label;
         }
         if(label.contains(".")) label= GrxPrefsUtils.getFormattedlabelForListViews(label);
         return label;
 
     }
 
-    public static String getFormattedlabelForListViews(String label){
+    private static String getFormattedlabelForListViews(String label){
         return ".." + label.substring(Math.max(0, label.length() - Common.ACTIVITY_LABEL_MAX_CHARS));
     }
 
@@ -285,7 +284,7 @@ public class GrxPrefsUtils {
         if(ri!=null){
             try{
                 drawable=ri.loadIcon(context.getPackageManager());
-            }catch (Exception e){}
+            }catch (Exception ignored){}
         }
         return drawable;
     }
@@ -300,13 +299,13 @@ public class GrxPrefsUtils {
                 ActivityInfo a_i = context.getPackageManager().getActivityInfo(c_n, 0);
                 if(a_i!=null) drawable = a_i.loadIcon(context.getPackageManager());
             }
-        }catch (Exception e){}
+        }catch (Exception ignored){}
         if(drawable==null){
             ResolveInfo ri = context.getPackageManager().resolveActivity(intent,0);
             if(ri!=null){
                 try{
                     drawable=ri.loadIcon(context.getPackageManager());
-                }catch (Exception e){}
+                }catch (Exception ignored){}
             }
         }
 
@@ -349,7 +348,7 @@ public class GrxPrefsUtils {
         return label;
     }
 
-    public static Drawable getDrawableFromPath(Context contex, String path){
+    private static Drawable getDrawableFromPath(Context contex, String path){
 
         Drawable tmp=null;
         try {
@@ -440,7 +439,7 @@ public class GrxPrefsUtils {
         Intent intent = null;
         try {
             intent = Intent.parseUri(uri, 0);
-        }catch (URISyntaxException e) {}
+        }catch (URISyntaxException ignored) {}
         if(intent!=null) file_name = intent.getStringExtra(Common.EXTRA_URI_ICON);
         if(file_name!=null){
             File f_ico = new File(file_name);
@@ -455,7 +454,7 @@ public class GrxPrefsUtils {
         Intent intent = null;
         try {
             intent = Intent.parseUri(uri, 0);
-        }catch (URISyntaxException e) {}
+        }catch (URISyntaxException ignored) {}
         if(intent!=null) file_name = intent.getStringExtra(Common.EXTRA_URI_ICON);
         if(file_name!=null){
             File f_ico = new File(file_name);
@@ -476,7 +475,7 @@ public class GrxPrefsUtils {
 
                 try{
                     Runtime.getRuntime().exec("chmod 777 " + file_name);
-                }catch (IOException e){
+                }catch (IOException ignored){
 
                 }
 
@@ -579,7 +578,7 @@ public class GrxPrefsUtils {
     public static int getContrastTextColor(int bgcolor){
         int textcolor;
         double luminance = ColorUtils.calculateLuminance(bgcolor);
-        if(luminance>(double) 0.5) textcolor = 0xff222222;
+        if(luminance> 0.5) textcolor = 0xff222222;
         else textcolor = 0xffffffff;
         return textcolor;
     }
@@ -588,7 +587,7 @@ public class GrxPrefsUtils {
         Drawable drw = null;
         try {
             drw= context.getPackageManager().getApplicationInfo(packagename,0).loadIcon(context.getPackageManager());
-        }catch (Exception e){}
+        }catch (Exception ignored){}
         return drw;
     }
 
@@ -609,7 +608,7 @@ public class GrxPrefsUtils {
     }
 
 
-    public static boolean isActivityInstalled(Context context, String packagename, String activityname){
+    private static boolean isActivityInstalled(Context context, String packagename, String activityname){
         boolean t = false;
         try {
             ComponentName componentName = new ComponentName(packagename, activityname);
@@ -617,7 +616,7 @@ public class GrxPrefsUtils {
             intent.setComponent(componentName);
             ResolveInfo resolveInfo = context.getPackageManager().resolveActivity(intent, 0);
             if(resolveInfo!=null) t=true;
-        }catch (Exception e){}
+        }catch (Exception ignored){}
         return t;
     }
 
@@ -627,7 +626,7 @@ public class GrxPrefsUtils {
         try {
             Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
             if(launchIntent!=null) className = launchIntent.getComponent().getClassName();
-        }catch (Exception e){
+        }catch (Exception ignored){
 
         }
         return className;

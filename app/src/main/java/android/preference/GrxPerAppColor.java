@@ -30,9 +30,6 @@ public class GrxPerAppColor extends GrxBasePreference implements DlgFrGrxPerAppC
     private boolean mShowAuto;
     private boolean mShowAlpha;
 
-    private String mLabel;
-
-
 
     public GrxPerAppColor(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -63,9 +60,10 @@ public class GrxPerAppColor extends GrxBasePreference implements DlgFrGrxPerAppC
             String[] arr = mStringValue.split(Pattern.quote(myPrefAttrsInfo.getMySeparator()));
             numitems=arr.length;
         }
-        if(numitems==0) mLabel=myPrefAttrsInfo.getMySummary();
+        String mLabel;
+        if(numitems==0) mLabel =myPrefAttrsInfo.getMySummary();
         else mLabel = getContext().getString( R.string.grxs_num_selected,numitems ) ;
-        setSummary(myPrefAttrsInfo.getMySummary() + " " +mLabel);
+        setSummary(myPrefAttrsInfo.getMySummary() + " " + mLabel);
     }
 
 

@@ -23,7 +23,7 @@ import com.grx.settings.utils.Common;
 
 public class CardViewWithLink extends CardView implements View.OnClickListener {
 
-    String mUrl;
+    private String mUrl;
 
 
     public CardViewWithLink(Context context){

@@ -27,7 +27,7 @@ import com.grx.settings.R;
  */
 public class StateAwareTextView extends TextView {
 
-    public static final String TAG = StateAwareTextView.class.getSimpleName();
+    private static final String TAG = StateAwareTextView.class.getSimpleName();
 
     // Drawable state set - checked
     private static final int[] CHECKED_STATE_SET = {

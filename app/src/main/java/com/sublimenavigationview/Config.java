@@ -17,6 +17,6 @@
 package com.sublimenavigationview;
 
 
-public class Config {
+class Config {
     public static final boolean DEBUG = false;
 }

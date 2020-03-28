@@ -38,7 +38,7 @@ public class GrxPickImage extends GrxBasePreference{
     private int mSizeY=0;
     private boolean mCircular=false;
     private boolean mJustUri=true;
-    int mIconSize;
+    private int mIconSize;
 
     public GrxPickImage(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -64,7 +64,7 @@ public class GrxPickImage extends GrxBasePreference{
         mCircular=ta.getBoolean(R.styleable.grxPreferences_circularImage,false);
         ta.recycle();
 
-        mJustUri = (mSizeX!=0 && mSizeY!=0) ? false : true;
+        mJustUri = mSizeX == 0 || mSizeY == 0;
         Resources resources = getContext().getResources();
         mIconSize = resources.getDimensionPixelSize(R.dimen.icon_size_in_prefs);
     }
@@ -85,7 +85,7 @@ public class GrxPickImage extends GrxBasePreference{
                 Intent intent = new Intent(chl.getActivity(), GrxImagePicker.class);
                 intent.putExtra(Common.TAG_DEST_FRAGMENT_NAME_EXTRA_KEY,myPrefAttrsInfo.getMyKey());
                 intent = GrxImageHelper.intent_avatar_img(intent, mSizeX, mSizeY,mCircular);
-                String output_file_name = Common.IconsDir + File.separator + String.valueOf(System.currentTimeMillis()+".jpg");
+                String output_file_name = Common.IconsDir + File.separator + System.currentTimeMillis() + ".jpg";
                 intent.putExtra(GrxImagePicker.S_OUTPUT_FILE_NAME,output_file_name);
                 chl.startImagePicker(intent, Common.REQ_CODE_GALLERY_IMAGE_PICKER_CROP_CIRCULAR);
             }
@@ -101,7 +101,7 @@ public class GrxPickImage extends GrxBasePreference{
 
     @Override
     protected View onCreateView(ViewGroup parent) {
-        View view = (View) super.onCreateView(parent);
+        View view = super.onCreateView(parent);
         vWidgetIcon.setScaleType(ImageView.ScaleType.CENTER);
         vWidgetIcon.setVisibility(View.VISIBLE);
         return view;
@@ -119,7 +119,7 @@ public class GrxPickImage extends GrxBasePreference{
         setNewImage(myPrefAttrsInfo.getMyStringDefValue());
     }
 
-    public void deletCurrentImgFile(){
+    private void deletCurrentImgFile(){
           boolean detele_current_img=false;
           if(mStringValue!=null){
               detele_current_img = mStringValue.contains( getContext().getString(R.string.grxs_data_base_folder)+File.separator+getContext().getString(R.string.grxs_data_icons_subfolder) );

@@ -21,11 +21,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -62,13 +60,12 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
     private LinearLayout vDeleteButton;
     private LinearLayout vBackButton;
     private LinearLayout vAddButton;
-    private LinearLayout vHelpButton;
     private LinearLayout vSeparator;
 
     private int mIconsTintColor;
 
-    TextView vTxtSelectedInfo;
-    String SelectedItemsInfo;
+    private TextView vTxtSelectedInfo;
+    private String SelectedItemsInfo;
 
     private GrxMultiValueListener mCallBack;
     private int mIdOptionsArr;
@@ -76,7 +73,6 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
     private int mIdIconsArray;
     private String mHelperFragment;
     private String mKey;
-    private String mTitle;
     private String mValue;
     private String mOriValue;
     private String mSeparator;
@@ -145,7 +141,7 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
         SelectItemsList = view.findViewById(R.id.gid_listview);
         vSeparator = view.findViewById(R.id.gid_separator);
 
-        vHelpButton = view.findViewById(R.id.gid_help_button);
+        LinearLayout vHelpButton = view.findViewById(R.id.gid_help_button);
         vHelpButton.setOnClickListener(v -> showHelp());
         vTxtSelectedInfo = view.findViewById(R.id.gid_items_selected);
         vAddButton = view.findViewById(R.id.gid_item);
@@ -213,7 +209,7 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
 
         mHelperFragment=getArguments().getString(Common.TAG_FRAGMENTHELPER_NAME_EXTRA_KEY);
         mKey=getArguments().getString("key");
-        mTitle=getArguments().getString("tit");
+        String mTitle = getArguments().getString("tit");
         mOriValue=getArguments().getString("val");
         mValue=mOriValue;
         mIdOptionsArr= getArguments().getInt("opt_arr_id");
@@ -257,12 +253,12 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
     }
 
     private String getStringValue(){
-        String value = "";
+        StringBuilder value = new StringBuilder();
         for(int i=0;i<mSelectedItemsList.size();i++){
-            value+=mSelectedItemsList.get(i).get_value();
-            value+=mSeparator;
+            value.append(mSelectedItemsList.get(i).get_value());
+            value.append(mSeparator);
         }
-        return value;
+        return value.toString();
     }
 
     private  void setResultAndDoCallback() {
@@ -316,10 +312,10 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
 
         if(valor!=null && !valor.isEmpty()) selected=valor.split(Pattern.quote(mSeparator));
         if(selected!=null){
-            for(int ind=0;ind<selected.length;ind++){
-                for(int i=0;i<mAvailableItemsList.size();i++){
-                    if(mAvailableItemsList.get(i).get_value().equals(selected[ind])){
-                        mSelectedItemsList.add(new GrxCustomOptionInfo(mAvailableItemsList.get(i).get_title(),mAvailableItemsList.get(i).get_value(), mAvailableItemsList.get(i).get_icon()));
+            for (String s : selected) {
+                for (int i = 0; i < mAvailableItemsList.size(); i++) {
+                    if (mAvailableItemsList.get(i).get_value().equals(s)) {
+                        mSelectedItemsList.add(new GrxCustomOptionInfo(mAvailableItemsList.get(i).get_title(), mAvailableItemsList.get(i).get_value(), mAvailableItemsList.get(i).get_icon()));
                     }
                 }
             }
@@ -425,11 +421,11 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
     private void setSummary(){
 
         if(mMaxNumOfAccesses!=0) SelectedItemsInfo = getString(R.string.grxs_num_items_selected,mSelectedItemsList.size())+ "  "+ getString(R.string.grxs_current_max_choices, mMaxNumOfAccesses);
-        else SelectedItemsInfo= String.valueOf(mSelectedItemsList.size() )+"/"+String.valueOf(mAvailableItemsList.size())+" "+getString(R.string.grxs_items_selected);
+        else SelectedItemsInfo= mSelectedItemsList.size() +"/"+ mAvailableItemsList.size() +" "+getString(R.string.grxs_items_selected);
         vTxtSelectedInfo.setText(SelectedItemsInfo);
     }
 
-    private BaseAdapter mAdapter = new BaseAdapter() {
+    private final BaseAdapter mAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return mSelectedItemsList.size();
@@ -469,14 +465,14 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
         }
 
         class CustomViewHolder {
-            public ImageView vImgGrabber;
-            public TextView vTxt;
-            public ImageView vIcono;
+            ImageView vImgGrabber;
+            TextView vTxt;
+            ImageView vIcono;
         }
     };
 
 
-    private BaseAdapter mAdapter2 = new BaseAdapter() { //grx
+    private final BaseAdapter mAdapter2 = new BaseAdapter() { //grx
         @Override
         public int getCount() {
             return mAvailableItemsList.size();
@@ -534,9 +530,9 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
         }
 
         class CustomViewHolder {
-            public ImageView vImgGrabber;
-            public TextView vTxt;
-            public ImageView vIcono;
+            ImageView vImgGrabber;
+            TextView vTxt;
+            ImageView vIcono;
         }
     };
 
@@ -592,12 +588,10 @@ public class DlgFrSelectSortItems extends DialogFragment implements SlideAndDrag
             case MenuItem.DIRECTION_LEFT:
                 return Menu.ITEM_SCROLL_BACK;
             case MenuItem.DIRECTION_RIGHT:
-                switch (buttonPosition) {
-                    case 0:
-                        return Menu.ITEM_DELETE_FROM_BOTTOM_TO_TOP;
-                    default:
-                        return Menu.ITEM_NOTHING;
+                if (buttonPosition == 0) {
+                    return Menu.ITEM_DELETE_FROM_BOTTOM_TO_TOP;
                 }
+                return Menu.ITEM_NOTHING;
         }
         return Menu.ITEM_NOTHING;
     }

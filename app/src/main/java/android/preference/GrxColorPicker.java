@@ -32,10 +32,8 @@ public class GrxColorPicker extends GrxBasePreference implements DlgFrGrxColorPi
 
 	private boolean showAlphaSlider;
 	private String pickerType;
-	private int pickerStyle=-1;
 
     private boolean showAuto;
-    private String pickerTitle;
 
     private boolean saveValueOnFly=false;
 
@@ -59,8 +57,8 @@ public class GrxColorPicker extends GrxBasePreference implements DlgFrGrxColorPi
         saveValueOnFly=ta.getBoolean(R.styleable.grxPreferences_saveValueOnFly, false );
         ta.recycle();
         setDefaultValue(myPrefAttrsInfo.getMyIntDefValue());
-        pickerTitle=getTitle().toString();
-        if(pickerTitle==null) pickerTitle=getContext().getResources().getString(R.string.grxs_titulo_def_color_picker);
+        String pickerTitle = getTitle().toString();
+        if(pickerTitle ==null) pickerTitle =getContext().getResources().getString(R.string.grxs_titulo_def_color_picker);
 
 	}
 
@@ -80,15 +78,12 @@ public class GrxColorPicker extends GrxBasePreference implements DlgFrGrxColorPi
         vWidgetArrow.setVisibility(View.GONE);
         if(vWidgetIcon!=null) {
             vWidgetIcon.setVisibility(View.VISIBLE);
-            vWidgetIcon.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    ClipboardManager cbm = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("color", (Integer.toHexString(mIntValue).toUpperCase()));
-                    cbm.setPrimaryClip(clip);
-                    Toast.makeText(getContext(), getContext().getResources().getString(R.string.grxs_copied_clipboard),Toast.LENGTH_LONG).show();
-                    return true;
-                }
+            vWidgetIcon.setOnLongClickListener(v -> {
+                ClipboardManager cbm = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("color", (Integer.toHexString(mIntValue).toUpperCase()));
+                cbm.setPrimaryClip(clip);
+                Toast.makeText(getContext(), getContext().getResources().getString(R.string.grxs_copied_clipboard),Toast.LENGTH_LONG).show();
+                return true;
             });
         }
         return view;
@@ -99,7 +94,7 @@ public class GrxColorPicker extends GrxBasePreference implements DlgFrGrxColorPi
 		super.onBindView(view);
         CircleColorDrawable colorChoiceDrawable = null;
 		Drawable currentDrawable = vWidgetIcon.getDrawable();
-        if (currentDrawable!=null && currentDrawable instanceof CircleColorDrawable)
+        if (currentDrawable instanceof CircleColorDrawable)
             colorChoiceDrawable = (CircleColorDrawable) currentDrawable;
         if (colorChoiceDrawable==null) {
             colorChoiceDrawable = new CircleColorDrawable(mIntValue);
@@ -111,7 +106,7 @@ public class GrxColorPicker extends GrxBasePreference implements DlgFrGrxColorPi
         String type;
         if(pickerType!=null && !pickerType.isEmpty()) type=pickerType;
         else type=Common.userColorPickerStyle;
-        pickerStyle=Common.getColorPickerStyleIndex(type);
+        int pickerStyle = Common.getColorPickerStyleIndex(type);
         return pickerStyle;
     }
 

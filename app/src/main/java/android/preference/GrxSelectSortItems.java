@@ -31,7 +31,7 @@ public class GrxSelectSortItems extends GrxBasePreference implements DlgFrSelect
 
 
     private String mLabel;
-    int iconsValueTint =0;
+    private int iconsValueTint =0;
 
     public GrxSelectSortItems(Context context, AttributeSet attrs) {
         super(context, attrs);

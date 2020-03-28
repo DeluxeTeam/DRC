@@ -33,8 +33,9 @@ import com.grx.settings.R;
  */
 public class SublimeSubheaderItemView extends SublimeBaseItemView {
 
-    StateAwareImageView mExpandCollapse;  ///grx imageview  -> stateawareimageviewe: we will make expand - collapse arrow tinted
-    Drawable mExpandDrawable, mCollapseDrawable;
+    private StateAwareImageView mExpandCollapse;  ///grx imageview  -> stateawareimageviewe: we will make expand - collapse arrow tinted
+    private Drawable mExpandDrawable;
+    private Drawable mCollapseDrawable;
 
     public SublimeSubheaderItemView(Context context) {
         this(context, null);
@@ -53,7 +54,7 @@ public class SublimeSubheaderItemView extends SublimeBaseItemView {
     @Override
     protected void initializeViews() {
         super.initializeViews();
-        mExpandCollapse = (StateAwareImageView) findViewById(R.id.expand_collapse); //grxgrx
+        mExpandCollapse = findViewById(R.id.expand_collapse); //grxgrx
         //grxgrx
         super.setIsSubHeaderView(true);
 
@@ -151,32 +152,32 @@ public class SublimeSubheaderItemView extends SublimeBaseItemView {
         // Block this call
     }
 
-    public void setSubheaderItemTextColor(ColorStateList subheaderTextColor) {
+    private void setSubheaderItemTextColor(ColorStateList subheaderTextColor) {
         mText.setTextColor(subheaderTextColor);
     }
 
-    public void setSubheaderHintTextColor(ColorStateList subheaderHintTextColor) {
+    private void setSubheaderHintTextColor(ColorStateList subheaderHintTextColor) {
         mHint.setTextColor(subheaderHintTextColor);
     }
 
-    public void setSubheaderItemTypeface(Typeface itemTypeface, int itemTypefaceStyle) {
+    private void setSubheaderItemTypeface(Typeface itemTypeface, int itemTypefaceStyle) {
         //mText.setTypeface(itemTypeface, itemTypefaceStyle);
         //grx
         mText.setTypeface(null,Typeface.BOLD);
     }
 
-    public void setSubheaderHintTypeface(Typeface hintTypeface, int hintTypefaceStyle) {
+    private void setSubheaderHintTypeface(Typeface hintTypeface, int hintTypefaceStyle) {
         mHint.setTypeface(hintTypeface, hintTypefaceStyle);
     }
 
-    public void setSubheaderItemTypefaceStyle(int itemTypefaceStyle) {
+    private void setSubheaderItemTypefaceStyle(int itemTypefaceStyle) {
         //mText.setTypeface(mText.getTypeface(), itemTypefaceStyle);
         //grx
         mText.setTypeface(null,Typeface.BOLD);
 
     }
 
-    public void setSubheaderHintTypefaceStyle(int hintTypefaceStyle) {
+    private void setSubheaderHintTypefaceStyle(int hintTypefaceStyle) {
         mHint.setTypeface(mHint.getTypeface(), hintTypefaceStyle);
     }
 

@@ -29,7 +29,6 @@ import java.util.regex.Pattern;
 
 public class GrxMultipleWidgets extends GrxBasePreference  implements DlgFrGrxMultipleWidgets.OnWidgetsSelectedListener{
 
-    private String mLabel;
     private int idWidgetsArray;
 
 
@@ -55,7 +54,7 @@ public class GrxMultipleWidgets extends GrxBasePreference  implements DlgFrGrxMu
     @Override
     public void resetPreference(){
         String[] uris = mStringValue.split(Pattern.quote(myPrefAttrsInfo.getMySeparator()));
-        for(int i=0;i<uris.length;i++) GrxPrefsUtils.deleteGrxIconFileFromUriString(uris[i]);
+        for (String s : uris) GrxPrefsUtils.deleteGrxIconFileFromUriString(s);
         mStringValue= myPrefAttrsInfo.getMyStringDefValue();
         configStringPreference(mStringValue);
         saveNewStringValue(mStringValue);
@@ -69,7 +68,8 @@ public class GrxMultipleWidgets extends GrxBasePreference  implements DlgFrGrxMu
             String[] arr = mStringValue.split(Pattern.quote(myPrefAttrsInfo.getMySeparator()));
             napps=arr.length;
         }
-        if(napps==0) mLabel=myPrefAttrsInfo.getMySummary();
+        String mLabel;
+        if(napps==0) mLabel =myPrefAttrsInfo.getMySummary();
         else mLabel = myPrefAttrsInfo.getMySummary() +" "+  getContext().getString( R.string.grxs_num_selected,napps ) ;
         setSummary(mLabel);
     }

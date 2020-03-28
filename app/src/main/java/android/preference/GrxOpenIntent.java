@@ -20,7 +20,7 @@ import com.grx.settings.prefssupport.PrefAttrsInfo;
 
 
 
-public class GrxOpenIntent extends GrxBasePreference{
+class GrxOpenIntent extends GrxBasePreference{
 
     ImageView vWidgetIcon;
     ImageView vAndroidIcon;

@@ -26,7 +26,6 @@ import java.util.Calendar;
 public class DlgFrGrxDatePicker extends DialogFragment {
 
     private String mkey;
-    private String mValue;
     private DlgFrGrxDatePicker.OnGrxDateSetListener mCallBack;
 
     private OnGrxDateSetListener mCallback;
@@ -74,7 +73,7 @@ public class DlgFrGrxDatePicker extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle state) {
             mkey=getArguments().getString("key");
-            mValue=getArguments().getString("val");
+        String mValue = getArguments().getString("val");
 
         int year = 0;
         int month = 0;
@@ -94,16 +93,15 @@ public class DlgFrGrxDatePicker extends DialogFragment {
                 System.out.println("Wrong date format (grxsettings)" + casque);
             }
         }
-            DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    if(mCallback!=null) mCallback.onGrxDateSet(String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear+1)+"/"+String.valueOf(year),mkey);
-                    else {
-                        Log.d("grxsettings", "null callback in datepicker");
-                    }
+        return new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year1, int monthOfYear, int dayOfMonth) {
+                if(mCallback!=null) mCallback.onGrxDateSet(dayOfMonth +"/"+ (monthOfYear + 1) +"/"+ year1,mkey);
+                else {
+                    Log.d("grxsettings", "null callback in datepicker");
                 }
-            }, year, month, day);
-        return dpd;
+            }
+        }, year, month, day);
     }
 
 }

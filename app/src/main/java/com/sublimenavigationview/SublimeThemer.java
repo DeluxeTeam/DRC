@@ -45,10 +45,10 @@ public class SublimeThemer {
 
     public enum DefaultTheme {DARK, LIGHT}
 
-    private Context mContext;
+    private final Context mContext;
     private ColorStateList mIconTintList, mCheckableItemTintList, mCenteredTintiList;
     private Drawable mItemBackground, mDrawerBackground;
-    private DefaultTheme mDefaultTheme;
+    private final DefaultTheme mDefaultTheme;
     private float mElevation;
     private Drawable mGroupExpandDrawable, mGroupCollapseDrawable;
 
@@ -65,10 +65,7 @@ public class SublimeThemer {
     }
 
     public SublimeThemer setIconTintList(ColorStateList iconTintList) {
-        if (iconTintList == null) {
-            //Log.e(TAG, "'setIconTintList(ColorStateList)' was called with a 'null' value");
-        }
-
+        //Log.e(TAG, "'setIconTintList(ColorStateList)' was called with a 'null' value");
 
 
         mIconTintList = iconTintList;
@@ -76,90 +73,70 @@ public class SublimeThemer {
     }
 
     public SublimeThemer setCheckableItemTintList(ColorStateList checkableItemTintList) {
-        if (checkableItemTintList == null) {
-            //Log.e(TAG, "'setCheckableItemTintList(ColorStateList)' was called with a 'null' value");
-        }
+        //Log.e(TAG, "'setCheckableItemTintList(ColorStateList)' was called with a 'null' value");
 
         mCheckableItemTintList = checkableItemTintList;
         return this;
     }
 
     public SublimeThemer setItemStyleProfile(TextViewStyleProfile itemStyleProfile) {
-        if (itemStyleProfile == null) {
-//            Log.e(TAG, "'setItemStyleProfile(TextViewStyleProfile)' was " + "called with a 'null' value");
-        }
+        //            Log.e(TAG, "'setItemStyleProfile(TextViewStyleProfile)' was " + "called with a 'null' value");
 
         mItemStyleProfile = itemStyleProfile;
         return this;
     }
 
     public SublimeThemer setItemHintStyleProfile(TextViewStyleProfile itemHintStyleProfile) {
-        if (itemHintStyleProfile == null) {
-            //Log.e(TAG, "'setItemHintStyleProfile(TextViewStyleProfile)' was " +"called with a 'null' value");
-        }
+        //Log.e(TAG, "'setItemHintStyleProfile(TextViewStyleProfile)' was " +"called with a 'null' value");
 
         mItemHintStyleProfile = itemHintStyleProfile;
         return this;
     }
 
     public SublimeThemer setSubheaderStyleProfile(TextViewStyleProfile subheaderStyleProfile) {
-        if (subheaderStyleProfile == null) {
-            //Log.e(TAG, "'setSubheaderStyleProfile(TextViewStyleProfile)' was " + "called with a 'null' value");
-        }
+        //Log.e(TAG, "'setSubheaderStyleProfile(TextViewStyleProfile)' was " + "called with a 'null' value");
 
         mSubheaderStyleProfile = subheaderStyleProfile;
         return this;
     }
 
     public SublimeThemer setSubheaderHintStyleProfile(TextViewStyleProfile subheaderHintStyleProfile) {
-        if (subheaderHintStyleProfile == null) {
-            //Log.e(TAG, "'setSubheaderHintStyleProfile(TextViewStyleProfile)' was " + "called with a 'null' value");
-        }
+        //Log.e(TAG, "'setSubheaderHintStyleProfile(TextViewStyleProfile)' was " + "called with a 'null' value");
 
         mSubheaderHintStyleProfile = subheaderHintStyleProfile;
         return this;
     }
 
     public SublimeThemer setBadgeStyleProfile(TextViewStyleProfile badgeStyleProfile) {
-        if (badgeStyleProfile == null) {
-            //Log.e(TAG, "'setBadgeStyleProfile(TextViewStyleProfile)' was " + "called with a 'null' value");
-        }
+        //Log.e(TAG, "'setBadgeStyleProfile(TextViewStyleProfile)' was " + "called with a 'null' value");
 
         mBadgeStyleProfile = badgeStyleProfile;
         return this;
     }
 
     public SublimeThemer setGroupExpandDrawable(Drawable groupExpandDrawable) {
-        if (groupExpandDrawable == null) {
-            //Log.e(TAG, "'setGroupExpandDrawable(Drawable)' was called with a 'null' value");
-        }
+        //Log.e(TAG, "'setGroupExpandDrawable(Drawable)' was called with a 'null' value");
 
         mGroupExpandDrawable = groupExpandDrawable;
         return this;
     }
 
     public SublimeThemer setGroupCollapseDrawable(Drawable groupCollapseDrawable) {
-        if (groupCollapseDrawable == null) {
-            //Log.e(TAG, "'setGroupCollapseDrawable(Drawable)' was called with a 'null' value");
-        }
+        //Log.e(TAG, "'setGroupCollapseDrawable(Drawable)' was called with a 'null' value");
 
         mGroupCollapseDrawable = groupCollapseDrawable;
         return this;
     }
 
     public SublimeThemer setItemBackground(Drawable itemBackground) {
-        if (itemBackground == null) {
-            //Log.e(TAG, "'setItemBackground(Drawable)' was called with a 'null' value");
-        }
+        //Log.e(TAG, "'setItemBackground(Drawable)' was called with a 'null' value");
 
         mItemBackground = itemBackground;
         return this;
     }
 
     public SublimeThemer setDrawerBackground(Drawable drawerBackground) {
-        if (drawerBackground == null) {
-            //Log.e(TAG, "'setDrawerBackground(Drawable)' was called with a 'null' value");
-        }
+        //Log.e(TAG, "'setDrawerBackground(Drawable)' was called with a 'null' value");
 
         mDrawerBackground = drawerBackground;
         return this;

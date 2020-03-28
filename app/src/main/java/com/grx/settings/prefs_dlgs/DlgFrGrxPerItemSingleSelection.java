@@ -8,16 +8,11 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +20,6 @@ import com.grx.settings.GrxPreferenceScreen;
 import com.grx.settings.R;
 import com.grx.settings.utils.Common;
 import com.grx.settings.utils.GrxPrefsUtils;
-import com.root.RootUtils;
 import com.sldv.Menu;
 import com.sldv.MenuItem;
 import com.sldv.SlideAndDragListView;
@@ -57,7 +51,6 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
     private boolean mShortOutOption;
     private String mHelperFragment;
     private String mKey;
-    private String mTitle;
     private String mValue;
     private String mOriValue;
     private String mSeparator;
@@ -138,7 +131,7 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
 
         mHelperFragment = getArguments().getString(Common.TAG_FRAGMENTHELPER_NAME_EXTRA_KEY);
         mKey = getArguments().getString("key");
-        mTitle = getArguments().getString("tit");
+        String mTitle = getArguments().getString("tit");
         mOriValue=getArguments().getString("val");
         mValue=mOriValue;
         mIdOptionsArr = getArguments().getInt("opt_arr_id");
@@ -166,8 +159,7 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
         builder.setPositiveButton(R.string.grxs_ok, (dialog, which) -> setResultAndDoCallback());
         initItemsList();
         ini_drag_list();
-        AlertDialog ad = builder.create();
-        return ad;
+        return builder.create();
 
     }
 
@@ -184,7 +176,7 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
     private View getDialogView(){
 
         View view = getActivity().getLayoutInflater().inflate(R.layout.dlg_peritemsingleselection, null);
-        mDragList = (SlideAndDragListView) view.findViewById(R.id.gid_slv_listview);
+        mDragList = view.findViewById(R.id.gid_slv_listview);
 
         if(mShortOutOption) {
             view.findViewById(R.id.gid_list_title ).setVisibility(View.VISIBLE);
@@ -195,13 +187,13 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
 
 
     private String getReturnValue(){
-        String value = "";
+        StringBuilder value = new StringBuilder();
 
         for(int i=0; i< mItemList.size();i++){
-            value+=mItemList.get(i).getValue();
-            value+=mSeparator;
+            value.append(mItemList.get(i).getValue());
+            value.append(mSeparator);
         }
-       return value;
+       return value.toString();
     }
 
     private void initItemsList(){
@@ -209,15 +201,15 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
         mItemList = new ArrayList<>();
 
         TypedArray icons_array=null;
-        String vals_array[] = getResources().getStringArray(mIdValuesArr);
-        String opt_array[] = getResources().getStringArray(mIdOptionsArr);
-        String spinner_vals[]=getResources().getStringArray(mIdSpinnerValuesArray);
+        String[] vals_array = getResources().getStringArray(mIdValuesArr);
+        String[] opt_array = getResources().getStringArray(mIdOptionsArr);
+        String[] spinner_vals =getResources().getStringArray(mIdSpinnerValuesArray);
 
         if(mIdIconsArray!=0){
             icons_array = getResources().obtainTypedArray(mIdIconsArray);
         }
 
-        String values[];
+        String[] values;
         if(mValue==null || mValue.isEmpty()) {
             mValue=generateDefaultValue(vals_array,spinner_vals);
         }
@@ -263,11 +255,11 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
 
     private String generateDefaultValue(String[] vals_array, String[] spinner_values_array){
         String returnval = "";
-        for(int i=0;i<vals_array.length;i++){
-            returnval+=vals_array[i];
-            returnval+=";";
-            returnval+=spinner_values_array[0];
-            returnval+=mSeparator;
+        for (String s : vals_array) {
+            returnval += s;
+            returnval += ";";
+            returnval += spinner_values_array[0];
+            returnval += mSeparator;
         }
 
         return returnval;
@@ -314,18 +306,15 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
                     dialogInterface.dismiss();
                 });
 
-        builder.setSingleChoiceItems(getResources().getStringArray(mIdSpinnerOptionsArray), selected, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String new_value = getResources().getStringArray(mIdSpinnerValuesArray)[which];
-                if(!curval.equals(new_value)) {
-                    mItemList.get(mItemClicked).setSpinnervalue(new_value);
-                    mAdapter.notifyDataSetChanged();
-                    if (mOnTheFly) setResultAndDoCallback();
-                }
-                mItemClicked=-1;
-                dialog.dismiss();
+        builder.setSingleChoiceItems(getResources().getStringArray(mIdSpinnerOptionsArray), selected, (dialog, which) -> {
+            String new_value = getResources().getStringArray(mIdSpinnerValuesArray)[which];
+            if(!curval.equals(new_value)) {
+                mItemList.get(mItemClicked).setSpinnervalue(new_value);
+                mAdapter.notifyDataSetChanged();
+                if (mOnTheFly) setResultAndDoCallback();
             }
+            mItemClicked=-1;
+            dialog.dismiss();
         });
 
         builder.setNegativeButton(R.string.grxs_cancel, (dialog, which) -> {
@@ -347,7 +336,7 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
     }
 
 
-    private class ItemInfo {
+    private static class ItemInfo {
         private String mValue="";
         private String mOptionValue;
         private String mOptionText;
@@ -355,7 +344,7 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
         private Drawable mDrawable=null;
 
 
-        public ItemInfo(String value, String optiontext, String optionval, String spinnerval, Drawable drawable){
+        ItemInfo(String value, String optiontext, String optionval, String spinnerval, Drawable drawable){
             if(value==null || value.isEmpty() ) return;
             mValue = value;
             mOptionValue=optionval;
@@ -365,28 +354,28 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
 
 
         }
-        public String getText(){
+        String getText(){
             return mOptionText;
         }
 
-        public String getValue(){
+        String getValue(){
             return mValue;
         }
 
-        public String getSpinnerValue(){return mSpinnerValue;}
+        String getSpinnerValue(){return mSpinnerValue;}
 
-        public Drawable getmDrawable(){
+        Drawable getmDrawable(){
             return mDrawable;
         }
 
-        public void setSpinnervalue(String value){
+        void setSpinnervalue(String value){
             mSpinnerValue=value;
             mValue=mOptionValue+";"+value;
         }
     }
 
 
-    private BaseAdapter mAdapter = new BaseAdapter() {
+    private final BaseAdapter mAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return mItemList.size();
@@ -408,9 +397,9 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
             if (convertView == null) {
                 cvh = new CustomViewHolder();
                 convertView = LayoutInflater.from(getActivity()).inflate(R.layout.item_dlg_peritem_single_sel, null);
-                cvh.vCtxt = (TextView) convertView.findViewById(R.id.gid_item_text);
-                cvh.vIcon =(ImageView)   convertView.findViewById(R.id.gid_item_img);
-                cvh.vValue = (TextView) convertView.findViewById(R.id.gid_item_value);
+                cvh.vCtxt = convertView.findViewById(R.id.gid_item_text);
+                cvh.vIcon = convertView.findViewById(R.id.gid_item_img);
+                cvh.vValue = convertView.findViewById(R.id.gid_item_value);
 
                 convertView.setTag(cvh);
             } else {
@@ -442,9 +431,9 @@ public class DlgFrGrxPerItemSingleSelection extends DialogFragment
         }
 
         class CustomViewHolder {
-            public TextView vCtxt;
-            public ImageView vIcon;
-            public TextView vValue;
+            TextView vCtxt;
+            ImageView vIcon;
+            TextView vValue;
 
         }
     };

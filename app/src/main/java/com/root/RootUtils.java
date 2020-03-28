@@ -42,10 +42,10 @@ public class  RootUtils {
     }
 
     public static boolean busyboxInstalled() {
-        return existBinary("busybox");
+        return existBinary();
     }
 
-    private static boolean existBinary(String binary) {
+    private static boolean existBinary() {
         String paths;
         if (System.getenv("PATH") != null) {
             paths = System.getenv("PATH");
@@ -54,7 +54,7 @@ public class  RootUtils {
         }
         for (String path : paths.split(":")) {
             if (!path.endsWith("/")) path += "/";
-            if (RootOperations.existFile(path + binary, false) || RootOperations.existFile(path + binary)) {
+            if (RootOperations.existFile(path + "busybox", false) || RootOperations.existFile(path + "busybox")) {
                 return true;
             }
         }
@@ -93,7 +93,7 @@ public class  RootUtils {
         mount(writeable, mountpoint, getSU());
     }
 
-    public static void mount(boolean writeable, String mountpoint, SU su) {
+    private static void mount(boolean writeable, String mountpoint, SU su) {
         su.runCommand(String.format("mount -o remount,%s %s %s",
                 writeable ? "rw" : "ro", mountpoint, mountpoint));
         su.runCommand(String.format("mount -o remount,%s %s",
@@ -144,11 +144,11 @@ public class  RootUtils {
         private boolean denied;
         private boolean firstTry;
 
-        public SU() {
+        SU() {
             this(true, null);
         }
 
-        public SU(boolean root, String tag) {
+        SU(boolean root, String tag) {
             mRoot = root;
             mTag = tag;
             try {
@@ -205,7 +205,7 @@ public class  RootUtils {
             }
         }
 
-        public void close() {
+        void close() {
             try {
                 if (mWriter != null) {
                     mWriter.write("exit\n");

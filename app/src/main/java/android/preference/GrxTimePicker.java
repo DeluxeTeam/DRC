@@ -43,7 +43,7 @@ public class GrxTimePicker extends GrxBasePreference {
     public int getIntFromStringTime(String time){
         int h=0;
         int m=0;
-        String arr[]=time.split(":");
+        String[] arr =time.split(":");
         if (arr.length==2){
             h=Integer.valueOf(arr[0]);
             m=Integer.valueOf(arr[1]);
@@ -84,8 +84,8 @@ public class GrxTimePicker extends GrxBasePreference {
     private void setFormattedValue(int value){
         String hs;
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY,(int)value/60);
-        cal.set(Calendar.MINUTE,(int)value%60);
+        cal.set(Calendar.HOUR_OF_DAY, value /60);
+        cal.set(Calendar.MINUTE, value %60);
         android.text.format.DateFormat df;
         hs = android.text.format.DateFormat.getTimeFormat(getContext()).format(cal.getTime());
         //if (value < (int) 600) hs = "0"+hs;

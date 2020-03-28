@@ -43,8 +43,8 @@ public class ColorPickerPreference
         Preference.OnPreferenceClickListener,
         ColorPickerDialog.OnColorChangedListener {
 
-    View mView;
-    ColorPickerDialog mDialog;
+    private View mView;
+    private ColorPickerDialog mDialog;
     private int mValue = Color.BLACK;
     private float mDensity = 0;
     private boolean mAlphaSliderEnabled = false;
@@ -107,7 +107,7 @@ public class ColorPickerPreference
     private void setPreviewColor() {
         if (mView == null) return;
         ImageView iView = new ImageView(getContext());
-        LinearLayout widgetFrameView = ((LinearLayout) mView.findViewById(android.R.id.widget_frame));
+        LinearLayout widgetFrameView = mView.findViewById(android.R.id.widget_frame);
         if (widgetFrameView == null) return;
         widgetFrameView.setVisibility(View.VISIBLE);
         widgetFrameView.setPadding(
@@ -156,7 +156,7 @@ public class ColorPickerPreference
         setPreviewColor();
         try {
             getOnPreferenceChangeListener().onPreferenceChange(this, color);
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
 
         }
     }
@@ -166,7 +166,7 @@ public class ColorPickerPreference
         return false;
     }
 
-    protected void showDialog(Bundle state) {
+    private void showDialog(Bundle state) {
         mDialog = new ColorPickerDialog(getContext(), mValue);
         mDialog.setOnColorChangedListener(this);
         if (mAlphaSliderEnabled) {
@@ -289,7 +289,7 @@ public class ColorPickerPreference
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
-        if (state == null || !(state instanceof SavedState)) {
+        if (!(state instanceof SavedState)) {
             // Didn't save state for us in onSaveInstanceState
             super.onRestoreInstanceState(state);
             return;
@@ -307,7 +307,7 @@ public class ColorPickerPreference
     private static class SavedState extends BaseSavedState {
         Bundle dialogBundle;
 
-        public SavedState(Parcel source) {
+        SavedState(Parcel source) {
             super(source);
             dialogBundle = source.readBundle();
         }
@@ -318,7 +318,7 @@ public class ColorPickerPreference
             dest.writeBundle(dialogBundle);
         }
 
-        public SavedState(Parcelable superState) {
+        SavedState(Parcelable superState) {
             super(superState);
         }
 

@@ -13,8 +13,6 @@ package android.preference;
 import android.content.Context;
 import android.content.res.TypedArray;
 
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -41,7 +39,7 @@ public class GrxPreferenceCategory extends PreferenceCategory implements GrxPref
     private boolean isBPEnabled = true;
     private boolean centerhorizontal = false;
 
-    PrefAttrsInfo  myPrefAttrsInfo = null;
+    private PrefAttrsInfo  myPrefAttrsInfo = null;
 
 
 
@@ -88,7 +86,7 @@ public class GrxPreferenceCategory extends PreferenceCategory implements GrxPref
 
     }
 
-    public void checkDepRuleAndAssignKeyIfNeeded(){  // in some type of prefs, we need to make sure we have a key for dep rules
+    private void checkDepRuleAndAssignKeyIfNeeded(){  // in some type of prefs, we need to make sure we have a key for dep rules
         String deprul = myPrefAttrsInfo.getMyDependencyRule();
         if(deprul!=null && !deprul.isEmpty()){
             if(!myPrefAttrsInfo.isValidKey()){
@@ -109,7 +107,7 @@ public class GrxPreferenceCategory extends PreferenceCategory implements GrxPref
         if(mHidden) {
             ll.removeAllViews();
         }else {
-            vTit =  (TextView) ll.findViewById(android.R.id.title);
+            vTit = ll.findViewById(android.R.id.title);
             vTit.setMaxLines(5);
             if(mTextColor!=0) vTit.setTextColor(mTextColor);
             if(mBackgroundColor!=0) vTit.setBackgroundColor(mBackgroundColor);

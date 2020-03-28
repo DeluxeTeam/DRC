@@ -9,9 +9,6 @@ import com.grx.settings.GrxPreferenceScreen;
 import com.grx.settings.R;
 import com.grx.settings.prefs_dlgs.DlgFrGrxPerItemSingleSelection;
 import com.grx.settings.utils.Common;
-import com.grx.settings.utils.GrxPrefsUtils;
-
-import java.util.regex.Pattern;
 
 
 /*
@@ -26,9 +23,10 @@ import java.util.regex.Pattern;
 
 public class GrxPerItemSingleSelection extends GrxBasePreference implements DlgFrGrxPerItemSingleSelection.PerItemSingleSelectionDialogListener {
 
-    int iconsValueTint =0;
-    boolean shortout = false;
-    int spinnerOptionsArrayId = 0, spinnerValuesArrayId=0;
+    private int iconsValueTint =0;
+    private boolean shortout = false;
+    private int spinnerOptionsArrayId = 0;
+    private int spinnerValuesArrayId=0;
     private boolean mIconblacklistDependency;
     private boolean mOnTheFly;
 

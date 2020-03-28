@@ -36,24 +36,23 @@ public class ColorPickerView extends View {
 
 	private float lightness = 1;
 	private float alpha = 1;
-	private int backgroundColor = 0x00000000;
 
-	private Integer initialColors[] = new Integer[]{null, null, null, null, null};
+    private Integer[] initialColors = new Integer[]{null, null, null, null, null};
 	private int colorSelection = 0;
 	private Integer initialColor;
 	private Integer pickerTextColor;
-	private Paint colorWheelFill = PaintBuilder.newPaint().color(0).build();
-	private Paint selectorStroke1 = PaintBuilder.newPaint().color(0xffffffff).build();
-	private Paint selectorStroke2 = PaintBuilder.newPaint().color(0xff000000).build();
-	private Paint alphaPatternPaint = PaintBuilder.newPaint().build();
+	private final Paint colorWheelFill = PaintBuilder.newPaint().color(0).build();
+	private final Paint selectorStroke1 = PaintBuilder.newPaint().color(0xffffffff).build();
+	private final Paint selectorStroke2 = PaintBuilder.newPaint().color(0xff000000).build();
+	private final Paint alphaPatternPaint = PaintBuilder.newPaint().build();
 	private ColorCircle currentColorCircle;
 
-	private ArrayList<OnColorChangedListener> colorChangedListeners = new ArrayList<>();
-	private ArrayList<OnColorSelectedListener> listeners = new ArrayList<OnColorSelectedListener>();
+	private final ArrayList<OnColorChangedListener> colorChangedListeners = new ArrayList<>();
+	private final ArrayList<OnColorSelectedListener> listeners = new ArrayList<>();
 	private LightnessSlider lightnessSlider;
 	private AlphaSlider alphaSlider;
 	private EditText colorEdit;
-	private TextWatcher colorTextChange = new TextWatcher() {
+	private final TextWatcher colorTextChange = new TextWatcher() {
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 		}
@@ -67,7 +66,7 @@ public class ColorPickerView extends View {
                 setColor(color, false);
 				//grxgrx need fix
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
 		}
 
@@ -136,9 +135,9 @@ public class ColorPickerView extends View {
 		super.onLayout(changed, left, top, right, bottom);
 
 		if (alphaSliderViewId != 0)
-			setAlphaSlider((AlphaSlider) getRootView().findViewById(alphaSliderViewId));
+			setAlphaSlider(getRootView().findViewById(alphaSliderViewId));
 		if (lightnessSliderViewId != 0)
-			setLightnessSlider((LightnessSlider) getRootView().findViewById(lightnessSliderViewId));
+			setLightnessSlider(getRootView().findViewById(lightnessSliderViewId));
 
 		updateColorWheel();
 		currentColorCircle = findNearestByColor(initialColor);
@@ -249,7 +248,7 @@ public class ColorPickerView extends View {
 		return true;
 	}
 
-	protected void callOnColorChangedListeners(int oldColor, int newColor) {
+	private void callOnColorChangedListeners(int oldColor, int newColor) {
 		if (colorChangedListeners != null && oldColor != newColor) {
 			for (OnColorChangedListener listener : colorChangedListeners) {
 				try {
@@ -263,7 +262,8 @@ public class ColorPickerView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		canvas.drawColor(backgroundColor);
+        int backgroundColor = 0x00000000;
+        canvas.drawColor(backgroundColor);
 		if (colorWheel != null)
 			canvas.drawBitmap(colorWheel, 0, 0, null);
 		if (currentColorCircle != null) {
@@ -337,7 +337,7 @@ public class ColorPickerView extends View {
 		setInitialColor(initialColor, true);
 	}
 
-	public void setInitialColor(int color, boolean updateText) {
+	private void setInitialColor(int color, boolean updateText) {
 		float[] hsv = new float[3];
 		Color.colorToHSV(color, hsv);
 
@@ -425,7 +425,7 @@ public class ColorPickerView extends View {
 		}
 	}
 
-	public void setColorEditTextColor(int argb) {
+	private void setColorEditTextColor(int argb) {
 		this.pickerTextColor = argb;
 		if (colorEdit != null)
 			colorEdit.setTextColor(argb);
@@ -460,24 +460,21 @@ public class ColorPickerView extends View {
 			if (i == selectedColor) {
 				childLayout.setBackgroundColor(Color.WHITE);
 			}
-			ImageView childImage = (ImageView) childLayout.findViewById(R.id.image_preview);
+			ImageView childImage = childLayout.findViewById(R.id.image_preview);
 			childImage.setClickable(true);
 			childImage.setTag(i);
-			childImage.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (v == null)
-						return;
-					Object tag = v.getTag();
-					if (tag == null || !(tag instanceof Integer))
-						return;
-					setSelectedColor((int) tag);
-				}
+			childImage.setOnClickListener(v -> {
+				if (v == null)
+					return;
+				Object tag = v.getTag();
+				if (tag == null || !(tag instanceof Integer))
+					return;
+				setSelectedColor((int) tag);
 			});
 		}
 	}
 
-	public void setSelectedColor(int previewNumber) {
+	private void setSelectedColor(int previewNumber) {
 		if (initialColors == null || initialColors.length < previewNumber)
 			return;
 		this.colorSelection = previewNumber;
@@ -518,7 +515,7 @@ public class ColorPickerView extends View {
 		if (!(childView instanceof LinearLayout))
 			return;
 		LinearLayout childLayout = (LinearLayout) childView;
-		ImageView childImage = (ImageView) childLayout.findViewById(R.id.image_preview);
+		ImageView childImage = childLayout.findViewById(R.id.image_preview);
 		childImage.setImageDrawable(new CircleColorDrawable(newColor));
 	}
 
@@ -538,7 +535,7 @@ public class ColorPickerView extends View {
 	public enum WHEEL_TYPE {
 		FLOWER, CIRCLE;
 
-		public static WHEEL_TYPE indexOf(int index) {
+		static WHEEL_TYPE indexOf(int index) {
 			switch (index) {
 				case 0:
 					return FLOWER;

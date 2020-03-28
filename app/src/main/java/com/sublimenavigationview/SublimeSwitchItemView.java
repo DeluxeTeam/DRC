@@ -18,10 +18,6 @@ package com.sublimenavigationview;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.SwitchCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -52,7 +48,7 @@ public class SublimeSwitchItemView extends SublimeBaseItemView {
     @Override
     protected void initializeViews() {
         super.initializeViews();
-        mSwitch = (SwitchCompat) findViewById(R.id.switch_ctrl);
+        mSwitch = findViewById(R.id.switch_ctrl);
     }
 
     @Override
@@ -79,7 +75,7 @@ public class SublimeSwitchItemView extends SublimeBaseItemView {
         mSwitch.setChecked(checked);
     }
 
-    public void setCheckableItemTintList(ColorStateList checkableItemTintList) {
+    private void setCheckableItemTintList(ColorStateList checkableItemTintList) {
 
     }
 

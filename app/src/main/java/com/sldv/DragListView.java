@@ -22,14 +22,10 @@ import java.util.List;
  * Created by yuyidong on 15/9/30.
  */
 public class DragListView<T> extends ListView implements View.OnDragListener {
-    /* 移动距离 */
-    private final int DRAG_SCROLL_PX_UNIT = 25;
     /* Handler */
     private Handler mScrollHandler;
     /* Handler的延时 */
     private final long SCROLL_HANDLER_DELAY_MILLIS = 5;
-    /* 边界比例，到这个比例的位置就开始移动 */
-    private final float BOUND_GAP_RATIO = 0.2f;
     /* 边界 */
     private int mTopScrollBound;
     private int mBottomScrollBound;
@@ -48,9 +44,9 @@ public class DragListView<T> extends ListView implements View.OnDragListener {
     /* 之前之前drag所在ListView中的位置 */
     private int mBeforeBeforePosition;
     /* 适配器 */
-    protected BaseAdapter mSDAdapter;
+    private BaseAdapter mSDAdapter;
     /* 数据 */
-    protected List<T> mDataList;
+    private List<T> mDataList;
     /* 监听器 */
     private OnDragListener mOnDragListener;
 
@@ -62,7 +58,7 @@ public class DragListView<T> extends ListView implements View.OnDragListener {
         this(context, attrs, 0);
     }
 
-    private float mTouchSlop;
+    private final float mTouchSlop;
 
     public DragListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -73,6 +69,8 @@ public class DragListView<T> extends ListView implements View.OnDragListener {
     private final Runnable mDragScroller = new Runnable() {
         @Override
         public void run() {
+            /* 移动距离 */
+            int DRAG_SCROLL_PX_UNIT = 25;
             if (mLastDragY <= mTopScrollBound) {
                 smoothScrollBy(-DRAG_SCROLL_PX_UNIT, (int) SCROLL_HANDLER_DELAY_MILLIS);
             } else if (mLastDragY >= mBottomScrollBound) {
@@ -93,6 +91,8 @@ public class DragListView<T> extends ListView implements View.OnDragListener {
     @Override
     public boolean onDrag(View v, DragEvent event) {
         final int action = event.getAction();
+        /* 边界比例，到这个比例的位置就开始移动 */
+        float BOUND_GAP_RATIO = 0.2f;
         switch (action) {
             case DragEvent.ACTION_DRAG_STARTED:
                 return true;
@@ -207,11 +207,11 @@ public class DragListView<T> extends ListView implements View.OnDragListener {
         }
     }
 
-    protected void setRawAdapter(ListAdapter adapter) {
+    void setRawAdapter(ListAdapter adapter) {
         mSDAdapter = (BaseAdapter) adapter;
     }
 
-    protected void setDragPosition(int position, boolean isWannaTransparentWhileDragging) {
+    void setDragPosition(int position, boolean isWannaTransparentWhileDragging) {
         mCurrentPosition = position;
         mBeforeCurrentPosition = position;
         mBeforeBeforePosition = position;
