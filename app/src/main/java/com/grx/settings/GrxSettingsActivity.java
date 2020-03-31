@@ -198,16 +198,14 @@ public class GrxSettingsActivity extends AppCompatActivity implements
 
     public class dlxAnimationBg extends AsyncTask<Void, Void, Boolean> {
 
-        Drawable mAnimation = null;
-
         @Override
         protected Boolean doInBackground(Void... voids) {
-            mAnimation = getResources().getDrawable(R.drawable.deluxe_animation);
+            Drawable anim = getResources().getDrawable(R.drawable.deluxe_animation);
             ImageView animation = mSVN.getHeaderView().findViewById(R.id.gid_snv_header_container).findViewById(R.id.dlx_animation);
             if (animation != null) {
-                final AnimationDrawable frameAnimation = (AnimationDrawable) mAnimation;
+                final AnimationDrawable frameAnimation = (AnimationDrawable) anim;
                 runOnUiThread(() -> {
-                    animation.setBackground(mAnimation);
+                    animation.setBackground(anim);
                     animation.post(frameAnimation::start);
                 });
             }
