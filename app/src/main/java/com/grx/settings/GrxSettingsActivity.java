@@ -21,7 +21,9 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.*;
 import android.os.Process;
@@ -38,6 +40,7 @@ import android.util.TypedValue;
 import android.view.*;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -193,6 +196,26 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         showToast(txt);
     }
 
+    public class dlxAnimationBg extends AsyncTask<Void, Void, Boolean> {
+
+        Drawable mAnimation = null;
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            mAnimation = getResources().getDrawable(R.drawable.deluxe_animation);
+            ImageView animation = mSVN.getHeaderView().findViewById(R.id.gid_snv_header_container).findViewById(R.id.dlx_animation);
+            if (animation != null) {
+                final AnimationDrawable frameAnimation = (AnimationDrawable) mAnimation;
+                runOnUiThread(() -> {
+                    animation.setBackground(mAnimation);
+                    animation.post(frameAnimation::start);
+                });
+            }
+            return null;
+        }
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -262,6 +285,7 @@ public class GrxSettingsActivity extends AppCompatActivity implements
         setDrawerLayoutPosition();
         initToolBar();
         initSublimeNavigationView();
+        new dlxAnimationBg().execute();
         initSublimeNavigationMenus();
         initUserConfigFAB();
         initMenuNavigation();
