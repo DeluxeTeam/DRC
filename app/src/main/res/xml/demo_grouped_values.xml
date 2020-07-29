@@ -167,15 +167,4 @@
             grx:groupedValueKey="grxcirbatpanel" grx:groupedValueMyAlias="btlb"/>
     </GrxPreferenceCategory>
 
-
-
-    <GrxPreferenceCategory android:title="Panel Colors" />
-    <GrxInfoText android:summary="Panel Layers from outside to inside are: notifications, Notifications Scroll and QuickSettings, Dim (scrim view) and bluring behind panel. The dim controlled by the mod affects to the panel and secure unlock screens dim" />
-    <GrxSwitchPreference android:title="Enable Panel Colors" android:key="genablepancol" android:defaultValue="false" grx:groupKey="gk_panel" />
-    <GrxSeekBar android:title="% Stock dim Effect"  android:key="gdimamount" android:defaultValue="100" grx:groupKey="gk_panel" grx:interval="5" grx:maxValue="100" grx:minValue="0" grx:showPopup="true" grx:units=" %" />
-    <GrxSwitchPreference android:title="Enable Blur in Panel" android:key="gblur" android:defaultValue="false" grx:groupKey="gk_panel" />
-    <GrxSeekBar android:title="Panel Blur Amount" android:key="gbluramount" android:dependency="gblur" android:defaultValue="10" grx:groupKey="gk_panel" grx:interval="1" grx:maxValue="30" grx:minValue="0" grx:showPopup="true" grx:units=" %" />
-
-
-
 </PreferenceScreen>
