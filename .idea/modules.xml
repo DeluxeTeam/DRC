@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DRC-master.iml" filepath="$PROJECT_DIR$/.idea/modules/DRC-master.iml" group="DRC-master" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DRC-master-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DRC-master-app.iml" group="DRC-master/app" />
       <module fileurl="file://$PROJECT_DIR$/GrxSettingsV2.iml" filepath="$PROJECT_DIR$/GrxSettingsV2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

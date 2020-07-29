@@ -16,6 +16,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.provider.Settings;
 import android.support.v7.widget.SwitchCompat;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -197,6 +198,20 @@ public class GrxSwitchPreference extends SwitchPreference implements GrxPreferen
     @Override
     public void setOnPreferenceChangeListener(Preference.OnPreferenceChangeListener onPreferenceChangeListener){
         GrxPreferenceScreen grxPreferenceScreen = (GrxPreferenceScreen) onPreferenceChangeListener;
+
+        String myGroupedKey = myPrefAttrsInfo.getMyGroupedValueKey();
+        if(!TextUtils.isEmpty(myGroupedKey) && !TextUtils.isEmpty( getKey() )){
+            grxPreferenceScreen.addGroupedValueMember(
+                    getKey(), // my key
+                    myPrefAttrsInfo.getMyBooleanDefValue(),  // object
+                    PrefAttrsInfo.PREF_TYPE.BOOL,
+                    myGroupedKey,
+                    myPrefAttrsInfo.getMyGroupedValueMyAlias(),
+                    myPrefAttrsInfo.getMyGroupedValueSystemType(),
+                    myPrefAttrsInfo.getMyGroupedValueBroadCast()
+            );
+        }
+
         if(!Common.SyncUpMode){
             if(!myPrefAttrsInfo.isBuildPropEnabled()){
                 grxPreferenceScreen.addPreferenceToRemoveList(this);
@@ -261,5 +276,9 @@ public class GrxSwitchPreference extends SwitchPreference implements GrxPreferen
 
     public PrefAttrsInfo getPrefAttrsInfo() { return myPrefAttrsInfo;}
 
+    public String getMyGroupedKeyName(){
+        if(myPrefAttrsInfo!=null) return myPrefAttrsInfo.getMyGroupedValueKey();
+        else return null;
+    }
 
 }

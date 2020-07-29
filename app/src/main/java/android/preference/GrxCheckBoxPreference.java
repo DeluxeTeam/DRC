@@ -16,6 +16,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.provider.Settings;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -165,13 +166,28 @@ public class GrxCheckBoxPreference extends CheckBoxPreference implements GrxPref
     @Override
     public void setOnPreferenceChangeListener(Preference.OnPreferenceChangeListener onPreferenceChangeListener){
         GrxPreferenceScreen grxPreferenceScreen = (GrxPreferenceScreen) onPreferenceChangeListener;
+
+        String mydeprule = myPrefAttrsInfo.getMyDependencyRule();
+
+        String myGroupedKey = myPrefAttrsInfo.getMyGroupedValueKey();
+        if(!TextUtils.isEmpty(myGroupedKey) && !TextUtils.isEmpty( getKey() )){
+            grxPreferenceScreen.addGroupedValueMember(
+                    getKey(), // my key
+                    myPrefAttrsInfo.getMyBooleanDefValue(),  // object
+                    PrefAttrsInfo.PREF_TYPE.BOOL,
+                    myGroupedKey,
+                    myPrefAttrsInfo.getMyGroupedValueMyAlias(),
+                    myPrefAttrsInfo.getMyGroupedValueSystemType(),
+                    myPrefAttrsInfo.getMyGroupedValueBroadCast()
+            );
+        }
+
         if(!Common.SyncUpMode){
             if(!myPrefAttrsInfo.isBuildPropEnabled()){
                 grxPreferenceScreen.addPreferenceToRemoveList(this);
             }
             else{
                 super.setOnPreferenceChangeListener(onPreferenceChangeListener);
-                String mydeprule = myPrefAttrsInfo.getMyDependencyRule();
                 if(mydeprule!=null){
                     grxPreferenceScreen.addCustomDependency(this,mydeprule,null);
                 }
@@ -219,5 +235,11 @@ public class GrxCheckBoxPreference extends CheckBoxPreference implements GrxPref
 
 
     public PrefAttrsInfo getPrefAttrsInfo() { return myPrefAttrsInfo;}
+
+
+    public String getMyGroupedKeyName(){
+        if(myPrefAttrsInfo!=null) return myPrefAttrsInfo.getMyGroupedValueKey();
+        else return null;
+    }
 
 }
